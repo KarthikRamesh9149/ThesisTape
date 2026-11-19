@@ -10,6 +10,7 @@ from pathlib import Path
 from threading import Lock
 from urllib.parse import urldefrag, urlsplit
 
+from .edgar_exhibits import printed_heading_date
 from .retrieval_sources import SUFFIX, availability, extract, instant, object_bytes
 
 ARCHIVE = Path(__file__).resolve().parents[1] / "retrieval"
@@ -269,6 +270,23 @@ class DatedSession:
         with self._lock:
             self._authorize(max_date)
             return self._read(url, locator)
+
+    def exhibit_dates(self, passage: Evidence, *, max_date: str):
+        with self._lock:
+            self._authorize(max_date)
+            hits = self._read(passage.citation_url, passage.locator)
+            if hits != (passage,):
+                self._finish("exhibit_dates", [])
+                return None
+            source = self._eligible[passage.url][1]
+            if source["kind"] != "edgar" or "exhibit" not in source["selection"]:
+                self._finish("exhibit_dates", [])
+                return None
+            # Check original and index again even when the session previously read this passage.
+            self._corpus._blocks(source)
+            original = object_bytes(self._corpus._objects, passage.sha256, ".htm")
+            self._finish("exhibit_dates", hits)
+            return {"edgar_accepted_at": source["published"], "printed_heading_date": printed_heading_date(original)}
 
     def page_image(self, passage: Evidence, *, max_date: str) -> bytes | None:
         """Return only the registered page pixels for a freshly verified, eligible PDF passage."""

@@ -263,11 +263,68 @@ def check(root, *, grade_arm=None):
     }
 
 
+def check_datelines(directory, paired):
+    case = case_for("twitter-deal")
+    rules = load(case.archive.parent / "evaluator/dateline-check.json")
+    record, memo, opened = verify_report(
+        directory, case, "dispute", rules["budget_usd"], case.corpus()
+    )
+    decision = record["dispute"]
+    dates = decision.get("verified_exhibit_dates", {})
+    verified_dates = {
+        pid: (
+            rules["printed_heading_dates"][h.source_id],
+            rules["edgar_acceptance_dates"][h.source_id],
+        )
+        for pid, h in opened.items()
+    }
+    actual = {
+        pid: (row["printed_heading_date"], row["edgar_accepted_at"][:10])
+        for pid, row in dates.items()
+    }
+    advice = decision.get("advice") or {}
+    assessment = advice.get("assessment", "")
+    mislabeled = re.search(
+        r"\b(?:July 11|11 July|2022-07-11)(?:,? 2022)?\s+(?:response|letter|reply)\b"
+        r"|\b(?:response|letter|reply)\s+(?:was\s+)?dated\s+(?:July 11|11 July|2022-07-11)\b",
+        assessment,
+        re.IGNORECASE,
+    )
+    passed = (
+        memo is not None
+        and actual == verified_dates
+        and decision["status"] == "adjudicated"
+        and advice.get("disposition") == "unresolved"
+        and not mislabeled
+        and record["review"]["rounds"][-1]["assessment"]["conflict"]["treatment"]
+        == "qualified"
+    )
+    extra = Decimal(record["estimated_model_cost_usd"])
+    return {
+        "original_trial_usd": paired["checkpoint_usd"],
+        "date_check": {
+            **stats(record),
+            "passed": passed,
+            "assessment_sha256": fingerprint(assessment.encode()),
+            "exhibit_dates": dates,
+        },
+        "checkpoint_usd": str(Decimal(paired["checkpoint_usd"]) + extra),
+        "prior_project_usd": paired["prior_project_usd"],
+        "project_recorded_usd": str(Decimal(paired["project_recorded_usd"]) + extra),
+        "project_cap_usd": "100",
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=("check", "grade"))
     parser.add_argument("--directory", type=Path, default=HERE / "trial")
     parser.add_argument("--arm", choices=ARMS)
+    parser.add_argument(
+        "--dateline-dir",
+        type=Path,
+        help="Include the separate filing-date regression in the replay",
+    )
     args = parser.parse_args()
     if (args.command == "grade") != bool(args.arm):
         parser.error("--arm is required only when grading live")
@@ -275,6 +332,19 @@ def main():
     saved = args.directory / "results.json"
     if not args.arm and saved.exists() and result != load(saved):
         raise CaseError("Frozen results differ from replay")
+    if not args.arm:
+        datelines = args.dateline_dir or (
+            HERE / "dateline-check" if args.directory == HERE / "trial" else None
+        )
+        if datelines is not None:
+            usage = check_datelines(datelines, result)
+            if datelines == HERE / "dateline-check" and usage != load(
+                HERE / "usage.json"
+            ):
+                raise CaseError(
+                    "Saved date-regression results or cumulative costs differ from replay"
+                )
+            result = {"original_trial": result, "checkpoint": usage}
     print(json_bytes(result).decode(), end="")
 
 

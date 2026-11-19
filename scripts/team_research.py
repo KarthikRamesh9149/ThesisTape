@@ -19,6 +19,7 @@ from .baseline_evidence import (
 from .claim_review import review_candidate
 from .disney_hulu_case import SAVED_CASE, CaseError, read_saved_file
 from .forecast_specialist import analyze
+from .material_dispute import VERSION as DISPUTE_VERSION
 from .material_dispute import review_dispute
 from .retrieval_gateway import ARCHIVE, Corpus, Evidence
 from .sol_baseline import fingerprint, json_bytes
@@ -330,7 +331,7 @@ def author(case, ask, opened, reports, action, *, decision=None, forecast=None):
             prompt = {**prompt, "input": json_bytes(data).decode()}
 
 
-def research(case: Case, corpus: Corpus, ask, *, route: str):
+def research(case: Case, corpus: Corpus, ask, *, route: str, dispute_version=DISPUTE_VERSION):
     if route in TABLE_ROUTES:
         if case.table is None:
             raise CaseError("The table route needs a located source table")
@@ -385,7 +386,7 @@ Do not suggest any answers, figures, dates, filing IDs or specific source. Use w
         memo, arithmetic = candidate.memo, candidate.calculation
         if route == "dispute" or case.source_urls:
             memo, arithmetic, review, dispute = review_dispute(
-                case, corpus, opened, action, candidate, ask, enabled=route == "dispute"
+                case, corpus, opened, action, candidate, ask, enabled=route == "dispute", version=dispute_version
             )
         elif route in ("reviewed", "forecast"):
             memo, arithmetic, review = review_candidate(case, corpus, opened, action, candidate, ask)

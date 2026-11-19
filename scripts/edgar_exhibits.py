@@ -1,6 +1,7 @@
 """Read indexed EDGAR exhibit components and explicitly selected prose sections."""
 
 import re
+from datetime import datetime
 from html.parser import HTMLParser
 from urllib.parse import urlsplit
 
@@ -62,6 +63,24 @@ class ExhibitProse(HTMLParser):
     def handle_data(self, data):
         if self.in_body and not self.skip:
             self.buffer.append(data)
+
+
+def printed_heading_date(document):
+    """Return an unambiguous standalone calendar date in the actual exhibit heading."""
+    _, separator, body = document.partition(b"<TEXT>")
+    if not separator:
+        return None
+    dates = set()
+    for line in ExhibitProse(body.decode()).paragraphs[:20]:
+        if len(line) > 130 or line.casefold().startswith("dear "):
+            break
+        for form in ("%B %d, %Y", "%d %B %Y"):
+            try:
+                dates.add(datetime.strptime(line, form).date().isoformat())
+                break
+            except ValueError:
+                continue
+    return dates.pop() if len(dates) == 1 else None
 
 
 def sections(source, original, index):

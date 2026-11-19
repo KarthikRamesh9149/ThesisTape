@@ -13,7 +13,8 @@ from .sol_provider import ASTRA
 from .sol_research import passage_context
 from .team_report import render_candidate, typed_prompt
 
-VERSION = "material-dispute-v1"
+LEGACY_VERSION = "material-dispute-v1"
+VERSION = "material-dispute-v2"
 # Leave room for a Sol revision and a fresh review if Astra changes the interpretation.
 REVIEW_ALLOWANCE = Decimal("0.060")
 RECHECK_ALLOWANCE = Decimal("0.022")
@@ -106,10 +107,12 @@ def block_release(result, reason):
     result.update(approved=False, release_block=reason)
 
 
-def adjudicate(case, corpus, opened, candidate, result, ask):
+def adjudicate(case, corpus, opened, candidate, result, ask, *, version):
     conflict = result["assessment"]["conflict"]
     with corpus.session(case.cutoff) as session:
         originals = {}
+        dates = {}
+        by_document = {}
         for pid, hit in opened.items():
             hits = session.read(
                 hit.citation_url, locator=hit.locator, max_date=case.cutoff
@@ -117,6 +120,13 @@ def adjudicate(case, corpus, opened, candidate, result, ask):
             if hits != (hit,):
                 raise CaseError("Could not reopen the disputed case file at its cutoff")
             originals[pid] = hits[0]
+            if version == VERSION:
+                if hit.url not in by_document:
+                    by_document[hit.url] = session.exhibit_dates(
+                        hits[0], max_date=case.cutoff
+                    )
+                if by_document[hit.url] is not None:
+                    dates[pid] = by_document[hit.url]
         retrieval = session.trace
     context = {
         **case.intake(),
@@ -125,7 +135,15 @@ def adjudicate(case, corpus, opened, candidate, result, ask):
         "passages": passage_context(originals),
         "reviewed_report": candidate.memo.decode(),
     }
-    prompt = typed_prompt(ASTRA, ADJUDICATE, context, Advice, effort="medium")
+    instructions = ADJUDICATE
+    if dates:
+        context["verified_exhibit_dates"] = dates
+        instructions += (
+            "\nRefer to the parties or passage IDs in your assessment. If chronology changes the answer, "
+            "use the verified printed heading date for a letter and label an EDGAR acceptance time as "
+            "a filing time. A missing printed date stays unknown. The controller retains both fields."
+        )
+    prompt = typed_prompt(ASTRA, instructions, context, Advice, effort="medium")
     prompt["text"]["format"]["schema"]["properties"]["evidence_ids"]["items"][
         "enum"
     ] = list(originals)
@@ -144,6 +162,8 @@ def adjudicate(case, corpus, opened, candidate, result, ask):
     }
     if raw is None:
         return {**decision, "status": "insufficient_budget"}
+    if dates:
+        decision["verified_exhibit_dates"] = dates
     try:
         advice = Advice.model_validate_json(raw)
     except ValidationError:
@@ -208,7 +228,9 @@ def revise_and_recheck(case, corpus, opened, action, original, first, advice, as
     return revised, checked, "reviewed"
 
 
-def review_dispute(case, corpus, opened, action, candidate, ask, *, enabled):
+def review_dispute(
+    case, corpus, opened, action, candidate, ask, *, enabled, version=VERSION
+):
     first = inspect(case, corpus, opened, action, candidate, ask, "review.initial")
     conflict = first["assessment"]["conflict"]
     rounds = [first]
@@ -217,7 +239,9 @@ def review_dispute(case, corpus, opened, action, candidate, ask, *, enabled):
         "advice": None,
     }
     if enabled and conflict["kind"] == "material":
-        decision = adjudicate(case, corpus, opened, candidate, first, ask)
+        decision = adjudicate(
+            case, corpus, opened, candidate, first, ask, version=version
+        )
     advice = decision["advice"]
     if advice and (
         advice["recommendation"] == "revise" or advice["disposition"] == "resolved"
@@ -226,6 +250,11 @@ def review_dispute(case, corpus, opened, action, candidate, ask, *, enabled):
             first, "The specialist's material assessment requires a fresh review"
         )
     if not first["approved"]:
+        if advice is not None and "verified_exhibit_dates" in decision:
+            advice = {
+                **advice,
+                "verified_exhibit_dates": decision["verified_exhibit_dates"],
+            }
         candidate, checked, decision["revision_status"] = revise_and_recheck(
             case, corpus, opened, action, candidate, first, advice, ask
         )

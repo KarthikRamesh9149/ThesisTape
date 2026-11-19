@@ -12,6 +12,7 @@ from threading import Lock
 from .claim_review import VERSION as REVIEW_VERSION
 from .disney_hulu_case import CaseError, read_saved_file
 from .forecast_specialist import VERSION as FORECAST_VERSION
+from .material_dispute import LEGACY_VERSION
 from .material_dispute import VERSION as DISPUTE_VERSION
 from .sol_baseline import PROJECT_ROOT, fingerprint, generation_request, json_bytes
 from .sol_provider import (
@@ -33,7 +34,7 @@ CASES = ("disney", "tradeweb", "tradeweb-before", "toyota", "nvidia", "toyota-bu
 ROUTES = ("team", "single", "reviewed", "forecast", "dispute", *TABLE_ROUTES)
 
 
-def configuration(case, corpus, route):
+def configuration(case, corpus, route, *, dispute_version=DISPUTE_VERSION):
     models = (MODEL, LUNA)
     if case.source_urls:
         models = (MODEL,)
@@ -47,7 +48,7 @@ def configuration(case, corpus, route):
         "schema_version": 3,
         "prompt_version": VERSION,
         **({"source_file_sha256": fingerprint(json_bytes(list(case.source_urls)))} if case.source_urls else {}),
-        **({"dispute_version": DISPUTE_VERSION} if route == "dispute" or case.source_urls else {}),
+        **({"dispute_version": dispute_version} if route == "dispute" or case.source_urls else {}),
         **({"table_version": VISUAL_VERSION, "review_version": VISUAL_VERSION,
             "table": asdict(case.table)} if route in TABLE_ROUTES else {}),
         **(
@@ -178,10 +179,13 @@ def replay(case: Case, record: dict, *, corpus=None):
     route = record["route"]
     if route not in ROUTES:
         raise CaseError("Unknown research route")
+    version = record.get("dispute_version", DISPUTE_VERSION)
+    if version not in (DISPUTE_VERSION, LEGACY_VERSION):
+        raise CaseError("Unknown dispute review version")
     return reproduce(
         record,
-        configuration(case, corpus, route),
-        lambda ask: research(case, corpus, ask, route=route),
+        configuration(case, corpus, route, dispute_version=version),
+        lambda ask: research(case, corpus, ask, route=route, dispute_version=version),
     )
 
 

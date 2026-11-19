@@ -1,4 +1,5 @@
 import json
+import shutil
 import unittest
 from copy import deepcopy
 from dataclasses import replace
@@ -10,8 +11,10 @@ from tempfile import TemporaryDirectory
 from evaluations.material_dispute import experiment as ev
 from scripts.baseline_evidence import check_claim_numbers
 from scripts.disney_hulu_case import CaseError
+from scripts.edgar_exhibits import printed_heading_date
 from scripts.material_dispute import REVIEW_ALLOWANCE
 from scripts.research_team import release_state, replay, run
+from scripts.retrieval_gateway import Corpus
 from scripts.sol_provider import ASTRA, MODEL, Result
 from scripts.team_meter import verify_ledger
 from scripts.team_research import case_for, research
@@ -149,7 +152,20 @@ class DisputeTests(unittest.TestCase):
         self.assertTrue(
             all(e["max_date"] == self.case.cutoff for e in decision["retrieval"])
         )
-        self.assertEqual(len(decision["retrieval"]), 4)
+        self.assertEqual(
+            sum(e["operation"] == "exhibit_dates" for e in decision["retrieval"]), 3
+        )
+        self.assertEqual(
+            decision["verified_exhibit_dates"]["P4"],
+            {
+                "edgar_accepted_at": "2022-07-11T16:38:36-04:00",
+                "printed_heading_date": "2022-07-10",
+            },
+        )
+        self.assertEqual(
+            json.loads(on["dispute.adjudicate"][0]["input"])["verified_exhibit_dates"],
+            decision["verified_exhibit_dates"],
+        )
         for prompt, _ in on.values():
             obj = json.loads(prompt["input"])
             self.assertFalse(
@@ -266,6 +282,42 @@ class DisputeTests(unittest.TestCase):
             for private in (h.url, h.title, h.sha256, h.text[:75]):
                 self.assertNotIn(private, serialized)
         self.assertEqual([len(e["results"]) for e in trace["source_reads"]], [2, 0, 0])
+
+    def test_exhibit_chronology_rechecks_hashes_and_refuses_ambiguous_or_ineligible_headings(
+        self,
+    ):
+        for body, expected in (
+            ("<p>July 8, 2022</p>", "2022-07-08"),
+            ("<p>July 8, 2022</p><p>July 10, 2022</p>", None),
+            ("<p>Dear Counsel:</p><p>July 8, 2022</p>", None),
+            ("<p>July 32, 2022</p>", None),
+        ):
+            self.assertEqual(
+                printed_heading_date(
+                    ("<TEXT><html><body>" + body + "</body></html>").encode()
+                ),
+                expected,
+            )
+        hit = self.opened["P4"]
+        with self.corpus.session("2022-07-11T20:38:35Z") as early:
+            self.assertIsNone(early.exhibit_dates(hit, max_date=early.cutoff))
+            self.assertTrue(all(not e["results"] for e in early.trace))
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp) / "archive"
+            shutil.copytree(self.case.archive, root)
+            with Corpus(root).session(self.case.cutoff) as session:
+                self.assertEqual(
+                    session.exhibit_dates(hit, max_date=session.cutoff)[
+                        "printed_heading_date"
+                    ],
+                    "2022-07-10",
+                )
+                file = root / "objects" / (hit.sha256 + ".htm")
+                original = file.read_bytes()
+                self.assertIn(b"July&nbsp;10", original)
+                file.write_bytes(original.replace(b"July&nbsp;10", b"July&nbsp;11"))
+                with self.assertRaisesRegex(ValueError, "SHA-256"):
+                    session.exhibit_dates(hit, max_date=session.cutoff)
 
     def test_per_share_unit_cannot_be_substituted_for_an_aggregate_or_foreign_amount(
         self,
