@@ -172,6 +172,31 @@ class DeskTests(unittest.TestCase):
             self.assert_status(400, "/api/runs", body={**fields, "profile": "unknown"})
             worker.assert_called_once()
 
+    def test_public_analyst_and_team_use_the_same_dated_source_gateway(self):
+        from scripts.focused_archive import VERSION
+
+        with patch.object(self.desk, "start_locked"):
+            for i, profile in enumerate(("single_astra", "mixed"), 1):
+                fields = {
+                    **self.data,
+                    "collection": "historical-web",
+                    "cutoff": "2023-03-22",
+                    "request_id": f"{i:032x}",
+                    "profile": profile,
+                    "budget": "0.30",
+                }
+                answer = self.assert_status(202, "/api/runs", body=fields)
+                rec = self.desk.record(self.desk.directory(answer["id"]))
+                self.assertEqual(
+                    (
+                        rec["research_profile"],
+                        rec["archive_version"],
+                        rec["budget_usd"],
+                    ),
+                    (profile, VERSION, "0.30"),
+                )
+                self.assertFalse(rec["calls"])
+
     def test_budget_exhaustion_and_ownership_from_cli_queue(self):
         case = analyst_case(self.data["question"], self.data["cutoff"])
         folder = self.root / "from-cli"

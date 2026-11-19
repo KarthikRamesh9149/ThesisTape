@@ -258,7 +258,8 @@ class Desk:
         web = fields["collection"] == public.COLLECTION
         profile = fields.get("profile", "mixed")
         if (
-            profile not in ("mixed", "evidence_team_v3", "evidence_team_v4")
+            profile
+            not in ("mixed", "single_astra", "evidence_team_v3", "evidence_team_v4")
             or not web
             and "profile" in fields
         ):
@@ -293,7 +294,7 @@ class Desk:
                         queued=True,
                         profile=profile,
                         gateway=public.SavedArchive(cutoff, FocusedArchive.VERSION)
-                        if profile == "evidence_team_v4"
+                        if profile in {"mixed", "single_astra", "evidence_team_v4"}
                         else None,
                     )
                 else:

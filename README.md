@@ -26,6 +26,8 @@ Install the [Python 3.12 research dependencies](#run-the-research-team), start t
 
 The live ECB trial cost USD 0.2052854 and its download reproduced offline. [ECB report and browser checks](evaluations/open_research/ecb/evaluation.md) · [Boeing acquisition report](evaluations/open_research/boeing/reviewed.md)
 
+For a public-source question, choose the standard team, the team with additional checks on figures, or a single Astra analyst. All three search the same dated archive and can reopen the surrounding text of the original source. On the March 2023 Fed decision, the team found the new target range and the single analyst supported the size of the hike. The browser downloads preserve each report’s remaining evidence gaps. [Compare the two Fed memos](evaluations/open_research/fomc/evaluation.md)
+
 Open [the local desk](http://127.0.0.1:8765/). **Saved runs** opens real reports, including their call history, with no API key or model usage. Select a numbered citation to read its dated passage and locator. **Open original** links to the publisher. **Export .md** downloads the same bytes as the CLI.
 
 **New research** takes a question, source collection, UTC cutoff and per-run USD limit. A date without a time includes that entire UTC day. Live runs use the project’s `OPENAI_API_KEY`. **Run activity** shows dispatched assignments, routing decisions, estimated charges from returned token usage and outstanding reservations. **Pause run** lets in-flight requests settle. **Resume run** continues under the original cutoff and cap. The public archive accepts open research questions. Three curated collections cover the dated research archive, Twitter merger filings and NVIDIA earnings filings. Questions outside their coverage can produce a qualified memo.
