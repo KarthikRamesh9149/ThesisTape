@@ -26,6 +26,8 @@ The desk binds to loopback and saves each intake to its own folder under `runs/d
 
 [Build plan and validation milestones](BUILD_PLAN.md) · [Architecture and model costs (PDF)](ThesisTape-Architecture.pdf)
 
+ThesisTape produced and replayed reports for all 400 FinanceGym questions. The originally registered researchers released 361. Later procedures supplied 39. The benchmark cost an estimated USD 90.38 across all attempts. Including development and testing, project usage reached USD 138.93 against the USD 140 limit. FinanceGym’s maintainers determine the official score and rank. [Results, methods and submission files](evaluations/financegym/evaluation.md)
+
 GPT-6.2 Sol can research a filing alone or lead two GPT-6 Luna workers. The team and the single analyst each earned 3/3 on the Disney/Hulu and Tradeweb development cases. The single analyst was cheaper on both. Moving the Tradeweb cutoff to one second before its amendment led the team to request another search and qualify its answer. [Results and costs](evaluations/first-team/evaluation.md) · [Disney memo](evaluations/first-team/disney-team/memo.md) · [Tradeweb memo](evaluations/first-team/tradeweb-team/memo.md)
 
 On 24 held-out financial events, single Astra earned 79.7% local quality and released 24 reports. The research team earned 70.1% and released 22. Both forecast the correct direction in 7 of 16 prospective cases. The team cost an average USD 0.1378 per event and single Astra USD 0.1417. The preregistered rule selected single Astra for the primary FinanceGym investigation. [Held-out results and intervals](evaluations/paired/revisions/analyst_product/blind/evaluation.md) · [Evaluation protocol](evaluations/paired/protocol.md)
