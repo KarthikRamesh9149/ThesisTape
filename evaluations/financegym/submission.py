@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import math
 from collections import Counter
 from datetime import date
 from decimal import Decimal
@@ -9,9 +10,11 @@ from email.headerregistry import Address
 from email.message import EmailMessage
 from email.policy import SMTP
 from pathlib import Path
+from statistics import mean
 from urllib.parse import urlsplit
 
 from evaluations.financebench.corpus import FOLDER as FINANCEBENCH
+from evaluations.paired.analysis import nearest
 from evaluations.paired.confirmation import committed, write_once
 from evaluations.paired.production import FOLDER as PRIMARY
 from scripts.run_checkpoint import load
@@ -159,6 +162,8 @@ def verify_export(questions, directory):
         or len(audits_rows) != 400
         or audits["tasks"] != 400
         or audits["verified_provider_generations"] < 1
+        or audits["qualified"]
+        != sum(row["state"] == "qualified" for row in audits_rows)
     ):
         raise ValueError("Supply the matching, fully verified 400-task export")
     for row, line, proof in zip(inputs, raw.splitlines(), audits_rows, strict=True):
@@ -188,8 +193,30 @@ def model_names(cfg, audit):
     return sorted(models)
 
 
+def per_question_usage(directory, audit):
+    answers = (directory / "answers.jsonl").read_bytes().splitlines()
+    times, costs = [], []
+    for line, proof in zip(answers, audit["tasks_audited"], strict=True):
+        elapsed = json.loads(line)["elapsed_s"]
+        if (
+            type(elapsed) not in (int, float)
+            or not math.isfinite(elapsed)
+            or elapsed < 0
+        ):
+            raise ValueError("Invalid recorded question duration")
+        times.append(elapsed)
+        costs.append(Decimal(proof["estimated_cost_usd"]))
+    return {
+        "mean_cost_usd": mean(costs),
+        "p95_cost_usd": nearest(costs, 0.95),
+        "mean_seconds": mean(times),
+        "p95_seconds": nearest(times, 0.95),
+    }
+
+
 def paper(questions, directory):
     cfg, audit = verify_export(questions, directory)
+    usage = per_question_usage(directory, audit)
     primary = json.loads(committed(PRIMARY / "blind/decision.json"))
     finance = json.loads(committed(FINANCEBENCH / "results.json"))["summary"]
     counts = Counter(cfg["profiles_by_task"].values())
@@ -251,6 +278,8 @@ The event-paired 90% bootstrap interval for mixed minus single local quality was
 ## Reproducibility and cost
 
 The JSONL contains exactly 400 original question and cutoff pairs. Each report's dated searches, provider request fingerprints, recorded usage and final Markdown were checked offline. The submission contains {audit["qualified"]} qualified reports. Those reports restrict their conclusions where the research did not establish part of the answer. Model generation for these runs cost an estimated USD {Decimal(audit["total_research_cost_usd"]):.2f}, based on the recorded usage for {audit["verified_provider_generations"]} confirmed generations. The estimate excludes local computing, external judging and development.
+
+Per question, model costs averaged USD {usage["mean_cost_usd"]:.4f} and the 95th percentile was USD {usage["p95_cost_usd"]:.4f}. Recorded research time averaged {usage["mean_seconds"]:.1f} seconds, with a 95th percentile of {usage["p95_seconds"]:.1f} seconds. Each duration sums the elapsed time of that question's investigations and any additional editing. Time waiting between those stages is excluded.
 
 | Artifact | SHA-256 |
 |---|---|

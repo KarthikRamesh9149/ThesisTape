@@ -1,5 +1,7 @@
+import json
 import tempfile
 import unittest
+from decimal import Decimal
 from email import policy
 from email.parser import BytesParser
 from pathlib import Path
@@ -10,6 +12,31 @@ from scripts.sol_baseline import fingerprint
 
 
 class MaintainerPackage(unittest.TestCase):
+    def test_cost_and_duration_percentiles_count_each_original_question_once(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            rows = [{"elapsed_s": i * 10} for i in range(20, 0, -1)]
+            audit = {
+                "tasks_audited": [
+                    {"estimated_cost_usd": str(Decimal(i) / 100)} for i in range(1, 21)
+                ]
+            }
+            answers = folder / "answers.jsonl"
+            answers.write_text("\n".join(map(json.dumps, rows)))
+            self.assertEqual(
+                submission.per_question_usage(folder, audit),
+                {
+                    "mean_cost_usd": Decimal("0.105"),
+                    "p95_cost_usd": Decimal("0.19"),
+                    "mean_seconds": 105,
+                    "p95_seconds": 190,
+                },
+            )
+            rows[0]["elapsed_s"] = -1
+            answers.write_text("\n".join(map(json.dumps, rows)))
+            with self.assertRaisesRegex(ValueError, "duration"):
+                submission.per_question_usage(folder, audit)
+
     def test_model_list_includes_the_recovery_investigator_when_editing_finishes_the_report(
         self,
     ):

@@ -151,7 +151,9 @@ def cited_kinds(visible):
     }
 
 
-def replay_case(row, report, proof, folder, cfg, extension, editor_spec):
+def replay_case(
+    row, report, proof, folder, cfg, extension, editor_spec, *, provider_receipts=None
+):
     chain = proof.get("attempts", [proof])
     editions, seconds = set(), 0
     billing = [*chain, proof["editorial"]] if "editorial" in proof else chain
@@ -167,6 +169,15 @@ def replay_case(row, report, proof, folder, cfg, extension, editor_spec):
             "Transport evidence inventory changed",
         )
         rec = load(run / "run.json")
+        if provider_receipts is not None:
+            for call in rec["calls"].values():
+                identity_hash = call["provider"]["ids_sha256"]
+                require(
+                    re.fullmatch("[0-9a-f]{64}", identity_hash)
+                    and identity_hash not in provider_receipts,
+                    "A confirmed provider identity is missing or duplicated",
+                )
+                provider_receipts.add(identity_hash)
         if "original_run_sha256" in evidence:
             require(
                 fingerprint((run / "run.json").read_bytes())
@@ -247,8 +258,8 @@ def replay_case(row, report, proof, folder, cfg, extension, editor_spec):
             row, saved, (run / "memo.md").read_bytes()
         )
     require(
-        item["report"] == report["report"],
-        "A reproduced report differs from the offered submission",
+        item["report"] == report["report"] and visible["release"] == proof["state"],
+        "A reproduced report or its release status differs from the offered submission",
     )
     require(
         report["num_docs_retrieved"] == len(editions)
@@ -289,7 +300,7 @@ def verify(questions, root):
     reports = [
         json.loads(raw) for raw in (root / "answers.jsonl").read_bytes().splitlines()
     ]
-    seen, attempts = set(), 0
+    seen, provider_receipts, attempts = set(), set(), 0
     kinds, encyclopedia_only, with_calculations = Counter(), 0, 0
     for number, group in enumerate(
         batched(zip(rows, reports, audit["tasks_audited"], strict=True), 25), 1
@@ -326,7 +337,14 @@ def verify(questions, root):
                 require(case not in seen, "A task was replayed twice")
                 seen.add(case)
                 visible, count = replay_case(
-                    row, report, proof, Path(t) / case, cfg, extension, editor_spec
+                    row,
+                    report,
+                    proof,
+                    Path(t) / case,
+                    cfg,
+                    extension,
+                    editor_spec,
+                    provider_receipts=provider_receipts,
                 )
                 attempts += count
                 cited = cited_kinds(visible)
@@ -336,9 +354,14 @@ def verify(questions, root):
                     p["calculation_ids"] for p in visible["paragraphs"]
                 )
     require(len(seen) == 400, "Research archive does not cover all 400 questions")
+    require(
+        len(provider_receipts) == audit["verified_provider_generations"],
+        "Total confirmed model generations differs from the reproduced receipts",
+    )
     return {
         "replayed_published_reports": len(seen),
         "retained_attempts": attempts,
+        "confirmed_provider_generations": len(provider_receipts),
         "answers_sha256": audit["answers_sha256"],
         "reports_citing_each_source_kind": dict(sorted(kinds.items())),
         "reports_citing_only_encyclopedia_revisions": encyclopedia_only,
