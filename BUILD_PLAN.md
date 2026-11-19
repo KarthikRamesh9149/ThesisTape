@@ -25,7 +25,7 @@ Sol can request evidence, commission a worker, escalate, draft or finish with ga
 
 ## Implementation choices
 
-Start with one Python 3.12 application. Use the OpenAI Responses API with typed tool calls and Pydantic schemas. Store run state and the budget ledger in SQLite, search admitted document passages with SQLite FTS5, and keep original document bytes in a content-addressed local directory. A CLI runs evaluation jobs. A small FastAPI web view gives the analyst the same engine and evidence. Add semantic retrieval only if the first retrieval tests show that full-text search misses relevant passages. [OpenAI Docs structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs) · [SQLite FTS5](https://www.sqlite.org/fts5.html)
+The Python 3.12 application uses the OpenAI Responses API with typed tool calls and Pydantic schemas. The CLI and local analyst desk share an atomic JSON run record and budget ledger, private provider receipts and a SQLite writer lock. SQLite FTS5 searches admitted passages from a content-addressed archive. The desk uses Python’s standard-library HTTP server on loopback. Add semantic retrieval only if retrieval tests show that full-text search misses relevant passages. [OpenAI Docs structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs) · [SQLite FTS5](https://www.sqlite.org/fts5.html)
 
 | Record | Fields the implementation must preserve |
 | --- | --- |
@@ -87,6 +87,8 @@ Use atomic reservations for concurrent calls, stable assignment IDs and bounded 
 
 **CLI recovery verified on 19 November 2026.** The Twitter price run survived a graceful interrupt during the author call and a hard kill after the reviewer’s receipt reached disk. The resumed CLI finished offline. Its two generation requests matched two provider receipts and USD 0.011814 in estimated usage. An offline copy without a receipt retained its entire pending reservation. Estimated project usage through this checkpoint is USD 0.5462619. [Results and reproduction commands](evaluations/cli_resume/evaluation.md)
 
+**Analyst desk verified on 19 November 2026.** A free-form Tradeweb question ran under a USD 0.10 cap. The browser displayed a live reservation, paused after Sol’s plan, and resumed the same run. Twelve calls settled for an estimated USD 0.0323058. The reviewer requested a correction before approving the memo. Selecting its citation opened Item 2.02 of the dated SEC amendment. The 1,941-byte Markdown download matched the CLI replay and the saved file. Estimated project usage through Step 5 is USD 0.5785677. [Browser trial and offline proof](evaluations/analyst_desk/evaluation.md)
+
 ### 6. Test whether the extra agents earn their cost
 
 Start with **12 development cases and 24 additional blind cases** from different events outside the official 400. Cover multiple issuers, markets, document layouts and forecast horizons. Use real archived material. Write the factual and forward-outcome scoring criteria before comparing outputs. Keep later outcomes accessible only to evaluators. Small artificial inputs are sufficient for timeout and budget tests.
@@ -111,4 +113,4 @@ At the checked Standard rates, the architecture’s example uses 12,000 input an
 
 **Illustration for the final run.** If all 400 cases used the base allowance and 80 needed that additional pass, text-model usage would be **400 × USD 0.0997 + 80 × USD 0.0810 = USD 46.36**. Search, visual inputs, cache charges, storage, development comparisons and retries are separate. The first live cases establish the actual token distribution. Batch independent offline calls when turnaround permits and apply discounts only to eligible usage. [Batch pricing and turnaround](https://developers.openai.com/api/docs/guides/batch)
 
-**Next implementation checkpoint.** Build the Step 5 analyst screen on the same run record. Enter a question, cutoff and spending limit, inspect progress and spend, open a material claim at its cited passage and verify that the exported memo matches the CLI output byte for byte.
+**Next implementation checkpoint.** Start Step 6 by freezing the evaluation protocol and case split for 12 development cases and 24 blind cases outside the official 400. Define dated sources, evaluator-only scoring criteria, paired comparisons, budget and the quality tolerance before running the comparisons.

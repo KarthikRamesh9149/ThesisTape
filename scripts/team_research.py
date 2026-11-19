@@ -22,6 +22,7 @@ from .forecast_specialist import analyze
 from .material_dispute import VERSION as DISPUTE_VERSION
 from .material_dispute import review_dispute
 from .retrieval_gateway import ARCHIVE, Corpus, Evidence
+from .retrieval_sources import instant
 from .sol_baseline import fingerprint, json_bytes
 from .sol_provider import LUNA, MODEL
 from .sol_research import (
@@ -55,6 +56,7 @@ class Case:
     archive_objects: Path | None = None
     table: TableTarget | None = None
     source_urls: tuple[str, ...] = ()
+    collection: str | None = None
 
     def intake(self):
         return {"question": self.question, "cutoff": self.cutoff}
@@ -98,6 +100,43 @@ def case_for(name: str) -> Case:
     if name == "tradeweb-before":
         return Case(data["case_id"] + "-before", data["title"], data["question"], data["comparison_cutoff"])
     return Case(data["case_id"], data["title"], data["question"], data["cutoff"])
+
+
+COLLECTIONS = {
+    "archive": "Dated research archive",
+    "twitter": "Twitter merger filings",
+    "nvidia": "NVIDIA earnings filings",
+}
+
+
+def analyst_case(question: str, cutoff: str, collection: str = "archive") -> Case:
+    if not isinstance(question, str) or not 1 <= len(question.strip()) <= 2000:
+        raise CaseError("Enter a research question of 1 to 2,000 characters")
+    if any(ord(c) < 32 and c not in "\r\n\t" for c in question):
+        raise CaseError("The research question contains a control character")
+    if not isinstance(cutoff, str):
+        raise CaseError("Enter a cutoff date or a timestamp with a timezone")
+    try:
+        instant(cutoff, "UTC")
+    except (ValueError, OverflowError):
+        raise CaseError("Enter a valid UTC date or a timestamp with a timezone") from None
+    if not isinstance(collection, str) or collection not in COLLECTIONS:
+        raise CaseError("Choose a listed source collection")
+    question = question.strip()
+    identity = fingerprint(json_bytes([collection, question, cutoff]))
+    archive, urls = ARCHIVE, ()
+    if collection != "archive":
+        template = case_for("twitter-deal" if collection == "twitter" else "nvidia")
+        archive, urls = template.archive, template.source_urls
+    title = {
+        "archive": "Analyst research",
+        "twitter": "Twitter merger research",
+        "nvidia": "NVIDIA earnings research",
+    }[collection]
+    return Case(
+        "analyst-" + identity, title, question, cutoff,
+        reporting_currency="source", archive=archive, source_urls=urls, collection=collection,
+    )
 
 
 class Assignments(StrictOutput):

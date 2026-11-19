@@ -33,13 +33,21 @@ from .sol_provider import (
     TERRA,
 )
 from .team_meter import Meter, check_decision_order, recorded_output, verify_ledger
-from .team_research import VERSION, Case, case_for, research
+from .team_research import COLLECTIONS, VERSION, Case, analyst_case, case_for, research
 from .visual_reader import ROUTES as TABLE_ROUTES
 from .visual_reader import VERSION as VISUAL_VERSION
 
 CASES = ("disney", "tradeweb", "tradeweb-before", "toyota", "nvidia", "toyota-buybacks", "toyota-buybacks-actual",
          "twitter-deal", "twitter-price")
 ROUTES = ("team", "single", "reviewed", "forecast", "dispute", *TABLE_ROUTES)
+
+
+def default_route(case: Case) -> str:
+    if case.table:
+        return "visual"
+    if case.source_urls:
+        return "dispute"
+    return "reviewed" if case.collection else "team"
 
 
 def configuration(case, corpus, route, *, dispute_version=DISPUTE_VERSION):
@@ -73,6 +81,7 @@ def configuration(case, corpus, route, *, dispute_version=DISPUTE_VERSION):
             else {}
         ),
         "case_id": case.id,
+        **({"collection": case.collection} if case.collection else {}),
         **case.intake(),
         "route": route,
         "corpus_sha256": corpus.digest,
@@ -142,7 +151,7 @@ def release_state(memo, trace, *, review_required):
     raise CaseError("No review decision authorizes this release")
 
 
-def execute(config, directory, budget, provider, workflow, *, artifact_name="memo.md", pause=None):
+def new_record(config, directory, budget):
     if not budget.is_finite() or budget <= 0:
         raise CaseError("Choose a positive finite USD budget")
     try:
@@ -159,6 +168,21 @@ def execute(config, directory, budget, provider, workflow, *, artifact_name="mem
         "checkpoint_id": uuid4().hex,
     }
     record["specification_sha256"] = specification(config, record)
+    return record
+
+
+def queue_research(case, directory, budget):
+    """Persist the accepted intake before an HTTP client receives its run ID."""
+    config = configuration(case, case.corpus(), default_route(case))
+    record = new_record(config, directory, budget)
+    record["state"] = "queued"
+    with own_run(directory):
+        Meter(directory, record, None)
+    return record
+
+
+def execute(config, directory, budget, provider, workflow, *, artifact_name="memo.md", pause=None):
+    record = new_record(config, directory, budget)
     with own_run(directory):
         meter = Meter(directory, record, provider, pause=pause)
         return finish(config, meter, workflow, artifact_name)
@@ -221,6 +245,11 @@ def check_configuration(record, config):
 
 
 def saved_case(record):
+    if "collection" in record:
+        case = analyst_case(record["question"], record["cutoff"], record["collection"])
+        if case.id != record["case_id"]:
+            raise CaseError("The saved analyst intake changed")
+        return case
     for key in CASES:
         case = case_for(key)
         if case.id == record["case_id"]:
@@ -253,7 +282,7 @@ def resume(directory, provider=None, *, pause=None):
         case = saved_case(record)
         config, workflow = saved_workflow(case, record, case.corpus())
         check_configuration(record, config)
-        if record["state"] not in ("running", "paused", "failed", "needs_reconciliation"):
+        if record["state"] not in ("queued", "running", "paused", "failed", "needs_reconciliation"):
             raise CaseError("Unknown saved run state")
         if path.exists() or path.is_symlink():
             raise CaseError("An unfinished run already has an exported memo")
@@ -265,9 +294,14 @@ def resume(directory, provider=None, *, pause=None):
             meter.save()
         prior = sorted(set(record["calls"]) - meter.pending.keys())
         recovered = meter.restore()
-        record.setdefault("resumptions", []).append({
-            "at": datetime.now(UTC).isoformat(), "already_settled": prior, "recovered_receipts": recovered,
-        })
+        if record["state"] != "queued":
+            record.setdefault("resumptions", []).append(
+                {
+                    "at": datetime.now(UTC).isoformat(),
+                    "already_settled": prior,
+                    "recovered_receipts": recovered,
+                }
+            )
         record.pop("failure", None)
         record["state"] = "running"
         meter.save()
@@ -311,7 +345,11 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     cmds = parser.add_subparsers(dest="command", required=True)
     live = cmds.add_parser("run")
-    live.add_argument("--case", choices=CASES, required=True)
+    intake = live.add_mutually_exclusive_group(required=True)
+    intake.add_argument("--case", choices=CASES)
+    intake.add_argument("--question", help="Research a question against a dated source collection")
+    live.add_argument("--cutoff", help="UTC date or timestamp with timezone, for --question")
+    live.add_argument("--collection", choices=COLLECTIONS, help="Source collection for --question (default: archive)")
     live.add_argument("--route", choices=ROUTES)
     live.add_argument("--budget-usd", default="0.05")
     live.add_argument("--output-dir", type=Path, required=True)
@@ -327,10 +365,15 @@ def main(argv=None):
                 if args.command == "resume":
                     record = resume(directory, pause=pause)
                 else:
-                    case = case_for(args.case)
+                    if args.case and (args.cutoff is not None or args.collection is not None):
+                        raise CaseError("A predefined case supplies its own cutoff and source collection")
+                    case = (
+                        case_for(args.case) if args.case else
+                        analyst_case(args.question, args.cutoff, args.collection or "archive")
+                    )
                     record = run(
                         case,
-                        args.route or ("visual" if case.table else "dispute" if case.source_urls else "team"),
+                        args.route or default_route(case),
                         directory, Decimal(args.budget_usd), None, pause=pause,
                     )
             if record["state"] == "withheld":

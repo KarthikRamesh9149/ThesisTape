@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research desk · ThesisTape</title>
+  <link rel="stylesheet" href="/desk.css">
+  <script type="module" src="/desk.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="mast-inner">
+      <div class="brand"><span class="wordmark">ThesisTape</span><span class="brand-section">Research desk</span></div>
+      <nav aria-label="Research desk">
+        <button id="library-open" class="button outline" type="button">Saved runs</button>
+        <button id="new-open" class="button primary" type="button"><span aria-hidden="true">+</span> New research</button>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <p id="global-error" class="notice error" role="alert" hidden></p>
+    <button id="retry" class="button outline" type="button" hidden>Retry loading</button>
+    <div id="loading" role="status">Opening research desk…</div>
+    <article id="run" hidden>
+      <h1 id="run-title"></h1>
+      <div class="metadata">
+        <span id="status" role="status"></span><span id="cutoff"></span><span id="route"></span>
+        <button id="control" class="small-button" type="button" hidden></button>
+      </div>
+      <p id="question"></p>
+      <dl class="metrics">
+        <div><dt>Estimated spend</dt><dd id="spent"></dd><small id="reserved" hidden></small></div>
+        <div><dt>Spending limit</dt><dd id="budget"></dd></div>
+        <div><dt>Model calls</dt><dd id="calls"></dd></div>
+      </dl>
+      <p id="run-error" class="notice" role="status" hidden></p>
+      <div class="workspace">
+        <section class="reader" aria-label="Run details">
+          <div class="toolbar">
+            <div role="tablist" aria-label="Report view">
+              <button id="memo-tab" role="tab" aria-controls="memo" type="button">Research memo</button>
+              <button id="activity-tab" role="tab" aria-controls="activity" type="button">Run activity</button>
+            </div>
+            <a id="export" class="button outline export" download hidden>Export .md</a>
+          </div>
+          <div id="memo" role="tabpanel" aria-labelledby="memo-tab" tabindex="0"></div>
+          <div id="activity" role="tabpanel" aria-labelledby="activity-tab" tabindex="0" hidden></div>
+        </section>
+        <aside class="inspector" aria-labelledby="evidence-heading">
+          <div class="source-head"><h2 id="evidence-heading">Source evidence</h2><span id="passage-count"></span></div>
+          <div id="source-list" aria-label="Cited passages"></div>
+          <div id="passage" tabindex="-1" aria-label="Selected source passage"></div>
+        </aside>
+      </div>
+    </article>
+  </main>
+  <dialog id="new-dialog" aria-labelledby="new-title">
+    <div class="dialog-head"><h2 id="new-title">New research</h2><button class="dismiss" type="button" aria-label="Close new research">×</button></div>
+    <form id="intake">
+      <label for="research-question">Research question</label>
+      <textarea id="research-question" maxlength="2000" rows="4" required placeholder="What changed in Tradeweb’s adjusted expense forecast?"></textarea>
+      <label for="collection">Source collection</label>
+      <select id="collection" required></select>
+      <div class="date-fields">
+        <div><label for="new-cutoff">Cutoff date (UTC)</label><input id="new-cutoff" type="date" required></div>
+        <div><label for="new-time">Time in UTC <span>(optional)</span></label><input id="new-time" type="time" step="1" aria-describedby="cutoff-help"></div>
+      </div>
+      <p id="cutoff-help" class="field-help">Leave the time blank to include the full UTC date.</p>
+      <label for="new-budget">Spending limit (USD)</label>
+      <input id="new-budget" class="budget-input" type="number" min="0.000001" max="100" step="any" value="0.10" required>
+      <p id="intake-error" class="notice error" role="alert" hidden></p>
+      <div class="dialog-actions"><button class="button outline dismiss-form" type="button">Cancel</button><button class="button primary" id="start" type="submit">Start research</button></div>
+    </form>
+  </dialog>
+  <dialog id="library-dialog" aria-labelledby="library-title">
+    <div class="dialog-head"><h2 id="library-title">Saved runs</h2><button class="dismiss" type="button" aria-label="Close saved runs">×</button></div>
+    <div id="library" aria-live="polite"></div>
+  </dialog>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "id": "desk-4998abc16f72497ab3f18169d6a556fd",
+  "question": "What did Tradeweb correct about the high end of its 2023 adjusted expense forecast, and what stayed unchanged in the amended filing?",
+  "cutoff": "2023-10-27T00:15:00Z",
+  "observed_states": [
+    "running",
+    "paused",
+    "complete"
+  ],
+  "saw_reservation": true,
+  "settled_at_pause": [
+    "lead.plan"
+  ],
+  "writes": [
+    [
+      "/api/runs",
+      202
+    ],
+    [
+      "/api/runs/desk-4998abc16f72497ab3f18169d6a556fd/pause",
+      202
+    ],
+    [
+      "/api/runs/desk-4998abc16f72497ab3f18169d6a556fd/resume",
+      202
+    ]
+  ],
+  "visible_source_url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000171/tw-20231026.htm#:~:text=On%20October%2026%2C%202023%2C%20the%20Company%20filed%20the%20Original%20Form%208%2DK%2C%20which%20included%20the%20Original",
+  "exported": {
+    "bytes": 1941,
+    "sha256": "daddfbdff9a69b8cb0a8cdc99f75ad48607fc05a49f6a459fb4d1993af0bc922"
+  },
+  "calls": 12,
+  "spend_usd": "0.0323058",
+  "unchanged_after_inspection": true
+}
