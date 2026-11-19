@@ -1,0 +1,4830 @@
+{
+  "method": "Masked OpenAI Astra as-of grading, with exact report and source excerpt checks",
+  "reports_sha256": "f36941b82a4ab0a1109079e6bb6148cfff8e03f94328741ccb00427fa2225258",
+  "rows": [
+    {
+      "alias": "6d1f49fafec8c49f",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "a988eaaccc95abdb",
+      "assessment": {
+        "claims": [
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "On March 21, 2022, Berkshire Hathaway and Alleghany announced a definitive agreement for Berkshire to buy all outstanding Alleghany shares",
+              "source_id": "P1",
+              "source_quote": "March 21, 2022 – Berkshire Hathaway (NYSE:BRK.A; BRK.B) and Alleghany\nCorporation (NYSE:Y) today jointly announced they have entered into a definitive agreement under\nwhich Berkshire Hathaway will acquire all outstanding Alleghany shares"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "$848.02 per share in cash",
+              "source_id": "P1",
+              "source_quote": "$848.02 per share in cash"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "approximately $11.6 billion in equity value",
+              "source_id": "P1",
+              "source_quote": "a total equity\nvalue of approximately $11.6 billion"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "a 29% premium to Alleghany’s average stock price over the prior 30 days",
+              "source_id": "P1",
+              "source_quote": "a 29% premium to Alleghany’s average stock price over\nthe last 30 days"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "a 16% premium to its 52-week high closing price",
+              "source_id": "P1",
+              "source_quote": "a 16% premium to Alleghany’s 52-week high closing price"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "The offer was above even the highest close in that longer window",
+              "source_id": "P1",
+              "source_quote": "a 16% premium to Alleghany’s 52-week high closing price"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "the two percentages measure the same offer against different historical benchmarks",
+              "source_id": "P1",
+              "source_quote": "The acquisition price represents a multiple of 1.26 times\nAlleghany’s book value at December 31, 2021, a 29% premium to Alleghany’s average stock price over\nthe last 30 days and a 16% premium to Alleghany’s 52-week high closing price."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "cash fixes the payout at $848.02 per share if the deal closes on the agreed terms",
+              "source_id": "P1",
+              "source_quote": "all outstanding Alleghany shares for $848.02 per share in cash"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "a move in Berkshire’s stock price does not change that amount",
+              "source_id": "P1",
+              "source_quote": "$848.02 per share in cash"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "a fixed payout is not a guaranteed payout: required stockholder and regulatory approvals and other closing conditions remain",
+              "source_id": "P3",
+              "source_quote": "obtaining required stockholder and\nregulatory approvals, and the satisfaction of other conditions to the completion of the transaction"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "The historical premiums show how much Berkshire offered over past prices",
+              "source_id": "P1",
+              "source_quote": "a 29% premium to Alleghany’s average stock price over\nthe last 30 days and a 16% premium to Alleghany’s 52-week high closing price"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "not what a holder is certain to receive",
+              "source_id": "P3",
+              "source_quote": "circumstances that could give rise to the termination of the merger agreement"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "A competing buyer could offer better terms.",
+              "source_id": "P2",
+              "source_quote": "alternative acquisition proposals during a 25-day “go-shop” period."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "During the 25-day go-shop period",
+              "source_id": "P2",
+              "source_quote": "during a 25-day “go-shop” period"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "Alleghany can terminate the Berkshire merger agreement to accept a superior proposal, subject to the agreement’s terms",
+              "source_id": "P2",
+              "source_quote": "Alleghany has the right to terminate\nthe merger agreement to accept a superior proposal"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "The go-shop gives holders a chance at a better deal, but there is no assurance it will produce a superior proposal.",
+              "source_id": "P2",
+              "source_quote": "There can be no assurances that the “go-shop” process will\nresult in a superior proposal"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "A public announcement of a superior proposal would be a reason to reassess the expected payout",
+              "source_id": "P2",
+              "source_quote": "Alleghany has the right to terminate\nthe merger agreement to accept a superior proposal"
+            }
+          }
+        ],
+        "points": [
+          {
+            "award": true,
+            "criterion": "F1",
+            "reason": "The report identifies both the cash price per share and the approximate total equity value.",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "$848.02 per share in cash, representing approximately $11.6 billion in equity value",
+              "source_id": "P1",
+              "source_quote": "$848.02 per share in cash.\nThe transaction, which was unanimously approved by both Boards of Directors, represents a total equity\nvalue of approximately $11.6 billion."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "F2",
+            "reason": "The report distinguishes the 30-day average from the 52-week high close and assigns each its stated premium. Neither figure requires a calculation.",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "a 29% premium to Alleghany’s average stock price over the prior 30 days and a 16% premium to its 52-week high closing price",
+              "source_id": "P1",
+              "source_quote": "a 29% premium to Alleghany’s average stock price over\nthe last 30 days and a 16% premium to Alleghany’s 52-week high closing price."
+            }
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "The report gives the 25-day window and conditional termination right, but never says Alleghany could actively solicit competing bids.",
+            "witness": null
+          },
+          {
+            "award": true,
+            "criterion": "R1",
+            "reason": "The cash amount, unlike stock consideration, fixes the holder’s contractual payout regardless of Berkshire’s share price, conditional on closing on the agreed terms.",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "cash fixes the payout at $848.02 per share if the deal closes on the agreed terms; a move in Berkshire’s stock price does not change that amount",
+              "source_id": "P1",
+              "source_quote": "all outstanding Alleghany shares for $848.02 per share in cash."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R2",
+            "reason": "A superior proposal could displace the Berkshire deal. Its public announcement would justify reassessing the expected payout without assuming a competing acquisition will close.",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "A public announcement of a superior proposal would be a reason to reassess the expected payout",
+              "source_id": "P2",
+              "source_quote": "Alleghany has the right to terminate\nthe merger agreement to accept a superior proposal"
+            }
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0.234048",
+      "memo_sha256": "1906c39f1ffeb88f3d5d3cc6a7a943d8aab1159c111b74a018a358a6a0054d6a"
+    },
+    {
+      "alias": "d3b42e1256c83cd5",
+      "assessment": {
+        "claims": [
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "Berkshire agreed to pay $848.02 per Alleghany share in cash",
+              "source_id": "P1",
+              "source_quote": "Berkshire Hathaway will acquire all outstanding Alleghany shares for $848.02 per share in cash."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "valuing Alleghany’s equity at approximately $11.6 billion",
+              "source_id": "P1",
+              "source_quote": "a total equity\nvalue of approximately $11.6 billion"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "29% above Alleghany’s average stock price over the last 30 days",
+              "source_id": "P1",
+              "source_quote": "a 29% premium to Alleghany’s average stock price over\nthe last 30 days"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "16% above its 52-week high closing price",
+              "source_id": "P1",
+              "source_quote": "a 16% premium to Alleghany’s 52-week high closing price"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "These are reported premiums, not new calculations: the release identifies both benchmarks but does not give their dollar values in the cited passage",
+              "source_id": "P1",
+              "source_quote": "a 29% premium to Alleghany’s average stock price over\nthe last 30 days and a 16% premium to Alleghany’s 52-week high closing price."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "a fixed cash payout if the deal closes",
+              "source_id": "P1",
+              "source_quote": "all outstanding Alleghany shares for $848.02 per share in cash"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "the offer clears even the highest closing price of the prior 52 weeks",
+              "source_id": "P1",
+              "source_quote": "a 16% premium to Alleghany’s 52-week high closing price"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "both comparisons are backward-looking: neither establishes what Alleghany is worth on its own",
+              "source_id": "P1",
+              "source_quote": "a 29% premium to Alleghany’s average stock price over\nthe last 30 days and a 16% premium to Alleghany’s 52-week high closing price."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "the cash payout still depends on required stockholder and regulatory approvals and other closing conditions",
+              "source_id": "P5",
+              "source_quote": "obtaining required stockholder and\nregulatory approvals, and the satisfaction of other conditions to the completion of the transaction"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "A rival could offer more cash per share during the 25-day go-shop.",
+              "source_id": "P4",
+              "source_quote": "alternative acquisition proposals during a 25-day “go-shop” period."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "Alleghany can terminate the Berkshire agreement to accept a superior proposal during that period, subject to the merger agreement’s terms and conditions.",
+              "source_id": "P4",
+              "source_quote": "Alleghany has the right to terminate\nthe merger agreement to accept a superior proposal during the go-shop period, subject to the terms\nand conditions of the merger agreement."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "A public announcement that the board has determined a rival offer is superior would be a reason to revise the analysis.",
+              "source_id": "P4",
+              "source_quote": "Alleghany has the right to terminate\nthe merger agreement to accept a superior proposal during the go-shop period"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "Silence alone is not evidence that no rival has come forward: Alleghany says it does not intend to report developments",
+              "source_id": "P4",
+              "source_quote": "Alleghany does not intend to communicate developments regarding"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "unless the board makes a determination requiring disclosure",
+              "source_id": "P3",
+              "source_quote": "unless and until Alleghany’s Board of Directors makes a determination requiring further\ndisclosure."
+            }
+          }
+        ],
+        "points": [
+          {
+            "award": true,
+            "criterion": "F1",
+            "reason": "The report gives the cash price per share and correctly identifies $11.6 billion as approximate total equity value.",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "$848.02 per Alleghany share in cash, valuing Alleghany’s equity at approximately $11.6 billion",
+              "source_id": "P1",
+              "source_quote": "$848.02 per share in cash.\nThe transaction, which was unanimously approved by both Boards of Directors, represents a total equity\nvalue of approximately $11.6 billion."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "F2",
+            "reason": "The report pairs each premium with its correct benchmark and identifies both percentages as reported rather than calculated.",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "29% above Alleghany’s average stock price over the last 30 days and 16% above its 52-week high closing price",
+              "source_id": "P1",
+              "source_quote": "a 29% premium to Alleghany’s average stock price over\nthe last 30 days and a 16% premium to Alleghany’s 52-week high closing price."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "F3",
+            "reason": "The report identifies the 25-day window for competing bids and distinguishes receiving a bid from terminating under the agreement to accept a superior proposal.",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "during the 25-day go-shop. Alleghany can terminate the Berkshire agreement to accept a superior proposal during that period, subject to the merger agreement’s terms and conditions.",
+              "source_id": "P4",
+              "source_quote": "alternative acquisition proposals during a 25-day “go-shop” period. Alleghany has the right to terminate\nthe merger agreement to accept a superior proposal during the go-shop period, subject to the terms\nand conditions of the merger agreement."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R1",
+            "reason": "The holder knows the agreed price, but not whether it will be paid: outstanding approvals and other closing conditions separate a fixed price from a guaranteed return.",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "the cash payout still depends on required stockholder and regulatory approvals and other closing conditions",
+              "source_id": "P5",
+              "source_quote": "obtaining required stockholder and\nregulatory approvals, and the satisfaction of other conditions to the completion of the transaction"
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R2",
+            "reason": "A competing bid could displace Berkshire’s deal. A public superior-proposal determination would warrant revision; silence during the go-shop would not rule out a bid.",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "A public announcement that the board has determined a rival offer is superior would be a reason to revise the analysis.",
+              "source_id": "P4",
+              "source_quote": "Alleghany has the right to terminate\nthe merger agreement to accept a superior proposal during the go-shop period"
+            }
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0.233464",
+      "memo_sha256": "54518c5f76040d0c310cf5be536716e9006dbbca61e40beecba56d610a06da6c"
+    },
+    {
+      "alias": "f074825fab3cb433",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "f69e2309887f7368",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "1ec0fe3c0368eedd",
+      "assessment": {
+        "claims": [
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "BEA’s advance estimate showed that real GDP—the volume of U.S. production—grew at a 3.2% annual rate in Q1 2019",
+              "source_id": "P1",
+              "source_quote": "Real gross domestic product (GDP) increased at an annual rate of 3.2 percent"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "up from 2.2% in Q4 2018 (3.2 − 2.2 = 1.0 annualized percentage point)",
+              "source_id": "P1",
+              "source_quote": "fourth quarter of 2018, real GDP increased  2.2 percent."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "The gross domestic purchases price index, which measures prices paid by U.S. residents rather than output, rose at a 0.8% annual rate",
+              "source_id": "P2",
+              "source_quote": "The price index for gross domestic purchases increased 0.8 percent"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "down from 1.7% (0.8 − 1.7 = −0.9 annualized percentage points)",
+              "source_id": "P2",
+              "source_quote": "compared with\nan increase of 1.7 percent"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "Output growth accelerated",
+              "source_id": "P2",
+              "source_quote": "The acceleration in real GDP growth in the first quarter"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "purchases-price inflation slowed",
+              "source_id": "P2",
+              "source_quote": "increased 0.8 percent in the first | quarter, compared with\nan increase of 1.7 percent"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Real personal consumption expenditures (PCE) added to Q1 GDP growth",
+              "source_id": "P1",
+              "source_quote": "positive contributions from personal consumption\nexpenditures (PCE)"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "grew more slowly than in Q4, partly offsetting the acceleration in GDP",
+              "source_id": "P2",
+              "source_quote": "These movements were partly offset by decelerations in PCE"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "headline PCE price growth slowed from 1.5% in Q4 to 0.6% in Q1",
+              "source_id": "P2",
+              "source_quote": "The PCE price index increased 0.6 percent,\ncompared with an increase of 1.5 percent."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "core PCE price growth slowed from 1.8% to 1.3%",
+              "source_id": "P2",
+              "source_quote": "Excluding food and energy prices, the PCE price index\nincreased 1.3 percent, compared with an increase of 1.8 percent."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "both at annual rates",
+              "source_id": "P3",
+              "source_quote": "adjusted series are displayed at annual rates"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "May 30, 2019 second estimate",
+              "source_id": "P1",
+              "source_quote": "based on more complete data, will be released on May\n30, 20 | 19."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "leave Q1 gross domestic purchases price growth at 0.8% annualized at published one-decimal precision",
+              "source_id": "P2",
+              "source_quote": "The price index for gross domestic purchases increased 0.8 percent"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "Slower consumer-price growth helps explain the low advance reading because consumer purchases are part of domestic purchases.",
+              "source_id": "P2",
+              "source_quote": "The PCE price index increased 0.6 percent,\ncompared with an increase of 1.5 percent."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "that slowdown is a comparison with Q4, not evidence of a downward revision to Q1",
+              "source_id": "P2",
+              "source_quote": "The PCE price index increased 0.6 percent,\ncompared with an increase of 1.5 percent."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "absence of a directional signal from the source data",
+              "source_id": "P1",
+              "source_quote": "based on source data that are incomplete\nor subject to further revision by the source agency"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "more complete inputs can change the unrounded estimate without changing the published rate",
+              "source_id": "P3",
+              "source_quote": "changes are calculated from unrounded data."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "Alternative: higher. Before May 30, watch for published upward revisions to the March source price series used to estimate PCE prices.",
+              "source_id": "P1",
+              "source_quote": "based on source data that are incomplete\nor subject to further revision by the source agency"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "after accounting for their weight in domestic purchases and any offsets from other purchases prices",
+              "source_id": "P3",
+              "source_quote": "chained weighted formula that incorporates weights"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "implied a Q1 annualized rate that rounds above 0.8%",
+              "source_id": "P2",
+              "source_quote": "The price index for gross domestic purchases increased 0.8 percent"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "Real GDP growth acceleration, Q1 2019 versus Q4 2018 (annualized percentage points) — 3.2 − 2.2 = 1.0",
+              "source_id": "P1",
+              "source_quote": "Real gross domestic product (GDP) increased at an annual rate of 3.2 percent"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p6",
+              "report_quote": "Gross domestic purchases price index growth change, Q1 2019 versus Q4 2018 (annualized percentage points) — 0.8 − 1.7 = -0.9",
+              "source_id": "P2",
+              "source_quote": "The price index for gross domestic purchases increased 0.8 percent"
+            }
+          }
+        ],
+        "points": [
+          {
+            "award": true,
+            "criterion": "F1",
+            "reason": "The report identifies 3.2% as the advance annualized growth rate of real GDP in Q1 2019.",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "grew at a 3.2% annual rate in Q1 2019",
+              "source_id": "P1",
+              "source_quote": "Real gross domestic product (GDP) increased at an annual rate of 3.2 percent"
+            }
+          },
+          {
+            "award": true,
+            "criterion": "F2",
+            "reason": "The report identifies 0.8% as annualized growth in domestic purchases prices, not real output.",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "rose at a 0.8% annual rate",
+              "source_id": "P2",
+              "source_quote": "The price index for gross domestic purchases increased 0.8 percent"
+            }
+          },
+          {
+            "award": true,
+            "criterion": "F3",
+            "reason": "The report correctly distinguishes PCE’s positive contribution to growth from the effect of its deceleration.",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Real personal consumption expenditures (PCE) added to Q1 GDP growth",
+              "source_id": "P1",
+              "source_quote": "positive contributions from personal consumption\nexpenditures (PCE)"
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R1",
+            "reason": "The within call explains how revised inputs can leave the rounded rate unchanged without mistaking a quarter-to-quarter slowdown for a revision signal.",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "more complete inputs can change the unrounded estimate without changing the published rate",
+              "source_id": "P3",
+              "source_quote": "changes are calculated from unrounded data."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R2",
+            "reason": "The higher alternative specifies what to watch before May 30: upward source-price revisions large enough, after weighting and offsets, to change the rounded rate.",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "watch for published upward revisions to the March source price series used to estimate PCE prices",
+              "source_id": "P1",
+              "source_quote": "subject to further revision by the source agency"
+            }
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0.290720",
+      "memo_sha256": "fad780d7290ca3dfb711b1d893ba401faae0fff34f0c524df01a2174935928a6"
+    },
+    {
+      "alias": "66a2f8f09af70872",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "7a912c8a8226fd56",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "df64dfa3a182693c",
+      "assessment": {
+        "claims": [
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "In its April 26 advance estimate",
+              "source_id": "P1",
+              "source_quote": "FRIDAY, APRIL 26, 2019"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "real GDP—U.S. output adjusted for price changes—grew 3.2% annualized in Q1 2019",
+              "source_id": "P1",
+              "source_quote": "Real gross domestic product (GDP) increased at an annual rate of 3.2 percent"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "up from 2.2% in Q4 2018 (3.2 − 2.2 = +1.0 annualized percentage point)",
+              "source_id": "P1",
+              "source_quote": "fourth quarter of 2018, real GDP increased  2.2 percent."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "The gross domestic purchases price index instead measures prices paid for domestic purchases.",
+              "source_id": "P2",
+              "source_quote": "The price index for gross domestic purchases"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "It rose 0.8% annualized",
+              "source_id": "P2",
+              "source_quote": "The price index for gross domestic purchases increased 0.8 percent"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "down from 1.7% (0.8 − 1.7 = −0.9 annualized percentage point)",
+              "source_id": "P2",
+              "source_quote": "an increase of 1.7 percent in the fourth"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "Output growth accelerated",
+              "source_id": "P2",
+              "source_quote": "The acceleration in real GDP growth in the first quarter"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "purchase-price inflation slowed; these are quarter-to-quarter comparisons, not revisions",
+              "source_id": "P2",
+              "source_quote": "compared with\nan increase of 1.7 percent in the fourth"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Real personal consumption expenditures (PCE) contributed positively to Q1 GDP growth",
+              "source_id": "P1",
+              "source_quote": "The increase in real GDP in the first quarter reflected positive contributions from personal consumption"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "grew more slowly than in Q4, tempering the acceleration",
+              "source_id": "P2",
+              "source_quote": "These movements were partly offset by decelerations in PCE"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "PCE price growth slowed to 0.6% annualized from 1.5%",
+              "source_id": "P2",
+              "source_quote": "The PCE price index increased 0.6 percent,\ncompared with an increase of 1.5 percent."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "BEA’s May 30 second estimate",
+              "source_id": "P1",
+              "source_quote": "based on more complete data, will be released on May\n30"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "within, meaning Q1 gross domestic purchases price growth still rounds to 0.8% annualized",
+              "source_id": "P2",
+              "source_quote": "The price index for gross domestic purchases increased 0.8 percent"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "Confidence is low.",
+              "source_id": "P1",
+              "source_quote": "based on source data that are incomplete\nor subject to further revision by the source agency"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "The advance estimate already reflects slower consumer-price growth.",
+              "source_id": "P2",
+              "source_quote": "The PCE price index increased 0.6 percent,\ncompared with an increase of 1.5 percent."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "More complete source data could revise the consumer-price component and move the broader index",
+              "source_id": "P1",
+              "source_quote": "based on source data that are incomplete\nor subject to further revision by the source agency"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "the available evidence gives no directional signal and no reason to expect a change at one-decimal precision",
+              "source_id": "P1",
+              "source_quote": "based on source data that are incomplete\nor subject to further revision by the source agency"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "Alternative: lower. Before May 30, watch for updated March consumer-price inputs that imply Q1 PCE price growth below the advance estimate’s 0.6% annualized.",
+              "source_id": "P2",
+              "source_quote": "The PCE price index increased 0.6 percent"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "Switch to lower only if the implied downward revision, after accounting for other purchase prices, is large enough for the broader index to round below 0.8%",
+              "source_id": "P2",
+              "source_quote": "The price index for gross domestic purchases increased 0.8 percent"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "Real GDP growth acceleration, Q1 2019 versus Q4 2018 (annualized percentage points) — 3.2 − 2.2 = 1.0",
+              "source_id": "P1",
+              "source_quote": "Real gross domestic product (GDP) increased at an annual rate of 3.2 percent"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p6",
+              "report_quote": "Gross domestic purchases price index growth change, Q1 2019 versus Q4 2018 (annualized percentage points) — 0.8 − 1.7 = -0.9",
+              "source_id": "P2",
+              "source_quote": "The price index for gross domestic purchases increased 0.8 percent"
+            }
+          }
+        ],
+        "points": [
+          {
+            "award": true,
+            "criterion": "F1",
+            "reason": "The report gives the Q1 2019 advance estimate for real output growth at the correct annual rate.",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "grew 3.2% annualized in Q1 2019",
+              "source_id": "P1",
+              "source_quote": "Real gross domestic product (GDP) increased at an annual rate of 3.2 percent"
+            }
+          },
+          {
+            "award": true,
+            "criterion": "F2",
+            "reason": "The report identifies the purchases price index separately from output and gives its Q1 increase as 0.8% annualized.",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "It rose 0.8% annualized, down from 1.7%",
+              "source_id": "P2",
+              "source_quote": "The price index for gross domestic purchases increased 0.8 percent"
+            }
+          },
+          {
+            "award": true,
+            "criterion": "F3",
+            "reason": "PCE added to Q1 real GDP growth even though its deceleration tempered the pickup from Q4.",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Real personal consumption expenditures (PCE) contributed positively to Q1 GDP growth",
+              "source_id": "P1",
+              "source_quote": "positive contributions from personal consumption"
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R1",
+            "reason": "The within call distinguishes slower PCE inflation already in the estimate from a revision to consumer prices that could change the broader index.",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "The advance estimate already reflects slower consumer-price growth.",
+              "source_id": "P2",
+              "source_quote": "The PCE price index increased 0.6 percent,\ncompared with an increase of 1.5 percent."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R2",
+            "reason": "The lower alternative identifies March price updates to monitor before May 30 and requires their net effect to change the rounded purchases figure.",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "watch for updated March consumer-price inputs that imply Q1 PCE price growth below the advance estimate’s 0.6% annualized",
+              "source_id": "P2",
+              "source_quote": "The PCE price index increased 0.6 percent"
+            }
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0.274184",
+      "memo_sha256": "d6f8f2bb22030dc6ce4f6fd9b4e01dfe74551df199f81eb906d2d93c5dcdb915"
+    },
+    {
+      "alias": "e07593ba671c1202",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "f11db0ed6377918b",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "0a40e20468e4b905",
+      "assessment": {
+        "claims": [
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "BEA reported that real GDP rose",
+              "source_id": "P1",
+              "source_quote": "The increase in fourth quarter GDP reflected both the continued economic recovery"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "the U.S. economy produced more after adjusting for price changes",
+              "source_id": "P4",
+              "source_quote": "Quantities, | or | \"real\" | volume\nmeasures"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "The 1.7 percent increase in the domestic purchases price index measured a different change: prices paid for goods and services purchased in the United States.",
+              "source_id": "P1",
+              "source_quote": "The price index for gross domestic purchases increased 1.7 percent in the fourth quarter"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "The supplied excerpt does not state the annualized real GDP growth rate. Its 6.0 percent annual rate is for current-dollar GDP, not real GDP.",
+              "source_id": "P1",
+              "source_quote": "Current-dollar GDP increased 6.0 percent at an annual rate"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Goods accounted for most of the export increase, led by industrial supplies and materials.",
+              "source_id": "P1",
+              "source_quote": "The increase in exports primarily reflected an increase in goods (led by industrial supplies and materials)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Stronger foreign purchases of U.S. output supported real GDP growth, all else equal.",
+              "source_id": "P1",
+              "source_quote": "The increase in exports primarily reflected an increase in goods"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Those exports were not domestic purchases, so the export gain was not part of the 1.7 percent price reading.",
+              "source_id": "P1",
+              "source_quote": "The price index for gross domestic purchases increased 1.7 percent in the fourth quarter"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "February 25 second estimate",
+              "source_id": "P2",
+              "source_quote": "Second Estimate | February 25, 2021"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "within, meaning Q4 real GDP growth remains unchanged at the published one-decimal annualized rate. The key assumption is that updated goods-export data broadly confirm the advance estimate.",
+              "source_id": "P1",
+              "source_quote": "The increase in exports primarily reflected an increase in goods (led by industrial supplies and materials)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "The export gain was already counted; it is not, by itself, evidence for an upward revision.",
+              "source_id": "P1",
+              "source_quote": "The increase in exports primarily reflected an increase in goods"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "This is a low-confidence call because the supplied passages give no newer goods-export reading.",
+              "source_id": "P2",
+              "source_quote": "Advance Estimate | January 28, 2021"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "Alternative: lower. I would change the call if updated Q4 trade data showed a smaller increase in real industrial-supplies exports than BEA initially incorporated, large enough, without offsets elsewhere, to lower annualized real GDP growth at one-decimal precision.",
+              "source_id": "P1",
+              "source_quote": "The increase in exports primarily reflected an increase in goods (led by industrial supplies and materials)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "The signal is weaker export volume, not merely lower export prices.",
+              "source_id": "P4",
+              "source_quote": "Quantities, | or | \"real\" | volume\nmeasures, and prices are expressed as index"
+            }
+          }
+        ],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "The report correctly distinguishes current-dollar GDP from real GDP but never gives the 4.0% annualized real growth rate.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "The report identifies the correct index and 1.7% increase but does not say that the price change is an annual rate.",
+            "witness": null
+          },
+          {
+            "award": true,
+            "criterion": "F3",
+            "reason": "The report identifies both goods as the main source of export growth and industrial supplies and materials as the leading goods category.",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Goods accounted for most of the export increase, led by industrial supplies and materials.",
+              "source_id": "P1",
+              "source_quote": "The increase in exports primarily reflected an increase in goods (led by industrial supplies and materials)."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R1",
+            "reason": "The within call distinguishes a contribution already in the advance estimate from a revision, which would require updated evidence.",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "The export gain was already counted; it is not, by itself, evidence for an upward revision.",
+              "source_id": "P1",
+              "source_quote": "The increase in exports primarily reflected an increase in goods (led by industrial supplies and materials)."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R2",
+            "reason": "The lower alternative specifies an observable shortfall in real export volume, conditional on no offset and a change at published precision.",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "updated Q4 trade data showed a smaller increase in real industrial-supplies exports than BEA initially incorporated",
+              "source_id": "P1",
+              "source_quote": "The increase in exports primarily reflected an increase in goods (led by industrial supplies and materials)."
+            }
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0.091976",
+      "memo_sha256": "8013417e642ff5c561095be92fa5480c3d4691157c872212bc8fa645982bcf26"
+    },
+    {
+      "alias": "1e1669f2dc1133ed",
+      "assessment": {
+        "claims": [
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "In its January 28 advance estimate",
+              "source_id": "P3",
+              "source_quote": "EMBARGOED UNTIL RELEASE AT 8:30 A.M. EST, THURSDAY, JANUARY 28, 2021"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "real GDP grew at a 4.0 percent annual rate from Q3 to Q4 2020",
+              "source_id": "P3",
+              "source_quote": "Real gross domestic product (GDP) increased at an annual rate of 4.0 percent in the fourth quarter of\n2020 (table 1)"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "the gross domestic purchases price index rose 1.7 percent in Q4",
+              "source_id": "P1",
+              "source_quote": "The price index for gross domestic purchases increased 1.7 percent in the fourth quarter"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "The first measures growth in the volume of U.S. production",
+              "source_id": "P3",
+              "source_quote": "Real gross domestic product (GDP) increased at an annual rate of 4.0 percent"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "the second measures price changes for what U.S. residents buy",
+              "source_id": "P1",
+              "source_quote": "The price index for gross domestic purchases"
+            }
+          },
+          {
+            "verdict": "unsupported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "including imports",
+              "source_id": null,
+              "source_quote": null
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "The 4.0 percent figure is already adjusted for price changes.",
+              "source_id": "P3",
+              "source_quote": "Real gross domestic product (GDP) increased at an annual rate of 4.0 percent"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Goods drove the increase in exports, led by industrial supplies and materials",
+              "source_id": "P1",
+              "source_quote": "The increase in exports primarily reflected an increase in goods (led by industrial supplies and materials)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "That export increase supported real GDP because exports count as U.S. production.",
+              "source_id": "P3",
+              "source_quote": "The increase in real GDP reflected increases in exports"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Imports also increased and are subtracted in the GDP calculation",
+              "source_id": "P3",
+              "source_quote": "Imports, which are a subtraction in the calculation of GDP, increased (table 2)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "the export boost alone does not establish the net contribution of trade",
+              "source_id": "P3",
+              "source_quote": "Imports, which are a subtraction in the calculation of GDP, increased (table 2)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "I expect the February 25 second estimate to still print 4.0 percent annualized at one-decimal precision.",
+              "source_id": "P3",
+              "source_quote": "Real gross domestic product (GDP) increased at an annual rate of 4.0 percent in the fourth quarter of\n2020 (table 1)"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "February 25 second estimate",
+              "source_id": "P3",
+              "source_quote": "The \"second\"\nestimate for the fourth quarter, based on more complete data, will be released on February 25, 2021."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "The main assumption is that updated goods trade data will not change the net trade contribution enough to move the headline.",
+              "source_id": "P1",
+              "source_quote": "The increase in exports primarily reflected an increase in goods (led by industrial supplies and materials)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "The advance release identifies goods exports as a source of growth",
+              "source_id": "P1",
+              "source_quote": "The increase in exports primarily reflected an increase in goods (led by industrial supplies and materials)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "it gives no clear signal that their contribution was over- or understated",
+              "source_id": "P3",
+              "source_quote": "The GDP estimate released today is based on source data that are incomplete or subject to further\nrevision by the source agency"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "Confidence is low because the advance estimate relies on incomplete or revisable data",
+              "source_id": "P3",
+              "source_quote": "The GDP estimate released today is based on source data that are incomplete or subject to further\nrevision by the source agency"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "Alternative: lower. I would switch if updated Q4 goods trade data showed weaker real exports of industrial supplies and materials than BEA assumed",
+              "source_id": "P1",
+              "source_quote": "The increase in exports primarily reflected an increase in goods (led by industrial supplies and materials)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "the shortfall was large enough to pull the published rate below 4.0 percent without an offset from lower imports or stronger spending",
+              "source_id": "P3",
+              "source_quote": "The increase in real GDP reflected increases in exports, nonresidential fixed investment, personal\nconsumption expenditures (PCE), residential fixed investment, and private inventory investment that\nwere partly offset by decreases in state and local government spending and federal government\nspending. Imports, which are a subtraction in the calculation of GDP, increased (table 2)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "The observable check is the updated trade data against BEA’s advance-estimate source assumptions",
+              "source_id": "P2",
+              "source_quote": "A\ndetailed | Key Source Data and Assumptions | file is also posted for each release."
+            }
+          }
+        ],
+        "points": [
+          {
+            "award": true,
+            "criterion": "F1",
+            "reason": "The report identifies the advance estimate, the Q3-to-Q4 period, and the 4.0 percent annual rate.",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "real GDP grew at a 4.0 percent annual rate from Q3 to Q4 2020",
+              "source_id": "P3",
+              "source_quote": "Real gross domestic product (GDP) increased at an annual rate of 4.0 percent in the fourth quarter of\n2020 (table 1), according to the \"advance\" estimate"
+            }
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "The index, quarter, direction, and magnitude are correct, but the report does not identify 1.7 percent as an annual rate.",
+            "witness": null
+          },
+          {
+            "award": true,
+            "criterion": "F3",
+            "reason": "The report correctly identifies goods as the main source of export growth and industrial supplies and materials as the leading goods category.",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Goods drove the increase in exports, led by industrial supplies and materials",
+              "source_id": "P1",
+              "source_quote": "The increase in exports primarily reflected an increase in goods (led by industrial supplies and materials)."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R1",
+            "reason": "The within call rests on an explicit assumption: trade updates will not shift net exports enough to change the rounded headline. The release provides no directional revision signal.",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "updated goods trade data will not change the net trade contribution enough to move the headline",
+              "source_id": "P3",
+              "source_quote": "Imports, which are a subtraction in the calculation of GDP, increased (table 2)."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R2",
+            "reason": "The lower alternative specifies an observable export shortfall against advance assumptions and requires it to move the published rate after import and spending offsets.",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "The observable check is the updated trade data against BEA’s advance-estimate source assumptions",
+              "source_id": "P2",
+              "source_quote": "Information on the source data and key assumptions used for unavailable source data in the advance\nestimate is provided in a Technical Note"
+            }
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0.119552",
+      "memo_sha256": "f2820b69584fff45c64a6ffe0390ed20ca32d3c9e07b0d7b566e5d23b4d6c7d6"
+    },
+    {
+      "alias": "52755d59512c8622",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "5400003a02a0475c",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "c60c74417d1932d2",
+      "assessment": {
+        "claims": [
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "BEA’s advance estimate showed that inflation-adjusted U.S. output grew at a 4.0 percent annual rate in Q4 2020, down from 33.4 percent in Q3",
+              "source_id": "P1",
+              "source_quote": "Real gross domestic product (GDP) increased at an annual rate of 4.0 percent in the fourth quarter of\n2020 (table 1), according to the \"advance\" estimate released by the Bureau of Economic Analysis. In the\nthird quarter, real GDP increased 33.4 percent."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "The gross domestic purchases price index measures changes in prices paid for domestic purchases, not growth in U.S. output.",
+              "source_id": "P3",
+              "source_quote": "The price index for gross domestic purchases"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "It rose 1.7 percent in Q4, compared with 3.3 percent in Q3",
+              "source_id": "P3",
+              "source_quote": "The price index for gross domestic purchases increased 1.7 percent in the fourth quarter, compared\nwith an increase of 3.3 percent in the third quarter"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Rising exports lifted the advance real GDP reading.",
+              "source_id": "P1",
+              "source_quote": "The increase in real GDP reflected increases in exports"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Goods accounted for most of the export increase, led by industrial supplies and materials.",
+              "source_id": "P2",
+              "source_quote": "The increase in exports primarily reflected an increase in goods (led by industrial supplies and materials)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Imports also rose, offsetting some of the export boost because imports are subtracted in calculating GDP",
+              "source_id": "P1",
+              "source_quote": "Imports, which are a subtraction in the calculation of GDP, increased (table 2)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "BEA’s February 25 second estimate",
+              "source_id": "P1",
+              "source_quote": "estimate for the fourth quarter, based on more complete data, will be released on February 25, 2021."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "I expect BEA’s February 25 second estimate to leave Q4 2020 real GDP growth at 4.0 percent annualized to one decimal place.",
+              "source_id": "P1",
+              "source_quote": "Real gross domestic product (GDP) increased at an annual rate of 4.0 percent in the fourth quarter of\n2020"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "The main revision driver I would watch is real net exports: more complete source data can change the estimated contributions of both exports and imports.",
+              "source_id": "P1",
+              "source_quote": "The GDP estimate released today is based on source data that are incomplete or subject to further\nrevision by the source agency"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "Goods exports lifted the advance estimate, but that does not show whether BEA initially estimated them too high or too low",
+              "source_id": "P2",
+              "source_quote": "The increase in exports primarily reflected an increase in goods (led by industrial supplies and materials)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "If updated December goods-trade data and the price data needed to adjust them become available before February 25, compare real goods exports and imports with BEA’s advance-estimate source assumptions.",
+              "source_id": "P2",
+              "source_quote": "More information on the source data that underlie the estimates is available in the Key Source and Data\nAssumptions file on BEA’s website."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "I would switch to higher if stronger real goods exports raised the net export contribution enough for growth to round above 4.0 percent annualized after accounting for import revisions and any other known offsets.",
+              "source_id": "P1",
+              "source_quote": "The increase in real GDP reflected increases in exports, nonresidential fixed investment, personal\nconsumption expenditures (PCE), residential fixed investment, and private inventory investment that\nwere partly offset by decreases in state and local government spending and federal government\nspending. Imports, which are a subtraction in the calculation of GDP, increased (table 2)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "The advance release points to BEA’s source assumptions but does not establish when the updated inputs will be available",
+              "source_id": "P2",
+              "source_quote": "More information on the source data that underlie the estimates is available in the Key Source and Data\nAssumptions file on BEA’s website."
+            }
+          }
+        ],
+        "points": [
+          {
+            "award": true,
+            "criterion": "F1",
+            "reason": "The report identifies the advance estimate as real output growth of 4.0 percent at an annual rate in Q4 2020.",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "inflation-adjusted U.S. output grew at a 4.0 percent annual rate in Q4 2020",
+              "source_id": "P1",
+              "source_quote": "Real gross domestic product (GDP) increased at an annual rate of 4.0 percent in the fourth quarter of\n2020"
+            }
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "The index, quarter and 1.7 percent figure are correct, but the report does not identify the price change as an annual rate.",
+            "witness": null
+          },
+          {
+            "award": true,
+            "criterion": "F3",
+            "reason": "The report identifies goods as the primary source of export growth and industrial supplies and materials as the leading goods category.",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Goods accounted for most of the export increase, led by industrial supplies and materials.",
+              "source_id": "P2",
+              "source_quote": "The increase in exports primarily reflected an increase in goods (led by industrial supplies and materials)."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R1",
+            "reason": "The within call distinguishes a positive export contribution from evidence of revision bias and identifies how fuller trade data could change real net exports.",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "Goods exports lifted the advance estimate, but that does not show whether BEA initially estimated them too high or too low",
+              "source_id": "P2",
+              "source_quote": "The increase in exports primarily reflected an increase in goods (led by industrial supplies and materials)."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R2",
+            "reason": "The higher alternative has a testable trigger: compare updated real trade with advance assumptions and switch only if the net effect changes the rounded reading.",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "I would switch to higher if stronger real goods exports raised the net export contribution enough for growth to round above 4.0 percent annualized after accounting for import revisions and any other known offsets.",
+              "source_id": "P2",
+              "source_quote": "More information on the source data that underlie the estimates is available in the Key Source and Data\nAssumptions file on BEA’s website."
+            }
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0.10636",
+      "memo_sha256": "56e67424de6290eddf3f3381e36cc2cafcd57a4e9b96e549c8506f552f53d91f"
+    },
+    {
+      "alias": "d99546892f805092",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "2b6eaa36e569e3ba",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "2eabc17a6d99fddd",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "30cbe55778a44cba",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "656de4fee3c3eadc",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "a79d1c390686be1c",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "150451c69c3edfad",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "5a17bb6b06fc52a5",
+      "assessment": {
+        "claims": [
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "after tax and in USD millions",
+              "source_id": "P1",
+              "source_quote": "Earnings are stated on an after-tax basis.  ( | Dollar amounts are in millions,\nexcept for per share amounts)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "5,871 in operating earnings",
+              "source_id": "P1",
+              "source_quote": "Operating earnings ...................................................................................... | 5,871 | 5,555"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "(54,517) in investment losses",
+              "source_id": "P1",
+              "source_quote": "Investments ............................................................................................. | (54,517) | 15,498"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "(1,100) in derivative losses",
+              "source_id": "P1",
+              "source_quote": "Derivatives .............................................................................................. | (1,100) | 608"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "The two losses totaled (55,617)",
+              "source_id": "P1",
+              "source_quote": "(55,617) | 16,106"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "adding them to operating earnings produced a (49,746) net loss attributable to Berkshire shareholders",
+              "source_id": "P1",
+              "source_quote": "(55,617) | 16,106\nOperating earnings ...................................................................................... | 5,871 | 5,555\nNet earnings (loss) attributable to Berkshire shareholders .............................. | $ | (49,746) | $ | 21,661"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "The net loss is not a measure of cash outflow.",
+              "source_id": "P3",
+              "source_quote": "include the changes in unrealized gains/losses of our equity security investments as a component of\ninvestment gains/losses in our earnings statements."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "GAAP required Berkshire to recognize changes in unrealized gains and losses on its equity holdings in earnings.",
+              "source_id": "P3",
+              "source_quote": "Due to a change in Generally Accepted Accounting Principles  (“GAAP”) in 2018, we are | required to\ninclude the changes in unrealized gains/losses of our equity security investments as a component of\ninvestment gains/losses in our earnings statements."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "That revaluation accounted for approximately $55.5 billion of first-quarter 2020 investment losses",
+              "source_id": "P3",
+              "source_quote": "investment gains/losses include a\nloss of approximately $55.5 billion | in the | first quarter of 2020"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "it reduced reported earnings without itself requiring a sale or a cash payment",
+              "source_id": "P3",
+              "source_quote": "include the changes in unrealized gains/losses of our equity security investments as a component of\ninvestment gains/losses in our earnings statements."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "the headline loss mainly reflects a decline in the value of the equity holdings, not a comparable cash drain from running the businesses",
+              "source_id": "P3",
+              "source_quote": "loss of approximately $55.5 billion | in the | first quarter of 2020 and a gain of approximately $1 | 5.1 | billion\nin the first quarter of 2019 due to changes during the first quarter s of 2020 | and 2019 | in the amoun t of\nunrealized gains that existed in our equity security investment holdings."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "A better starting point for assessing the businesses is Berkshire’s non-GAAP operating earnings",
+              "source_id": "P2",
+              "source_quote": "An analysis of Berkshire’s operating earnings follow | s (dollar amounts are in millions).\nFirst Quarter\n2020 | 2019\nInsurance-underwriting................................ | .................................................  $ | 363 | $ | 389\nInsurance-investment income ....................................................................... | 1,386 | 1,237\nRailroad, utilities and energy ................................ ........................................  1,751 | 1,858\nOther businesses ...........................................................................................  2,038 | 2,200"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "which exclude investment and derivative gains and losses",
+              "source_id": "P2",
+              "source_quote": "Berkshire shows operating earnings defin | ed | as net earnings exclusive of\ninvestment and derivative gains/lo  sses."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "But operating earnings are not cash flow either.",
+              "source_id": "P2",
+              "source_quote": "Berkshire shows operating earnings defin | ed | as net earnings exclusive of\ninvestment and derivative gains/lo  sses."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "The release notes realized gains on investment sales without showing how much cash those sales generated",
+              "source_id": "P3",
+              "source_quote": "include after -tax realized  gains on sales of investment s of approximately $ | 965million | and  $392 | million in\nthe first quarters of 2020and 2 | 019, respectively | ."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "The check is the first-quarter 10-Q cash-flow statement: cash used in operating activities would indicate a separate operating cash drain",
+              "source_id": "P1",
+              "source_quote": "we urge investors and reporters to read our 10- | Q, which has been posted at\nwww.berkshirehathaway.com."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "the unrealized equity loss itself did not consume cash",
+              "source_id": "P3",
+              "source_quote": "include the changes in unrealized gains/losses of our equity security investments as a component of\ninvestment gains/losses in our earnings statements."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "(54,517) + (1,100) = -55,617",
+              "source_id": "P1",
+              "source_quote": "Investments ............................................................................................. | (54,517) | 15,498\nDerivatives .............................................................................................. | (1,100) | 608"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "5,871 + C1 = -49,746",
+              "source_id": "P1",
+              "source_quote": "(55,617) | 16,106\nOperating earnings ...................................................................................... | 5,871 | 5,555"
+            }
+          }
+        ],
+        "points": [
+          {
+            "award": true,
+            "criterion": "F1",
+            "reason": "The bridge starts with positive Q1 2020 after-tax operating earnings of $5,871 million.",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "Berkshire’s first-quarter 2020 bridge was, after tax and in USD millions: 5,871 in operating earnings",
+              "source_id": "P1",
+              "source_quote": "Operating earnings ...................................................................................... | 5,871 | 5,555"
+            }
+          },
+          {
+            "award": true,
+            "criterion": "F2",
+            "reason": "The report shows both loss components and subtracts their $55,617 million total from operating earnings to reach the $49,746 million attributable loss.",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "The two losses totaled (55,617); adding them to operating earnings produced a (49,746) net loss attributable to Berkshire shareholders",
+              "source_id": "P1",
+              "source_quote": "(55,617) | 16,106\nOperating earnings ...................................................................................... | 5,871 | 5,555\nNet earnings (loss) attributable to Berkshire shareholders .............................. | $ | (49,746) | $ | 21,661"
+            }
+          },
+          {
+            "award": true,
+            "criterion": "F3",
+            "reason": "The report distinguishes recognizing an unrealized equity loss in earnings from paying cash.",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "it reduced reported earnings without itself requiring a sale or a cash payment",
+              "source_id": "P3",
+              "source_quote": "include the changes in unrealized gains/losses of our equity security investments as a component of\ninvestment gains/losses in our earnings statements."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R1",
+            "reason": "The $55.5 billion unrealized revaluation explains why the headline loss is poor evidence of a comparable operating cash drain.",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "the headline loss mainly reflects a decline in the value of the equity holdings, not a comparable cash drain from running the businesses",
+              "source_id": "P3",
+              "source_quote": "loss of approximately $55.5 billion | in the | first quarter of 2020 and a gain of approximately $1 | 5.1 | billion\nin the first quarter of 2019 due to changes during the first quarter s of 2020 | and 2019 | in the amoun t of\nunrealized gains that existed in our equity security investment holdings."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R2",
+            "reason": "Positive operating earnings do not establish positive operating cash flow. The report specifies which quarterly statement and which cash-flow sign would reveal a separate drain.",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "The check is the first-quarter 10-Q cash-flow statement: cash used in operating activities would indicate a separate operating cash drain",
+              "source_id": "P2",
+              "source_quote": "Berkshire shows operating earnings defin | ed | as net earnings exclusive of\ninvestment and derivative gains/lo  sses."
+            }
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0.127832",
+      "memo_sha256": "e151eee4d97ed2ebb30b0e0fffac09f8ad4315a7be1a793579248e544daff979"
+    },
+    {
+      "alias": "ac819d745d1122fa",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "b862a99366975ee5",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "bd69ee33d1843a1d",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "0797312478561bd0",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "49fd984d1d9c3c6d",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "9096e8c143c4cb84",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "ace1e489c7a6a647",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "dea49d9a7f277a01",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "e215493b66fc0fcc",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "0c774a959bef1006",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "27c123245d86aaf0",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "597de7c0eba209df",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "980f6dc38c4d1987",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "e87de14343e6eec1",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "f028a43a3b0e0463",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "4f621b1b5db05206",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "643119f65a1ed37a",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "71260ad0e1c8365a",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "ca9f9440474568ae",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "d83dbaae16c373bb",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "dc9b1778f471426f",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "1cbaa7cc1e96489c",
+      "assessment": {
+        "claims": [
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "two UK retail markets: sports-inspired casual footwear and sports-inspired casual apparel, each covering in-store and online sales",
+              "source_id": "P2",
+              "source_quote": "(a) | the retail supply of sports-inspired casual footwear in-  store and online in\nthe UK; and\n(b) | the retail supply of sports-inspired casual apparel in-  store and online in\nthe UK."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "Its 4 November 2021 remittal report again found a substantial lessening of competition in both markets",
+              "source_id": "P1",
+              "source_quote": "result, in a substantial lessening of competition (SLC) in the retail supply of\nsports-inspired casual footwear and in the retail supply of sports-inspired\ncasual apparel sold both in stores and online in the UK."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "how competitive Footasylum would have been without the merger",
+              "source_id": "P1",
+              "source_quote": "the possible effect of\nCoronavirus (COVID-19) on Footasylum under the counterfactual"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "how strongly Nike’s and adidas’s own direct-to-consumer retail offers would constrain the merged firm",
+              "source_id": "P1",
+              "source_quote": "the likely post-merger constraints from\nNike’s and adidas’s own direct-to-consumer (DTC) retail offer"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "The CMA separately examined whether the brands might reduce or stop supplying Footasylum",
+              "source_id": "P3",
+              "source_quote": "We have considered the evidence on whether Footasylum may continue to be\nsupplied by Nike and/or adidas (whether in a reduced format or having its\nsupply stopped)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "which bears on its ability to compete independently",
+              "source_id": "P3",
+              "source_quote": "These brands are important suppliers to\nFootasylum and their products are an important part of the close competition\nbetween Footasylum and JD Sports."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "the CMA found a substantial lessening of competition in two UK retail markets: sports-inspired casual footwear and sports-inspired casual apparel, both sold in stores and online",
+              "source_id": "P1",
+              "source_quote": "result, in a substantial lessening of competition (SLC) in the retail supply of\nsports-inspired casual footwear and in the retail supply of sports-inspired\ncasual apparel sold both in stores and online in the UK."
+            }
+          },
+          {
+            "verdict": "unsupported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "The cited passage does not identify the specific competitive constraints the CMA reconsidered",
+              "source_id": null,
+              "source_quote": null
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "or say whether the disposal requirement changed; an unchanged competition finding does not establish that the remedy was unchanged",
+              "source_id": "P1",
+              "source_quote": "result, in a substantial lessening of competition (SLC) in the retail supply of\nsports-inspired casual footwear and in the retail supply of sports-inspired\ncasual apparel sold both in stores and online in the UK."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "the merger could weaken JD Sports’ incentive to maintain its range or service",
+              "source_id": "P2",
+              "source_quote": "not improve that offering as\nmuch as it would otherwise have done across aspects of price, quality, range\nand service levels"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "if shoppers who would otherwise switch to Footasylum stay within the merged group, JD Sports loses fewer sales when its offer worsens",
+              "source_id": "P2",
+              "source_quote": "Horizontal unilateral\neffects are more likely when the merging parties are close competitors (ie\ntheir products are close substitutes)."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "most of the supplier evidence was confidential",
+              "source_id": "P3",
+              "source_quote": "The\nlarge bulk of this evidence is confidential."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "If Nike or adidas would have materially cut Footasylum’s access to key products even without the merger, the merger may have removed less competitive pressure",
+              "source_id": "P3",
+              "source_quote": "These brands are important suppliers to\nFootasylum and their products are an important part of the close competition\nbetween Footasylum and JD Sports."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "Dated allocation notices showing sustained cuts to product range or volume that were planned independently of the merger would be a reason to revise that interpretation",
+              "source_id": "P3",
+              "source_quote": "suppliers allocate products to retailers via their selective\ndistribution policies which places retailers into categories that determines for\neach retailer its range and volume of products and the timing of supply."
+            }
+          }
+        ],
+        "points": [
+          {
+            "award": true,
+            "criterion": "F1",
+            "reason": "The report identifies both UK product markets and includes store and online sales in each.",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "two UK retail markets: sports-inspired casual footwear and sports-inspired casual apparel, each covering in-store and online sales",
+              "source_id": "P1",
+              "source_quote": "sports-inspired casual footwear and in the retail supply of sports-inspired\ncasual apparel sold both in stores and online in the UK."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "F2",
+            "reason": "Paragraph 2 correctly distinguishes Footasylum’s competitiveness absent the merger from the post-merger constraint of both brands’ direct sales. Paragraph 3 misdescribes the passage, not the substantive constraints.",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "how competitive Footasylum would have been without the merger, and how strongly Nike’s and adidas’s own direct-to-consumer retail offers would constrain the merged firm",
+              "source_id": "P1",
+              "source_quote": "Coronavirus (COVID-19) on Footasylum under the counterfactual, and on the\nimpact of Coronavirus (COVID-19) on the likely post-merger constraints from\nNike’s and adidas’s own direct-to-consumer (DTC) retail offer."
+            }
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "The report does not establish that both decisions required sale or that the remittal required sale of the entire business to a CMA-approved purchaser.",
+            "witness": null
+          },
+          {
+            "award": true,
+            "criterion": "R1",
+            "reason": "The report explains why recapturing sales at Footasylum could make a deterioration in JD’s range or service profitable for the merged group.",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "if shoppers who would otherwise switch to Footasylum stay within the merged group, JD Sports loses fewer sales when its offer worsens",
+              "source_id": "P2",
+              "source_quote": "a\ncompetitor that previously provided a competitive constraint, allowing the\nmerged entity to worsen its offering profitably"
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R2",
+            "reason": "Independently planned supply cuts would weaken Footasylum even without the merger. Dated allocation notices could distinguish this alternative from merger-related changes.",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "Dated allocation notices showing sustained cuts to product range or volume that were planned independently of the merger",
+              "source_id": "P3",
+              "source_quote": "We have considered the evidence on whether Footasylum may continue to be\nsupplied by Nike and/or adidas (whether in a reduced format or having its\nsupply stopped)."
+            }
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0.108128",
+      "memo_sha256": "8188368850d340aa33f6c639633bba4353119c04b8758e8c752d9f24a97c3502"
+    },
+    {
+      "alias": "44ba0253bbca7b9c",
+      "assessment": {
+        "claims": [
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "On remittal, the CMA again found that JD Sports’ acquisition of Footasylum had resulted, or could be expected to result, in a substantial lessening of competition.",
+              "source_id": "P3",
+              "source_quote": "has resulted, or may be expected to\nresult, in a substantial lessening of competition (SLC)"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "two UK retail markets: sports-inspired casual footwear and sports-inspired casual apparel, each covering in-store and online sales",
+              "source_id": "P1",
+              "source_quote": "(a) | the retail supply of sports-inspired casual footwear in-  store and online in\nthe UK; and\n(b) | the retail supply of sports-inspired casual apparel in-  store and online in\nthe UK."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "how COVID-19 affected Footasylum’s ability to compete had the merger not happened",
+              "source_id": "P3",
+              "source_quote": "the possible effect of\nCoronavirus (COVID-19) on Footasylum under the counterfactual"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "how strongly Nike’s and adidas’s own direct-to-consumer retail offers would constrain the merged business",
+              "source_id": "P3",
+              "source_quote": "the\nimpact of Coronavirus (COVID-19) on the likely post-merger constraints from\nNike’s and adidas’s own direct-to-consumer (DTC) retail offer."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "PDF p. 1 states the original and remittal competition findings",
+              "source_id": "P3",
+              "source_quote": "On 6 May 2020, the CMA announced its decision that the completed\nacquisition by JD Sports of Footasylum (the Merger) has resulted or may be\nexpected to result, in an SLC."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "The excerpts establish that the competition finding was renewed, but not whether the disposal requirement changed.",
+              "source_id": "P3",
+              "source_quote": "has resulted, or may be expected to\nresult, in a substantial lessening of competition (SLC) in the retail supply of\nsports-inspired casual footwear and in the retail supply of sports-inspired\ncasual apparel sold both in stores and online in the UK."
+            }
+          },
+          {
+            "verdict": "nonmaterial",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "Comparing the disposal requirements would require the remedy provisions from both decisions.",
+              "source_id": null,
+              "source_quote": null
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "The May 2021 online survey",
+              "source_id": "P4",
+              "source_quote": "We carried out a survey of online customers of the Parties in May 2021"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "over 40% of its footwear customers and half of its apparel customers said they would go to JD Sports",
+              "source_id": "P4",
+              "source_quote": "Over 40% of Footasylum customers for\nfootwear and half of Footasylum customers for apparel said they would go to\nJD Sports in the event that they could not shop at Footasylum."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "In the reverse direction, the figures were 9% for footwear and 8% for apparel.",
+              "source_id": "P4",
+              "source_quote": "Only 9%\nof JD Sports’ online footwear customers said they would go to Footasylum\nand 8% of its online apparel customers said they would go to Footasylum if\nthey could no longer shop at JD Sports."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "JD Sports constrained Footasylum more strongly online than Footasylum constrained JD Sports",
+              "source_id": "P4",
+              "source_quote": "The Remittal Online Survey results showed a much lower proportion of JD\nSports customers considered Footasylum to be their best alternative."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "under common ownership, sales that Footasylum loses to JD Sports stay within the group, which can weaken the incentive to maintain Footasylum’s offer",
+              "source_id": "P1",
+              "source_quote": "one firm merges with a\ncompetitor that previously provided a competitive constraint, allowing the\nmerged entity to worsen its offering profitably or not improve that offering as\nmuch as it would otherwise have done"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "The survey measured stated choices, not observed switching",
+              "source_id": "P4",
+              "source_quote": "said they would go to Footasylum if\nthey could no longer shop at JD Sports."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "its results need not carry over to stores. The CMA said in-store diversion could be higher.",
+              "source_id": "P4",
+              "source_quote": "Whilst in-store diversion between the Parties may still be higher than\nonline diversion"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "Footasylum could therefore be a stronger constraint on JD Sports in stores than the online responses suggest.",
+              "source_id": "P4",
+              "source_quote": "Whilst in-store diversion between the Parties may still be higher than\nonline diversion"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "An observable signal would be a larger share of displaced JD Sports shoppers actually buying at Footasylum after a JD Sports store closure than the reverse-direction online responses suggest",
+              "source_id": "P4",
+              "source_quote": "Only 9%\nof JD Sports’ online footwear customers said they would go to Footasylum\nand 8% of its online apparel customers said they would go to Footasylum if\nthey could no longer shop at JD Sports."
+            }
+          }
+        ],
+        "points": [
+          {
+            "award": true,
+            "criterion": "F1",
+            "reason": "The report identifies both UK product markets and includes both sales channels in each.",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "two UK retail markets: sports-inspired casual footwear and sports-inspired casual apparel, each covering in-store and online sales",
+              "source_id": "P3",
+              "source_quote": "sports-inspired casual footwear and in the retail supply of sports-inspired\ncasual apparel sold both in stores and online in the UK."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "F2",
+            "reason": "The remittal discussion identifies both COVID-19 questions: Footasylum’s position without the merger and the brands’ post-merger direct-to-consumer constraint.",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Footasylum’s ability to compete had the merger not happened and how strongly Nike’s and adidas’s own direct-to-consumer retail offers would constrain the merged business",
+              "source_id": "P3",
+              "source_quote": "Coronavirus (COVID-19) on Footasylum under the counterfactual, and on the\nimpact of Coronavirus (COVID-19) on the likely post-merger constraints from\nNike’s and adidas’s own direct-to-consumer (DTC) retail offer."
+            }
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "The report leaves disposal unresolved. It does not identify the continuing sale requirement or the final terms covering the entire business and a CMA-approved purchaser.",
+            "witness": null
+          },
+          {
+            "award": true,
+            "criterion": "R1",
+            "reason": "The report explains why diversion to JD Sports matters: recapturing lost Footasylum sales within the group weakens the incentive to maintain Footasylum’s offer.",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "sales that Footasylum loses to JD Sports stay within the group, which can weaken the incentive to maintain Footasylum’s offer",
+              "source_id": "P4",
+              "source_quote": "Over 40% of Footasylum customers for\nfootwear and half of Footasylum customers for apparel said they would go to\nJD Sports in the event that they could not shop at Footasylum."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R2",
+            "reason": "The online survey may understate in-store diversion. Observing displaced JD Sports shoppers’ purchases after a closure could test that limitation in the relevant direction.",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "a larger share of displaced JD Sports shoppers actually buying at Footasylum after a JD Sports store closure than the reverse-direction online responses suggest",
+              "source_id": "P4",
+              "source_quote": "Whilst in-store diversion between the Parties may still be higher than\nonline diversion"
+            }
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0.116504",
+      "memo_sha256": "2de0c16456da65729448478f4e834bd80cdb393745accacd9cb345e32ba8cf0d"
+    },
+    {
+      "alias": "66168f1fa54d3fee",
+      "assessment": {
+        "claims": [
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "The Tribunal left the CMA’s overall analytical approach intact",
+              "source_id": "P1",
+              "source_quote": "there was no error of law in the\nCMA’s overarching analytical approach."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "required it to revisit two pandemic-sensitive judgments: how Footasylum would have fared without the merger",
+              "source_id": "P1",
+              "source_quote": "the Tribunal upheld JD\nSports’ Application as regards the CMA’s assessment of the possible effect of\nCoronavirus (COVID-19) on Footasylum under the counterfactual"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "how strongly Nike’s and adidas’s own direct-to-consumer (DTC) channels would constrain the merged retailer",
+              "source_id": "P1",
+              "source_quote": "the likely post-merger constraints from\nNike’s and adidas’s own direct-to-consumer (DTC) retail offer."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "The CMA again found a substantial lessening of competition",
+              "source_id": "P4",
+              "source_quote": "The SLC that we have found in our Remittal differs from the CMA’s Phase 2\nFinal Report in that whilst there is a loss of constraint from Footasylum on JD\nas a result of the Merger, the SLC is based primarily on the removal of the\nconstraint imposed by JD Sports on Footasylum."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "two UK retail markets: sports-inspired casual footwear and sports-inspired casual apparel. Each included both in-store and online sales.",
+              "source_id": "P4",
+              "source_quote": "(a)  the retail supply of sports-inspired casual footwear in-  store and online in\nthe UK; and\n(b)  the retail supply of sports-inspired casual apparel in-  store and online in\nthe UK."
+            }
+          },
+          {
+            "verdict": "unsupported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "The disposal requirement did not change",
+              "source_id": null,
+              "source_quote": null
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "sell all of Footasylum to a CMA-approved buyer",
+              "source_id": "P4",
+              "source_quote": "the sale of the entirety of Footasylum to a purchase\napproved by | the CMA is an effective and proportionate remedy."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "What changed was whose shoppers were most at risk.",
+              "source_id": "P4",
+              "source_quote": "The SLC that we have found in our Remittal differs from the CMA’s Phase 2\nFinal Report in that whilst there is a loss of constraint from Footasylum on JD\nas a result of the Merger, the SLC is based primarily on the removal of the\nconstraint imposed by JD Sports on Footasylum."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "Footasylum had become a weaker rival to JD Sports",
+              "source_id": "P4",
+              "source_quote": "Footasylum becoming a weaker constraint and other competitors\nbecoming stronger constraints on JD Sports."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "JD Sports remained an important alternative for Footasylum shoppers",
+              "source_id": "P4",
+              "source_quote": "the SLC is based primarily on the removal of the\nconstraint imposed by JD Sports on Footasylum."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "Under common ownership, a sale lost by Footasylum to JD Sports would stay within the group.",
+              "source_id": "P4",
+              "source_quote": "This Merger would bring together two close competitors"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "That reduced the incentive to improve Footasylum’s price, quality, range or service",
+              "source_id": "P3",
+              "source_quote": "allowing the\nmerged entity to worsen its offering profitably or not improve that offering as\nmuch as it would otherwise have done across aspects of price, quality, range\nand service levels"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "the finding did not require equally large effects on JD Sports shoppers",
+              "source_id": "P4",
+              "source_quote": "whilst there is a loss of constraint from Footasylum on JD\nas a result of the Merger, the SLC is based primarily on the removal of the\nconstraint imposed by JD Sports on Footasylum."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "A possible alternative was that Nike’s DTC growth could replace some of the lost rivalry.",
+              "source_id": "P5",
+              "source_quote": "Nike’s DTC sales channels have grown strongly\nover the past year and are expected to grow further in footwear. In our\nRemittal Online Survey, online customers of Footasylum and JD Sports\nresponded that Nike is a popular alternative for online footwear shoppers."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "growth alone does not show whom Nike constrains: in online footwear, Nike was a stronger constraint on JD Sports than Footasylum was",
+              "source_id": "P5",
+              "source_quote": "In terms of\nconstraints for online consumers, Nike is a stronger constraint on JD Sports\nthan Footasylum is, but is a much weaker constraint on Footasylum than JD\nSports is."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "Footasylum shoppers ranked Nike behind JD Sports",
+              "source_id": "P5",
+              "source_quote": "for Footasylum’s customers Nike was ranked second only to JD\nSports as their best alternative to Footasylum."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "A repeat survey showing those shoppers choosing Nike over JD Sports as their best alternative would weaken the footwear rationale",
+              "source_id": "P5",
+              "source_quote": "for Footasylum’s customers Nike was ranked second only to JD\nSports as their best alternative to Footasylum."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "it would not by itself settle the apparel question",
+              "source_id": "P5",
+              "source_quote": "online customers of Footasylum and JD Sports\nresponded that Nike is a popular alternative for online footwear shoppers."
+            }
+          }
+        ],
+        "points": [
+          {
+            "award": true,
+            "criterion": "F1",
+            "reason": "The report identifies both UK product markets and includes store and online sales in each.",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "sports-inspired casual footwear and sports-inspired casual apparel. Each included both in-store and online sales.",
+              "source_id": "P4",
+              "source_quote": "(a)  the retail supply of sports-inspired casual footwear in-  store and online in\nthe UK; and\n(b)  the retail supply of sports-inspired casual apparel in-  store and online in\nthe UK."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "F2",
+            "reason": "The report distinguishes Covid’s effect on Footasylum without the merger from its effect on the two brands’ post-merger retail constraints.",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "how Footasylum would have fared without the merger, and how strongly Nike’s and adidas’s own direct-to-consumer (DTC) channels would constrain the merged retailer",
+              "source_id": "P1",
+              "source_quote": "Coronavirus (COVID-19) on Footasylum under the counterfactual, and on the\nimpact of Coronavirus (COVID-19) on the likely post-merger constraints from\nNike’s and adidas’s own direct-to-consumer (DTC) retail offer."
+            }
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "Page 11 establishes the whole-business sale and buyer approval on remittal. It compares the competition findings, not the remedies, so the earlier disposal requirement lacks support.",
+            "witness": null
+          },
+          {
+            "award": true,
+            "criterion": "R1",
+            "reason": "Recapturing diverted sales explains why common ownership weakens incentives to improve Footasylum’s offer even if the reverse constraint is weaker.",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "a sale lost by Footasylum to JD Sports would stay within the group. That reduced the incentive to improve Footasylum’s price, quality, range or service",
+              "source_id": "P4",
+              "source_quote": "the SLC is based primarily on the removal of the\nconstraint imposed by JD Sports on Footasylum."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R2",
+            "reason": "Nike’s growth need not replace JD’s constraint on Footasylum. A reversal in online footwear shoppers’ alternative rankings would weaken that rationale without resolving apparel.",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "A repeat survey showing those shoppers choosing Nike over JD Sports as their best alternative would weaken the footwear rationale",
+              "source_id": "P5",
+              "source_quote": "for Footasylum’s customers Nike was ranked second only to JD\nSports as their best alternative to Footasylum."
+            }
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0.124424",
+      "memo_sha256": "e4ef11783e2c2ed63d9541ac7b551bf91a1b5e07615b9a080374afd0128a9891"
+    },
+    {
+      "alias": "ebf6be4002eb0324",
+      "assessment": {
+        "claims": [
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "the CMA reassessed horizontal unilateral effects in two UK retail markets: sports-inspired casual footwear and sports-inspired casual apparel, each covering stores and online sales",
+              "source_id": "P3",
+              "source_quote": "result in an SLC arising from horizonal unilateral effects in:\n(a) | the retail supply of sports-inspired casual footwear in-  store and online in\nthe UK; and\n(b) | the retail supply of sports-inspired casual apparel in-  store and online in\nthe UK."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "The tribunal remitted the assessment of COVID-19’s possible effect on Footasylum absent the merger",
+              "source_id": "P1",
+              "source_quote": "the Tribunal upheld JD\nSports’ Application as regards the CMA’s assessment of the possible effect of\nCoronavirus (COVID-19) on Footasylum under the counterfactual"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "on the post-merger competitive constraint from Nike’s and adidas’s direct-to-consumer offers",
+              "source_id": "P1",
+              "source_quote": "on the\nimpact of Coronavirus (COVID-19) on the likely post-merger constraints from\nNike’s and adidas’s own direct-to-consumer (DTC) retail offer."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "Footasylum would most likely have continued receiving products from both brands absent the merger",
+              "source_id": "P5",
+              "source_quote": "the most likely\nscenario that would have occurred absent the Merger is that Footasylum\nwould have continued to receive products by Nike and adidas"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "It expected both brands’ direct offers to become stronger constraints",
+              "source_id": "P4",
+              "source_quote": "We consider that Nike is likely to become a stronger\nconstraint to both Parties in the future as a result of growth in its DTC offering.\n39. | adidas too has seen its sales through its DTC channels grow strongly over the\npast year. We consider that adidas exerts some competitive constraint on\nboth Parties in footwear although less than Nike. In terms of constraints for\nonline consumers, adidas is a more important constraint on JD Sports than it\nis on Footasylum and it is a much weaker constraint on Footasylum than JD\nSports is. adidas is likely to become a stronger constraint to both in the future"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "found them weaker than JD Sports as constraints on Footasylum",
+              "source_id": "P4",
+              "source_quote": "while Nike also imposes\nsome constraint on Footasylum, it is considerably less than the constraint\nfrom JD Sports."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "with the adidas comparison concerning footwear",
+              "source_id": "P4",
+              "source_quote": "both Parties in footwear although less than Nike. In terms of constraints for\nonline consumers, adidas is a more important constraint on JD Sports than it\nis on Footasylum and it is a much weaker constraint on Footasylum than JD\nSports is."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "The CMA again found a substantial lessening of competition in both markets",
+              "source_id": "P1",
+              "source_quote": "result, in a substantial lessening of competition (SLC) in the retail supply of\nsports-inspired casual footwear and in the retail supply of sports-inspired\ncasual apparel sold both in stores and online in the UK."
+            }
+          },
+          {
+            "verdict": "nonmaterial",
+            "witness": {
+              "paragraph": "p3",
+              "report_quote": "The supplied excerpts do not state the final remedy, so they establish that the competition finding stood, but not whether the disposal requirement changed.",
+              "source_id": null,
+              "source_quote": null
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "The May 2021 online survey suggests the loss of rivalry mattered more for Footasylum shoppers",
+              "source_id": "P2",
+              "source_quote": "The Remittal Online Survey results showed a much lower proportion of JD\nSports customers considered Footasylum to be their best alternative."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "over 40% of footwear customers and half of apparel customers said they would switch to JD Sports",
+              "source_id": "P2",
+              "source_quote": "Over 40% of Footasylum customers for\nfootwear and half of Footasylum customers for apparel said they would go to\nJD Sports in the event that they could not shop at Footasylum."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "In the reverse direction, the figures were 9% for footwear and 8% for apparel",
+              "source_id": "P2",
+              "source_quote": "Only 9%\nof JD Sports’ online footwear customers said they would go to Footasylum\nand 8% of its online apparel customers said they would go to Footasylum if\nthey could no longer shop at JD Sports."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "recapture some sales that Footasylum would otherwise lose to JD Sports if it worsened its offer, reducing its incentive to maintain price, quality, range or service",
+              "source_id": "P3",
+              "source_quote": "competitor that previously provided a competitive constraint, allowing the\nmerged entity to worsen its offering profitably or not improve that offering as\nmuch as it would otherwise have done across aspects of price, quality, range\nand service levels"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "The survey measured stated online choices, not actual switching",
+              "source_id": "P2",
+              "source_quote": "Footasylum’s online customers. Over 40% of Footasylum customers for\nfootwear and half of Footasylum customers for apparel said they would go to\nJD Sports in the event that they could not shop at Footasylum."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "diversion between the parties could be higher in stores",
+              "source_id": "P2",
+              "source_quote": "in-store diversion between the Parties may still be higher than\nonline diversion"
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "One alternative is that Nike’s growing direct offer becomes a much closer substitute for Footasylum",
+              "source_id": "P4",
+              "source_quote": "We consider that Nike is likely to become a stronger\nconstraint to both Parties in the future as a result of growth in its DTC offering."
+            }
+          },
+          {
+            "verdict": "supported",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "Actual switching after Footasylum stockouts, measured separately for online and store shoppers, would test that interpretation: if more shoppers went to Nike than to JD Sports in both channels, the case that JD Sports is Footasylum’s closest constraint would weaken.",
+              "source_id": "P2",
+              "source_quote": "This survey found that for both footwear and\napparel, JD Sports was by far and away the closest alternative for\nFootasylum’s online customers."
+            }
+          }
+        ],
+        "points": [
+          {
+            "award": true,
+            "criterion": "F1",
+            "reason": "Identifies both UK product markets and includes store and online sales in each.",
+            "witness": {
+              "paragraph": "p1",
+              "report_quote": "sports-inspired casual footwear and sports-inspired casual apparel, each covering stores and online sales",
+              "source_id": "P3",
+              "source_quote": "(a) | the retail supply of sports-inspired casual footwear in-  store and online in\nthe UK; and\n(b) | the retail supply of sports-inspired casual apparel in-  store and online in\nthe UK."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "F2",
+            "reason": "Distinguishes COVID-19’s possible effect on standalone Footasylum from its effect on the brands’ post-merger competitive constraints.",
+            "witness": {
+              "paragraph": "p2",
+              "report_quote": "COVID-19’s possible effect on Footasylum absent the merger and on the post-merger competitive constraint from Nike’s and adidas’s direct-to-consumer offers",
+              "source_id": "P1",
+              "source_quote": "Coronavirus (COVID-19) on Footasylum under the counterfactual, and on the\nimpact of Coronavirus (COVID-19) on the likely post-merger constraints from\nNike’s and adidas’s own direct-to-consumer (DTC) retail offer."
+            }
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "Leaves disposal unresolved. Both decisions required a sale; the remittal required sale of the entire business to a CMA-approved purchaser.",
+            "witness": null
+          },
+          {
+            "award": true,
+            "criterion": "R1",
+            "reason": "Connects asymmetric diversion to recaptured sales: losing a Footasylum customer to JD becomes less costly under common ownership, weakening the incentive to maintain Footasylum’s offer.",
+            "witness": {
+              "paragraph": "p4",
+              "report_quote": "Common ownership lets the merged firm recapture some sales that Footasylum would otherwise lose to JD Sports if it worsened its offer",
+              "source_id": "P2",
+              "source_quote": "Over 40% of Footasylum customers for\nfootwear and half of Footasylum customers for apparel said they would go to\nJD Sports in the event that they could not shop at Footasylum."
+            }
+          },
+          {
+            "award": true,
+            "criterion": "R2",
+            "reason": "Distinguishes stated online choices from actual switching and specifies an observable revision signal: Nike attracting more displaced Footasylum shoppers than JD in both channels.",
+            "witness": {
+              "paragraph": "p5",
+              "report_quote": "if more shoppers went to Nike than to JD Sports in both channels, the case that JD Sports is Footasylum’s closest constraint would weaken",
+              "source_id": "P4",
+              "source_quote": "We consider that Nike is likely to become a stronger\nconstraint to both Parties in the future as a result of growth in its DTC offering."
+            }
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0.13524",
+      "memo_sha256": "a8044830dd44ce3e172c1ff03b4e17aed44c91bc7e741514d346cdbb32c4b253"
+    },
+    {
+      "alias": "f327c83e8e99b6b3",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "1ba068f1e3af4abf",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "5a29c4eb6036f886",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "badc669557a75b22",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "bdbe6a11cb8beed1",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "e281695fe2b18283",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "e51cd2bb375821c0",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "235280a5ad09a0d8",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "3a69e8e94381eef8",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "704666d0e89b7ea2",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "8160063778b278ba",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "c4be2151027190e3",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "e722da8f74754f8d",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "0ab1c25cd0fe5e09",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "51b7f7c98c52294c",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "8b94be160512ed05",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "aebdcbfb91a39067",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "ccc8a97e969e2205",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    },
+    {
+      "alias": "da2c90802e43e2fc",
+      "assessment": {
+        "claims": [],
+        "points": [
+          {
+            "award": false,
+            "criterion": "F1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F2",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "F3",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R1",
+            "reason": "No released report.",
+            "witness": null
+          },
+          {
+            "award": false,
+            "criterion": "R2",
+            "reason": "No released report.",
+            "witness": null
+          }
+        ]
+      },
+      "evaluator_cost_usd": "0",
+      "memo_sha256": null
+    }
+  ],
+  "split": "development"
+}
