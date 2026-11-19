@@ -12,21 +12,41 @@ from .research_team import check_configuration, new_record
 from .reviewed_research import research as review_workflow
 from .run_checkpoint import PauseRequested, load, own_run, publish
 from .sol_baseline import fingerprint, json_bytes
-from .sol_provider import MODEL
+from .sol_provider import ASTRA, MODEL
 from .team_meter import Meter, recorded_output, verify_ledger
 from .temporal_web import ArchiveGateway
 
 
 def configuration(question, cutoff, budget, gateway, profile, assignment):
-    if profile not in ("evidence_team", "evidence_team_v2", "evidence_team_v3"):
+    if profile not in (
+        "evidence_team",
+        "evidence_team_v2",
+        "evidence_team_v3",
+        "quantitative_astra",
+    ):
         raise CaseError("Unknown quantitative research profile")
     config = archive.configuration(
         question, cutoff, budget, gateway, "mixed", assignment
     )
+    if profile == "quantitative_astra":
+        return {
+            **config,
+            "research_profile": profile,
+            "worker_model": None,
+            "research_model": ASTRA,
+        }
     return {**config, "research_profile": profile, "worker_model": MODEL}
 
 
 def research(question, cutoff, gateway, dispatch, *, profile):
+    if profile == "quantitative_astra":
+
+        def single(stage, prompt, limit, **kwargs):
+            return dispatch(stage, {**prompt, "model": ASTRA}, limit, **kwargs)
+
+        return review_workflow(
+            question, cutoff, gateway, single, revision=3, single=True
+        )
     return review_workflow(
         question,
         cutoff,

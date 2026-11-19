@@ -179,7 +179,9 @@ def merge(results, question, validator):
     )
 
 
-def review(draft, context, passages, calculations, ask, stage, *, revision=1):
+def review(
+    draft, context, passages, calculations, ask, stage, *, revision=1, single=False
+):
     compiled, rejected = {}, {}
     question, cutoff = context["question"], context["cutoff"]
     for i, p in enumerate(draft.paragraphs, 1):
@@ -205,6 +207,8 @@ def review(draft, context, passages, calculations, ask, stage, *, revision=1):
         compiled.update(math.residual_rows(compiled, calculations, passages))
     if not compiled:
         return [], rejected, ["No publishable evidence paragraph."]
+    if single:
+        return list(compiled.values()), rejected, []
     used = {pid for p in compiled.values() for pid in p["pids"]}
     visible = render(
         question,
@@ -253,7 +257,7 @@ def review(draft, context, passages, calculations, ask, stage, *, revision=1):
     )
 
 
-def research(question, cutoff, gateway, ask, *, revision=1):
+def research(question, cutoff, gateway, ask, *, revision=1, single=False):
     rule = getattr(gateway, "forecast_rule", None)
     verify = getattr(gateway, "check_source", checked_doc)
     task = {"question": question, "cutoff": cutoff}
@@ -353,9 +357,12 @@ rate. Explicitly distinguish the forecast from what the sources show. You are as
             passages,
         )
 
-    with ThreadPoolExecutor(max_workers=2) as pool:
-        m, o = pool.submit(maths), pool.submit(outlook)
-        operations, scenario = m.result().operations, o.result()
+    if single:
+        operations, scenario = maths().operations, []
+    else:
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            m, o = pool.submit(maths), pool.submit(outlook)
+            operations, scenario = m.result().operations, o.result()
     calculations, errors = math.compile_plan(
         operations, passages, rule, normalize_labels=revision >= 3
     )
@@ -376,7 +383,14 @@ rate. Explicitly distinguish the forecast from what the sources show. You are as
     )
     draft = kind.model_validate_json(raw)
     good, blocked, missing = review(
-        draft, context, passages, calculations, ask, "review.initial", revision=revision
+        draft,
+        context,
+        passages,
+        calculations,
+        ask,
+        "review.initial",
+        revision=revision,
+        single=single,
     )
     reviews = [{"approved": len(good), "blocked": blocked, "missing": missing}]
     if blocked or missing:
@@ -391,7 +405,7 @@ rate. Explicitly distinguish the forecast from what the sources show. You are as
             "lead.revise",
             typed_prompt(ASTRA, policy, corrective, kind, effort="medium"),
             3200,
-            keep_usd=Decimal("0.045"),
+            **({} if single else {"keep_usd": Decimal("0.045")}),
         )
         if raw:
             candidate = kind.model_validate_json(raw)
@@ -403,6 +417,7 @@ rate. Explicitly distinguish the forecast from what the sources show. You are as
                 ask,
                 "review.recheck",
                 revision=revision,
+                single=single,
             )
             # A failed rewrite cannot discard an already verified first draft.
             initial_coverage = {p["section"] for p in good}

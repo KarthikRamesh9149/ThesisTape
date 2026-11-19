@@ -121,4 +121,8 @@ At the checked Standard rates, the architecture’s example uses 12,000 input an
 
 **Nintendo replay.** Nine of eleven saved specialist or writer outputs pass the revised checks. Single Astra's five exact responses produce a complete memo for the original USD 0.141616. The next prospective study uses USD 0.30 per assignment across every arm. [Reproduction, diagnostic count and limits](evaluations/paired/revisions/grounding_v2/evaluation.md)
 
-**Next implementation checkpoint.** Run the separately registered development comparison, grade masked outputs against the as-of evidence, then lock the two finalists before opening blind packets.
+**Development comparison.** The production team released nine of 12 reports, single Astra released 12 and single Sol released 12. Their local quality scores were 55.2%, 81.6% and 80.6%, respectively. The study froze the team and single Astra before opening the 24 held-out cases. [Finalists and component scores](evaluations/paired/revisions/analyst_product/finalists.json)
+
+**Financial calculations.** A separately versioned team can request missing evidence, preserve verified arithmetic and ask a fresh reviewer to inspect the rendered memo. A USD 0.45 case limit covered a peak requirement of USD 0.404994 on Nintendo. The registered comparison retained its USD 0.30 case limit. [Engineering trials and independent grading](evaluations/paired/revisions/quantitative_trials_v3/evaluation.md)
+
+**Next validation checkpoint.** Complete both held-out comparisons, lock the reports, grade the as-of evidence, then measure forecast accuracy. FinanceGym’s grading determines leaderboard position.
