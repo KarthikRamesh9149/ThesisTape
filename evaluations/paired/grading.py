@@ -247,6 +247,7 @@ def key_file(split, member, revision=REVISION):
 def grade_asof(split, revision=REVISION):
     index, bundle = locked_inputs(split, revision)
     keys = key_file(split, "asof.json", revision)["cases"]
+
     def assess(row):
         alias = row["alias"]
         if row["memo_sha256"] is None:
@@ -299,13 +300,11 @@ def grade_asof(split, revision=REVISION):
                     / "grade",
                 )
         return {
-        "alias": alias,
-        "memo_sha256": row["memo_sha256"],
-        "assessment": assessment,
-        "evaluator_cost_usd": price,
-    }
-)
-print(alias, price, flush=True
+            "alias": alias,
+            "memo_sha256": row["memo_sha256"],
+            "assessment": assessment,
+            "evaluator_cost_usd": price,
+        }
 
     ordered = sorted(index["rows"], key=lambda r: (r["case_id"], r["alias"]))
     with bundle, ThreadPoolExecutor(max_workers=2) as pool:
