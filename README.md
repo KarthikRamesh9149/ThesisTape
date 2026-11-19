@@ -49,7 +49,18 @@ For a live run, set `OPENAI_API_KEY` in the ignored project `.env.local` or the 
 .venv/bin/python -B -m scripts.research_team run --case tradeweb-before --route team --budget-usd 0.05 --output-dir runs/tradeweb-earlier-new
 ```
 
-Each directory contains the memo and a portable `run.json` with assignments, actual search queries, selected excerpts, lead decisions, token usage, timings and costs. The separate `provider-ids.json` is an operator receipt kept under the ignored `runs/` directory. The earlier Tradeweb report lists the passages inspected when the archive could not support a figure. [Earlier report](evaluations/first-team/tradeweb-before/memo.md) · [All recorded development spend](evaluations/first-team/development-usage.json)
+Each directory contains the memo and a portable `run.json` with assignments, actual search queries, selected excerpts, lead decisions, token usage, timings and costs. The separate `provider-ids.json` is an operator receipt kept under the ignored `runs/` directory. The earlier Tradeweb report lists the passages inspected when the archive could not support a figure. [Earlier report](evaluations/first-team/tradeweb-before/memo.md) · [First team runs and spend](evaluations/first-team/development-usage.json)
+
+### Run independent citation review
+
+Use `--route reviewed` to send the team’s memo to a fresh Sol reviewer. It reopens the original passages at the case cutoff and assesses every material paragraph, any filing history and the Disney arithmetic. A material rejection goes to the lead for one correction. The controller exports the exact memo that passes review. If the revision still fails review, the verdict and drafts remain in the run record and the CLI exits with status 2. A search that yields no usable evidence returns a qualified notice listing the passages inspected.
+
+On Toyota’s real FY2024 forecast table, the reviewer accepted the original and caught a deliberately changed metric with identical numbers and citations. The complete correction branch added USD 0.011550 to the shared draft. [Paired evaluation and replay instructions](evaluations/citation_review/evaluation.md) · [Reviewed memo](evaluations/citation_review/challenge/memo.md) · [Cumulative spend](evaluations/citation_review/usage.json)
+
+```sh
+.venv/bin/python -B -m evaluations.citation_review.experiment check
+.venv/bin/python -B -m scripts.research_team run --case toyota --route reviewed --budget-usd 0.09 --output-dir runs/toyota-reviewed-new
+```
 
 ## Run the single-Sol baseline
 

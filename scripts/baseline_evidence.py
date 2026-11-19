@@ -112,7 +112,7 @@ class Draft(StrictOutput):
 
 MONEY = re.compile(r"(?:\$|USD )(\d+(?:\.\d+)?) (million|billion)\b")
 SCALE = {"million": Decimal(1000000), "billion": Decimal(1000000000)}
-NUMBER = re.compile(r"\d+(?:\.\d+)?")
+NUMBER = re.compile(r"\d+(?:,\d{3})*(?:\.\d+)?")
 PERCENT = re.compile(r"(\d+(?:\.\d+)?)\s*(?:%|percent\b)", re.IGNORECASE)
 UNSAFE_PROSE = re.compile(r"https?://|www\.|[\x00-\x1f\x7f<>\[\]`]", re.IGNORECASE)
 
@@ -157,8 +157,12 @@ def check_paragraph(paragraph: Paragraph, passages: dict[str, str], cutoff: date
     # that day still needs independent support from the cited passage.
     framing = r"(?:as of|(?:not (?:yet )?known|unknown|undetermined|unresolved) on)"
     claims = re.sub(rf"\b{framing} (?:{as_of_date})(?![\w/-]|,?\s+\d{{4}}\b)", "", text, flags=re.IGNORECASE)
+
+    def numbers(value: str) -> set[Decimal]:
+        return {Decimal(n.replace(",", "")) for n in NUMBER.findall(value)}
+
     if (
-        set(map(Decimal, NUMBER.findall(claims))) - set(map(Decimal, NUMBER.findall(corpus)))
+        numbers(claims) - numbers(corpus)
         or set(map(Decimal, PERCENT.findall(claims))) - set(map(Decimal, PERCENT.findall(corpus)))
     ):
         raise CaseError("A numerical claim does not appear in its cited evidence")

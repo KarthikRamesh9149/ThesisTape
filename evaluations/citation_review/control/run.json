@@ -1,0 +1,900 @@
+{
+  "assignments": {
+    "contrary": "What corrections, revisions, or conflicting evidence, if any, affect which Toyota full-year consolidated operating income forecast applied at the requested cutoff?",
+    "filings": "What full-year consolidated operating income did Toyota forecast for the fiscal year in question as of the requested cutoff? Record the amount in millions of yen, the announcement date, and the wording that defines the forecast’s scope."
+  },
+  "budget_usd": "0.09",
+  "calculation": null,
+  "calls": {
+    "contrary.extract": {
+      "confirmed_ms": 9930,
+      "dispatched_ms": 8511,
+      "estimated_model_cost_usd": "0.0003051",
+      "input_tokens_preflight": 2926,
+      "max_output_tokens": 960,
+      "model": "gpt-6-luna",
+      "output": "{\"findings\":[{\"span_id\":\"P1.S9\",\"kind\":\"fact\"}]}",
+      "provider": {
+        "elapsed_ms": 1418,
+        "ids_sha256": "5a34593ded69af6f6c60e56581bb78db4437142e0ef7454f2a1028442d70cc92",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 2926,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 25,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 2951
+        }
+      },
+      "request_sha256": "89484b0c99175c46fba7a208158a875b61e8f718b1297453ec07c62385adb656",
+      "reservation_usd": "0.00084575",
+      "stage": "contrary.extract"
+    },
+    "contrary.search.1": {
+      "confirmed_ms": 6489,
+      "dispatched_ms": 5135,
+      "estimated_model_cost_usd": "0.0000517",
+      "input_tokens_preflight": 342,
+      "max_output_tokens": 512,
+      "model": "gpt-6-luna",
+      "output": {
+        "arguments": {
+          "query": "Toyota FY2024 full-year consolidated operating income forecast May 2023 earnings outlook correction revision"
+        },
+        "name": "search_archive"
+      },
+      "provider": {
+        "elapsed_ms": 1351,
+        "ids_sha256": "816f661484497b98a9fedafe3f8d9d8da80e31ec70fdcb52a1b5b3989c47ba15",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 342,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 35,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 377
+        }
+      },
+      "request_sha256": "87c69453f4fdd69f0cf1c0d9ac6d6af57bb18c04b568e165fb411d5294b4ba41",
+      "reservation_usd": "0.00029875",
+      "stage": "contrary.search.1"
+    },
+    "contrary.search.2": {
+      "confirmed_ms": 8276,
+      "dispatched_ms": 6857,
+      "estimated_model_cost_usd": "0.0000982",
+      "input_tokens_preflight": 837,
+      "max_output_tokens": 512,
+      "model": "gpt-6-luna",
+      "output": {
+        "arguments": {
+          "passage_ids": [
+            "P1",
+            "P2",
+            "P3"
+          ]
+        },
+        "name": "read_passages"
+      },
+      "provider": {
+        "elapsed_ms": 1417,
+        "ids_sha256": "8833f0da32d9e63c0b5aade3c79c138ce92d21c149271ddbe3aaff5595a90766",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 837,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 29,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 866
+        }
+      },
+      "request_sha256": "5fcc4802158fe32513943a679187c14e3f6073fb3547620608345bab9c39345d",
+      "reservation_usd": "0.000360625",
+      "stage": "contrary.search.2"
+    },
+    "filings.extract": {
+      "confirmed_ms": 10620,
+      "dispatched_ms": 8562,
+      "estimated_model_cost_usd": "0.000105",
+      "input_tokens_preflight": 805,
+      "max_output_tokens": 960,
+      "model": "gpt-6-luna",
+      "output": "{\"findings\":[{\"span_id\":\"P1.S1\",\"kind\":\"fact\"},{\"span_id\":\"P1.S8\",\"kind\":\"qualification\"},{\"span_id\":\"P1.S9\",\"kind\":\"fact\"}]}",
+      "provider": {
+        "elapsed_ms": 2057,
+        "ids_sha256": "6cadf39d983f8da9ec6ae31b723096430e2a35fe2ab0208c2dd6404090e72418",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 805,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 49,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 854
+        }
+      },
+      "request_sha256": "bfd542bc358e3d6e453bd94abae08e3f0912a280e1435bb4acee9f2011bf1d45",
+      "reservation_usd": "0.000580625",
+      "stage": "filings.extract"
+    },
+    "filings.search.1": {
+      "confirmed_ms": 6853,
+      "dispatched_ms": 5143,
+      "estimated_model_cost_usd": "0.0000523",
+      "input_tokens_preflight": 353,
+      "max_output_tokens": 512,
+      "model": "gpt-6-luna",
+      "output": {
+        "arguments": {
+          "query": "Toyota FY2024 consolidated operating income forecast announcement May 2023 financial results forecast scope"
+        },
+        "name": "search_archive"
+      },
+      "provider": {
+        "elapsed_ms": 1709,
+        "ids_sha256": "03197cedc22e069e89d0df002e34cb8d3ba9d1794a4f66820ed9a2cfc47910bc",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 353,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 34,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 387
+        }
+      },
+      "request_sha256": "97aa2fa1cefc9250d3e5f73880740f83682ab745384aa92445cf9806e76f1cbe",
+      "reservation_usd": "0.000300125",
+      "stage": "filings.search.1"
+    },
+    "filings.search.2": {
+      "confirmed_ms": 8369,
+      "dispatched_ms": 7045,
+      "estimated_model_cost_usd": "0.0000962",
+      "input_tokens_preflight": 847,
+      "max_output_tokens": 512,
+      "model": "gpt-6-luna",
+      "output": {
+        "arguments": {
+          "passage_ids": [
+            "P1"
+          ]
+        },
+        "name": "read_passages"
+      },
+      "provider": {
+        "elapsed_ms": 1320,
+        "ids_sha256": "1951b009f78c9aabaf52dca00bfccfe062545f209cd6bd9aa9c16baf06fb39d0",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 847,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 23,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 870
+        }
+      },
+      "request_sha256": "2462812a00280d7979604a68f8bf612ff8c27c23a49aab5bbc0be8043e5bfd7c",
+      "reservation_usd": "0.000361875",
+      "stage": "filings.search.2"
+    },
+    "lead.decide.1": {
+      "confirmed_ms": 13246,
+      "dispatched_ms": 10839,
+      "estimated_model_cost_usd": "0.002408",
+      "input_tokens_preflight": 934,
+      "max_output_tokens": 1280,
+      "model": "gpt-6.2-sol",
+      "output": "{\"action\":\"write\",\"instruction\":\"P1 directly supports Toyota’s full-year FY2024 consolidated operating income forecast of 3,000,000 million yen, announced May 10, 2023. The two reports agree.\"}",
+      "provider": {
+        "elapsed_ms": 2405,
+        "ids_sha256": "355f988477868bd402f3c3bbc59ef75e8ca7af7b78f0cf693c8e64a2f31919a2",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 934,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 54,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 988
+        }
+      },
+      "request_sha256": "889ff335c1505787b6826a08dd9c27b2b382eeec40f44268f3abf7131909a382",
+      "reservation_usd": "0.015135",
+      "stage": "lead.decide.1"
+    },
+    "lead.memo": {
+      "confirmed_ms": 16948,
+      "dispatched_ms": 13538,
+      "estimated_model_cost_usd": "0.004238",
+      "input_tokens_preflight": 1224,
+      "max_output_tokens": 2560,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"paragraphs\": [\n    {\n      \"text\": \"As of 11 May 2023, Toyota’s full-year consolidated operating income forecast for FY2024 was 3,000,000 million yen. The forecast was announced on 10 May 2023.\",\n      \"citations\": [\n        {\n          \"passage_id\": \"P1\",\n          \"quote\": \"3.  Forecast of Consolidated Results for FY2024 (April 1, 2023 through March 31, 2024)\"\n        },\n        {\n          \"passage_id\": \"P1\",\n          \"quote\": \"Full-year          38,000,000           2.3          3,000,000         10.1\"\n        }\n      ]\n    }\n  ],\n  \"filing_history\": null\n}",
+      "provider": {
+        "elapsed_ms": 3405,
+        "ids_sha256": "f41942fbfcf8f649f81c7fab548a5d7087e928c421d9b7a0440d3475343abd7f",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 1224,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 179,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1403
+        }
+      },
+      "request_sha256": "e15bd39db96bf390098678bc4dad977c449fb883669ec425c748d20d073b0f84",
+      "reservation_usd": "0.02866",
+      "stage": "lead.memo"
+    },
+    "lead.memo_repair": {
+      "confirmed_ms": 20441,
+      "dispatched_ms": 17170,
+      "estimated_model_cost_usd": "0.004392",
+      "input_tokens_preflight": 1241,
+      "max_output_tokens": 2560,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"paragraphs\": [\n    {\n      \"text\": \"As of 11 May 2023, Toyota forecast full-year consolidated operating income of 3,000,000 million yen for FY2024 (April 1, 2023 through March 31, 2024).\",\n      \"citations\": [\n        {\n          \"passage_id\": \"P1\",\n          \"quote\": \"3.  Forecast of Consolidated Results for FY2024 (April 1, 2023 through March 31, 2024)\"\n        },\n        {\n          \"passage_id\": \"P1\",\n          \"quote\": \"Million yen             %                                   Yen\\n   Full-year          38,000,000           2.3          3,000,000         10.1\"\n        }\n      ]\n    }\n  ],\n  \"filing_history\": null\n}",
+      "provider": {
+        "elapsed_ms": 3268,
+        "ids_sha256": "2d3d9123816178c89cd8d2a28878db298a6d954692d443449b1b5db9302f36cf",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 1241,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 191,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1432
+        }
+      },
+      "request_sha256": "50fbbaa7a26066e7da2cfcdf1527ceddb9b7ae6203b25a3d8f4860f5a588371c",
+      "reservation_usd": "0.0287025",
+      "stage": "lead.memo_repair"
+    },
+    "lead.plan": {
+      "confirmed_ms": 4923,
+      "dispatched_ms": 1403,
+      "estimated_model_cost_usd": "0.00129",
+      "input_tokens_preflight": 190,
+      "max_output_tokens": 768,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"filings\": \"What full-year consolidated operating income did Toyota forecast for the fiscal year in question as of the requested cutoff? Record the amount in millions of yen, the announcement date, and the wording that defines the forecast’s scope.\",\n  \"contrary\": \"What corrections, revisions, or conflicting evidence, if any, affect which Toyota full-year consolidated operating income forecast applied at the requested cutoff?\"\n}",
+      "provider": {
+        "elapsed_ms": 3519,
+        "ids_sha256": "561ee0a07769e221eaf4ebdad5d7db3a7f78808c5a03558ccd7cbc82dcf1c919",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 190,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 91,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 281
+        }
+      },
+      "request_sha256": "254ac7af922159794df79272158a6cf9687b7c4422ce7c97a92b9c2f0d6f2509",
+      "reservation_usd": "0.008155",
+      "stage": "lead.plan"
+    },
+    "review.initial": {
+      "confirmed_ms": 24788,
+      "dispatched_ms": 20936,
+      "estimated_model_cost_usd": "0.003772",
+      "input_tokens_preflight": 1061,
+      "max_output_tokens": 2048,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"findings\": [\n    {\n      \"claim_id\": \"paragraph_1\",\n      \"verdict\": \"supported\",\n      \"reason\": \"Toyota’s May 10, 2023 release lists 3,000,000 in the Full-year row under Operating income (million yen) in its consolidated FY2024 forecast, covering April 1, 2023 through March 31, 2024. The figure was a forecast, not an actual result, and was available by May 11.\",\n      \"evidence_ids\": [\"P1\"]\n    }\n  ],\n  \"addresses_question\": true,\n  \"coverage_reason\": \"The memo gives the requested full-year consolidated operating income outlook in millions of yen for the correct fiscal year and as-of date.\"\n}",
+      "provider": {
+        "elapsed_ms": 3850,
+        "ids_sha256": "a89594104ca8dcb659fc471d39088d512d53703e5aaa9b2a52dc6ec7139107f7",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 1061,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 165,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1226
+        }
+      },
+      "request_sha256": "53ae4089b232eb656322f5c884c3cb4eab997a05f72d92e2fe7548706184f86f",
+      "reservation_usd": "0.0231325",
+      "stage": "review.initial"
+    }
+  },
+  "case_id": "toyota-outlook-2023-05-11",
+  "corpus_sha256": "4bc99235fbd4c25740055dcc57386a785a60494ae622fb1f415dc690aa28df6b",
+  "coverage": "write",
+  "created_at": "2026-11-19T09:45:15.862511+00:00",
+  "cutoff": "2023-05-11",
+  "decisions": [
+    {
+      "action": "write",
+      "instruction": "P1 directly supports Toyota’s full-year FY2024 consolidated operating income forecast of 3,000,000 million yen, announced May 10, 2023. The two reports agree."
+    }
+  ],
+  "elapsed_ms": 24800,
+  "estimated_model_cost_usd": "0.0168085",
+  "events": [
+    [
+      "reserve",
+      "lead.plan"
+    ],
+    [
+      "settle",
+      "lead.plan"
+    ],
+    [
+      "reserve",
+      "contrary.search.1"
+    ],
+    [
+      "reserve",
+      "filings.search.1"
+    ],
+    [
+      "settle",
+      "contrary.search.1"
+    ],
+    [
+      "settle",
+      "filings.search.1"
+    ],
+    [
+      "reserve",
+      "contrary.search.2"
+    ],
+    [
+      "reserve",
+      "filings.search.2"
+    ],
+    [
+      "settle",
+      "contrary.search.2"
+    ],
+    [
+      "settle",
+      "filings.search.2"
+    ],
+    [
+      "reserve",
+      "contrary.extract"
+    ],
+    [
+      "reserve",
+      "filings.extract"
+    ],
+    [
+      "settle",
+      "contrary.extract"
+    ],
+    [
+      "settle",
+      "filings.extract"
+    ],
+    [
+      "reserve",
+      "lead.decide.1"
+    ],
+    [
+      "settle",
+      "lead.decide.1"
+    ],
+    [
+      "reserve",
+      "lead.memo"
+    ],
+    [
+      "settle",
+      "lead.memo"
+    ],
+    [
+      "reserve",
+      "lead.memo_repair"
+    ],
+    [
+      "settle",
+      "lead.memo_repair"
+    ],
+    [
+      "reserve",
+      "review.initial"
+    ],
+    [
+      "settle",
+      "review.initial"
+    ]
+  ],
+  "evidence": {
+    "P1": {
+      "available_by_utc": "2023-05-10T14:59:59.999999+00:00",
+      "citation_url": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf#page=3&search=%223.%20Forecast%20of%20Consolidated%20Results%20for%20FY2024%20%28April%22",
+      "edition": "FY2023 financial summary, English edition",
+      "locator": "PDF p3 §1",
+      "published": "2023-05-10",
+      "sha256": "35d198a5a14812731798e5bb917854d675ae6b2e74913c377301120b5a1de08c",
+      "source_id": "toyota-fy2023",
+      "text": "3.  Forecast of Consolidated Results for FY2024 (April 1, 2023 through March 31, 2024)\n                                                                                                                                                               (% of change from FY2023)\n                                                                                                                                       Net income                     Earnings per share\n                         Sales revenues                Operating income          Income before income                                 attributable to                attributable to Toyota\n                                                                                                        taxes                         Toyota Motor                     Motor Corporation\n                                                                                                                                       Corporation                            – Basic\n                        Million yen             %         Million yen             %         Million yen             %         Million yen             %                                   Yen\n   Full-year          38,000,000           2.3          3,000,000         10.1          3,690,000           0.6          2,580,000           5.2                               190.19",
+      "title": "Toyota Motor Corporation FY2023 consolidated financial results",
+      "url": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf",
+      "version_at": "2023-05-10"
+    }
+  },
+  "memo_sha256": "cf6c234e1ea24dc8cb9ada321f67933f9070002bdb7c6dfc49afa0311c309392",
+  "paid_tool_charges_usd": "0",
+  "pricing": {
+    "per_million_usd": {
+      "gpt-6-luna": {
+        "cache_write_30m": "0.125",
+        "cached_input": "0.01",
+        "ordinary_input": "0.10",
+        "output": "0.50"
+      },
+      "gpt-6.2-sol": {
+        "cache_write_30m": "2.50",
+        "cached_input": "0.10",
+        "ordinary_input": "2.00",
+        "output": "10.00"
+      }
+    },
+    "sources": [
+      "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+      "https://developers.openai.com/api/docs/models/gpt-6-luna"
+    ],
+    "status": "estimate_from_usage"
+  },
+  "prompt_version": "sol-two-luna-v4",
+  "question": "As of 11 May 2023, what was Toyota’s full-year consolidated operating income outlook for FY2024, in millions of yen?",
+  "review": {
+    "released_memo_sha256": "cf6c234e1ea24dc8cb9ada321f67933f9070002bdb7c6dfc49afa0311c309392",
+    "rounds": [
+      {
+        "approved": true,
+        "assessment": {
+          "addresses_question": true,
+          "coverage_reason": "The memo gives the requested full-year consolidated operating income outlook in millions of yen for the correct fiscal year and as-of date.",
+          "findings": [
+            {
+              "claim_id": "paragraph_1",
+              "evidence_ids": [
+                "P1"
+              ],
+              "reason": "Toyota’s May 10, 2023 release lists 3,000,000 in the Full-year row under Operating income (million yen) in its consolidated FY2024 forecast, covering April 1, 2023 through March 31, 2024. The figure was a forecast, not an actual result, and was available by May 11.",
+              "verdict": "supported"
+            }
+          ]
+        },
+        "draft": {
+          "filing_history": null,
+          "paragraphs": [
+            {
+              "citations": [
+                {
+                  "passage_id": "P1",
+                  "quote": "3.  Forecast of Consolidated Results for FY2024 (April 1, 2023 through March 31, 2024)"
+                },
+                {
+                  "passage_id": "P1",
+                  "quote": "Million yen             %                                   Yen\n   Full-year          38,000,000           2.3          3,000,000         10.1"
+                }
+              ],
+              "text": "As of 11 May 2023, Toyota forecast full-year consolidated operating income of 3,000,000 million yen for FY2024 (April 1, 2023 through March 31, 2024)."
+            }
+          ]
+        },
+        "draft_sha256": "ac09683ecabd1a8ffea3411ca76423355c95344d2b9d39da0dc01f06e1ea0e33",
+        "memo_sha256": "cf6c234e1ea24dc8cb9ada321f67933f9070002bdb7c6dfc49afa0311c309392",
+        "retrieval": [
+          {
+            "max_date": "2023-05-11",
+            "operation": "read",
+            "results": [
+              "toyota-fy2023/PDF p3 §1"
+            ]
+          }
+        ]
+      }
+    ],
+    "status": "approved"
+  },
+  "review_version": "sol-citation-review-v1",
+  "route": "reviewed",
+  "run_id": "toyota-review-control",
+  "schema_version": 3,
+  "state": "complete",
+  "unreconciled_reservation_usd": "0",
+  "worker_reports": [
+    {
+      "assignment": "What full-year consolidated operating income did Toyota forecast for the fiscal year in question as of the requested cutoff? Record the amount in millions of yen, the announcement date, and the wording that defines the forecast’s scope.",
+      "findings": [
+        {
+          "end": 86,
+          "kind": "fact",
+          "passage_id": "P1",
+          "quote": "3.  Forecast of Consolidated Results for FY2024 (April 1, 2023 through March 31, 2024)",
+          "start": 0
+        },
+        {
+          "end": 1163,
+          "kind": "qualification",
+          "passage_id": "P1",
+          "quote": "Corporation                            – Basic\n                        Million yen             %         Million yen             %         Million yen             %         Million yen             %",
+          "start": 965
+        },
+        {
+          "end": 1346,
+          "kind": "fact",
+          "passage_id": "P1",
+          "quote": "Million yen             %                                   Yen\n   Full-year          38,000,000           2.3          3,000,000         10.1          3,690,000           0.6          2,580,000           5.2",
+          "start": 1138
+        }
+      ],
+      "role": "filings"
+    },
+    {
+      "assignment": "What corrections, revisions, or conflicting evidence, if any, affect which Toyota full-year consolidated operating income forecast applied at the requested cutoff?",
+      "findings": [
+        {
+          "end": 1346,
+          "kind": "fact",
+          "passage_id": "P1",
+          "quote": "Million yen             %                                   Yen\n   Full-year          38,000,000           2.3          3,000,000         10.1          3,690,000           0.6          2,580,000           5.2",
+          "start": 1138
+        }
+      ],
+      "role": "contrary"
+    }
+  ],
+  "workers": [
+    {
+      "assignment": "What full-year consolidated operating income did Toyota forecast for the fiscal year in question as of the requested cutoff? Record the amount in millions of yen, the announcement date, and the wording that defines the forecast’s scope.",
+      "findings": [
+        {
+          "end": 86,
+          "kind": "fact",
+          "passage_id": "P1",
+          "quote": "3.  Forecast of Consolidated Results for FY2024 (April 1, 2023 through March 31, 2024)",
+          "start": 0
+        },
+        {
+          "end": 1163,
+          "kind": "qualification",
+          "passage_id": "P1",
+          "quote": "Corporation                            – Basic\n                        Million yen             %         Million yen             %         Million yen             %         Million yen             %",
+          "start": 965
+        },
+        {
+          "end": 1346,
+          "kind": "fact",
+          "passage_id": "P1",
+          "quote": "Million yen             %                                   Yen\n   Full-year          38,000,000           2.3          3,000,000         10.1          3,690,000           0.6          2,580,000           5.2",
+          "start": 1138
+        }
+      ],
+      "opened": {
+        "P1": {
+          "available_by_utc": "2023-05-10T14:59:59.999999+00:00",
+          "citation_url": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf#page=3&search=%223.%20Forecast%20of%20Consolidated%20Results%20for%20FY2024%20%28April%22",
+          "edition": "FY2023 financial summary, English edition",
+          "locator": "PDF p3 §1",
+          "published": "2023-05-10",
+          "sha256": "35d198a5a14812731798e5bb917854d675ae6b2e74913c377301120b5a1de08c",
+          "source_id": "toyota-fy2023",
+          "text": "3.  Forecast of Consolidated Results for FY2024 (April 1, 2023 through March 31, 2024)\n                                                                                                                                                               (% of change from FY2023)\n                                                                                                                                       Net income                     Earnings per share\n                         Sales revenues                Operating income          Income before income                                 attributable to                attributable to Toyota\n                                                                                                        taxes                         Toyota Motor                     Motor Corporation\n                                                                                                                                       Corporation                            – Basic\n                        Million yen             %         Million yen             %         Million yen             %         Million yen             %                                   Yen\n   Full-year          38,000,000           2.3          3,000,000         10.1          3,690,000           0.6          2,580,000           5.2                               190.19",
+          "title": "Toyota Motor Corporation FY2023 consolidated financial results",
+          "url": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf",
+          "version_at": "2023-05-10"
+        }
+      },
+      "role": "filings",
+      "searches": [
+        {
+          "query": "Toyota FY2024 consolidated operating income forecast announcement May 2023 financial results forecast scope",
+          "results": [
+            {
+              "id": "P1",
+              "locator": "PDF p3 §1",
+              "preview": "3.  Forecast of Consolidated Results for FY2024 (April 1, 2023 through March 31, 2024)\n                                                                                                                                     ",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            },
+            {
+              "id": "P2",
+              "locator": "PDF p2 §1",
+              "preview": "                                                      FY2023 Consolidated Financial Result                                                    s\n\n                  (Consolidated financial information has been prepared in ",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            },
+            {
+              "id": "P3",
+              "locator": "PDF p2 §2",
+              "preview": "                                                                                                                                   (Amounts are rounded to the nearest million yen)\n1.  Consolidated Results for FY2023 (Apr",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            },
+            {
+              "id": "P4",
+              "locator": "PDF p3 §3",
+              "preview": "(Reference)Overview of the Unconsolidated Financial Results\n                                                         FY2023 Unconsolidated Financial Results\n                 (Unconsolidated financial information has been",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            },
+            {
+              "id": "P5",
+              "locator": "PDF p2 §5",
+              "preview": "2.  Cash Dividends\n                            Annual cash dividends per common share                  Total amount of                                                                 Ratio of total amount\n               ",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            }
+          ]
+        }
+      ],
+      "trace": [
+        {
+          "max_date": "2023-05-11",
+          "operation": "search",
+          "results": [
+            "toyota-fy2023/PDF p3 §1",
+            "toyota-fy2023/PDF p2 §1",
+            "toyota-fy2023/PDF p2 §2",
+            "toyota-fy2023/PDF p3 §3",
+            "toyota-fy2023/PDF p2 §5"
+          ]
+        },
+        {
+          "max_date": "2023-05-11",
+          "operation": "read",
+          "results": [
+            "toyota-fy2023/PDF p3 §1"
+          ]
+        }
+      ]
+    },
+    {
+      "assignment": "What corrections, revisions, or conflicting evidence, if any, affect which Toyota full-year consolidated operating income forecast applied at the requested cutoff?",
+      "findings": [
+        {
+          "end": 1346,
+          "kind": "fact",
+          "passage_id": "P1",
+          "quote": "Million yen             %                                   Yen\n   Full-year          38,000,000           2.3          3,000,000         10.1          3,690,000           0.6          2,580,000           5.2",
+          "start": 1138
+        }
+      ],
+      "opened": {
+        "P1": {
+          "available_by_utc": "2023-05-10T14:59:59.999999+00:00",
+          "citation_url": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf#page=3&search=%223.%20Forecast%20of%20Consolidated%20Results%20for%20FY2024%20%28April%22",
+          "edition": "FY2023 financial summary, English edition",
+          "locator": "PDF p3 §1",
+          "published": "2023-05-10",
+          "sha256": "35d198a5a14812731798e5bb917854d675ae6b2e74913c377301120b5a1de08c",
+          "source_id": "toyota-fy2023",
+          "text": "3.  Forecast of Consolidated Results for FY2024 (April 1, 2023 through March 31, 2024)\n                                                                                                                                                               (% of change from FY2023)\n                                                                                                                                       Net income                     Earnings per share\n                         Sales revenues                Operating income          Income before income                                 attributable to                attributable to Toyota\n                                                                                                        taxes                         Toyota Motor                     Motor Corporation\n                                                                                                                                       Corporation                            – Basic\n                        Million yen             %         Million yen             %         Million yen             %         Million yen             %                                   Yen\n   Full-year          38,000,000           2.3          3,000,000         10.1          3,690,000           0.6          2,580,000           5.2                               190.19",
+          "title": "Toyota Motor Corporation FY2023 consolidated financial results",
+          "url": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf",
+          "version_at": "2023-05-10"
+        },
+        "P2": {
+          "available_by_utc": "2023-05-10T14:59:59.999999+00:00",
+          "citation_url": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf#page=2&search=%22FY2023%20Consolidated%20Financial%20Result%20s%20%28Consolidated%20financial%20information%22",
+          "edition": "FY2023 financial summary, English edition",
+          "locator": "PDF p2 §1",
+          "published": "2023-05-10",
+          "sha256": "35d198a5a14812731798e5bb917854d675ae6b2e74913c377301120b5a1de08c",
+          "source_id": "toyota-fy2023",
+          "text": "                                                      FY2023 Consolidated Financial Result                                                    s\n\n                  (Consolidated financial information has been prepared in accordance with International Financial Reporting Standards)\n                                                     English translation from the original Japanese-language document\n\n                                                                                                                                                                               May 10, 2023\nCompany name                                                                                         : Toyota Motor Corporation\nStock exchanges on which the shares are listed                                                    : Tokyo and Nagoya Stock Exchanges in Japan\nCode number                                                                                               : 7203\nURL                                                                                               : https://global.toyota/jp/\nRepresentative                                                                                    : Akio Toyoda, Chairman of the Board of Directors\nContact person                                                                                          : Hideaki Hayashi, General Manager, Accounting Division\n                                                                                                   Tel. (0565)28-2121\nDate of the ordinary general shareholders' meeting                                                : June 14, 2023\nPayment date of cash dividends                                                               : May 26, 2023\nFiling date of financial statements                                                             : June 22, 2023\nSupplemental materials prepared for financial results                               : yes\nEarnings announcement for financial results                                             : yes",
+          "title": "Toyota Motor Corporation FY2023 consolidated financial results",
+          "url": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf",
+          "version_at": "2023-05-10"
+        },
+        "P3": {
+          "available_by_utc": "2023-05-10T14:59:59.999999+00:00",
+          "citation_url": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf#page=2&search=%22%28Amounts%20are%20rounded%20to%20the%20nearest%20million%20yen%29%22",
+          "edition": "FY2023 financial summary, English edition",
+          "locator": "PDF p2 §2",
+          "published": "2023-05-10",
+          "sha256": "35d198a5a14812731798e5bb917854d675ae6b2e74913c377301120b5a1de08c",
+          "source_id": "toyota-fy2023",
+          "text": "                                                                                                                                   (Amounts are rounded to the nearest million yen)\n1.  Consolidated Results for FY2023 (April 1,2022 through March 31, 2023)\n(1)  Consolidated financial results                                                                                                                            (% of change from previous year)\n                                                                                                                                                 Net income\n                      Sales revenues        Operating income         Income before                                                             attributable to             Comprehensive\n                                                                                    income taxes               Net income                      Toyota Motor                      income\n                                                                                                                                                Corporation\n                      Million yen         %      Million yen         %      Million yen         %      Million yen         %      Million yen         %      Million yen         %\n   FY2023        37,154,298     18.4      2,725,025      -9.0      3,668,733      -8.1      2,492,967    -13.3      2,451,318    -14.0      3,320,681    -17.3\n   FY2022        31,379,507     15.3      2,995,697     36.3      3,990,532     36.1      2,874,614     25.9      2,850,110      26.9       4,017,742      21.9\n\n                       Earnings per share                  Earnings per share                 Ratio of net income               Ratio of income before\n                      attributable to Toyota              attributable to Toyota             attributable to Toyota                income taxes and               Ratio of operating income\n                        Motor Corporation                   Motor Corporation                Motor Corporation to                equity in earnings of                 to sales revenues\n                               – Basic                            – Diluted               Toyota Motor Corporation                affiliated companies\n                                                                                              shareholders' equity                    to total assets\n                                               Yen                                    Yen                                       %                                       %                                       %\n   FY2023                                   179.47                     －                                      9.0                                      5.2                                      7.3\n   FY2022                                  205.23                               205.23                                  11.5                                    6.1                                    9.5\n(Reference) Share of profit (loss) of investments accounted for using the equity method\n         FY2023  643,063 million yen,  FY2022  560,346 million yen\n(Note)   On October 1, 2021, Toyota Motor Corporation (\"TMC\") effected a five-for-one stock split of its common stock to shareholders of record as\n         of September 30, 2021. \"Earnings per share attributable to Toyota Motor Corporation (Basic)\" and \"Earnings per share attributable to\n         Toyota Motor Corporation (Diluted)\" are calculated based on the assumption that the stock split was implemented at the beginning of the\n         previous fiscal year.\n         \"Earnings per share attributable to Toyota Motor Corporation (Diluted)\" is not disclosed for FY2023, because there were no potential\n         shares during that period as the acquisition of all outstanding First Series Model AA Class Shares took place on April 2, 2021, and the\n         cancellation of all First Series Model AA Class Shares was completed on April 3, 2021.",
+          "title": "Toyota Motor Corporation FY2023 consolidated financial results",
+          "url": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf",
+          "version_at": "2023-05-10"
+        }
+      },
+      "role": "contrary",
+      "searches": [
+        {
+          "query": "Toyota FY2024 full-year consolidated operating income forecast May 2023 earnings outlook correction revision",
+          "results": [
+            {
+              "id": "P1",
+              "locator": "PDF p3 §1",
+              "preview": "3.  Forecast of Consolidated Results for FY2024 (April 1, 2023 through March 31, 2024)\n                                                                                                                                     ",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            },
+            {
+              "id": "P2",
+              "locator": "PDF p2 §1",
+              "preview": "                                                      FY2023 Consolidated Financial Result                                                    s\n\n                  (Consolidated financial information has been prepared in ",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            },
+            {
+              "id": "P3",
+              "locator": "PDF p2 §2",
+              "preview": "                                                                                                                                   (Amounts are rounded to the nearest million yen)\n1.  Consolidated Results for FY2023 (Apr",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            },
+            {
+              "id": "P4",
+              "locator": "PDF p3 §3",
+              "preview": "(Reference)Overview of the Unconsolidated Financial Results\n                                                         FY2023 Unconsolidated Financial Results\n                 (Unconsolidated financial information has been",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            },
+            {
+              "id": "P5",
+              "locator": "PDF p2 §5",
+              "preview": "2.  Cash Dividends\n                            Annual cash dividends per common share                  Total amount of                                                                 Ratio of total amount\n               ",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            }
+          ]
+        }
+      ],
+      "trace": [
+        {
+          "max_date": "2023-05-11",
+          "operation": "search",
+          "results": [
+            "toyota-fy2023/PDF p3 §1",
+            "toyota-fy2023/PDF p2 §1",
+            "toyota-fy2023/PDF p2 §2",
+            "toyota-fy2023/PDF p3 §3",
+            "toyota-fy2023/PDF p2 §5"
+          ]
+        },
+        {
+          "max_date": "2023-05-11",
+          "operation": "read",
+          "results": [
+            "toyota-fy2023/PDF p3 §1"
+          ]
+        },
+        {
+          "max_date": "2023-05-11",
+          "operation": "read",
+          "results": [
+            "toyota-fy2023/PDF p2 §1"
+          ]
+        },
+        {
+          "max_date": "2023-05-11",
+          "operation": "read",
+          "results": [
+            "toyota-fy2023/PDF p2 §2"
+          ]
+        }
+      ]
+    }
+  ]
+}

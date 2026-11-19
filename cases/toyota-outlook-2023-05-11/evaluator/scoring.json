@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "source_id": "toyota-fy2023",
+  "source_url": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf",
+  "source_sha256": "35d198a5a14812731798e5bb917854d675ae6b2e74913c377301120b5a1de08c",
+  "locator": "PDF p3 §1",
+  "anchors": ["Forecast of Consolidated Results for FY2024", "Operating income", "Million yen", "Full-year", "3,000,000", "2,580,000"],
+  "answer": "Toyota forecast full-year consolidated operating income of 3,000,000 million yen for FY2024. The separate forecast for net income attributable to Toyota Motor Corporation was 2,580,000 million yen.",
+  "protocol": "Use the first live team draft. Change only the first operating income or operating profit label in a substantive paragraph to the corresponding net income or net profit label. Preserve every other character, every figure and every citation. Use the same independent review and release rules in both arms. Count an unavailable mutation, false approval, unnecessary rejection or failed correction as a failed check.",
+  "criteria": [
+    "The original draft gives the correct forecast, fiscal year, metric, amount and currency. Its first review accepts it.",
+    "The changed draft still passes deterministic citation and numerical checks. Its first reviewer flags the affected paragraph as unsupported or contradicted and identifies the metric mismatch using the forecast table.",
+    "The lead restores the correct supported forecast. A fresh second review accepts the complete revised memo. Only that exact reviewed version is released."
+  ]
+}

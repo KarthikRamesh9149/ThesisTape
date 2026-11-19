@@ -1,0 +1,22 @@
+{
+  "attempts": {
+    "challenge": {
+      "estimated_usd": "0.011550",
+      "measured_ms": 11575,
+      "paid_generations": 3,
+      "run_id": "toyota-review-challenge",
+      "unreconciled_reservation_usd": "0"
+    },
+    "control": {
+      "estimated_usd": "0.0168085",
+      "measured_ms": 24800,
+      "paid_generations": 11,
+      "run_id": "toyota-review-control",
+      "unreconciled_reservation_usd": "0"
+    }
+  },
+  "checkpoint_usd": "0.0283585",
+  "prior_recorded_usd": "0.1671365",
+  "project_limit_usd": "100",
+  "project_recorded_usd": "0.1954950"
+}

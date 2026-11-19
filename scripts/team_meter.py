@@ -20,13 +20,13 @@ from .sol_research import tool_decision
 
 
 def funded_limit(stage, model, input_tokens, available, desired):
-    if stage not in ("lead.memo", "lead.memo_repair"):
+    if stage not in ("lead.memo", "lead.memo_repair", "lead.revise", "review.initial", "review.recheck"):
         return desired
     rates = MODEL_RATES[model]
     affordable = int(
         (available * MILLION - input_tokens * Decimal(rates["cache_write_30m"])) / Decimal(rates["output"])
     )
-    # Leave enough room for a structured report, even on a repair.
+    # Keep enough output for the structured report or review.
     return min(desired, affordable) if affordable >= min(768, desired) else desired
 
 
