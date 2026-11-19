@@ -1,0 +1,7 @@
+# Releasing an independently reviewed first draft
+
+This publication rule was added after the first live case in which both registered investigators failed to release a report. The original and recovery registrations, per-question ceilings, exact inputs and outputs remain the basis for reporting how often each investigator released an answer. This rule applies uniformly to questions that both investigators left unanswered. It uses no benchmark scores, answer keys, new retrieval or model calls.
+
+The quantitative investigator sometimes completes its independent paragraph review and then loses the entire memo because an optional rewrite or recheck fails. Reconstruct the first draft using the original question, source passages, calculations, completed author response and independent reviewer response. Verify their request fingerprints. Follow the existing branch that omits the optional rewrite. Only paragraphs already accepted by the independent reviewer may pass through the normal citation, arithmetic and question-attribution checks. Preserve the qualified status and record the reviewer's outstanding coverage gaps. If zero approved paragraphs survive, this rule yields no report.
+
+The export records both investigators' failures and costs alongside the derived report, source run hash, reviewer receipt hash and scope of the independent approval. Report these qualified publications separately from the originally registered releases. Any later funded procedure requires a separate record and accounting.

@@ -5,12 +5,24 @@ import zipfile
 from pathlib import Path
 from unittest.mock import patch
 
-from evaluations.financegym import evidence, recovery, submission
+from evaluations.financegym import evidence, recovery, reviewed_release, submission
 from evaluations.open_research import fomc
 from scripts.sol_baseline import json_bytes
 
 
 class ConditionalRecoveryTests(unittest.TestCase):
+    def test_first_draft_requires_an_existing_independent_approval_and_failed_run(self):
+        for state, profile, calls in [
+            ("qualified", "evidence_team_v4", {}),
+            ("failed", "single_astra", {"review.initial": {"output": "unused"}}),
+            ("failed", "evidence_team_v4", {"review.initial": {}}),
+        ]:
+            with self.subTest(state=state, profile=profile):
+                rec = {"state": state, "research_profile": profile, "calls": calls}
+                self.assertIsNone(
+                    reviewed_release.approved_draft({}, Path("."), rec, "unused")
+                )
+
     def test_portable_costs_duration_and_editions_match_the_real_fed_trial(self):
         with (
             tempfile.TemporaryDirectory() as t,

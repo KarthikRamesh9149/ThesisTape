@@ -19,7 +19,7 @@ from scripts.run_checkpoint import load
 from scripts.sol_baseline import fingerprint, json_bytes
 from scripts.team_meter import verify_ledger
 
-from . import recovery, runner, submission
+from . import recovery, reviewed_release, runner, submission
 
 FOLDER = REPO / "evaluations/financegym/results"
 PORTABLE = re.compile(
@@ -238,19 +238,34 @@ def verify(questions, root):
                     if len(chain) == 2
                     else runner.route(row, cfg)
                 )[0]
-                saved = engine.audit(
-                    run, SavedArchive(row["cutoff"], cfg["archive_version"]), record=rec
-                )
-                item, visible = runner.reviewed_answer(
-                    row, saved, (run / "memo.md").read_bytes()
-                )
+                if "reviewed_publication" in proof:
+                    publication = reviewed_release.approved_draft(
+                        row, run, rec, cfg["archive_version"]
+                    )
+                    require(
+                        publication and publication[2] == proof["reviewed_publication"],
+                        "Original independent paragraph approval differs",
+                    )
+                    item, visible, _ = publication
+                else:
+                    saved = engine.audit(
+                        run,
+                        SavedArchive(row["cutoff"], cfg["archive_version"]),
+                        record=rec,
+                    )
+                    item, visible = runner.reviewed_answer(
+                        row, saved, (run / "memo.md").read_bytes()
+                    )
                 require(
                     item["report"] == report["report"],
                     "A reproduced report differs from the offered submission",
                 )
                 require(
                     report["num_docs_retrieved"] == len(editions)
-                    and report["elapsed_s"] == round(seconds, 3),
+                    and report["elapsed_s"]
+                    == (
+                        round(seconds, 3) if "attempts" in proof else item["elapsed_s"]
+                    ),
                     "A submitted document count or duration differs from the original investigations",
                 )
                 cited = cited_kinds(visible)

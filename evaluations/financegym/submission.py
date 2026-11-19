@@ -18,7 +18,7 @@ from scripts.run_checkpoint import load
 from scripts.sol_baseline import fingerprint, json_bytes
 from scripts.sol_provider import ASTRA, MODEL
 
-from . import recovery
+from . import recovery, reviewed_release
 from .runner import locked, tasks, validate_file
 
 NAMES = {
@@ -30,16 +30,15 @@ NAMES = {
 RECIPIENT = "rujunh@google.com"
 
 
-def verified_selection(manifest, proof, extension):
+def verified_selection(manifest, proof, extension, publication=None):
     profile = manifest["profiles_by_task"][proof["task_id"]]
+    derived = proof.get("reviewed_publication")
     if extension is None:
-        return proof["profile"] == profile and "attempts" not in proof
+        return (
+            proof["profile"] == profile and "attempts" not in proof and derived is None
+        )
     chain = proof["attempts"]
-    if (
-        len(chain) not in (1, 2)
-        or chain[0]["profile"] != profile
-        or chain[-1]["report_sha256"] != proof["report_sha256"]
-    ):
+    if len(chain) not in (1, 2) or chain[0]["profile"] != profile:
         return False
     if len(chain) == 2 and (
         chain[0]["report_sha256"] is not None
@@ -47,10 +46,30 @@ def verified_selection(manifest, proof, extension):
         or chain[-1]["profile"] != recovery.second_route(manifest, profile)[1]
     ):
         return False
+    if derived is not None:
+        if not (
+            publication
+            and len(chain) == 2
+            and chain[-1]["report_sha256"] is None
+            and chain[-1]["state"] in {"failed", "needs_reconciliation"}
+            and chain[-1]["profile"] == "evidence_team_v4"
+            and derived["method"] == "independently_reviewed_first_draft"
+            and derived["source_run_sha256"] == chain[-1]["original_run_sha256"]
+            and derived["additional_model_generations"] == 0
+            and Decimal(derived["additional_model_cost_usd"]) == 0
+            and 0 < derived["published_paragraphs"] <= derived["approved_paragraphs"]
+            and derived["report_sha256"] == proof["report_sha256"]
+            and proof["state"] == "qualified"
+        ):
+            return False
+    elif (
+        chain[-1]["report_sha256"] != proof["report_sha256"]
+        or chain[-1]["state"] != proof["state"]
+    ):
+        return False
     return (
         proof["primary_profile"] == profile
         and proof["profile"] == chain[-1]["profile"]
-        and proof["state"] == chain[-1]["state"]
         and Decimal(proof["estimated_cost_usd"])
         == sum(Decimal(a["estimated_cost_usd"]) for a in chain)
         and Decimal(proof["outstanding_usd"])
@@ -66,6 +85,7 @@ def verify_export(questions, directory):
     inputs = tasks(questions)
     audits_rows = audits["tasks_audited"]
     extension = audits.get("recovery_registration_sha256")
+    publication = audits.get("reviewed_release_registration_sha256")
     if extension is not None:
         verified = recovery.register(manifest)
         if json.loads(
@@ -75,8 +95,18 @@ def verify_export(questions, directory):
                 "The recovery research differs from its registered procedure"
             )
         recovered = sum(len(a["attempts"]) == 2 for a in audits_rows)
+        retained = sum("reviewed_publication" in a for a in audits_rows)
+        if publication is not None:
+            registered = reviewed_release.locked(manifest, verified)
+            if (
+                publication != fingerprint(json_bytes(registered))
+                or retained != audits["reviewed_first_draft_releases"]
+            ):
+                raise ValueError(
+                    "Reviewed first drafts differ from the documented publication rule"
+                )
         if (audits["recovery_releases"], audits["primary_releases"]) != (
-            recovered,
+            recovered - retained,
             400 - recovered,
         ) or Decimal(audits["outstanding_usd"]) != sum(
             Decimal(a["outstanding_usd"]) for a in audits_rows
@@ -96,7 +126,7 @@ def verify_export(questions, directory):
         answer = json.loads(line)
         if (
             row["task_id"] != proof["task_id"]
-            or not verified_selection(manifest, proof, extension)
+            or not verified_selection(manifest, proof, extension, publication)
             or proof["report_sha256"] != fingerprint(answer["report"].encode())
             or proof["state"] not in {"complete", "qualified"}
         ):
@@ -117,13 +147,15 @@ def paper(questions, directory):
         f"- {NAMES[p]} received {n} original tasks under a USD {cfg['case_limits_usd'][p]} per-task ceiling."
         for p, n in sorted(counts.items())
     )
-    if audit.get("recovery_releases"):
+    if audit.get("recovery_registration_sha256"):
         original_cost = sum(
             Decimal(a["attempts"][0]["estimated_cost_usd"])
             for a in audit["tasks_audited"]
         )
         supplemental_cost = Decimal(audit["total_research_cost_usd"]) - original_cost
-        methods += f"\n\nThe primary researcher released {audit['primary_releases']} reports using an estimated USD {original_cost:.2f}. An independent recovery researcher supplied the remaining {audit['recovery_releases']} using an additional USD {supplemental_cost:.2f}. Each new investigation required an unanswered original question and retained the first attempt's costs. Unresolved provider reservations across both attempts total USD {audit['outstanding_usd']}."
+        methods += f"\n\nThe primary researcher released {audit['primary_releases']} reports using an estimated USD {original_cost:.2f}. Independent investigations on unanswered questions released {audit['recovery_releases']} reports. All independent investigations together used an additional USD {supplemental_cost:.2f}. Unresolved provider reservations across both attempts total USD {audit['outstanding_usd']}."
+        if audit.get("reviewed_first_draft_releases"):
+            methods += f"\n\nAfter the first case in which an optional rewrite failed following a completed independent review, we added an offline publication rule. It produced {audit['reviewed_first_draft_releases']} further qualified reports by retaining only previously approved paragraphs. The originally registered system left these questions unanswered. Both original attempts and expenses are included. The additional publications used zero new searches or generations."
     metrics = primary["metrics"]
     rows = "\n".join(
         f"| {NAMES[k]} | {v['cases']} | {v['F']:.1%} | {v['R']:.1%} | {v['O']:.1%} | {v['Q']:.1%} | {v['released']} |"
