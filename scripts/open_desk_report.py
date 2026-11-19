@@ -138,6 +138,7 @@ def inspect(directory, record):
         "route": "Public archives · "
         + {
             "mixed": "research team",
+            "evidence_team": "research team with quantitative review",
             "single_astra": "single Astra",
             "single_sol": "single Sol",
         }[record["research_profile"]],

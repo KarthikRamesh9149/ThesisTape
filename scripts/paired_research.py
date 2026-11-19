@@ -89,7 +89,7 @@ def paragraphs(draft):
 
 def formula(ident, result):
     left, right = (result[k].split(":", 1)[-1] for k in ("left", "right"))
-    expression = {
+    expression = result.get("expression") or {
         "add": f"{left} + {right}",
         "subtract": f"{left} − {right}",
         "multiply": f"{left} × {right}",
