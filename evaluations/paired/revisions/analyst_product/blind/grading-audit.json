@@ -1,0 +1,8 @@
+{
+  "asof_scores_sha256": "ceb79cedf008ba01403d60d3908f2d90db6b385fdcd533b01503610f6eb30f72",
+  "confirmed_grading_usd": "6.750768",
+  "grading_receipts_sha256": "46a3d44612a2e55fe54af004ef7528d4628dc98e9d8ef92cdef99cef89c2c459",
+  "locked_assignments": 48,
+  "paid_assessments": 46,
+  "verified_generations": 50
+}
