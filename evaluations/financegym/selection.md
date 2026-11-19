@@ -1,0 +1,9 @@
+# Choosing the official candidate
+
+This rule was recorded before reading either blind outcome file or any FinanceBench reference answer. Production cases comprise 24 historical events across six domains. The second comparison uses 24 unrelated companies to assess direct, source-supported answers to financial statement questions. Their scores have different meanings and are reported separately. [Event protocol](../paired/protocol.md) · [Financial statement protocol](../financebench/protocol.md)
+
+Use the broadly tested mixed finalist when its original paired quality and cost decision passes. Otherwise use its preregistered single-analyst comparator. A cutoff violation stops registration. Keep the mixed arm's original result and decision in both cases. A single-analyst entry will be identified as such in the submission.
+
+Use the quantitative team for a direct, historical financial statement question only if its fresh company-paired result has a positive 90% lower confidence bound on the difference in correct, cited answers over single Astra using the same tools. The implemented text rule requires an accounting metric and a request for an amount or comparison. Requests for a prediction, outlook or possible future development go to the broader finalist. If the evidence is inconclusive, use the general configuration for all questions. This selection policy supports no claim about an official score.
+
+Before any official generation, commit the exact candidate, input release, routing decisions, spending limits and projection for 400 tasks. The general route retains its tested USD 0.30 ceiling. The financial statement route, when qualified, uses its tested USD 0.45 ceiling. Record estimates and maximum exposure separately. The research archive must pass its independent dated-source and citation checks. Publish all late-source failures and coverage limitations.
