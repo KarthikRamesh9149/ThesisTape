@@ -1,0 +1,217 @@
+{
+  "budget_usd": "0.06",
+  "calls": {
+    "lead.memo": {
+      "confirmed_ms": 3368,
+      "dispatched_ms": 1234,
+      "estimated_model_cost_usd": "0.00781",
+      "input_tokens_preflight": 3540,
+      "max_output_tokens": 1536,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"value\": \"404.6\",\n  \"row\": \"Value of Shares Repurchased (billions of yen)[actual purchase]\",\n  \"column_group\": \"FY2022\",\n  \"column\": \"12 months\",\n  \"unit\": \"billions of yen\",\n  \"note_ids\": [4]\n}",
+      "provider": {
+        "elapsed_ms": 2133,
+        "ids_sha256": "119ff95c0c43c881b660d4ad3580f1366453b58a6e04999b87458b8f12572d21",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 3540,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 73,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 3613
+        }
+      },
+      "request_sha256": "e0a03e8a36182ab3e39d0244e9659a07c7c12e16181ef526f44d4939de32257b",
+      "reservation_usd": "0.02421",
+      "stage": "lead.memo"
+    },
+    "review.initial": {
+      "confirmed_ms": 6577,
+      "dispatched_ms": 3601,
+      "estimated_model_cost_usd": "0.009152",
+      "input_tokens_preflight": 3911,
+      "max_output_tokens": 1536,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"value\": \"supported\",\n  \"row\": \"supported\",\n  \"column\": \"supported\",\n  \"unit\": \"supported\",\n  \"footnotes\": \"supported\",\n  \"reason\": \"Toyota’s FY2023 supplemental table reports 404.6 billion yen on the actual-purchase row in the FY2022 12-month column (April 2021–March 2022). Note 4 alone applies to that row: it excludes purchases upon request of shares constituting less than one unit and commissions incurred for the repurchase. Note 5 applies only to the separate shareholder-return row.\"\n}",
+      "provider": {
+        "elapsed_ms": 2976,
+        "ids_sha256": "8693e15bf0c7c5948b292e506ac81b4df010b27e78e92167340a4e4c210226c1",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 3911,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 133,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 4044
+        }
+      },
+      "request_sha256": "fab47e34bb87d58e03b9941c2e7d7b96b4690ff8321fe56faac80576ed714b20",
+      "reservation_usd": "0.0251375",
+      "stage": "review.initial"
+    }
+  },
+  "case_id": "toyota-buybacks-actual-2023-05-11",
+  "corpus_sha256": "3f3fea5bd09b6f83f3db1695722974e7d76c059c75490578cbbfd3aa05b7653c",
+  "created_at": "2026-11-19T11:03:07.959865+00:00",
+  "cutoff": "2023-05-11",
+  "elapsed_ms": 6581,
+  "estimated_model_cost_usd": "0.016962",
+  "events": [
+    [
+      "reserve",
+      "lead.memo"
+    ],
+    [
+      "settle",
+      "lead.memo"
+    ],
+    [
+      "reserve",
+      "review.initial"
+    ],
+    [
+      "settle",
+      "review.initial"
+    ]
+  ],
+  "evidence": {
+    "footnotes": {
+      "citation": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf#page=30&search=%22%28Note%201%29%20Shows%20the%20number%20of%20employees%20as%22",
+      "edition_sha256": "35d198a5a14812731798e5bb917854d675ae6b2e74913c377301120b5a1de08c",
+      "locator": "PDF p30 §2",
+      "text_sha256": "6fb0afaab83e9459a487764d22bbd8bede11561e8072b4935115f1d45bd5ebda"
+    },
+    "table": {
+      "citation": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf#page=29&search=%22Supplemental%20Material%20for%20Financial%20Results%20for%20FY2023%20%28Consolidated%29%22",
+      "edition_sha256": "35d198a5a14812731798e5bb917854d675ae6b2e74913c377301120b5a1de08c",
+      "locator": "PDF p29 §1",
+      "text_sha256": "5233939f1b7700fde52ad0adecced8566c4de8be7b999fb8e3b66095f1ae8ffb"
+    }
+  },
+  "memo_sha256": "d6952d33bd60c30a8e9d034175f0c1e5312afa7f9ced0aabfe6c77a2d1199b56",
+  "paid_tool_charges_usd": "0",
+  "pricing": {
+    "per_million_usd": {
+      "gpt-6.1-terra": {
+        "cache_write_30m": "1.25",
+        "cached_input": "0.05",
+        "ordinary_input": "1.00",
+        "output": "5.00"
+      },
+      "gpt-6.2-sol": {
+        "cache_write_30m": "2.50",
+        "cached_input": "0.10",
+        "ordinary_input": "2.00",
+        "output": "10.00"
+      }
+    },
+    "sources": [
+      "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+      "https://developers.openai.com/api/docs/models/gpt-6.1-terra"
+    ],
+    "status": "estimate_from_usage"
+  },
+  "prompt_version": "sol-two-luna-v4",
+  "question": "As of 11 May 2023, what full-year FY2022 value did Toyota report for shares repurchased on its actual-purchase basis, in what unit, and which exclusions applied?",
+  "retrieval": [
+    {
+      "max_date": "2023-05-11",
+      "operation": "read",
+      "results": [
+        "toyota-fy2023/PDF p29 §1"
+      ]
+    },
+    {
+      "max_date": "2023-05-11",
+      "operation": "read",
+      "results": [
+        "toyota-fy2023/PDF p30 §2"
+      ]
+    }
+  ],
+  "review": {
+    "released_memo_sha256": "d6952d33bd60c30a8e9d034175f0c1e5312afa7f9ced0aabfe6c77a2d1199b56",
+    "rounds": [
+      {
+        "approved": true,
+        "assessment": {
+          "column": "supported",
+          "footnotes": "supported",
+          "reason": "Toyota’s FY2023 supplemental table reports 404.6 billion yen on the actual-purchase row in the FY2022 12-month column (April 2021–March 2022). Note 4 alone applies to that row: it excludes purchases upon request of shares constituting less than one unit and commissions incurred for the repurchase. Note 5 applies only to the separate shareholder-return row.",
+          "row": "supported",
+          "unit": "supported",
+          "value": "supported"
+        },
+        "candidate": {
+          "column": "12 months",
+          "column_group": "FY2022",
+          "note_ids": [
+            4
+          ],
+          "row": "Value of Shares Repurchased (billions of yen)[actual purchase]",
+          "unit": "billions of yen",
+          "value": "404.6"
+        },
+        "memo_sha256": "d6952d33bd60c30a8e9d034175f0c1e5312afa7f9ced0aabfe6c77a2d1199b56",
+        "retrieval": [
+          {
+            "max_date": "2023-05-11",
+            "operation": "read",
+            "results": [
+              "toyota-fy2023/PDF p29 §1"
+            ]
+          },
+          {
+            "max_date": "2023-05-11",
+            "operation": "read",
+            "results": [
+              "toyota-fy2023/PDF p30 §2"
+            ]
+          }
+        ]
+      }
+    ],
+    "status": "approved"
+  },
+  "review_version": "financial-table-v1",
+  "route": "visual",
+  "run_id": "toyota-clear-row",
+  "schema_version": 3,
+  "state": "complete",
+  "table": {
+    "notes_locator": "PDF p30 §2",
+    "row_anchor": "[actual purchase]",
+    "table_locator": "PDF p29 §1",
+    "url": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf"
+  },
+  "table_version": "financial-table-v1",
+  "unreconciled_reservation_usd": "0",
+  "visual_reader": {
+    "image_sha256": null,
+    "reading": null,
+    "reason": null,
+    "requested": false
+  }
+}

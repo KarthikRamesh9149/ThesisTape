@@ -149,7 +149,10 @@ def ambiguity(layout, anchor):
     i = matches[0]
     row = lines[i]
     # Units and basis can wrap onto a second line with only a footnote number.
-    if not re.search(r"\d", re.sub(r"\(Note\s+\d+\)", "", row, flags=re.IGNORECASE)) and i:
+    if (
+        not re.search(r"\d", re.sub(r"\(Note\s+\d+\)", "", row, flags=re.IGNORECASE))
+        and i
+    ):
         row = lines[i - 1] + " " + row
     if re.search(r"\d[\d,]*\.\d+\.\d|[―—－]\d", row):
         return "adjacent numeric cells joined in extraction"

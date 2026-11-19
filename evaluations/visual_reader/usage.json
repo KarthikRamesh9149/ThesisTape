@@ -1,0 +1,23 @@
+{
+  "checkpoint_usd": "0.066796",
+  "clear_row": {
+    "criteria": {
+      "column": true,
+      "exclusions": true,
+      "row": true,
+      "unit": true,
+      "value": true
+    },
+    "elapsed_ms": 6581,
+    "estimated_usd": "0.016962",
+    "model_generations": 2,
+    "pass": true,
+    "points": 5,
+    "skipped_image": true,
+    "unreconciled_usd": "0"
+  },
+  "pair_usd": "0.049834",
+  "prior_project_usd": "0.3197679",
+  "project_cap_usd": "100",
+  "project_recorded_usd": "0.3865639"
+}

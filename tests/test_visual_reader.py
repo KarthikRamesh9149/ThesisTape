@@ -1,5 +1,6 @@
 import base64
 import json
+import re
 import shutil
 import unittest
 from dataclasses import replace
@@ -9,7 +10,7 @@ from tempfile import TemporaryDirectory
 
 from evaluations.visual_reader import verify
 from scripts.disney_hulu_case import CaseError
-from scripts.research_team import release_state, run
+from scripts.research_team import configuration, release_state, replay, reproduce, run
 from scripts.retrieval_gateway import Corpus
 from scripts.sol_baseline import fingerprint
 from scripts.team_research import case_for, research
@@ -267,3 +268,83 @@ class TableTests(unittest.TestCase):
             receipt = verify.load(directory / "run.json")
             self.assertEqual(receipt["calls"], {})
             self.assertEqual(Decimal(receipt["estimated_model_cost_usd"]), 0)
+
+    def test_real_runs_reopen_every_citation_and_only_send_the_intended_pixels(self):
+        occurrences = 0
+        for path, case_name, image_stages in (
+            (verify.HERE / "pair/table-text", "toyota-buybacks", set()),
+            (
+                verify.HERE / "pair/visual",
+                "toyota-buybacks",
+                {"visual.read", "review.initial"},
+            ),
+            (verify.HERE / "clear-row", "toyota-buybacks-actual", set()),
+        ):
+            case = case_for(case_name)
+            record = verify.load(path / "run.json")
+            route = record["route"]
+            observed_images = set()
+
+            def workflow(ask, case=case, route=route, observed_images=observed_images):
+                def capture(stage, prompt, limit):
+                    content = prompt["input"]
+                    if isinstance(content, list):
+                        parts = content[0]["content"]
+                        self.assertEqual(
+                            [part["type"] for part in parts],
+                            ["input_text", "input_image"],
+                        )
+                        png = base64.b64decode(
+                            parts[1]["image_url"].split(",")[1], validate=True
+                        )
+                        self.assertEqual(
+                            fingerprint(png), self.rules["page29_png_sha256"]
+                        )
+                        observed_images.add(stage)
+                    return ask(stage, prompt, limit)
+
+                return research(case, self.corpus, capture, route=route)
+
+            memo = reproduce(record, configuration(case, self.corpus, route), workflow)
+            self.assertEqual(memo, (path / "memo.md").read_bytes())
+            self.assertEqual(observed_images, image_stages)
+            if "visual.read" in observed_images:
+                reading = record["visual_reader"]["reading"]
+                self.assertEqual(
+                    reading["value"], self.rules["criteria"]["value"]["expected"]
+                )
+                self.assertIn(
+                    verify.label(reading["row"]),
+                    {verify.label(s) for s in self.rules["criteria"]["row"]["labels"]},
+                )
+                self.assertEqual(
+                    (
+                        reading["column_group"],
+                        reading["column"],
+                        reading["unit"],
+                        reading["note_ids"],
+                    ),
+                    ("FY2022", "12 months", "billions of yen", [4, 5]),
+                )
+            with self.corpus.session(case.cutoff) as session:
+                for url in re.findall(r"\]\((https://[^\s)]+)\)", memo.decode()):
+                    hits = session.read(url, max_date=case.cutoff)
+                    self.assertIn(hits, ((self.pages.table,), (self.pages.notes,)))
+                    occurrences += 1
+        self.assertEqual(occurrences, 8)
+
+    def test_recorded_scores_costs_and_request_tampering(self):
+        pair = verify.compare(
+            verify.HERE / "pair", self.case, self.corpus, self.rules, self.pages
+        )
+        self.assertEqual(pair, verify.load(verify.HERE / "pair/results.json"))
+        usage = verify.checkpoint(
+            pair, verify.HERE / "clear-row", self.corpus, self.rules, self.pages
+        )
+        self.assertEqual(usage, verify.load(verify.HERE / "usage.json"))
+        record = verify.load(verify.HERE / "pair/visual/run.json")
+        record["calls"]["review.initial"]["request_sha256"] = record["calls"][
+            "visual.read"
+        ]["request_sha256"]
+        with self.assertRaisesRegex(CaseError, "fingerprint"):
+            replay(self.case, record, corpus=self.corpus)

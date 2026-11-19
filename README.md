@@ -73,6 +73,17 @@ On NVIDIA’s Q2 FY2024 revenue, the specialist memo earned 6/6 and the reviewed
 .venv/bin/python -B -m scripts.research_team run --case nvidia --route forecast --budget-usd 0.12 --output-dir runs/nvidia-forecast-new
 ```
 
+### Read a financial table
+
+The conditional table route checks the requested row in a located, dated PDF. If extraction joins numeric cells, the row is ambiguous or Sol cannot resolve a field, Terra reads the registered page. A fresh Sol reviewer checks the report against that same page and the original notes. A clear row can complete with text alone.
+
+On Toyota’s full-year buybacks, both routes scored 6/6. Visual confirmation added USD 0.012342. A separate live check of the adjacent row returned the correct value and skipped the image. [Reports, scores and replay](evaluations/visual_reader/evaluation.md) · [Cumulative spend](evaluations/visual_reader/usage.json)
+
+```sh
+.venv/bin/python -B -m evaluations.visual_reader.verify
+.venv/bin/python -B -m scripts.research_team run --case toyota-buybacks --route visual --budget-usd 0.12 --output-dir runs/toyota-table-new
+```
+
 ## Run the single-Sol baseline
 
 Sol chooses its search terms, inspects dated result previews and selects passages to open. It has up to two searches. Only the selected full passages go into its writing request. The controller checks the quoted evidence, reconciles the amounts with decimal arithmetic and builds citations from the opened sources.

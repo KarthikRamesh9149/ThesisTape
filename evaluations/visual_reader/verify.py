@@ -114,6 +114,17 @@ def replay_artifact(root, case, corpus, pages):
         memo is not None and read_saved_file(path) != memo
     ):
         raise CaseError("Released artifact differs from the replay")
+    if memo is not None:
+        links = re.findall(r"\]\((https://[^\s)]+)\)", memo.decode())
+        with corpus.session(case.cutoff) as session:
+            for url in links:
+                if session.read(url, max_date=case.cutoff) not in (
+                    (pages.table,),
+                    (pages.notes,),
+                ):
+                    raise CaseError(
+                        "A rendered citation failed to reopen its original dated passage"
+                    )
     return record, memo
 
 
