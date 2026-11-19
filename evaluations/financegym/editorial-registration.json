@@ -1,0 +1,10 @@
+{
+  "additional_cap_usd": "0.55",
+  "policy_sha256": "e3d72aca2c777a538c85912097f0c38d4746f7d1ed8b5a4350568b39bb560a09",
+  "reviewed_release_sha256": "afc525b544e05b68ef4fca2f3a0b30db0d8b2e4aff528c274ee80ea6024cd18b",
+  "sources": {
+    "evaluations/financegym/editorial.py": "7ee2b9cd075910c86f20be6336e29370f6cb8b1274ee948ebf4b2d9d3d9b5299",
+    "scripts/source_completion.py": "5c5a17ee4ca3fad5f7810170bc856dd44d7e5a8adc528ba49332019b177fa856"
+  },
+  "version": 1
+}
