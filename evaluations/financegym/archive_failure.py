@@ -55,18 +55,18 @@ def original_pdf(directory, sha):
     return raw
 
 
-def parser_error(raw):
+def parser_error(raw, kind=None):
     try:
         article(raw)
     except PdfReadError as error:
-        return str(error)
+        return str(error) if kind is None or kind == type(error).__name__ else None
     except CaseError:
         # For example, the archive rejects a well-formed PDF over its page limit.
         pass
     return None
 
 
-def damaged_receipts(folder, keys, message):
+def damaged_receipts(folder, keys, message, kind=None):
     damaged, checked = [], {}
     for key in sorted(keys):
         envelope = load(folder / (key + ".json"))
@@ -81,7 +81,7 @@ def damaged_receipts(folder, keys, message):
                     len(raw) == receipt["byte_length"],
                     "The PDF length differs from its receipt",
                 )
-            checked[sha] = raw is not None and parser_error(raw) == message
+            checked[sha] = raw is not None and parser_error(raw, kind) == message
         if checked[sha]:
             damaged.append(envelope)
     require(
@@ -93,7 +93,7 @@ def damaged_receipts(folder, keys, message):
 def attempt(loc, row, version, assigned, route, ids):
     run = loc / "research"
     rec = load(run / "run.json")
-    if rec.get("failure") != "PdfReadError" or rec["state"] != "failed":
+    if rec.get("failure") not in pacing.PARSER_FAILURES or rec["state"] != "failed":
         return registered_attempt(loc, row, version, assigned, route, ids)
     engine, profile, cap = route
     check_configuration(
@@ -148,6 +148,10 @@ def attempt(loc, row, version, assigned, route, ids):
                 profile=profile,
             )
         except PdfReadError as error:
+            require(
+                type(error).__name__ == rec["failure"],
+                "The dated source reproduced a different parser exception",
+            )
             message = str(error)
         else:
             raise ValueError(
@@ -165,7 +169,7 @@ def attempt(loc, row, version, assigned, route, ids):
         and http.seen == {p.stem for p in http.directory.glob("*.json")},
         "The failed run's HTTP inventory differs from the actual planned searches",
     )
-    receipts = damaged_receipts(http.directory, http.seen, message)
+    receipts = damaged_receipts(http.directory, http.seen, message, rec["failure"])
     urls = {
         source["url"]
         for raw in saved.values()
@@ -200,7 +204,10 @@ def attempt(loc, row, version, assigned, route, ids):
 
 def failed_pdf_files(run, certificate=None):
     record = load(run / "run.json")
-    if record.get("failure") != "PdfReadError" or record["state"] != "failed":
+    if (
+        record.get("failure") not in pacing.PARSER_FAILURES
+        or record["state"] != "failed"
+    ):
         return {}
     files = {}
     http = run.parent / "operator-http"
@@ -211,7 +218,7 @@ def failed_pdf_files(run, certificate=None):
     )
     for sha in digests:
         raw = original_pdf(http, sha)
-        if raw is not None and parser_error(raw):
+        if raw is not None and parser_error(raw, record["failure"]):
             files[f"failed-pdf/{sha}.bin"] = raw
     return files
 
@@ -220,14 +227,17 @@ def verify_certificate(run, proof):
     record = load(run / "run.json")
     detail = proof.get("archive_failure")
     blobs = {p.stem: p for p in (run / "failed-pdf").glob("*.bin")}
-    if record.get("failure") != "PdfReadError" or record["state"] != "failed":
+    if (
+        record.get("failure") not in pacing.PARSER_FAILURES
+        or record["state"] != "failed"
+    ):
         require(
             detail is None and not blobs,
             "Unrelated research contains a PDF failure certificate",
         )
         return
     require(
-        proof.get("failure") == "PdfReadError"
+        proof.get("failure") == record["failure"]
         and proof["state"] == "failed"
         and proof.get("report_sha256") is None
         and detail
@@ -264,7 +274,7 @@ def verify_certificate(run, proof):
                 "Original failed PDF bytes changed",
             )
             require(
-                parser_error(raw) == detail["error"],
+                parser_error(raw, record["failure"]) == detail["error"],
                 "The saved PDF produced a different error",
             )
         checked.add(sha)
@@ -324,7 +334,8 @@ if __name__ == "__main__":
         )
         first = load(runner.RESEARCH / row["task_id"] / "research/run.json")
         require(
-            first["state"] == "failed" and first.get("failure") == "PdfReadError",
+            first["state"] == "failed"
+            and first.get("failure") in pacing.PARSER_FAILURES,
             "This recovery entry point is for an original PDF parsing failure",
         )
         record = recovery.OUTPUT / row["task_id"] / "research/run.json"

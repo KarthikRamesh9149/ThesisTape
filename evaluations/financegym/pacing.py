@@ -9,7 +9,7 @@ from decimal import Decimal
 from itertools import islice
 from pathlib import Path
 
-from pypdf.errors import PdfReadError
+from pypdf.errors import PdfReadError, PdfStreamError
 
 from evaluations.paired.corpus import require
 from scripts.run_checkpoint import load, own_run
@@ -17,6 +17,8 @@ from scripts.team_meter import verify_ledger
 
 from . import runner
 from .budget import ProjectBudget
+
+PARSER_FAILURES = {PdfReadError.__name__, PdfStreamError.__name__}
 
 
 def transport_status(folders):
@@ -41,13 +43,14 @@ def next_wave(workers, maximum, previous_throttled, status):
 def capture_attempt(record, row, assigned, cap, execute):
     try:
         return execute()
-    except PdfReadError:
+    except PdfReadError as error:
         if not record.is_file():
             raise
         rec = load(record)
         if (
             rec.get("state") != "failed"
-            or rec.get("failure") != "PdfReadError"
+            or rec.get("failure") not in PARSER_FAILURES
+            or rec["failure"] != type(error).__name__
             or rec.get("assignment") != assigned
             or rec.get("cutoff") != row["cutoff"]
             or rec.get("question") != row["question"]

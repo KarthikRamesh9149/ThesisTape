@@ -6,7 +6,7 @@ from decimal import Decimal
 from pathlib import Path
 from unittest.mock import Mock, patch
 
-from pypdf.errors import PdfReadError
+from pypdf.errors import PdfReadError, PdfStreamError
 
 from evaluations.financegym import archive_failure, evidence, pacing, recovery
 from scripts.sol_baseline import fingerprint, json_bytes
@@ -14,6 +14,15 @@ from scripts.temporal_web import article
 
 
 class ArchiveFailureTests(unittest.TestCase):
+    def test_a_truncated_stream_has_its_own_exception_and_receipt(self):
+        raw = b"%PDF-1.7\n1 0 obj\n"
+        with self.assertRaises(PdfStreamError) as failure:
+            article(raw)
+        self.assertEqual(
+            archive_failure.parser_error(raw, "PdfStreamError"), str(failure.exception)
+        )
+        self.assertIsNone(archive_failure.parser_error(raw, "PdfReadError"))
+
     def test_portable_proof_requires_original_bytes_error_and_receipt(self):
         raw = b"%PDF-1.7\n1 0 obj\n<< /Type /Catalog >>\nendobj\n%%EOF\n"
         with self.assertRaises(PdfReadError) as failure:
@@ -100,7 +109,7 @@ class ArchiveFailureTests(unittest.TestCase):
                 patch.object(pacing.runner, "assignment", return_value=ticket),
                 patch.object(
                     pacing.runner, "capture_one", side_effect=PdfReadError("bad PDF")
-                ),
+                ) as capture,
                 patch.object(
                     pacing, "verify_ledger", return_value=(Decimal("0.01"), {})
                 ) as ledger,
@@ -116,10 +125,17 @@ class ArchiveFailureTests(unittest.TestCase):
                     ("cutoff", "2023-11-03"),
                     ("state", "running"),
                     ("failure", "unrelated"),
+                    ("failure", "PdfStreamError"),
                 ]:
                     record.write_bytes(json_bytes({**fields, field: value}))
                     with self.assertRaises(PdfReadError):
                         pacing.capture_primary(root, row, {}, budget)
+                capture.side_effect = PdfStreamError("truncated")
+                record.write_bytes(json_bytes({**fields, "failure": "PdfStreamError"}))
+                self.assertEqual(
+                    pacing.capture_primary(root, row, {}, budget)["state"], "failed"
+                )
+                capture.side_effect = PdfReadError("bad PDF")
                 record.write_bytes(json_bytes(fields))
                 ledger.return_value = Decimal("0.01"), {"call": Decimal("0.02")}
                 with self.assertRaisesRegex(ValueError, "unsettled"):

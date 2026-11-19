@@ -22,6 +22,7 @@ from scripts.team_meter import verify_ledger
 from . import (
     archive_failure,
     budget_publication,
+    budget_routes,
     editorial,
     recovery,
     reviewed_release,
@@ -122,7 +123,10 @@ def seal(questions, directory, dest):
         write_once(dest / name, bundle)
         shards[name] = fingerprint(bundle)
     files = {}
-    for name in ("answers.jsonl", "audit.json", "system-paper.md"):
+    names = ["answers.jsonl", "audit.json", "system-paper.md"]
+    if (directory / budget_routes.FILENAME).is_file():
+        names.append(budget_routes.FILENAME)
+    for name in names:
         raw = (directory / name).read_bytes()
         write_once(dest / name, raw)
         files[name] = fingerprint(raw)
@@ -207,11 +211,32 @@ def collect_identities(record, seen):
 
 
 def replay_case(
-    row, report, proof, folder, cfg, extension, editor_spec, *, provider_receipts=None
+    row,
+    report,
+    proof,
+    folder,
+    cfg,
+    extension,
+    editor_spec,
+    *,
+    provider_receipts=None,
+    allocation=None,
 ):
     chain = proof.get("attempts", [proof])
     editions, seconds = set(), 0
     originals = [folder / name for name in ("primary", "recovery")]
+    selected = proof.get("independent_budget_route")
+    if allocation is not None:
+        require(
+            selected == budget_routes.tag(allocation, row["task_id"]),
+            "Independent budget route changed",
+        )
+        if row["task_id"] in allocation["unanswered"]:
+            require(
+                budget_routes.candidate_record(originals[0])
+                == allocation["unanswered"][row["task_id"]],
+                "The original documents used to allocate the remaining budget changed",
+            )
     extra_review = proof.get("primary_draft_review")
     draft_saved = draft_memo = None
     if extra_review is not None:
@@ -272,8 +297,8 @@ def replay_case(
             planned, cap = runner.assignment(row, cfg), primary_route[2]
         elif mode == "recovery":
             planned, cap = (
-                recovery.ticket(row, cfg, extension, folder / "primary"),
-                recovery.second_route(cfg, primary_route[1])[2],
+                budget_routes.ticket(row, cfg, extension, folder / "primary", selected),
+                budget_routes.route(cfg, primary_route[1], selected)[2],
             )
         else:
             planned, cap = (
@@ -294,7 +319,7 @@ def replay_case(
         editions.update(sources)
         seconds += duration
     engine = (
-        recovery.second_route(cfg, chain[0]["profile"])
+        budget_routes.route(cfg, chain[0]["profile"], selected)
         if len(chain) == 2
         else runner.route(row, cfg)
     )[0]
@@ -361,14 +386,29 @@ def replay_case(
 def verify(questions, root):
     cfg, audit = submission.verify_export(questions, root)
     manifest = load(root / "manifest.json")
+    allocation = (
+        budget_routes.validate(load(root / budget_routes.FILENAME))
+        if (root / budget_routes.FILENAME).is_file()
+        else None
+    )
+    files = {"answers.jsonl", "audit.json", "system-paper.md"}
+    if allocation is not None:
+        files.add(budget_routes.FILENAME)
+    original_allocation = FOLDER.parent / "official-recovery-allocation.json"
+    if root.resolve() == FOLDER.resolve() and original_allocation.is_file():
+        require(
+            allocation is not None
+            and original_allocation.read_bytes()
+            == (root / budget_routes.FILENAME).read_bytes(),
+            "The final case allocation differs from the one recorded before dispatch",
+        )
     require(
         manifest["tasks"] == 400
         and manifest["registration_sha256"] == audit["registration_sha256"],
         "Unexpected research registration",
     )
     require(
-        set(manifest["files"]) == {"answers.jsonl", "audit.json", "system-paper.md"}
-        and len(manifest["shards"]) == 16,
+        set(manifest["files"]) == files and len(manifest["shards"]) == 16,
         "Incomplete finance research archive",
     )
     for name, expected in manifest["files"].items():
@@ -435,6 +475,7 @@ def verify(questions, root):
                     extension,
                     editor_spec,
                     provider_receipts=provider_receipts,
+                    allocation=allocation,
                 )
                 attempts += count
                 cited = cited_kinds(visible)
@@ -457,6 +498,9 @@ def verify(questions, root):
             "primary_draft_review_releases", 0
         ),
         "answers_sha256": audit["answers_sha256"],
+        "budget_selected_mixed_investigations": len(allocation["alternate_tasks"])
+        if allocation
+        else 0,
         "reports_citing_each_source_kind": dict(sorted(kinds.items())),
         "reports_citing_only_encyclopedia_revisions": encyclopedia_only,
         "reports_with_a_checked_calculation_in_published_text": with_calculations,

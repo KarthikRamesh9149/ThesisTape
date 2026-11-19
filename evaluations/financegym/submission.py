@@ -19,10 +19,11 @@ from evaluations.paired.confirmation import committed, write_once
 from evaluations.paired.production import FOLDER as PRIMARY
 from scripts.run_checkpoint import load
 from scripts.sol_baseline import fingerprint, json_bytes
-from scripts.sol_provider import ASTRA, MODEL
+from scripts.sol_provider import ASTRA, LUNA, MODEL
 
 from . import (
     budget_publication,
+    budget_routes,
     draft_review,
     editorial,
     recovery,
@@ -48,8 +49,13 @@ def verified_selection(
     funding=None,
     title_registration=None,
     budget_registration=None,
+    selected_recovery=None,
 ):
     profile = manifest["profiles_by_task"][proof["task_id"]]
+    if selected_recovery != proof.get("independent_budget_route") or (
+        selected_recovery is not None and len(proof.get("attempts", [])) != 2
+    ):
+        return False
     derived = proof.get("reviewed_publication")
     edit = proof.get("editorial")
     lookup = proof.get("title_lookup")
@@ -101,7 +107,8 @@ def verified_selection(
     if len(chain) == 2 and (
         chain[0]["report_sha256"] is not None
         or chain[0]["state"] in {"qualified", "complete"}
-        or chain[-1]["profile"] != recovery.second_route(manifest, profile)[1]
+        or chain[-1]["profile"]
+        != budget_routes.route(manifest, profile, selected_recovery)[1]
     ):
         return False
     costs = chain
@@ -178,6 +185,13 @@ def verify_export(questions, directory):
     summary = validate_file(questions, directory / "answers.jsonl")
     inputs = tasks(questions)
     audits_rows = audits["tasks_audited"]
+    allocation = (
+        budget_routes.validate(load(directory / budget_routes.FILENAME))
+        if (directory / budget_routes.FILENAME).is_file()
+        else None
+    )
+    if allocation:
+        budget_routes.verify_accounts(allocation, manifest, audits_rows)
     extension = audits.get("recovery_registration_sha256")
     publication = audits.get("reviewed_release_registration_sha256")
     funding = audits.get("editorial_registration_sha256")
@@ -272,6 +286,7 @@ def verify_export(questions, directory):
                 funding,
                 title_registration,
                 budget_registration,
+                budget_routes.tag(allocation, row["task_id"]),
             )
             or proof["report_sha256"] != fingerprint(answer["report"].encode())
             or proof["state"] not in {"complete", "qualified"}
@@ -294,6 +309,11 @@ def model_names(cfg, audit):
         for attempt in row.get("attempts", (row,))
     ):
         models.update((ASTRA, MODEL))
+    if any(
+        r.get("independent_budget_route", {}).get("profile") == "mixed"
+        for r in audit.get("tasks_audited", ())
+    ):
+        models.update((LUNA, MODEL, ASTRA))
     return sorted(models)
 
 
@@ -348,6 +368,17 @@ def paper(questions, directory):
             methods += f"\n\nFor {audit['title_lookup_releases']} of those edited reports, both investigators had retrieved zero passages. A later retrieval rule retried their original queries with capitalization variants of entity titles present in the question. It kept the cutoff, original query terms and result limits. The editor received the resulting historical passages. All earlier failures and the time spent on the retry were retained."
         if audit.get("primary_draft_review_attempts"):
             methods += f"\n\nAfter the owner set a USD 140 total project budget, we prospectively allowed one independent Sol review of a primary draft whose optional revision exceeded its allowance. It required a source-checked answer and a separate supporting section. We retained the original wording only when both survived independent review. The reviewer made no searches and had a USD 0.075 ceiling. Across {audit['primary_draft_review_attempts']} such reviews, {audit['primary_draft_review_releases']} qualified reports were released for a total additional USD {Decimal(audit['primary_draft_review_cost_usd']):.2f}. Earlier independent investigations kept their original outcomes."
+    alternatives = [
+        r for r in audit["tasks_audited"] if "independent_budget_route" in r
+    ]
+    if alternatives:
+        released = sum(
+            r["attempts"][1]["report_sha256"] is not None for r in alternatives
+        )
+        cost = sum(
+            Decimal(r["attempts"][1]["estimated_cost_usd"]) for r in alternatives
+        )
+        methods += f"\n\nAfter every primary question and existing-draft review had settled, the available project balance determined the remaining independent research assignments. The previously tested mixed team took {len(alternatives)} source-rich questions under its USD 0.30 case ceiling. It conducted fresh dated searches, used Luna researchers and Sol analysis, and gave the Astra draft to a fresh Sol reviewer. The team released {released} reports directly and used an estimated USD {cost:.2f}, included in the independent totals above. All earlier investigations retain their original routes. The allocation used source counts and measured costs before spending."
     damaged = [
         a
         for task in audit["tasks_audited"]

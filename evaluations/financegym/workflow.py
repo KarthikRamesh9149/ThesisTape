@@ -12,6 +12,7 @@ from . import (
     archive_failure,
     budget,
     budget_publication,
+    budget_routes,
     editorial,
     evidence,
     recovery,
@@ -61,7 +62,7 @@ def inventory(rows, cfg, spec):
     return dict(Counter(next_stage(row, cfg, spec) for row in rows))
 
 
-def advance(questions, row, stage, registration):
+def advance(questions, row, stage, registration, allocation=None):
     cfg, ext, edit, title, spec = registration
     key = row["task_id"]
     if stage == "draft_review":
@@ -78,7 +79,10 @@ def advance(questions, row, stage, registration):
         if stage == "draft_review":
             budget_publication.run_one(row, cfg, spec)
         elif stage == "title_lookup":
-            with archive_failure.use_archive_failure_verifier():
+            with (
+                archive_failure.use_archive_failure_verifier(),
+                budget_routes.for_case(row, budget_routes.tag(allocation, key)),
+            ):
                 titled_publication.run_one(row, cfg, ext, edit, title)
         else:
             budget.run_registered_stage(questions, key, stage)
@@ -109,7 +113,7 @@ def advance(questions, row, stage, registration):
 
 def finish(questions, destination, receipts):
     registration = registrations()
-    cfg, ext, edit, title, spec = registration
+    cfg, _, _, _, spec = registration
     rows = runner.tasks(questions)
     guard = budget.ProjectBudget()
     lock = guard.directory / "completion"
@@ -124,10 +128,26 @@ def finish(questions, destination, receipts):
             "Finish or resume the paced primary investigations first",
         )
         # Give every eligible existing draft one independent review before buying new investigations.
-        for stage in ("draft_review", "recovery", "title_lookup", "editorial"):
+        for row in rows:
+            if next_stage(row, cfg, spec) == "draft_review":
+                advance(questions, row, "draft_review", registration)
+        allocation = budget_routes.prepare(questions)
+        print(
+            json.dumps(
+                {
+                    "remaining_independent": len(allocation["unanswered"]),
+                    "assigned_mixed": len(allocation["alternate_tasks"]),
+                    "available_at_allocation_usd": allocation["budget"][
+                        "available_usd"
+                    ],
+                }
+            ),
+            flush=True,
+        )
+        for stage in ("recovery", "title_lookup", "editorial"):
             for row in rows:
                 if next_stage(row, cfg, spec) == stage:
-                    advance(questions, row, stage, registration)
+                    advance(questions, row, stage, registration, allocation)
         outstanding = {
             r["task_id"]: stage
             for r in rows
@@ -137,10 +157,7 @@ def finish(questions, destination, receipts):
             not outstanding,
             f"Questions still require evidence or a release decision: {outstanding}",
         )
-        with archive_failure.use_archive_failure_verifier():
-            budget_publication.export(
-                questions, destination, cfg, ext, edit, title, spec
-            )
+        budget_routes.export(questions, destination, registration, allocation)
         verified = evidence.seal(questions, destination, receipts)
         spend.snapshot_charges()
     return {"verified": verified, "project_budget": guard.status()}

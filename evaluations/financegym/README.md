@@ -12,6 +12,8 @@ Place the pinned question file at `runs/benchmark_400_public.jsonl`. The status 
 .venv/bin/python -B -m evaluations.financegym.workflow finish runs/benchmark_400_public.jsonl runs/financegym-submission
 ```
 
+After the original investigations and eligible draft reviews settle, the finish command records the balance and assigns the remaining cases. The quantitative team keeps its assignments when the budget covers the projected cost. When needed, the previously tested mixed team takes questions with several dated editions. Each assignment records the original evidence, model profile and spending limit before the new investigation begins. Offline replay checks that selection against the receipts. [Allocation policy](recovery-budget-policy.md)
+
 The final directory contains the submission JSONL, a per-question audit and a methodology paper. The workflow also seals and independently replays the private evidence in `evaluations/financegym/results/`. For a new run in a checkout that already contains a sealed benchmark, choose a fresh destination and pass `--evidence-directory` with a fresh directory. To reproduce the already sealed reports, use `evaluations.financegym.evidence verify` with the public question file. That operation runs offline without an API key.
 
 ## Verify the inputs and retrieval
@@ -102,7 +104,6 @@ When a damaged PDF interrupted a dated search, the original attempt kept its fai
 
 ```sh
 .venv/bin/python -B -m evaluations.financegym.archive_failure verify runs/benchmark_400_public.jsonl 6a04cfe2a3882eb36cfc9305
-.venv/bin/python -B -m evaluations.financegym.archive_failure export runs/benchmark_400_public.jsonl runs/financegym-submission
 ```
 
 ## Prepare the methodology paper and local email

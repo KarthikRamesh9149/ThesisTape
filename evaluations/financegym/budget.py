@@ -150,6 +150,23 @@ class ProjectBudget:
 
 
 def run_registered_stage(questions, task_id, stage):
+    from . import budget_routes, runner
+
+    rows = {row["task_id"]: row for row in runner.tasks(questions)}
+    if task_id not in rows:
+        raise ValueError("Unknown registered task")
+    row = rows[task_id]
+    plan = (
+        budget_routes.validate(load(budget_routes.ALLOCATION))
+        if budget_routes.ALLOCATION.is_file()
+        else None
+    )
+    selected = budget_routes.tag(plan, task_id)
+    with budget_routes.for_case(row, selected):
+        return funded_stage(row, stage)
+
+
+def funded_stage(row, stage):
     from . import (
         archive_failure,
         budget_publication,
@@ -159,10 +176,7 @@ def run_registered_stage(questions, task_id, stage):
         titled_publication,
     )
 
-    rows = {row["task_id"]: row for row in runner.tasks(questions)}
-    if task_id not in rows:
-        raise ValueError("Unknown registered task")
-    row = rows[task_id]
+    task_id = row["task_id"]
     cfg = runner.locked()
     extension = recovery.register(cfg)
     budget = ProjectBudget()
