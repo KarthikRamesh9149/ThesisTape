@@ -86,9 +86,9 @@ def child(workspace, phase, mode, args):
     )
 
 
-def expect_exit(process, code):
+def expect_exit(process, code, *, diagnostic=None):
     out, err = process.communicate(timeout=200)
-    if process.returncode != code:
+    if process.returncode != code or (diagnostic is not None and diagnostic not in err):
         raise CaseError(
             f"Expected exit {code}, received {process.returncode}: {(out + err).decode()[-1200:]}"
         )
@@ -97,6 +97,10 @@ def expect_exit(process, code):
 
 def snapshot(directory, proof, name):
     data = read_saved_file(directory / "run.json")
+    require(
+        not (directory / "memo.md").exists(),
+        "A memo was exported before review completed",
+    )
     publish(proof / name, data)
     return json.loads(data)
 
@@ -148,7 +152,9 @@ def live(workspace):
     snapshot(folder, proof, "in-flight.json")
     first.send_signal(signal.SIGINT)
     contender = child(workspace, "contender", "offline", args)
-    exits["contender"] = expect_exit(contender, 1)
+    exits["contender"] = expect_exit(
+        contender, 1, diagnostic=b"Another process owns this run"
+    )
     exits["start"] = expect_exit(first, 130)
     snapshot(folder, proof, "paused.json")
 
@@ -162,7 +168,9 @@ def live(workspace):
             "offline",
             ["resume", "--run-dir", str(unknown)],
         )
-        exits["missing-receipt"] = expect_exit(attempt, 1)
+        exits["missing-receipt"] = expect_exit(
+            attempt, 1, diagnostic=b"remains reserved"
+        )
         snapshot(unknown, proof, "unconfirmed.json")
 
     second = child(workspace, "resume", "kill-before-settlement", args)
@@ -213,7 +221,9 @@ def live(workspace):
 
 def check(folder):
     case = case_for("twitter-price")
-    final, memo, opened = verify_report(folder, case, "dispute", CAP, case.corpus())
+    corpus = case.corpus()
+    final, memo, opened = verify_report(folder, case, "dispute", CAP, corpus)
+    config, _ = research_team.saved_workflow(case, final, corpus)
     require(
         memo is not None and final["review"]["status"] == "approved",
         "The resumed memo did not pass review",
@@ -252,6 +262,7 @@ def check(folder):
         (final, 4, "complete"),
         (unknown, 1, "needs_reconciliation"),
     ):
+        research_team.check_configuration(r, config)
         verify_ledger(r, partial=r is not final)
         require(
             r["events"] == wanted[:length] and r["state"] == state,

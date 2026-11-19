@@ -1,0 +1,113 @@
+{
+  "budget_usd": "0.08",
+  "calls": {
+    "lead.memo": {
+      "confirmed_ms": 5442,
+      "dispatched_ms": 1410,
+      "estimated_model_cost_usd": "0.004992",
+      "input_tokens_preflight": 1611,
+      "max_output_tokens": 2560,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"paragraphs\": [\n    {\n      \"text\": \"As of 11 July 2022, Twitter’s board said it intended to close the proposed acquisition at the agreed price of USD 54.20 per share and planned to pursue legal action to enforce the merger agreement.\",\n      \"citations\": [\n        {\n          \"passage_id\": \"P3\",\n          \"quote\": \"Twitter Board Confident in Merger Agreement and Intends to Close Transaction at $54.20 Per Share Price\"\n        },\n        {\n          \"passage_id\": \"P3\",\n          \"quote\": \"We are committed to closing the transaction on the price and terms agreed upon with Mr. Musk and plan to pursue legal action to enforce the merger agreement.\"\n        }\n      ]\n    }\n  ],\n  \"filing_history\": null\n}",
+      "provider": {
+        "elapsed_ms": 4030,
+        "ids_sha256": "50fdd3edf997149422c5c49318f3f58a86647d9f098dd52aa0daaa2a6f62dbc3",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 1611,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 177,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1788
+        }
+      },
+      "receipt_sha256": "3f9e995c7f651c2c04ab4d687fada5c691eb4aa9ce39e6ebecbafc352a021910",
+      "request_sha256": "0d867e0ed748cf8f9a1d3fd18bc93e7fc604eef90358e77651130bed6d45eeac",
+      "reservation_usd": "0.0296275",
+      "stage": "lead.memo"
+    },
+    "review.initial": {
+      "dispatched_ms": 5976,
+      "input_tokens_preflight": 2311,
+      "max_output_tokens": 2048,
+      "model": "gpt-6.2-sol",
+      "request_sha256": "3db6d64ee3d7306d7ba58355f1769b1a6b23d2c3127214b04f666c294fa90e60",
+      "reservation_usd": "0.0262575",
+      "stage": "review.initial"
+    }
+  },
+  "case_id": "twitter-offer-price-2022-07-11",
+  "checkpoint_id": "11b1c14718b24b07af2c049c79001d32",
+  "corpus_sha256": "515c952137e0587aa953eacc6f71cc0f0d544d5bd590490b70c7590bfc1c65a5",
+  "created_at": "2026-11-19T11:57:25.163242+00:00",
+  "cutoff": "2022-07-11T21:00:00Z",
+  "dispute_version": "material-dispute-v2",
+  "elapsed_ms": 5976,
+  "estimated_model_cost_usd": "0.004992",
+  "events": [
+    [
+      "reserve",
+      "lead.memo"
+    ],
+    [
+      "settle",
+      "lead.memo"
+    ],
+    [
+      "reserve",
+      "review.initial"
+    ]
+  ],
+  "paid_tool_charges_usd": "0",
+  "pricing": {
+    "per_million_usd": {
+      "gpt-6.2-astra": {
+        "cache_write_30m": "10.00",
+        "cached_input": "0.40",
+        "ordinary_input": "8.00",
+        "output": "40.00"
+      },
+      "gpt-6.2-sol": {
+        "cache_write_30m": "2.50",
+        "cached_input": "0.10",
+        "ordinary_input": "2.00",
+        "output": "10.00"
+      }
+    },
+    "sources": [
+      "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+      "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
+    ],
+    "status": "estimate_from_usage"
+  },
+  "prompt_version": "sol-two-luna-v4",
+  "question": "As of 11 July 2022, what per-share price did Twitter’s board say it was seeking under the proposed acquisition agreement?",
+  "resumptions": [
+    {
+      "already_settled": [
+        "lead.memo"
+      ],
+      "at": "2026-11-19T11:57:31.049911+00:00",
+      "recovered_receipts": []
+    }
+  ],
+  "review_version": "sol-citation-review-v1",
+  "route": "dispute",
+  "run_id": "run",
+  "schema_version": 3,
+  "source_file_sha256": "b7f8f35e19aee4c543eaf77b219f7f003643435b01e2ce04e7207dddfcb294ab",
+  "specification_sha256": "c584013ab4b69a9cd16d04adb2528a58c5269233e72f7fc93d768af818aca2a2",
+  "state": "running",
+  "unreconciled_reservation_usd": "0.0262575"
+}

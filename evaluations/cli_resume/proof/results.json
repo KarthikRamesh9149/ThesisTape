@@ -1,0 +1,15 @@
+{
+  "budget_usd": "0.08",
+  "case_id": "twitter-offer-price-2022-07-11",
+  "checkpoint_usd": "0.011814",
+  "completed_generations": 2,
+  "duplicate_generations": 0,
+  "final_unreconciled_usd": "0",
+  "memo_sha256": "79302c11541913acebe99afe5e1e510aa4b8fd3f1ecff69e7fc08f765ed3fa90",
+  "prior_project_usd": "0.5344479",
+  "project_cap_usd": "100",
+  "project_recorded_usd": "0.5462619",
+  "recovered_assignment": "review.initial",
+  "reservation_at_hard_kill_usd": "0.0262575",
+  "unconfirmed_test_reservation_usd": "0.0296275"
+}

@@ -1,0 +1,51 @@
+{
+  "after_recovery": {
+    "memo.md": "79302c11541913acebe99afe5e1e510aa4b8fd3f1ecff69e7fc08f765ed3fa90",
+    "provider-ids.json": "07cb6a8c1783fb6b992a8f6db6aed054cd74be319bda4a810490bb86604c0ca7",
+    "run.json": "64968ee6c0740c036d4939c93391eed89f4e68954fc5ae3c53bda5a9f352d19a"
+  },
+  "after_repeat": {
+    "memo.md": "79302c11541913acebe99afe5e1e510aa4b8fd3f1ecff69e7fc08f765ed3fa90",
+    "provider-ids.json": "07cb6a8c1783fb6b992a8f6db6aed054cd74be319bda4a810490bb86604c0ca7",
+    "run.json": "64968ee6c0740c036d4939c93391eed89f4e68954fc5ae3c53bda5a9f352d19a"
+  },
+  "exits": {
+    "contender": 1,
+    "missing-receipt": 1,
+    "recover": 0,
+    "repeat": 0,
+    "resume": -9,
+    "start": 130
+  },
+  "http_requests": {
+    "contender": [],
+    "missing-receipt": [],
+    "recover": [],
+    "repeat": [],
+    "resume": [
+      {
+        "operation": "responses/input_tokens",
+        "sha256": "c08bf8ba9f4c9730a381ca21070eedbe5391a6040b8a1a1f2b47da102741908f"
+      },
+      {
+        "operation": "responses",
+        "sha256": "3db6d64ee3d7306d7ba58355f1769b1a6b23d2c3127214b04f666c294fa90e60"
+      }
+    ],
+    "start": [
+      {
+        "operation": "responses/input_tokens",
+        "sha256": "acc67b874d254642d475784f779d109eac74d7b22f2dc40687215627ad1af46e"
+      },
+      {
+        "operation": "responses",
+        "sha256": "0d867e0ed748cf8f9a1d3fd18bc93e7fc604eef90358e77651130bed6d45eeac"
+      }
+    ]
+  },
+  "pending_receipt_sha256": "c37490642f8bf23aa9fdc04ad35b706a46fb3944c4471fc42ca5cc7cb62ca58f",
+  "response_id_hashes": {
+    "lead.memo": "50663c6894a8cef96c4b10a976341a8c8e1e6f553c1afc5df8e9e1f0ed04265e",
+    "review.initial": "7b89d73f36b9eabe7a563c1238ab1abacabc82edfb3e0cfab386a599c55bdf77"
+  }
+}

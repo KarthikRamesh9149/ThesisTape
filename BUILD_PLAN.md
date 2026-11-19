@@ -85,6 +85,8 @@ Use atomic reservations for concurrent calls, stable assignment IDs and bounded 
 
 **Completion evidence.** Complete a case in the interface, inspect its cited passage, interrupt and resume a run, and compare the exported report with the CLI result. A duplicate dispatch cannot double-book the same assignment. Exhausting the cap launches no further paid work.
 
+**CLI recovery verified on 19 November 2026.** The Twitter price run survived a graceful interrupt during the author call and a hard kill after the reviewer’s receipt reached disk. The resumed CLI finished offline. Its two generation requests matched two provider receipts and USD 0.011814 in estimated usage. An offline copy without a receipt retained its entire pending reservation. Estimated project usage through this checkpoint is USD 0.5462619. [Results and reproduction commands](evaluations/cli_resume/evaluation.md)
+
 ### 6. Test whether the extra agents earn their cost
 
 Start with **12 development cases and 24 additional blind cases** from different events outside the official 400. Cover multiple issuers, markets, document layouts and forecast horizons. Use real archived material. Write the factual and forward-outcome scoring criteria before comparing outputs. Keep later outcomes accessible only to evaluators. Small artificial inputs are sufficient for timeout and budget tests.
@@ -109,4 +111,4 @@ At the checked Standard rates, the architecture’s example uses 12,000 input an
 
 **Illustration for the final run.** If all 400 cases used the base allowance and 80 needed that additional pass, text-model usage would be **400 × USD 0.0997 + 80 × USD 0.0810 = USD 46.36**. Search, visual inputs, cache charges, storage, development comparisons and retries are separate. The first live cases establish the actual token distribution. Batch independent offline calls when turnaround permits and apply discounts only to eligible usage. [Batch pricing and turnaround](https://developers.openai.com/api/docs/guides/batch)
 
-**Next implementation checkpoint.** Start Step 5 by interrupting a CLI run and resuming from its saved state. Demonstrate that a completed provider call is reused, a pending charge is accounted for, and the resumed report and ledger agree without a duplicate call or charge. The analyst screen can then read that same run.
+**Next implementation checkpoint.** Build the Step 5 analyst screen on the same run record. Enter a question, cutoff and spending limit, inspect progress and spend, open a material claim at its cited passage and verify that the exported memo matches the CLI output byte for byte.

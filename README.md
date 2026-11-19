@@ -51,6 +51,18 @@ For a live run, set `OPENAI_API_KEY` in the ignored project `.env.local` or the 
 
 Each directory contains the memo and a portable `run.json` with assignments, actual search queries, selected excerpts, lead decisions, token usage, timings and costs. The separate `provider-ids.json` is an operator receipt kept under the ignored `runs/` directory. The earlier Tradeweb report lists the passages inspected when the archive could not support a figure. [Earlier report](evaluations/first-team/tradeweb-before/memo.md) · [First team runs and spend](evaluations/first-team/development-usage.json)
 
+### Resume an interrupted research run
+
+Press Ctrl+C once to pause the CLI. It finishes saving any provider responses already in flight and exits with status 130. Continue in the same directory. The saved case, cutoff, route and spending limit carry over.
+
+```sh
+.venv/bin/python -B -m scripts.research_team resume --run-dir runs/disney-team-new
+```
+
+Keep the entire operator run directory when moving unfinished work. It contains the private receipts used to reconcile a generation that returned just before a crash. A completed run can reproduce its memo offline from the portable `run.json`. If a dispatched request has no recoverable receipt, the CLI records `needs_reconciliation`, displays the amount still reserved and stops before sending another generation.
+
+The Twitter price case survived both Ctrl+C and a hard process kill. The HTTP trace recorded one author generation and one reviewer generation. Offline recovery exported the cited memo, and repeating resume left the files byte-identical. [Live interruption proof and offline check](evaluations/cli_resume/evaluation.md)
+
 ### Run independent citation review
 
 Use `--route reviewed` to send the team’s memo to a fresh Sol reviewer. It reopens the original passages at the case cutoff and assesses every material paragraph, any filing history and the Disney arithmetic. A material rejection goes to the lead for one correction. The controller exports the exact memo that passes review. If the revision still fails review, the verdict and drafts remain in the run record and the CLI exits with status 2. A search that yields no usable evidence returns a qualified notice listing the passages inspected.

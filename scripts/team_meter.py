@@ -63,6 +63,12 @@ def check_decision_order(record, stage, seen):
         raise CaseError("Conditional spending decision is out of order")
 
 
+def event_time(record, event, stage):
+    if event == "skip":
+        return record["skipped_calls"][stage]["checked_ms"]
+    return record["calls"][stage]["dispatched_ms" if event == "reserve" else "confirmed_ms"]
+
+
 def provider_receipt(record, stage, call, response, tools, when):
     body = response.body
     provider = {k: body.get(k) for k in ("model", "status", "service_tier", "usage")}
@@ -96,10 +102,8 @@ class Meter:
         self.start = perf_counter()
         if continuing:
             self.spent, self.pending = verify_ledger(record, partial=True)
-            self.offset_ms = max([record.get("elapsed_ms", 0)] + [
-                c.get(k, 0) for c in [*record["calls"].values(), *record.get("skipped_calls", {}).values()]
-                for k in ("dispatched_ms", "confirmed_ms", "checked_ms")
-            ])
+            last_event_ms = event_time(record, *record["events"][-1]) if record["events"] else 0
+            self.offset_ms = max(record.get("elapsed_ms", 0), last_event_ms)
         else:
             self.spent, self.pending, self.offset_ms = Decimal(0), {}, 0
             self.record.update(calls={}, events=[])
@@ -128,11 +132,15 @@ class Meter:
         self.ids = load(ids_path) if ids_path.exists() else {}
         if set(self.ids) - self.record["calls"].keys():
             raise CaseError("Provider identifiers have no matching assignment")
+        journal = self.directory / "receipts"
+        if journal.is_symlink():
+            raise CaseError("Invalid private receipts directory")
+        expected = {receipt_path(self.directory, stage) for stage in self.record["calls"]}
+        if set(journal.glob("*.json")) - expected:
+            raise CaseError("A private receipt has no matching reservation in this checkpoint")
         recovered = []
         for stage, call in self.record["calls"].items():
             path = receipt_path(self.directory, stage)
-            if path.parent.is_symlink():
-                raise CaseError("Invalid private receipts directory")
             if path.exists():
                 receipt = load_receipt(path)
                 if (
@@ -152,7 +160,7 @@ class Meter:
             elif stage not in self.pending and stage not in self.record.get("legacy_settled", []):
                 raise CaseError(f"Missing private provider receipt for {stage}")
             if stage not in self.pending:
-                if "output" not in call:
+                if "output" not in call or call["provider"]["status"] != "completed":
                     raise CaseError(f"{stage} was billed without usable output; its charge is retained")
                 if stage not in self.ids or fingerprint(json_bytes(self.ids[stage])) != call["provider"]["ids_sha256"]:
                     raise CaseError(f"Missing or inconsistent operator identifiers for {stage}")
@@ -293,7 +301,7 @@ def verify_ledger(record: dict, *, partial=False):
             del pending[stage]
         else:
             raise CaseError("Out-of-order or duplicate spend event")
-        stamp = call[{"reserve": "dispatched_ms", "settle": "confirmed_ms", "skip": "checked_ms"}[event]]
+        stamp = event_time(record, event, stage)
         if type(stamp) is not int or stamp < last_ms or stamp > record.get("elapsed_ms", stamp):
             raise CaseError("Provider event timing does not agree with the run clock")
         if event == "settle":

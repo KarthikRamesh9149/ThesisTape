@@ -48,14 +48,17 @@ def own_run(directory):
     path = directory / ".writer.sqlite3"
     if directory.is_symlink() or not directory.is_dir() or path.is_symlink():
         raise CaseError("Expected an existing local run directory")
-    db = sqlite3.connect(path, timeout=0, isolation_level=None)
+    try:
+        db = sqlite3.connect(path, timeout=0, isolation_level=None)
+    except sqlite3.Error as error:
+        raise CaseError(f"Could not open the writer lock for {directory}: {error}") from None
     try:
         try:
             db.execute("BEGIN IMMEDIATE")
         except sqlite3.OperationalError as error:
             if error.sqlite_errorcode in (sqlite3.SQLITE_BUSY, sqlite3.SQLITE_LOCKED):
                 raise CaseError("Another process owns this run") from None
-            raise
+            raise CaseError(f"Could not acquire the writer lock for {directory}: {error}") from None
         yield
     finally:
         db.close()

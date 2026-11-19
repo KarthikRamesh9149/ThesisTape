@@ -9,6 +9,7 @@ from tempfile import TemporaryDirectory
 from threading import Barrier, Event, Lock
 from unittest.mock import Mock, patch
 
+from evaluations.cli_resume import experiment
 from scripts import research_team as runner
 from scripts.disney_hulu_case import CaseError
 from scripts.run_checkpoint import PauseRequested, load, own_run, publish, receipt_path
@@ -167,6 +168,50 @@ class ResumeTests(unittest.TestCase):
                 },
             )
         self.assertFalse((self.directory / "memo.md").exists())
+
+    def test_receipt_ahead_of_a_rolled_back_ledger_prevents_new_spending(self):
+        with (
+            patch.object(Meter, "settle", side_effect=SystemExit),
+            self.assertRaises(SystemExit),
+        ):
+            self.start()
+        record = load(self.directory / "run.json")
+        record.update(calls={}, events=[], unreconciled_reservation_usd="0")
+        publish(self.directory / "run.json", json_bytes(record))
+        with self.assertRaisesRegex(CaseError, "no matching reservation"):
+            runner.resume(self.directory, Mock(spec=[]))
+
+    def test_confirmed_unusable_response_stays_charged_and_is_never_reissued(self):
+        original = self.provider.generate
+
+        def incomplete(payload):
+            result = original(payload)
+            return Result(
+                {**result.body, "status": "incomplete", "output": []},
+                result.request_id,
+                0,
+            )
+
+        self.provider.generate = incomplete
+        with self.assertRaisesRegex(CaseError, "did not complete"):
+            self.start()
+        before = load(self.directory / "run.json")
+        self.assertGreater(Decimal(before["estimated_model_cost_usd"]), 0)
+        self.assertEqual(before["unreconciled_reservation_usd"], "0")
+        with self.assertRaisesRegex(CaseError, "billed without usable output"):
+            runner.resume(self.directory, Mock(spec=[]))
+        self.assertEqual(load(self.directory / "run.json"), before)
+
+    def test_real_transport_counts_and_interruption_snapshots_replay_offline(self):
+        folder = experiment.HERE / "proof"
+        self.assertEqual(experiment.check(folder), load(folder / "results.json"))
+        shutil.copytree(folder, self.directory)
+        path = self.directory / "observations.json"
+        observed = load(path)
+        observed["http_requests"]["recover"] = observed["http_requests"]["resume"]
+        publish(path, json_bytes(observed))
+        with self.assertRaisesRegex(CaseError, "provider request"):
+            experiment.check(self.directory)
 
     def test_changed_identity_budget_request_output_or_private_receipt_stops_before_dispatch(
         self,
