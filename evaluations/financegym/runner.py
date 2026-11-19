@@ -15,6 +15,8 @@ from pathlib import Path
 from evaluations.paired import corpus
 from evaluations.paired.analysis import blind_stats
 from evaluations.paired.confirmation import committed, write_once
+from evaluations.paired.event_audit import verify_private
+from evaluations.paired.product_audit import CountJournal
 from evaluations.paired.production import FOLDER
 from evaluations.paired.registration import REPO, ROOT, RUNTIME_FILES, git
 from scripts import quantitative_engine
@@ -25,7 +27,14 @@ from scripts.focused_archive import FocusedArchive, verify_transport
 from scripts.open_desk_report import SavedArchive
 from scripts.run_checkpoint import load, own_run
 from scripts.sol_baseline import fingerprint, json_bytes
-from scripts.sol_provider import ASTRA, LUNA, MODEL, MODEL_RATES
+from scripts.sol_provider import (
+    ASTRA,
+    LUNA,
+    MODEL,
+    MODEL_RATES,
+    OpenAIResponses,
+    project_key,
+)
 from scripts.team_meter import verify_ledger
 from scripts.temporal_web import cutoff_day
 
@@ -92,9 +101,19 @@ def register(path, cap, public_proof):
     from evaluations.financebench import grading
 
     from .archive_check import check
+    from .spend import report
 
     cases = tasks(path)
     cutoff_checks = check(public_proof, False, focused=True)
+    if REGISTER.is_file():
+        existing = locked()
+        general = existing["selection"]["general"]
+        corpus.require(
+            existing["eligibility"]["source_audit"] == cutoff_checks
+            and Decimal(existing["case_limits_usd"][general]) == cap,
+            "The supplied limit or public source proof differs from registration",
+        )
+        return existing
     score_file = FOLDER / "blind/scores.json"
     finalists = json.loads(committed(FOLDER / "finalists.json"))
     scores = committed(score_file)
@@ -141,6 +160,11 @@ def register(path, cap, public_proof):
             fingerprint(git("show", head + ":" + f)) == h,
             "Commit the candidate before registration",
         )
+    previous = report()
+    expected_cost = sum(mean[p] * n for p, n in counts.items())
+    previous_exposure = Decimal(previous["settled_estimate_usd"]) + Decimal(
+        previous["outstanding_usd"]
+    )
     m = {
         "study": "FinanceGym full public set",
         "code_revision": head,
@@ -153,7 +177,12 @@ def register(path, cap, public_proof):
             r["task_id"]: profile_for(r["question"], policy) for r in cases
         },
         "case_limits_usd": limits,
-        "estimated_research_usd": str(sum(mean[p] * n for p, n in counts.items())),
+        "estimated_research_usd": str(expected_cost),
+        "recorded_prior_project_usd": previous["settled_estimate_usd"],
+        "outstanding_prior_reservations_usd": previous["outstanding_usd"],
+        "project_estimate_including_prior_reservations_usd": str(
+            previous_exposure + expected_cost
+        ),
         "total_research_ceiling_usd": str(
             sum(Decimal(limits[p]) * n for p, n in counts.items())
         ),
@@ -251,6 +280,9 @@ def capture_one(root, row, m):
             None,
             cap,
             gateway=archive,
+            provider=CountJournal(
+                directory / "counts", OpenAIResponses(project_key(REPO / ".env.local"))
+            ),
             profile=profile,
             assignment=ticket,
         )
@@ -329,6 +361,7 @@ def export(path, root, dest):
         dest.parent.is_dir(), "Create the destination parent directory first"
     )
     audits = []
+    provider_ids = {"request_id": set(), "response_id": set()}
     with tempfile.TemporaryDirectory(dir=dest.parent) as temp:
         out = Path(temp) / "submission"
         out.mkdir()
@@ -344,6 +377,7 @@ def export(path, root, dest):
                     and record["budget_usd"] == cap,
                     "Task differs from the registered system",
                 )
+                verify_private(directory, record, provider_ids)
                 saved = selected.audit(
                     directory, SavedArchive(row["cutoff"], m["archive_version"])
                 )
@@ -366,6 +400,7 @@ def export(path, root, dest):
         validate_file(path, out / "answers.jsonl")
         audit = {
             "tasks": len(audits),
+            "verified_provider_generations": len(provider_ids["response_id"]),
             "answers_sha256": fingerprint((out / "answers.jsonl").read_bytes()),
             "registration_sha256": fingerprint(json_bytes(m)),
             "total_research_cost_usd": str(

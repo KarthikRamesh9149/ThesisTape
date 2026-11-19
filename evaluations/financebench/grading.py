@@ -122,7 +122,7 @@ def context(r, source, memo):
         "reference_answer": source["answer"],
         "reference_evidence": [
             {
-                "doc": e["evidence_doc_name"],
+                "doc": e["doc_name"],
                 "pdf_page": int(e["evidence_page_num"]) + 1,
                 "excerpt": e["evidence_text"],
             }
