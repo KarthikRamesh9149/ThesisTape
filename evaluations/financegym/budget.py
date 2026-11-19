@@ -150,7 +150,7 @@ class ProjectBudget:
 
 
 def run_registered_stage(questions, task_id, stage):
-    from . import editorial, recovery, runner
+    from . import budget_publication, editorial, recovery, runner, titled_publication
 
     rows = {row["task_id"]: row for row in runner.tasks(questions)}
     if task_id not in rows:
@@ -164,6 +164,22 @@ def run_registered_stage(questions, task_id, stage):
         cap = recovery.second_route(cfg, runner.route(row, cfg)[1])[2]
         if not recovery.needs_research(runner.RESEARCH / task_id):
             raise ValueError("The original investigation already has a report")
+        if budget_publication.REGISTRATION.is_file():
+            editor = editorial.locked(cfg, extension)
+            spec = budget_publication.locked(titled_publication.locked(editor))
+            if budget_publication.eligible(row, cfg, spec):
+                review_file = budget_publication.directory(task_id) / "run.json"
+                if (
+                    not review_file.is_file()
+                    or load(review_file)["state"] not in TERMINAL
+                ):
+                    raise ValueError(
+                        "The registered independent draft review must finish first"
+                    )
+                if load(review_file)["state"] == "qualified":
+                    raise ValueError(
+                        "The original draft already passed independent review"
+                    )
         with budget.reserve(record, cap):
             return recovery.recover_one(row, cfg, extension)
     if not editorial.eligible(row, cfg):

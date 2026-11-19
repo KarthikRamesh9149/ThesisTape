@@ -20,7 +20,7 @@ Registration verifies the committed paired blind decision and reproduces the ind
 
 ```sh
 .venv/bin/python -B -m evaluations.financegym.runner register runs/benchmark_400_public.jsonl --cap-usd 0.30 --source-proof runs/financegym-focused-source-proof
-.venv/bin/python -B -m evaluations.financegym.runner run runs/benchmark_400_public.jsonl --workers 4
+.venv/bin/python -B -m evaluations.financegym.pacing runs/benchmark_400_public.jsonl --workers 3
 ```
 
 Each task has a durable research record. An interrupted run reuses confirmed generations. Any uncertain charge stays reserved for reconciliation. Completed, withheld and failed attempts keep their original records.
@@ -54,7 +54,7 @@ If any task ends without a publishable answer, register the independent recovery
 .venv/bin/python -B -m evaluations.financegym.recovery register
 git add evaluations/financegym/recovery-registration.json
 git commit -m "Register independent recovery of unanswered FinanceGym questions" -- evaluations/financegym/recovery-registration.json
-.venv/bin/python -B -m evaluations.financegym.recovery run runs/benchmark_400_public.jsonl --workers 4
+.venv/bin/python -B -m evaluations.financegym.budget recovery runs/benchmark_400_public.jsonl --task-id "$UNANSWERED_TASK_ID"
 .venv/bin/python -B -m evaluations.financegym.recovery export runs/benchmark_400_public.jsonl runs/financegym-submission
 ```
 
@@ -67,7 +67,7 @@ If both investigators leave a question unanswered after its optional rewrite fai
 If neither investigator produced a releasable memo or an independently approved first draft, the [funded editing procedure](editorial-policy.md) can use their original dated passages. A Sol analyst checks calculations, Astra writes, and a fresh Sol review determines which paragraphs can appear in the qualified report. The additional ceiling is USD 0.55. The final export counts these reports and all three stages' expenses. It uses the originally released answer whenever one exists.
 
 ```sh
-.venv/bin/python -B -m evaluations.financegym.editorial run runs/benchmark_400_public.jsonl --task-id "$UNANSWERED_TASK_ID"
+.venv/bin/python -B -m evaluations.financegym.budget editorial runs/benchmark_400_public.jsonl --task-id "$UNANSWERED_TASK_ID"
 .venv/bin/python -B -m evaluations.financegym.editorial export runs/benchmark_400_public.jsonl runs/financegym-submission
 ```
 
@@ -76,6 +76,13 @@ One issuer search exposed case-sensitive title matching after both original inve
 ```sh
 .venv/bin/python -B -m evaluations.financegym.titled_publication run runs/benchmark_400_public.jsonl --task-id "$UNANSWERED_TASK_ID"
 .venv/bin/python -B -m evaluations.financegym.titled_publication export runs/benchmark_400_public.jsonl runs/financegym-submission
+```
+
+Under the USD 140 total budget, the system can first give a fresh Sol reviewer an existing primary draft when its optional revision exceeded the individual allowance. Only an original answer plus another section that both pass independent review can be released. One review costs at most USD 0.075. A withheld review and its charges stay in the record if the independent research team then takes the question. The 33 independent investigations already dispatched when this policy was recorded retain their original routes. Use the following export for the complete candidate. [Prospective eligibility and review](budget-review-policy.md)
+
+```sh
+.venv/bin/python -B -m evaluations.financegym.budget_publication run runs/benchmark_400_public.jsonl --task-id "$UNANSWERED_TASK_ID"
+.venv/bin/python -B -m evaluations.financegym.budget_publication export runs/benchmark_400_public.jsonl runs/financegym-submission
 ```
 
 ## Prepare the methodology paper and local email

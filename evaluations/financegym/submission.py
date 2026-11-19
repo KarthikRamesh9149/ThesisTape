@@ -21,7 +21,14 @@ from scripts.run_checkpoint import load
 from scripts.sol_baseline import fingerprint, json_bytes
 from scripts.sol_provider import ASTRA, MODEL
 
-from . import editorial, recovery, reviewed_release, titled_publication
+from . import (
+    budget_publication,
+    draft_review,
+    editorial,
+    recovery,
+    reviewed_release,
+    titled_publication,
+)
 from .runner import locked, tasks, validate_file
 
 NAMES = {
@@ -34,12 +41,19 @@ RECIPIENT = "rujunh@google.com"
 
 
 def verified_selection(
-    manifest, proof, extension, publication=None, funding=None, title_registration=None
+    manifest,
+    proof,
+    extension,
+    publication=None,
+    funding=None,
+    title_registration=None,
+    budget_registration=None,
 ):
     profile = manifest["profiles_by_task"][proof["task_id"]]
     derived = proof.get("reviewed_publication")
     edit = proof.get("editorial")
     lookup = proof.get("title_lookup")
+    review = proof.get("primary_draft_review")
     if extension is None:
         return (
             proof["profile"] == profile
@@ -47,9 +61,27 @@ def verified_selection(
             and derived is None
             and edit is None
             and lookup is None
+            and review is None
         )
     chain = proof["attempts"]
     if len(chain) not in (1, 2) or chain[0]["profile"] != profile:
+        return False
+    if review is not None and not (
+        budget_registration
+        and review["registration_sha256"] == budget_registration
+        and review["profile"] == draft_review.PROFILE
+        and chain[0]["state"] == "failed"
+        and chain[0]["report_sha256"] is None
+        and review["state"]
+        in {"qualified", "withheld", "failed", "needs_reconciliation"}
+        and ((review["state"] == "qualified") == bool(review["report_sha256"]))
+        and review["transport_requests"] == 0
+        and review["provider_generations"] in (0, 1)
+        and Decimal(review["estimated_cost_usd"]) >= 0
+        and Decimal(review["outstanding_usd"]) >= 0
+        and Decimal(review["estimated_cost_usd"]) + Decimal(review["outstanding_usd"])
+        <= draft_review.CAP
+    ):
         return False
     if lookup is not None and not (
         title_registration
@@ -74,7 +106,20 @@ def verified_selection(
         return False
     costs = chain
     final_profile = chain[-1]["profile"]
-    if edit is not None:
+    if review is not None and review["state"] == "qualified":
+        if not (
+            len(chain) == 1
+            and edit is None
+            and derived is None
+            and lookup is None
+            and review["provider_generations"] == 1
+            and Decimal(review["outstanding_usd"]) == 0
+            and proof["state"] == "qualified"
+            and proof["report_sha256"] == review["report_sha256"]
+        ):
+            return False
+        final_profile = draft_review.PROFILE
+    elif edit is not None:
         if not (
             funding
             and publication
@@ -114,6 +159,8 @@ def verified_selection(
         or chain[-1]["state"] != proof["state"]
     ):
         return False
+    if review is not None:
+        costs = [*costs, review]
     return (
         proof["primary_profile"] == profile
         and proof["profile"] == final_profile
@@ -135,6 +182,7 @@ def verify_export(questions, directory):
     publication = audits.get("reviewed_release_registration_sha256")
     funding = audits.get("editorial_registration_sha256")
     title_registration = audits.get("title_registration_sha256")
+    budget_registration = audits.get("budget_review_registration_sha256")
     if extension is not None:
         verified = recovery.register(manifest)
         if json.loads(
@@ -146,6 +194,24 @@ def verify_export(questions, directory):
         recovered = sum(len(a["attempts"]) == 2 for a in audits_rows)
         retained = sum("reviewed_publication" in a for a in audits_rows)
         editors = [a["editorial"] for a in audits_rows if "editorial" in a]
+        reviews = [
+            a["primary_draft_review"]
+            for a in audits_rows
+            if "primary_draft_review" in a
+        ]
+        approved_reviews = sum(a["state"] == "qualified" for a in reviews)
+        if budget_registration is not None and (
+            not title_registration
+            or fingerprint(json_bytes(budget_publication.locked(title_registration)))
+            != budget_registration
+            or len(reviews) != audits["primary_draft_review_attempts"]
+            or approved_reviews != audits["primary_draft_review_releases"]
+            or sum(Decimal(r["estimated_cost_usd"]) for r in reviews)
+            != Decimal(audits["primary_draft_review_cost_usd"])
+        ):
+            raise ValueError(
+                "Budget-limited review counts, registration or cost changed"
+            )
         if funding is not None:
             funded = editorial.locked(manifest, verified)
             if title_registration is not None and (
@@ -177,7 +243,7 @@ def verify_export(questions, directory):
                 )
         if (audits["recovery_releases"], audits["primary_releases"]) != (
             recovered - retained - len(editors),
-            400 - recovered,
+            400 - recovered - approved_reviews,
         ) or Decimal(audits["outstanding_usd"]) != sum(
             Decimal(a["outstanding_usd"]) for a in audits_rows
         ):
@@ -199,7 +265,13 @@ def verify_export(questions, directory):
         if (
             row["task_id"] != proof["task_id"]
             or not verified_selection(
-                manifest, proof, extension, publication, funding, title_registration
+                manifest,
+                proof,
+                extension,
+                publication,
+                funding,
+                title_registration,
+                budget_registration,
             )
             or proof["report_sha256"] != fingerprint(answer["report"].encode())
             or proof["state"] not in {"complete", "qualified"}
@@ -214,6 +286,8 @@ def verify_export(questions, directory):
 
 def model_names(cfg, audit):
     models = set(cfg["models"])
+    if any("primary_draft_review" in r for r in audit.get("tasks_audited", ())):
+        models.add(MODEL)
     if any(
         attempt["profile"] == "evidence_team_v4"
         for row in audit.get("tasks_audited", ())
@@ -263,6 +337,7 @@ def paper(questions, directory):
             Decimal(audit["total_research_cost_usd"])
             - original_cost
             - Decimal(audit.get("editorial_cost_usd", "0"))
+            - Decimal(audit.get("primary_draft_review_cost_usd", "0"))
         )
         methods += f"\n\nThe primary researcher released {audit['primary_releases']} reports using an estimated USD {original_cost:.2f}. Independent investigations on unanswered questions released {audit['recovery_releases']} reports. All independent investigations together used an additional USD {supplemental_cost:.2f}. Unresolved provider reservations across both attempts total USD {audit['outstanding_usd']}."
         if audit.get("reviewed_first_draft_releases"):
@@ -271,6 +346,8 @@ def paper(questions, directory):
             methods += f"\n\nA second addition addressed questions with neither a released memo nor independently approved paragraphs. Sol checked proposed calculations, an Astra author wrote a short answer and a fresh Sol context reviewed it. Editing generated {audit['editorial_releases']} qualified reports for an additional USD {Decimal(audit['editorial_cost_usd']):.2f}, under a USD 0.55 ceiling per eligible case. The editor worked from verified dated passages."
         if audit.get("title_lookup_releases"):
             methods += f"\n\nFor {audit['title_lookup_releases']} of those edited reports, both investigators had retrieved zero passages. A later retrieval rule retried their original queries with capitalization variants of entity titles present in the question. It kept the cutoff, original query terms and result limits. The editor received the resulting historical passages. All earlier failures and the time spent on the retry were retained."
+        if audit.get("primary_draft_review_attempts"):
+            methods += f"\n\nAfter the owner set a USD 140 total project budget, we prospectively allowed one independent Sol review of a primary draft whose optional revision exceeded its allowance. It required a source-checked answer and a separate supporting section. We retained the original wording only when both survived independent review. The reviewer made no searches and had a USD 0.075 ceiling. Across {audit['primary_draft_review_attempts']} such reviews, {audit['primary_draft_review_releases']} qualified reports were released for a total additional USD {Decimal(audit['primary_draft_review_cost_usd']):.2f}. Earlier independent investigations kept their original outcomes."
     metrics = primary["metrics"]
     rows = "\n".join(
         f"| {NAMES[k]} | {v['cases']} | {v['F']:.1%} | {v['R']:.1%} | {v['O']:.1%} | {v['Q']:.1%} | {v['released']} |"

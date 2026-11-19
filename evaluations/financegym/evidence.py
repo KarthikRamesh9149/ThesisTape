@@ -20,6 +20,7 @@ from scripts.sol_baseline import fingerprint, json_bytes
 from scripts.team_meter import verify_ledger
 
 from . import (
+    budget_publication,
     editorial,
     recovery,
     reviewed_release,
@@ -33,7 +34,9 @@ FOLDER = REPO / "evaluations/financegym/results"
 PORTABLE = re.compile(
     r"(?:run\.json|result\.json|memo\.md|(?:searches|counts)/[0-9a-f]{64}\.json)"
 )
-ENTRY = re.compile(r"([a-z0-9]{24})/(primary|recovery|editorial|title_lookup)/(.+)")
+ENTRY = re.compile(
+    r"([a-z0-9]{24})/(primary|recovery|editorial|title_lookup|primary_draft_review)/(.+)"
+)
 
 
 def attempt_modes(proof):
@@ -46,7 +49,9 @@ def attempt_modes(proof):
 
 
 def artifact_modes(proof):
-    return attempt_modes(proof) + (["title_lookup"] if "title_lookup" in proof else [])
+    return attempt_modes(proof) + [
+        mode for mode in ("title_lookup", "primary_draft_review") if mode in proof
+    ]
 
 
 def portable(run):
@@ -97,7 +102,11 @@ def seal(questions, directory, dest):
                 "title_lookup": title_lookup.ROOT,
             }
             for kind in artifact_modes(rec):
-                run = roots[kind] / case / "research"
+                run = (
+                    budget_publication.directory(case)
+                    if kind == "primary_draft_review"
+                    else roots[kind] / case / "research"
+                )
                 for name, raw in portable(run).items():
                     entries[f"{case}/{kind}/{name}"] = raw
         bundle = zipped(entries)
@@ -176,12 +185,40 @@ def check_receipt_index(run, expected):
     )
 
 
+def collect_identities(record, seen):
+    if seen is not None:
+        for call in record["calls"].values():
+            if "confirmed_ms" in call:
+                identity_hash = call["provider"]["ids_sha256"]
+                require(
+                    re.fullmatch("[0-9a-f]{64}", identity_hash)
+                    and identity_hash not in seen,
+                    "A confirmed provider identity is missing or duplicated",
+                )
+                seen.add(identity_hash)
+
+
 def replay_case(
     row, report, proof, folder, cfg, extension, editor_spec, *, provider_receipts=None
 ):
     chain = proof.get("attempts", [proof])
     editions, seconds = set(), 0
     originals = [folder / name for name in ("primary", "recovery")]
+    extra_review = proof.get("primary_draft_review")
+    draft_saved = draft_memo = None
+    if extra_review is not None:
+        review_dir = folder / "primary_draft_review"
+        review_spec = budget_publication.locked(titled_publication.locked(editor_spec))
+        draft_saved, draft_memo, receipt = budget_publication.review_info(
+            row, cfg, review_spec, originals[0], review_dir
+        )
+        require(
+            receipt == extra_review,
+            "The primary draft review charge or decision changed",
+        )
+        check_receipt_index(review_dir, 0)
+        collect_identities(load(review_dir / "run.json"), provider_receipts)
+        seconds += receipt["elapsed_s"]
     lookup = proof.get("title_lookup")
     if lookup is not None:
         recovered = folder / "title_lookup"
@@ -208,15 +245,7 @@ def replay_case(
         run = folder / mode
         check_receipt_index(run, evidence["transport_requests"])
         rec = load(run / "run.json")
-        if provider_receipts is not None:
-            for call in rec["calls"].values():
-                identity_hash = call["provider"]["ids_sha256"]
-                require(
-                    re.fullmatch("[0-9a-f]{64}", identity_hash)
-                    and identity_hash not in provider_receipts,
-                    "A confirmed provider identity is missing or duplicated",
-                )
-                provider_receipts.add(identity_hash)
+        collect_identities(rec, provider_receipts)
         if "original_run_sha256" in evidence:
             require(
                 fingerprint((run / "run.json").read_bytes())
@@ -260,7 +289,15 @@ def replay_case(
         if len(chain) == 2
         else runner.route(row, cfg)
     )[0]
-    if "editorial" in proof:
+    if draft_memo is not None:
+        require(
+            len(chain) == 1
+            and "editorial" not in proof
+            and "reviewed_publication" not in proof,
+            "A released primary draft review cannot be followed by another investigation",
+        )
+        item, visible = runner.reviewed_answer(row, draft_saved, draft_memo)
+    elif "editorial" in proof:
         require(
             reviewed_release.approved_draft(
                 row,
@@ -309,7 +346,7 @@ def replay_case(
         == (round(seconds, 3) if "attempts" in proof else item["elapsed_s"]),
         "A submitted document count or duration differs from the original investigations",
     )
-    return visible, len(billing)
+    return visible, len(billing) + int(extra_review is not None)
 
 
 def verify(questions, root):
@@ -405,6 +442,9 @@ def verify(questions, root):
         "retained_attempts": attempts,
         "confirmed_provider_generations": len(provider_receipts),
         "reports_with_restored_source_editions": audit.get("title_lookup_releases", 0),
+        "reports_from_independent_primary_draft_review": audit.get(
+            "primary_draft_review_releases", 0
+        ),
         "answers_sha256": audit["answers_sha256"],
         "reports_citing_each_source_kind": dict(sorted(kinds.items())),
         "reports_citing_only_encyclopedia_revisions": encyclopedia_only,
