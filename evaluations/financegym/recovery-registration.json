@@ -1,0 +1,15 @@
+{
+  "primary_registration_sha256": "2a51039b25186a8e30262013c82be24898ab4ffbf9adb6c692312b30d694fd4d",
+  "recovery_policy": {
+    "cap_usd": "0.45",
+    "policy_sha256": "65ff551179760d5eee43c10bf4c38d314029331818c17de87bd0d05af21a4a52",
+    "profile": "evidence_team_v4",
+    "trigger": "Only after the original investigation has no publishable report."
+  },
+  "sources": {
+    "evaluations/financebench/audit.py": "a6623c7ed7c51909e2f24567f086c9a5918c3af444936db9faea3bf08ae1108f",
+    "evaluations/financegym/recovery.py": "90563d27d98499fcfac0465d1e46d64dcb9f48a5ff209f9a5e85c7d4f9882eb5",
+    "evaluations/paired/product_audit.py": "d4b6daf3ea9d4a4df3cbf4caa1256ef4c8d41572270a5757bf2bc125f32f33cc",
+    "evaluations/paired/product_recovery.py": "12e1e3dde8ded28fc620e1cd6ffdc353eddbc5ff9fdeca1957405d39f05759a8"
+  }
+}
