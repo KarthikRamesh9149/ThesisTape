@@ -48,6 +48,7 @@ def bucket(row):
 
 
 def cost(row):
+    require(row["input_cache_write_12h_tokens"] == 0, "Unexpected 12-hour cache charge")
     details = {
         "cached_tokens": row["input_cached_tokens"],
         "cache_write_tokens": row["input_cache_write_30m_tokens"],
