@@ -1,0 +1,157 @@
+{
+  "arms": [
+    {
+      "arm": "single_sol",
+      "calls": 7,
+      "cap_usd": "0.20",
+      "direction": null,
+      "failure": "A numerical claim lacks a cited original or checked calculation",
+      "models": {
+        "gpt-6.2-sol": 7
+      },
+      "offline_replay": "reproduced terminal failure",
+      "outstanding_usd": "0",
+      "record_sha256": "fe766deadb87d767c98ac8155797cbf09d94093c6f418b940d8b700fe8ab1e52",
+      "release_sha256": null,
+      "settled_usd": "0.063326",
+      "state": "failed",
+      "tokens": {
+        "cache_write": 0,
+        "cached": 0,
+        "input": 17198,
+        "output": 2893
+      },
+      "wall_ms": 55280
+    },
+    {
+      "arm": "sol_team",
+      "calls": 18,
+      "cap_usd": "0.20",
+      "direction": null,
+      "failure": "Use only numbers printed in the cited passages in base_and_horizon",
+      "models": {
+        "gpt-6.2-sol": 18
+      },
+      "offline_replay": "reproduced terminal failure",
+      "outstanding_usd": "0",
+      "record_sha256": "64cead43306f330f82b239d3c759d5e20a9540667c14cf2147fd5c07f3d5da94",
+      "release_sha256": null,
+      "settled_usd": "0.106028",
+      "state": "failed",
+      "tokens": {
+        "cache_write": 0,
+        "cached": 0,
+        "input": 38864,
+        "output": 2830
+      },
+      "wall_ms": 66397
+    },
+    {
+      "arm": "mixed",
+      "calls": 17,
+      "cap_usd": "0.20",
+      "direction": null,
+      "failure": "Use only numbers printed in the cited passages in base_and_horizon",
+      "models": {
+        "gpt-6-luna": 10,
+        "gpt-6.1-terra": 1,
+        "gpt-6.2-sol": 6
+      },
+      "offline_replay": "reproduced terminal failure",
+      "outstanding_usd": "0",
+      "record_sha256": "9a2a372f82c4bfd64e61a02ecb57aa85eb897fabe944fa07729492993d81a54b",
+      "release_sha256": null,
+      "settled_usd": "0.0578850",
+      "state": "failed",
+      "tokens": {
+        "cache_write": 0,
+        "cached": 0,
+        "input": 35071,
+        "output": 2770
+      },
+      "wall_ms": 63525
+    },
+    {
+      "arm": "single_astra",
+      "calls": 5,
+      "cap_usd": "0.20",
+      "direction": null,
+      "failure": "Required reservation USD 0.15201 exceeds budget USD 0.058384",
+      "models": {
+        "gpt-6.2-astra": 5
+      },
+      "offline_replay": "reproduced budget stop",
+      "outstanding_usd": "0",
+      "record_sha256": "61ad980db373f39c507ffb49846e7ec637c619413a5427ae0a99dfaa8c3d9d7e",
+      "release_sha256": null,
+      "settled_usd": "0.141616",
+      "state": "budget_exhausted",
+      "tokens": {
+        "cache_write": 0,
+        "cached": 0,
+        "input": 11142,
+        "output": 1312
+      },
+      "wall_ms": 37050
+    },
+    {
+      "arm": "mixed_fixed_plan",
+      "calls": 10,
+      "cap_usd": "0.20",
+      "direction": null,
+      "failure": "Use only numbers printed in the cited passages in base_and_horizon",
+      "models": {
+        "gpt-6-luna": 6,
+        "gpt-6.1-terra": 1,
+        "gpt-6.2-sol": 3
+      },
+      "offline_replay": "reproduced terminal failure",
+      "outstanding_usd": "0",
+      "record_sha256": "b520ef6fcad642bfcbcdf80da532f375b16a163c55b674bd9b440f5c761593e0",
+      "release_sha256": null,
+      "settled_usd": "0.0357632",
+      "state": "failed",
+      "tokens": {
+        "cache_write": 0,
+        "cached": 0,
+        "input": 20462,
+        "output": 2145
+      },
+      "wall_ms": 42558
+    },
+    {
+      "arm": "mixed_no_forecast",
+      "calls": 17,
+      "cap_usd": "0.20",
+      "direction": null,
+      "failure": "A numerical claim lacks a cited original or checked calculation",
+      "models": {
+        "gpt-6-luna": 10,
+        "gpt-6.1-terra": 1,
+        "gpt-6.2-sol": 6
+      },
+      "offline_replay": "reproduced terminal failure",
+      "outstanding_usd": "0",
+      "record_sha256": "db8131cd1c3a0c9d6a1d769bfbff9e381161104ca2306604111893ddcdc06df3",
+      "release_sha256": null,
+      "settled_usd": "0.0765118",
+      "state": "failed",
+      "tokens": {
+        "cache_write": 0,
+        "cached": 0,
+        "input": 37535,
+        "output": 3781
+      },
+      "wall_ms": 78645
+    }
+  ],
+  "cap_usd": "1.20",
+  "case_id": "nintendo-fy2021-guidance",
+  "cutoff": "2020-05-08T12:00:00Z",
+  "generation_calls": 74,
+  "outstanding_usd": "0",
+  "packet_sha256": "b6d9dad17a9dad79ad5a5a0a4209db3e986467a1f2bdace2cb18b6343c10796b",
+  "released_reports": 0,
+  "run_manifest_sha256": "18c5914a855cd31d3ddaa19f85d503acac29590683ebb91fa1284da592c3cfa7",
+  "settled_usd": "0.4811300"
+}

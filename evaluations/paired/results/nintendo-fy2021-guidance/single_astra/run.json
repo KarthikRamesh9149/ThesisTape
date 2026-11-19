@@ -1,0 +1,277 @@
+{
+  "arm": "single_astra",
+  "bindings": {
+    "analyst": "gpt-6.2-astra",
+    "visual": "gpt-6.2-astra"
+  },
+  "budget_usd": "0.20",
+  "calls": {
+    "lead.memo": {
+      "confirmed_ms": 36693,
+      "dispatched_ms": 20644,
+      "estimated_model_cost_usd": "0.076712",
+      "input_tokens_preflight": 4944,
+      "max_output_tokens": 2141,
+      "model": "gpt-6.2-astra",
+      "output": "{\n  \"facts\": [\n    {\n      \"text\": \"Nintendo guided to 200,000 million yen in consolidated profit attributable to owners of parent for the year ending March 31, 2021 (PDF p. 2). Against the 258.6 billion yen earned in the year ended March 31, 2020 (PDF p. 3), the guide implied a decline of 58.6 billion yen (200.0 minus 258.6, in billions of yen), or 22.7% (58.6 divided by 258.6, rounded).\",\n      \"citations\": [\n        {\n          \"passage_id\": \"P5\",\n          \"quote\": \"Year ending Mar. 2021 | 1,200,000 | (8.3) | 300,000 | (14.9) | 290,000 | 200,000(19.5)(22.7) | 1,678.93\"\n        },\n        {\n          \"passage_id\": \"P3\",\n          \"quote\": \"profit attributable to owners of parent of 200.0 billion yen.\"\n        },\n        {\n          \"passage_id\": \"P1\",\n          \"quote\": \"net profit attributable to owners of parent totaled 258.6\\nbillion yen for this fiscal year.\"\n        }\n      ],\n      \"calculation_ids\": [\"C1\", \"C2\"]\n    },\n    {\n      \"text\": \"Production and shipping delays appeared to be easing, but Nintendo did not say component supply had normalized. It warned that persistent difficulty sourcing necessary parts, or a longer or worse COVID-19 disruption, could constrain product supply (PDF p. 3).\",\n      \"citations\": [\n        {\n          \"passage_id\": \"P2\",\n          \"quote\": \"It appears that delays in production and shipping are gradually recovering.\"\n        },\n        {\n          \"passage_id\": \"P2\",\n          \"quote\": \"issues involving the procurement of necessary components. In addition, if the impact of COVID-19 is prolonged or worsens\\nfurther, it may disrupt the product supply.\"\n        }\n      ],\n      \"calculation_ids\": []\n    }\n  ],\n  \"analysis\": {\n    \"text\": \"Base case at the results date: within ±2% of the 200,000 million yen guide, inclusive, for the year ending March 31, 2021. The main driver is continued recovery in Switch shipments. If parts arrive in time to build and ship consoles, new owners can buy both existing games and planned releases. That supports the hardware and software sales already contemplated in guidance rather than, by itself, implying a beat (PDF pp. 2–4).\",\n    \"citations\": [\n      {\n        \"passage_id\": \"P5\",\n        \"quote\": \"Year ending Mar. 2021 | 1,200,000 | (8.3) | 300,000 | (14.9) | 290,000 | 200,000(19.5)(22.7) | 1,678.93\"\n      },\n      {\n        \"passage_id\": \"P2\",\n        \"quote\": \"It appears that delays in production and shipping are gradually recovering.\"\n      },\n      {\n        \"passage_id\": \"P3\",\n        \"quote\": \"the\\ncombination of existing popular titles and a continuous stream of appealing new titles will work together to invigorate the platform.\"\n      }\n    ],\n    \"calculation_ids\": []\n  },\n  \"alternative_and_signal\": {\n    \"text\": \"Downside alternative: persistent component shortages could cost Nintendo console sales and the software purchases those new owners would otherwise make during the year. I would switch to a lower call if Nintendo cut its full-year Switch unit forecast and attributed the cut to parts shortages. That would indicate the delays were reducing expected annual volume, not just shifting shipments between quarters (PDF pp. 3–4).\",\n    \"citations\": [\n      {\n        \"passage_id\": \"P2\",\n        \"quote\": \"However, we may be affected if there continue to be\\nissues involving the procurement of necessary components.\"\n      },\n      {\n        \"passage_id\": \"P3\",\n        \"quote\": \"Unit sales of key products used in these forecasts can be found on page 14\"\n      }\n    ],\n    \"calculation_ids\": []\n  },\n  \"direction\": \"within\"\n}",
+      "provider": {
+        "elapsed_ms": 16046,
+        "ids_sha256": "a969ecb4f95aa0b45454267db7e2b2dc3d9e68941708358f5a1d0e7092441ebb",
+        "model": "gpt-6.2-astra",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 4944,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 929,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 5873
+        }
+      },
+      "receipt_sha256": "95b38a32382c1e4981c36171a737a645a3b59be8f102fd3b03e6b8a128d0f0dd",
+      "request_sha256": "e19b8b9e002c28b78bddfc8aa87467307f39a917a38196f767c40def5a3263de",
+      "requested_output_tokens": 2560,
+      "reservation_usd": "0.13508",
+      "stage": "lead.memo"
+    },
+    "lead.search.1": {
+      "confirmed_ms": 2904,
+      "dispatched_ms": 428,
+      "estimated_model_cost_usd": "0.004984",
+      "input_tokens_preflight": 433,
+      "max_output_tokens": 512,
+      "model": "gpt-6.2-astra",
+      "output": {
+        "arguments": {
+          "query": "Nintendo FY2020 financial results forecast profit attributable owners parent components supply Switch software digital sales March 2021"
+        },
+        "name": "search_archive"
+      },
+      "provider": {
+        "elapsed_ms": 2472,
+        "ids_sha256": "6e2cbdf041c85393c2df3e15c47bf65b807bb644c0f39eaae28c6ccb90f07000",
+        "model": "gpt-6.2-astra",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 433,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 38,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 471
+        }
+      },
+      "receipt_sha256": "05f73d001ded58e80181eeaa1a2ef73bf5bf1bd0501fa739af3f4c7a7e2b39e3",
+      "request_sha256": "96b632565eb51e7a54dccdedb070c28d00f24ab2a77dee39df8090c0461e5dd7",
+      "reservation_usd": "0.02481",
+      "stage": "lead.search.1"
+    },
+    "lead.search.2": {
+      "confirmed_ms": 5552,
+      "dispatched_ms": 3561,
+      "estimated_model_cost_usd": "0.009896",
+      "input_tokens_preflight": 1062,
+      "max_output_tokens": 512,
+      "model": "gpt-6.2-astra",
+      "output": {
+        "arguments": {
+          "passage_ids": [
+            "P1",
+            "P2",
+            "P3",
+            "P4",
+            "P5"
+          ]
+        },
+        "name": "read_passages"
+      },
+      "provider": {
+        "elapsed_ms": 1989,
+        "ids_sha256": "34bb4999ff13a6d0c67f9ecd2e2d2c0b18d1ef5d6b4aa3b94def4e96b4483249",
+        "model": "gpt-6.2-astra",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 1062,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 35,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1097
+        }
+      },
+      "receipt_sha256": "531ed20577ba716f8abb5049847ea19ada11427eeb8ede8f509b7d3681fd662c",
+      "request_sha256": "5597e671656b8aff169ef0d46b0b6cda126bc0ad4cd2133ff562f3b835e49465",
+      "reservation_usd": "0.0311",
+      "stage": "lead.search.2"
+    },
+    "lead.tools": {
+      "confirmed_ms": 14473,
+      "dispatched_ms": 5803,
+      "estimated_model_cost_usd": "0.029976",
+      "input_tokens_preflight": 2717,
+      "max_output_tokens": 1100,
+      "model": "gpt-6.2-astra",
+      "output": "{\n  \"calculations\": [\n    {\n      \"label\": \"Change in profit attributable to owners of parent: FY ending March 2021 guide vs FY ended March 2020 actual\",\n      \"unit\": \"JPY billion\",\n      \"operator\": \"subtract\",\n      \"left\": \"P3:200.0\",\n      \"right\": \"P1:258.6\"\n    },\n    {\n      \"label\": \"Percentage change in profit attributable to owners of parent: March 2021 guide vs March 2020 actual\",\n      \"unit\": \"%\",\n      \"operator\": \"change_percent\",\n      \"left\": \"P3:200.0\",\n      \"right\": \"P1:258.6\"\n    }\n  ],\n  \"inspect_page\": \"P5\",\n  \"visual_question\": \"In the year ending March 2021 forecast row, what amount in million yen and what year-on-year percentage change align under profit attributable to owners of parent?\"\n}",
+      "provider": {
+        "elapsed_ms": 8667,
+        "ids_sha256": "645eb8640f7c3ad89e50eaaf1617b8749f129a74299ba68805c187af2ead4eed",
+        "model": "gpt-6.2-astra",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 2717,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 206,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 2923
+        }
+      },
+      "receipt_sha256": "5860291b8f122078b4d2b88c7e9d35827ebf35b2363cb5ad869d2295a5d633d5",
+      "request_sha256": "98f3eb3c68de3426de5757132494d8782f62cdf9295c81d07e0ac04214517a75",
+      "reservation_usd": "0.07117",
+      "stage": "lead.tools"
+    },
+    "visual.read": {
+      "confirmed_ms": 20297,
+      "dispatched_ms": 15242,
+      "estimated_model_cost_usd": "0.020048",
+      "input_tokens_preflight": 1986,
+      "max_output_tokens": 800,
+      "model": "gpt-6.2-astra",
+      "output": "{\"observation\":\"PDF p. 2, consolidated forecast table: In the “Year ending Mar. 2021” row (fiscal year ending March 31, 2021), the “Profit attributable to owners of parent” column shows 200,000 million yen and (22.7)%, meaning a 22.7% decrease from the year ended March 31, 2020. The row, units and percentage alignment are unambiguous.\"}",
+      "provider": {
+        "elapsed_ms": 5052,
+        "ids_sha256": "aba535168451379551ad4fa5fbccf676f2960d260920f8d40833619c7ef11d1c",
+        "model": "gpt-6.2-astra",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 1986,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 104,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 2090
+        }
+      },
+      "receipt_sha256": "b2db6b870c0608a8219c82698c2acc9244c82e16a6e7caad9eeb4ad26a4953d6",
+      "request_sha256": "46274830923e2b899b7c52ce9b056d23a2d8c011fa19494d23cc2d3ee80fcece",
+      "reservation_usd": "0.05186",
+      "stage": "visual.read"
+    }
+  },
+  "case_id": "nintendo-fy2021-guidance",
+  "checkpoint_id": "afdf2ef8a9734bcd9ae1464bb99522cc",
+  "corpus_sha256": "b6d9dad17a9dad79ad5a5a0a4209db3e986467a1f2bdace2cb18b6343c10796b",
+  "created_at": "2026-11-19T14:00:38.029096+00:00",
+  "cutoff": "2020-05-08T12:00:00Z",
+  "elapsed_ms": 37049,
+  "estimated_model_cost_usd": "0.141616",
+  "events": [
+    [
+      "reserve",
+      "lead.search.1"
+    ],
+    [
+      "settle",
+      "lead.search.1"
+    ],
+    [
+      "reserve",
+      "lead.search.2"
+    ],
+    [
+      "settle",
+      "lead.search.2"
+    ],
+    [
+      "reserve",
+      "lead.tools"
+    ],
+    [
+      "settle",
+      "lead.tools"
+    ],
+    [
+      "reserve",
+      "visual.read"
+    ],
+    [
+      "settle",
+      "visual.read"
+    ],
+    [
+      "reserve",
+      "lead.memo"
+    ],
+    [
+      "settle",
+      "lead.memo"
+    ]
+  ],
+  "failure": "Required reservation USD 0.15201 exceeds budget USD 0.058384",
+  "finished_at": "2026-11-19T14:01:15.079037+00:00",
+  "forecast_rule": {
+    "metric": "profit attributable to owners of parent",
+    "mode": "relative",
+    "tolerance": "0.02",
+    "unit": "JPY million"
+  },
+  "packet_sha256": "b6d9dad17a9dad79ad5a5a0a4209db3e986467a1f2bdace2cb18b6343c10796b",
+  "paid_tool_charges_usd": "0",
+  "per_case_arm_usd": "0.20",
+  "question": "At Nintendo’s FY2020 results, what profit attributable to owners of parent did it guide for the year ending March 2021? Compare it with the just-reported year, discuss the risk to the supply of components, and forecast the full-year actual relative to guidance (within means ±2% of the guide, inclusive). State one base-case direction (lower, within, or higher), the main driver, an alternative and an observable signal that would change the call. Cite PDF pages for material claims and show the inputs to derived figures.",
+  "rate_limit_backoff_ms": 0,
+  "route": "single_astra",
+  "run_id": "run",
+  "run_manifest_sha256": "18c5914a855cd31d3ddaa19f85d503acac29590683ebb91fa1284da592c3cfa7",
+  "schema_version": 1,
+  "specification_sha256": "47348f11538ec66c795f9a7b71360d6471af6b4109e2e6f2a2c04f19c8dc3662",
+  "state": "budget_exhausted",
+  "unreconciled_reservation_usd": "0",
+  "wall_ms": 37050
+}

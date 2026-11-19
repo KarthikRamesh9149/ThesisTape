@@ -1,0 +1,8 @@
+{
+  "endpoint": "POST /v1/responses/input_tokens",
+  "input_tokens": 4961,
+  "model": "gpt-6.2-astra",
+  "prompt_sha256": "07d21e549739dacdfa08d6ccfd7884f541683f588b2ddd5318d5ad97c2a5ce45",
+  "scope": "post-run recount of the refused generation",
+  "stage": "lead.memo_repair"
+}

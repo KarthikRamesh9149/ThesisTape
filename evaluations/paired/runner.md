@@ -36,7 +36,7 @@ To obtain fresh input-token counts, use the project’s OpenAI key. This command
 
 ## First paid event
 
-The next checkpoint is one registered attempt per configuration on Nintendo. The six allowances total at most USD 1.20. The controller checks the committed manifest, follows the seeded order and saves each configuration under `runs/paired-development-v1/nintendo-fy2021-guidance/`. Repeating the run command resumes the existing assignments. A missing provider confirmation retains its reservation and pauses the block. The replay command verifies the saved reports, citations and ledgers offline.
+The first paid event completed with six terminal decisions, zero released memos and USD 0.48113 in receipt-based cost. The controller checked the committed manifest, followed the seeded order and saved each configuration under `runs/paired-development-v1/nintendo-fy2021-guidance/`. Repeating the run command on the original workspace reopens those assignments. Elsewhere the archived event audit can replay the results offline. [Results, failure analysis and offline commands](results/nintendo-fy2021-guidance/evaluation.md)
 
 ```sh
 .venv/bin/python -B -m evaluations.paired.runner run-event nintendo-fy2021-guidance

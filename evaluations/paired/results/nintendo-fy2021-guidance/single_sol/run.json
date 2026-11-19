@@ -1,0 +1,363 @@
+{
+  "arm": "single_sol",
+  "bindings": {
+    "analyst": "gpt-6.2-sol",
+    "visual": "gpt-6.2-sol"
+  },
+  "budget_usd": "0.20",
+  "calls": {
+    "lead.memo": {
+      "confirmed_ms": 36393,
+      "dispatched_ms": 18267,
+      "estimated_model_cost_usd": "0.020448",
+      "input_tokens_preflight": 4449,
+      "max_output_tokens": 2560,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"facts\": [\n    {\n      \"text\": \"Nintendo guided to ¥200,000 million in consolidated profit attributable to owners of parent for the year ending March 31, 2021, down 22.7% from the year ended March 31, 2020 (PDF pp. 2, 4). The prior-year comparison can be approximated as ¥200,000 million ÷ (1 − 0.227), but the percentage is rounded and p. 2 does not give the exact consolidated actual. The ¥210,842 million shown on p. 2 is non-consolidated profit.\",\n      \"citations\": [\n        {\n          \"passage_id\": \"P2\",\n          \"quote\": \"Year ending Mar. 2021 | 1,200,000 | (8.3) | 300,000 | (14.9) | 290,000 | 200,000(19.5)(22.7) | 1,678.93\"\n        },\n        {\n          \"passage_id\": \"P3\",\n          \"quote\": \"profit attributable to owners of parent of 200.0 billion yen.\"\n        },\n        {\n          \"passage_id\": \"P2\",\n          \"quote\": \"(Reference) Non-consolidated Results\"\n        }\n      ],\n      \"calculation_ids\": []\n    },\n    {\n      \"text\": \"Nintendo reported COVID-19-related production and shipment delays for Switch consoles, Joy-Con controllers and Ring Fit Adventure in some regions in February and March, with limited impact on FY2020 results (PDF p. 3). The disclosure does not identify a specific component shortage. For FY2021, the risk is that persistent shortages of parts constrain console assembly, limiting both hardware sales and the number of new owners buying games.\",\n      \"citations\": [\n        {\n          \"passage_id\": \"P4\",\n          \"quote\": \"Because of COVID-19, production and shipments of the Nintendo Switch console, accessories like the Joy-Con controllers, and Ring\\nFit Adventure faced delays in some regions from February through March\"\n        },\n        {\n          \"passage_id\": \"P4\",\n          \"quote\": \"this only had limited impact on business results for this\\nfiscal year.\"\n        }\n      ],\n      \"calculation_ids\": []\n    }\n  ],\n  \"analysis\": {\n    \"text\": \"Base case as of May 8, 2020: higher than guidance for the year ending March 31, 2021. The main driver is software sales to existing Switch owners: Animal Crossing’s record start gives Nintendo a way to outperform even if near-term hardware shipments are constrained (PDF pp. 3–4). Under the stated rule, ‘higher’ means above ¥200,000 million × (1 + 0.02); ‘within’ runs from ¥200,000 million × (1 − 0.02) through that upper threshold, inclusive.\",\n    \"citations\": [\n      {\n        \"passage_id\": \"P4\",\n        \"quote\": \"Animal Crossing: New Horizons, released in March, sold 11.77 million units, which is now the best start ever\\nfor a Nintendo Switch title.\"\n      },\n      {\n        \"passage_id\": \"P3\",\n        \"quote\": \"the\\ncombination of existing popular titles and a continuous stream of appealing new titles will work together to invigorate the platform.\"\n      },\n      {\n        \"passage_id\": \"P3\",\n        \"quote\": \"profit attributable to owners of parent of 200.0 billion yen.\"\n      }\n    ],\n    \"calculation_ids\": []\n  },\n  \"alternative_and_signal\": {\n    \"text\": \"Downside alternative: profit finishes below the lower edge of the band if prolonged component shortages cut console shipments enough that software sales to existing owners cannot make up for lost hardware sales and game purchases by new owners. I would switch to ‘lower’ if Nintendo materially cuts its full-year Switch unit forecast and attributes the cut to continuing component shortages rather than a temporary shipping delay (PDF pp. 3–4).\",\n    \"citations\": [\n      {\n        \"passage_id\": \"P4\",\n        \"quote\": \"Fit Adventure faced delays in some regions from February through March\"\n      },\n      {\n        \"passage_id\": \"P3\",\n        \"quote\": \"Unit sales of key products used in these forecasts can be found on page 14\"\n      },\n      {\n        \"passage_id\": \"P5\",\n        \"quote\": \"if physical distribution is\\nsuspended, we will not be able to sell hardware or packaged software through e-commerce\"\n      }\n    ],\n    \"calculation_ids\": []\n  },\n  \"direction\": \"higher\"\n}",
+      "provider": {
+        "elapsed_ms": 18120,
+        "ids_sha256": "e5c415ed6456ead3684df34b5da936a62946d742ab4f9e387fb053a70217e3d1",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 4449,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 1155,
+          "output_tokens_details": {
+            "reasoning_tokens": 163
+          },
+          "total_tokens": 5604
+        }
+      },
+      "receipt_sha256": "1fe3e5a7cce95b1bb0b1d2cd3de31c646d8ed0a6605ce30df677b71dcd831a98",
+      "request_sha256": "2427b9173b5ad2503039e2ecfdc5d15ce72c5163b00f6c8a282a041c7ac33bb6",
+      "reservation_usd": "0.0367225",
+      "stage": "lead.memo"
+    },
+    "lead.memo_repair": {
+      "confirmed_ms": 55273,
+      "dispatched_ms": 36772,
+      "estimated_model_cost_usd": "0.020672",
+      "input_tokens_preflight": 4466,
+      "max_output_tokens": 2560,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"facts\": [\n    {\n      \"text\": \"Nintendo guided to ¥200,000 million in consolidated profit attributable to owners of parent for the year ending March 31, 2021, down 22.7% from the year ended March 31, 2020 (PDF p. 2). The exact FY2020 consolidated actual is not shown on that page: the prior-year profit table is non-consolidated, and the rounded 22.7% decline cannot establish the exact actual.\",\n      \"citations\": [\n        {\"passage_id\": \"P2\", \"quote\": \"Year ending Mar. 2021 | 1,200,000 | (8.3) | 300,000 | (14.9) | 290,000 | 200,000(19.5)(22.7) | 1,678.93\"},\n        {\"passage_id\": \"P3\", \"quote\": \"profit attributable to owners of parent of 200.0 billion yen.\"},\n        {\"passage_id\": \"P2\", \"quote\": \"Percentages for net sales, operating profit etc. show increase (decrease) from previous period.\"},\n        {\"passage_id\": \"P2\", \"quote\": \"(Reference) Non-consolidated Results\\nNon-consolidated Results for the Years Ended March 31, 2019 and 2020\"}\n      ],\n      \"calculation_ids\": []\n    },\n    {\n      \"text\": \"COVID-19 already delayed production and shipments of Switch consoles, Joy-Con controllers and Ring Fit Adventure in some regions in February and March, though Nintendo said the effect on FY2020 results was limited (PDF p. 3). That does not establish a shortage of any specific component. The forward risk is that a prolonged shortage of even one required part could cap console assembly, costing Nintendo hardware sales and slowing growth of the installed base for software.\",\n      \"citations\": [\n        {\"passage_id\": \"P4\", \"quote\": \"Because of COVID-19, production and shipments of the Nintendo Switch console, accessories like the Joy-Con controllers, and Ring\\nFit Adventure faced delays in some regions from February through March\"},\n        {\"passage_id\": \"P4\", \"quote\": \"but this only had limited impact on business results for this\\nfiscal year.\"},\n        {\"passage_id\": \"P3\", \"quote\": \"expand their installed base.\"}\n      ],\n      \"calculation_ids\": []\n    }\n  ],\n  \"analysis\": {\n    \"text\": \"Base case as of May 8, 2020: FY2021 actual profit attributable to owners of parent comes in higher, meaning more than 2% above the ¥200,000 million guide; exactly 2% above or below still counts as within. The main driver is sustained Switch software demand. Animal Crossing's record launch gives Nintendo a title that can keep selling to existing Switch owners even if hardware shipments are constrained. I expect that momentum to outweigh temporary supply disruptions against a guide issued amid concern about weaker global consumption (PDF pp. 2–4).\",\n    \"citations\": [\n      {\"passage_id\": \"P2\", \"quote\": \"Year ending Mar. 2021 | 1,200,000 | (8.3) | 300,000 | (14.9) | 290,000 | 200,000(19.5)(22.7) | 1,678.93\"},\n      {\"passage_id\": \"P4\", \"quote\": \"Animal Crossing: New Horizons, released in March, sold 11.77 million units, which is now the best start ever\\nfor a Nintendo Switch title.\"},\n      {\"passage_id\": \"P4\", \"quote\": \"sales also continued to grow steadily for popular titles released in previous fiscal years\"},\n      {\"passage_id\": \"P3\", \"quote\": \"There are concerns that COVID-19 will lead to a global decline in production and consumption.\"}\n    ],\n    \"calculation_ids\": []\n  },\n  \"alternative_and_signal\": {\n    \"text\": \"Alternative: profit comes in within the inclusive ±2% band if persistent component constraints cost enough hardware sales and follow-on software purchases to absorb the expected software upside. I would switch to within if Nintendo cuts its full-year Switch hardware unit forecast at the next results update and explicitly attributes the cut to component availability rather than softer demand (PDF pp. 3–4 describe the earlier delays and identify unit sales as forecast inputs).\",\n    \"citations\": [\n      {\"passage_id\": \"P4\", \"quote\": \"Fit Adventure faced delays in some regions from February through March\"},\n      {\"passage_id\": \"P3\", \"quote\": \"Unit sales of key products used in these forecasts can be found on page 14\"}\n    ],\n    \"calculation_ids\": []\n  },\n  \"direction\": \"higher\"\n}",
+      "provider": {
+        "elapsed_ms": 18495,
+        "ids_sha256": "68fb141cb0ceb54e45004cfc1cab49b1189e3941addd11248a07982cdde00c0e",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 4466,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 1174,
+          "output_tokens_details": {
+            "reasoning_tokens": 143
+          },
+          "total_tokens": 5640
+        }
+      },
+      "receipt_sha256": "99a5cefbb29426c3b84150d367db902d0708d6f48b7684bc662490df2524a26b",
+      "request_sha256": "71f77af4d68b25bce5f3a3418354a7b0a5d0f4a4dfdca9c87d439517fce87687",
+      "reservation_usd": "0.036765",
+      "stage": "lead.memo_repair"
+    },
+    "lead.search.1": {
+      "confirmed_ms": 3466,
+      "dispatched_ms": 506,
+      "estimated_model_cost_usd": "0.001286",
+      "input_tokens_preflight": 433,
+      "max_output_tokens": 512,
+      "model": "gpt-6.2-sol",
+      "output": {
+        "arguments": {
+          "query": "Nintendo FY2020 financial results March 2020 March 2021 profit attributable owners parent forecast components supply COVID Nintendo Switch PDF"
+        },
+        "name": "search_archive"
+      },
+      "provider": {
+        "elapsed_ms": 2950,
+        "ids_sha256": "1b82e9a81d69df2fe21126b81bf7e8eb551cb5b8c3e8a9b7e423f55750a0ca5f",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 433,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 42,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 475
+        }
+      },
+      "receipt_sha256": "554dcf876387c3a7d6f796255fc68e535d03090191f1d73133eeb0ca8f0625d8",
+      "request_sha256": "386909687cdc58b966a39be610ccbaff20bfac8f3c5a0c96b37120c43b3dd75d",
+      "reservation_usd": "0.0062025",
+      "stage": "lead.search.1"
+    },
+    "lead.search.2": {
+      "confirmed_ms": 6146,
+      "dispatched_ms": 4173,
+      "estimated_model_cost_usd": "0.002422",
+      "input_tokens_preflight": 1051,
+      "max_output_tokens": 512,
+      "model": "gpt-6.2-sol",
+      "output": {
+        "arguments": {
+          "passage_ids": [
+            "P2",
+            "P3",
+            "P4",
+            "P5"
+          ]
+        },
+        "name": "read_passages"
+      },
+      "provider": {
+        "elapsed_ms": 1968,
+        "ids_sha256": "42bc22a5ee1e4b04ceb39ebcdd6b6637cb821e49f0d72a91179c96ae3556cf89",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 1051,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 32,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1083
+        }
+      },
+      "receipt_sha256": "0c41086f549a32e01691228351c2b909a80cc79996ce8479bc0fcfa2fb7f7f97",
+      "request_sha256": "2f43a09ed7f9c3f5ebf5378adc0d30545765d265206698a669db34e41e7a9304",
+      "reservation_usd": "0.0077475",
+      "stage": "lead.search.2"
+    },
+    "lead.tools": {
+      "confirmed_ms": 10968,
+      "dispatched_ms": 6367,
+      "estimated_model_cost_usd": "0.00748",
+      "input_tokens_preflight": 2385,
+      "max_output_tokens": 1100,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"calculations\": [\n    {\n      \"label\": \"Nintendo FY ending March 2021 profit attributable to owners of parent: 2% tolerance around guidance\",\n      \"unit\": \"JPY million\",\n      \"operator\": \"multiply\",\n      \"left\": \"P2:200,000\",\n      \"right\": \"0.02\"\n    },\n    {\n      \"label\": \"Nintendo FY ending March 2021 profit attributable to owners of parent: inclusive lower bound\",\n      \"unit\": \"JPY million\",\n      \"operator\": \"subtract\",\n      \"left\": \"P2:200,000\",\n      \"right\": \"C1\"\n    },\n    {\n      \"label\": \"Nintendo FY ending March 2021 profit attributable to owners of parent: inclusive upper bound\",\n      \"unit\": \"JPY million\",\n      \"operator\": \"add\",\n      \"left\": \"P2:200,000\",\n      \"right\": \"C1\"\n    }\n  ],\n  \"inspect_page\": \"P2\",\n  \"visual_question\": \"On PDF page 2, which year-over-year percentage is aligned with the FY ending March 2021 profit attributable to owners of parent forecast of 200,000 million yen: (19.5) or (22.7)?\"\n}",
+      "provider": {
+        "elapsed_ms": 4597,
+        "ids_sha256": "30f301bc64df94a8e4887b7e52860f1743befe38f686dd4227e0a5d220c75ee1",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 2385,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 271,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 2656
+        }
+      },
+      "receipt_sha256": "9a9aeb3847b2051931027473e1184bedd02bd78ecf235cbc4961ceca3e7852af",
+      "request_sha256": "0d134727b477aa6acc0fa21edb079afdf3f24d13e6272578843587ff3a6b8111",
+      "reservation_usd": "0.0169625",
+      "stage": "lead.tools"
+    },
+    "lead.tools_repair": {
+      "confirmed_ms": 13751,
+      "dispatched_ms": 11169,
+      "estimated_model_cost_usd": "0.005702",
+      "input_tokens_preflight": 2401,
+      "max_output_tokens": 1100,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"calculations\": [],\n  \"inspect_page\": \"P2\",\n  \"visual_question\": \"Read the original PDF p. 2 forecast table: which year-over-year percentage aligns with the FY ending March 2021 profit attributable to owners of parent of ¥200,000 million? Is the exact FY ended March 2020 actual for that same consolidated metric printed anywhere on this page?\"\n}",
+      "provider": {
+        "elapsed_ms": 2580,
+        "ids_sha256": "e804e7e0265fa480b71368f86647354e0836b8c972b0085555e6a3156fe7343a",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 2401,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 90,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 2491
+        }
+      },
+      "receipt_sha256": "26b57e6d4b0ad67f17de7abc7728babe6680ffaab6092e79fad2982ba10bbf6b",
+      "request_sha256": "6b696b1538aaba7a9ae690ea529ad455d84a28522f148f5e5f80b2c220b34d92",
+      "reservation_usd": "0.0170025",
+      "stage": "lead.tools_repair"
+    },
+    "visual.read": {
+      "confirmed_ms": 17898,
+      "dispatched_ms": 14495,
+      "estimated_model_cost_usd": "0.005316",
+      "input_tokens_preflight": 2013,
+      "max_output_tokens": 800,
+      "model": "gpt-6.2-sol",
+      "output": "{\"observation\":\"On PDF p. 2, the “Year ending Mar. 2021” row shows 200,000 in the “million yen” subcolumn under “Profit attributable to owners of parent.” The adjacent “%” subcolumn shows (22.7), meaning a 22.7% year-over-year decrease. The alignment is unambiguous. The exact consolidated actual for the year ended March 2020 is not printed on p. 2; ¥210,842 million is non-consolidated profit, and the rounded percentage cannot establish the exact consolidated actual.\"}",
+      "provider": {
+        "elapsed_ms": 3397,
+        "ids_sha256": "61f025fffbd3325d76e2163a43344509d7fe674e31221134f66344412b6323c8",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 2013,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 129,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 2142
+        }
+      },
+      "receipt_sha256": "ae6e685b9cc2f232fac4423ba95ee172197977254d8fbfbb03efb6e8b35b645b",
+      "request_sha256": "3551ee72b40131ca4668c07a1eaa14b338af934093a6985c159b4e8504253a13",
+      "reservation_usd": "0.0130325",
+      "stage": "visual.read"
+    }
+  },
+  "case_id": "nintendo-fy2021-guidance",
+  "checkpoint_id": "a456598e69664dc2af94052dc37e05f0",
+  "corpus_sha256": "b6d9dad17a9dad79ad5a5a0a4209db3e986467a1f2bdace2cb18b6343c10796b",
+  "created_at": "2026-11-19T13:57:31.716811+00:00",
+  "cutoff": "2020-05-08T12:00:00Z",
+  "elapsed_ms": 55278,
+  "estimated_model_cost_usd": "0.063326",
+  "events": [
+    [
+      "reserve",
+      "lead.search.1"
+    ],
+    [
+      "settle",
+      "lead.search.1"
+    ],
+    [
+      "reserve",
+      "lead.search.2"
+    ],
+    [
+      "settle",
+      "lead.search.2"
+    ],
+    [
+      "reserve",
+      "lead.tools"
+    ],
+    [
+      "settle",
+      "lead.tools"
+    ],
+    [
+      "reserve",
+      "lead.tools_repair"
+    ],
+    [
+      "settle",
+      "lead.tools_repair"
+    ],
+    [
+      "reserve",
+      "visual.read"
+    ],
+    [
+      "settle",
+      "visual.read"
+    ],
+    [
+      "reserve",
+      "lead.memo"
+    ],
+    [
+      "settle",
+      "lead.memo"
+    ],
+    [
+      "reserve",
+      "lead.memo_repair"
+    ],
+    [
+      "settle",
+      "lead.memo_repair"
+    ]
+  ],
+  "failure": "A numerical claim lacks a cited original or checked calculation",
+  "finished_at": "2026-11-19T13:58:26.997207+00:00",
+  "forecast_rule": {
+    "metric": "profit attributable to owners of parent",
+    "mode": "relative",
+    "tolerance": "0.02",
+    "unit": "JPY million"
+  },
+  "packet_sha256": "b6d9dad17a9dad79ad5a5a0a4209db3e986467a1f2bdace2cb18b6343c10796b",
+  "paid_tool_charges_usd": "0",
+  "per_case_arm_usd": "0.20",
+  "question": "At Nintendo’s FY2020 results, what profit attributable to owners of parent did it guide for the year ending March 2021? Compare it with the just-reported year, discuss the risk to the supply of components, and forecast the full-year actual relative to guidance (within means ±2% of the guide, inclusive). State one base-case direction (lower, within, or higher), the main driver, an alternative and an observable signal that would change the call. Cite PDF pages for material claims and show the inputs to derived figures.",
+  "rate_limit_backoff_ms": 0,
+  "route": "single_sol",
+  "run_id": "run",
+  "run_manifest_sha256": "18c5914a855cd31d3ddaa19f85d503acac29590683ebb91fa1284da592c3cfa7",
+  "schema_version": 1,
+  "specification_sha256": "5033beb50fe4b127f9cd2eb221f5c7bb93a7b6c33758b03aa6734207b572c7f1",
+  "state": "failed",
+  "unreconciled_reservation_usd": "0",
+  "wall_ms": 55280
+}
