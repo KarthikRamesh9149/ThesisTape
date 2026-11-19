@@ -1,0 +1,28 @@
+{
+  "additional_generation_cost_usd": "0",
+  "matching_generation_receipts": 8,
+  "original_memo_sha256": "237412125736238f9939669c655fd5c0428bd668a7ee8ff423157ec5f3e98f16",
+  "reviews": [
+    {
+      "approved": 3,
+      "blocked": {
+        "A1": "The financing figures and expansion are supported, but the investment increase is missing its unit. C1 correctly calculates the threshold in USD billions; write “an increase of more than $25 billion in planned investment.”",
+        "A4": "The cited passages establish that the proposal was nonbinding, but they do not establish due diligence, definitive negotiations, or milestone-based disbursement as specific conditions. Cite contemporaneous passages that state those conditions, or limit the claim to the lack of a binding award."
+      },
+      "missing": []
+    },
+    {
+      "approved": 4,
+      "blocked": {
+        "A4": "The citations establish that the terms were nonbinding, but the quoted excerpts do not establish that the full announcement omitted review criteria, milestones, or consequences. Keep the award uncertainty and cite the contemporaneous language on due diligence, final terms, and milestone-based disbursement."
+      },
+      "missing": [
+        "Identify Commerce’s due diligence and negotiation of final award terms as steps that could change whether an award was made and on what terms.",
+        "Identify the announced link between disbursement and completion of construction, production, and commercial milestones, without implying that specific thresholds or consequences were already public."
+      ],
+      "selected": true
+    }
+  ],
+  "revised_memo_sha256": "e01af9e1d4e0299f43aa3b48204565b3a1f47d68ab429861a9565be1468eb20d",
+  "state": "qualified"
+}

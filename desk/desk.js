@@ -515,7 +515,7 @@ async function init() {
     };
     let suggestedBudget = $("new-budget").value;
     $("research-method").onchange = () => {
-      const next = $("research-method").value === "evidence_team_v3" ? "0.45" : "0.30";
+      const next = $("research-method").value === "evidence_team_v4" ? "0.45" : "0.30";
       if ($("new-budget").value === suggestedBudget) $("new-budget").value = next;
       suggestedBudget = next;
     };

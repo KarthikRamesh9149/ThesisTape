@@ -242,7 +242,7 @@ class Desk:
         web = fields["collection"] == public.COLLECTION
         profile = fields.get("profile", "mixed")
         if (
-            profile not in ("mixed", "evidence_team_v3")
+            profile not in ("mixed", "evidence_team_v3", "evidence_team_v4")
             or not web
             and "profile" in fields
         ):
@@ -264,7 +264,9 @@ class Desk:
             if not directory.exists() and not directory.is_symlink():
                 if web:
                     implementation = (
-                        quantitative_engine if profile == "evidence_team_v3" else engine
+                        quantitative_engine
+                        if profile.startswith("evidence_team")
+                        else engine
                     )
                     implementation.run(
                         question,

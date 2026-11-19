@@ -257,6 +257,39 @@ def review(
     )
 
 
+def prefer_repair(initial, revised):
+    """Compare supported sections after the reviewer has removed rejected paragraphs."""
+    good, blocked, missing = initial
+    repaired, rejected, gaps = revised
+    if not repaired:
+        return False
+    if not good:
+        return True
+    before = {row["section"] for row in good}
+    after = {row["section"] for row in repaired}
+    if not (before & {"Answer", "Outlook"}) <= after:
+        return False
+    if "Answer" in after and not (rejected or gaps):
+        return True
+    if not (blocked or missing):
+        return False
+
+    # Missing items assess the whole draft, including material the reviewer subsequently
+    # removed. An empty missing list does not establish that the surviving text answered it.
+    def answers(rows):
+        return {p["text"] for p in rows if p["section"] == "Answer"}
+
+    if len(answers(repaired)) > len(answers(good)) and len(rejected) < len(blocked):
+        return True
+    if len(answers(repaired)) < len(answers(good)) and len(rejected) > len(blocked):
+        return False
+    return (len(gaps), len(rejected), -len(after)) <= (
+        len(missing),
+        len(blocked),
+        -len(before),
+    )
+
+
 def research(question, cutoff, gateway, ask, *, revision=1, single=False):
     rule = getattr(gateway, "forecast_rule", None)
     verify = getattr(gateway, "check_source", checked_doc)
@@ -422,12 +455,17 @@ rate. Explicitly distinguish the forecast from what the sources show. You are as
             # A failed rewrite cannot discard an already verified first draft.
             initial_coverage = {p["section"] for p in good}
             new_coverage = {p["section"] for p in repaired}
-            if repaired and (
+            use_repair = repaired and (
                 not good
                 or ("Answer" in new_coverage or "Answer" not in initial_coverage)
                 and (len(gaps), len(rejected), -len(new_coverage))
                 <= (len(missing), len(blocked), -len(initial_coverage))
-            ):
+            )
+            if revision >= 4:
+                use_repair = prefer_repair(
+                    (good, blocked, missing), (repaired, rejected, gaps)
+                )
+            if use_repair:
                 draft, good, blocked, missing = candidate, repaired, rejected, gaps
             reviews.append(
                 {

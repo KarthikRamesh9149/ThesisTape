@@ -150,6 +150,28 @@ class DeskTests(unittest.TestCase):
         self.provider.count.assert_called_once()
         self.provider.generate.assert_not_called()
 
+    def test_public_request_id_binds_the_selected_method_and_budget(self):
+        fields = {
+            **self.data,
+            "collection": "historical-web",
+            "cutoff": "2024-04-10",
+            "profile": "evidence_team_v4",
+            "budget": "0.45",
+        }
+        with patch.object(self.desk, "start_locked") as worker:
+            first = self.assert_status(202, "/api/runs", body=fields)
+            self.assertEqual(self.assert_status(202, "/api/runs", body=fields), first)
+            self.assert_status(409, "/api/runs", body={**fields, "profile": "mixed"})
+            self.assert_status(409, "/api/runs", body={**fields, "budget": "0.60"})
+            info = self.assert_status(200, "/api/runs/" + first["id"])
+            self.assertEqual(
+                (info["state"], info["budget"], info["call_count"]),
+                ("queued", "0.45", 0),
+            )
+            self.assertIn("quantitative", info["route"])
+            self.assert_status(400, "/api/runs", body={**fields, "profile": "unknown"})
+            worker.assert_called_once()
+
     def test_budget_exhaustion_and_ownership_from_cli_queue(self):
         case = analyst_case(self.data["question"], self.data["cutoff"])
         folder = self.root / "from-cli"

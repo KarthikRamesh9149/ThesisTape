@@ -1,0 +1,21 @@
+{
+  "archive_sha256": "1edd42a803e48fe8a4fd059aa63014f885a6272cc8477c797f91def119d8a924",
+  "calls": 8,
+  "download_bytes": 3612,
+  "download_sha256": "237412125736238f9939669c655fd5c0428bd668a7ee8ff423157ec5f3e98f16",
+  "first_source": "https://web.archive.org/web/20240410192324/https://www.nist.gov/news-events/news/2024/04/biden-harris-administration-announces-preliminary-terms-tsmc-expanded",
+  "page_errors": [],
+  "passages": 5,
+  "reserved": "0",
+  "retrieval_replayed": {
+    "eligible_sources": 15,
+    "searches": 5,
+    "transport_requests": 56
+  },
+  "spent": "0.308256",
+  "state": "qualified",
+  "viewport_widths": [
+    1440,
+    390
+  ]
+}

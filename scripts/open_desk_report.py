@@ -108,6 +108,8 @@ def inspect(directory, record):
         "evidence_team",
         "evidence_team_v2",
         "evidence_team_v3",
+        "evidence_team_v4",
+        "quantitative_astra",
     }:
         from . import quantitative_engine as selected
     cfg = selected.configuration(
@@ -132,10 +134,13 @@ def inspect(directory, record):
             for r in result["searches"]
         )
         if status == "qualified":
-            last = result.get("reviews", [])[-1]
+            history = result.get("reviews", [])
+            selected_review = next(
+                (r for r in reversed(history) if r.get("selected", True)), {}
+            )
             decisions.extend(
                 {"label": "Coverage limitation", "detail": msg}
-                for msg in last["missing"]
+                for msg in selected_review.get("missing", ())
             )
     return {
         "title": TITLE,
@@ -148,6 +153,8 @@ def inspect(directory, record):
             "evidence_team": "research team with quantitative review",
             "evidence_team_v2": "research team with quantitative review",
             "evidence_team_v3": "research team with quantitative review",
+            "evidence_team_v4": "research team with quantitative review",
+            "quantitative_astra": "single Astra with quantitative tools",
             "single_astra": "single Astra",
             "single_sol": "single Sol",
         }[record["research_profile"]],

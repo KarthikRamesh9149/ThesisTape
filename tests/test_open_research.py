@@ -1,6 +1,6 @@
 import unittest
 
-from evaluations.open_research import boeing, ecb
+from evaluations.open_research import boeing, ecb, tsmc
 from scripts.research_desk_agent import Draft, Paragraph, assemble_revision
 
 
@@ -34,3 +34,13 @@ class InvestmentMemoTests(unittest.TestCase):
         self.assertEqual(proof["calls"], 9)
         self.assertEqual(proof["state"], "complete")
         self.assertEqual(proof["page_errors"], [])
+
+    def test_tsmc_release_keeps_both_reviewed_funding_amounts_without_redispatch(self):
+        checked = tsmc.verify()
+        self.assertEqual(checked["matching_generation_receipts"], 8)
+        self.assertEqual(checked["additional_generation_cost_usd"], "0")
+        self.assertEqual(checked["state"], "qualified")
+        body = (tsmc.FOLDER / "revised.md").read_text().split("## Sources")[0]
+        self.assertIn("$6.6 billion", body)
+        self.assertIn("$5 billion", body)
+        self.assertIn("$65 billion", body)

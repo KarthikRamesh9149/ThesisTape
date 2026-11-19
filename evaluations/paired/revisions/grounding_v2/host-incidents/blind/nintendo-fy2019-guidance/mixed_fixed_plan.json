@@ -1,0 +1,20 @@
+{
+  "checkpoint_id": "711019153b204b018614fb284db7abfa",
+  "command": [
+    "pdftoppm",
+    "-f",
+    "2",
+    "-l",
+    "2",
+    "-singlefile",
+    "-scale-to",
+    "1400",
+    "-png",
+    "-"
+  ],
+  "exception": "TimeoutExpired",
+  "page": 2,
+  "result": "No memo. Replay verifies all earlier model requests and the specific original and page at the observed renderer failure.",
+  "source_sha256": "eb773bbafb9278300d7ecdee6cfaedeb63ebe8afdb2eec6044e2af7552333806",
+  "timeout_s": 30
+}

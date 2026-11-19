@@ -158,6 +158,32 @@ class TaskDates(unittest.TestCase):
 
 
 class FinancialLabels(unittest.TestCase):
+    def test_choose_reviewed_answer_after_rejected_paragraphs_are_removed(self):
+        def answer(text):
+            return {"section": "Answer", "text": text}
+
+        outlook = {
+            "section": "Outlook",
+            "text": "The project schedule could delay payment.",
+        }
+        other = answer("The third factory has an estimated construction window.")
+        paid = answer("The proposal specifies separate grant and loan amounts.")
+        before = (
+            [other, outlook],
+            {"A1": "missing unit", "A3": "unsupported terms"},
+            [],
+        )
+        after = (
+            [paid, other, outlook],
+            {"A3": "unsupported terms"},
+            ["eligibility", "timing"],
+        )
+        self.assertTrue(reviewed.prefer_repair(before, after))
+        self.assertFalse(reviewed.prefer_repair(after, before))
+        self.assertFalse(reviewed.prefer_repair(before, ([paid], {}, [])))
+        self.assertFalse(reviewed.prefer_repair((after[0], {}, []), before))
+        self.assertFalse(reviewed.prefer_repair(before, ([], {}, [])))
+
     def test_periods_or_unverified_labels_cannot_discard_verified_operands_or_inject_a_number(
         self,
     ):

@@ -22,6 +22,7 @@ def configuration(question, cutoff, budget, gateway, profile, assignment):
         "evidence_team",
         "evidence_team_v2",
         "evidence_team_v3",
+        "evidence_team_v4",
         "quantitative_astra",
     ):
         raise CaseError("Unknown quantitative research profile")
@@ -45,16 +46,19 @@ def research(question, cutoff, gateway, dispatch, *, profile):
             return dispatch(stage, {**prompt, "model": ASTRA}, limit, **kwargs)
 
         return review_workflow(
-            question, cutoff, gateway, single, revision=3, single=True
+            question, cutoff, gateway, single, revision=4, single=True
         )
     return review_workflow(
         question,
         cutoff,
         gateway,
         dispatch,
-        revision={"evidence_team": 1, "evidence_team_v2": 2, "evidence_team_v3": 3}[
-            profile
-        ],
+        revision={
+            "evidence_team": 1,
+            "evidence_team_v2": 2,
+            "evidence_team_v3": 3,
+            "evidence_team_v4": 4,
+        }[profile],
     )
 
 
@@ -119,7 +123,7 @@ def run(
     *,
     provider=None,
     gateway=None,
-    profile="evidence_team_v3",
+    profile="evidence_team_v4",
     assignment=None,
     queued=False,
     pause=None,

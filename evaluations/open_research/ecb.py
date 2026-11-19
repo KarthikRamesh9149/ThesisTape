@@ -3,6 +3,7 @@
 import json
 import tempfile
 import zipfile
+from contextlib import contextmanager
 from pathlib import Path
 
 from scripts.open_desk_report import inspect
@@ -12,9 +13,10 @@ from scripts.sol_baseline import fingerprint
 FOLDER = Path(__file__).with_suffix("")
 
 
-def verify():
-    browser = load(FOLDER / "browser.json")
-    archive = FOLDER / "run.zip"
+@contextmanager
+def saved_browser_run(folder):
+    browser = load(folder / "browser.json")
+    archive = folder / "run.zip"
     if fingerprint(archive.read_bytes()) != browser["archive_sha256"]:
         raise ValueError("The browser trial archive changed")
     with tempfile.TemporaryDirectory() as tmp, zipfile.ZipFile(archive) as z:
@@ -31,6 +33,11 @@ def verify():
             path = root / name
             path.parent.mkdir(exist_ok=True, parents=True)
             path.write_bytes(z.read(name))
+        yield root, browser
+
+
+def verify():
+    with saved_browser_run(FOLDER) as (root, browser):
         info, report = inspect(root, load(root / "run.json"))
         result = load(root / "result.json")
         if (

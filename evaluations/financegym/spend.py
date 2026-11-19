@@ -38,6 +38,11 @@ def report():
         load(REPO / "evaluations/open_research/ecb/browser.json")["spent"],
         count=1,
     )
+    add(
+        "Public TSMC desk trial",
+        load(REPO / "evaluations/open_research/tsmc/browser.json")["spent"],
+        count=1,
+    )
     seen = set()
 
     def include(group, file, resolution=None):
@@ -74,6 +79,10 @@ def report():
         include("Masked study graders", p)
     for p in (REPO / "runs/financegym").glob("*/research/run.json"):
         include("Official research", p)
+    for p in (REPO / "runs/financebench-research").glob("*/*/run.json"):
+        include("FinanceBench independent research", p)
+    for p in (REPO / "runs/financebench-grading").glob("*/grade/run.json"):
+        include("FinanceBench masked grading", p)
     return {
         "settled_estimate_usd": str(sum(money.values())),
         "outstanding_usd": str(sum(reservations.values())),
