@@ -67,6 +67,8 @@ def report():
     boj = REPO / "runs/open-research/boj-march2024/research/run.json"
     if boj.is_file():
         include("Public Bank of Japan source trial", boj)
+    for p in (REPO / "runs/public-fomc-march2023").glob("*/research/run.json"):
+        include("Public March 2023 Federal Reserve validation", p)
     for p in (REPO / "runs").glob("quantitative-development*/*/run/run.json"):
         include("Engineering trials for financial calculations", p)
     for p in (REPO / "runs").glob("quantitative-grading*/*/grade/run.json"):

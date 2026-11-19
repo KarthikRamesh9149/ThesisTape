@@ -25,6 +25,7 @@ from scripts.archive_receipts import RecordedHttp
 from scripts.disney_hulu_case import read_saved_file
 from scripts.focused_archive import FocusedArchive, verify_transport
 from scripts.open_desk_report import SavedArchive
+from scripts.question_attribution import publish as verify_attribution
 from scripts.run_checkpoint import load, own_run
 from scripts.sol_baseline import fingerprint, json_bytes
 from scripts.sol_provider import (
@@ -52,6 +53,7 @@ FILES = sorted(
         "scripts/packet_archive.py",
         "scripts/archive_receipts.py",
         "scripts/open_desk_report.py",
+        "scripts/question_attribution.py",
         "evaluations/financegym/runner.py",
         "evaluations/financegym/selection.py",
         "evaluations/financegym/selection.md",
@@ -351,7 +353,7 @@ def run(path, root, workers, limit):
             )
 
 
-def answer(row, saved, memo):
+def reviewed_answer(row, saved, memo):
     corpus.require(
         saved["question"] == row["question"] and saved["cutoff"] == row["cutoff"],
         "Original task text or date changed",
@@ -361,6 +363,11 @@ def answer(row, saved, memo):
         and saved["paragraphs"]
         and fingerprint(memo) == saved["memo_sha256"],
         "Task has no released, verified memo",
+    )
+    saved, memo = verify_attribution(saved, memo)
+    corpus.require(
+        memo is not None,
+        "No report survives verification against the original question",
     )
     docs = set()
     for search in saved["searches"]:
@@ -388,7 +395,11 @@ def answer(row, saved, memo):
         "report": body,
         "num_docs_retrieved": len({u.split("#:~:text=")[0] for u in docs}),
         "elapsed_s": round(elapsed, 3),
-    }
+    }, saved
+
+
+def answer(row, saved, memo):
+    return reviewed_answer(row, saved, memo)[0]
 
 
 def export(path, root, dest):
@@ -418,7 +429,9 @@ def export(path, root, dest):
                     directory, SavedArchive(row["cutoff"], m["archive_version"])
                 )
                 http = verify_transport(directory, folder / "operator-http")
-                item = answer(row, saved, read_saved_file(directory / "memo.md"))
+                item, visible = reviewed_answer(
+                    row, saved, read_saved_file(directory / "memo.md")
+                )
                 file.write(
                     json.dumps(item, ensure_ascii=False, separators=(",", ":")).encode()
                     + b"\n"
@@ -427,9 +440,11 @@ def export(path, root, dest):
                     {
                         "task_id": row["task_id"],
                         "profile": profile,
-                        "state": saved["release"],
+                        "state": visible["release"],
                         "estimated_cost_usd": saved["model_cost_usd"],
-                        "report_sha256": saved["memo_sha256"],
+                        "report_sha256": visible["memo_sha256"],
+                        "source_report_sha256": saved["memo_sha256"],
+                        "attribution_review": visible.get("attribution_review"),
                         **http,
                     }
                 )

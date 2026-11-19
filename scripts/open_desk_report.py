@@ -3,7 +3,7 @@
 from decimal import Decimal
 from types import SimpleNamespace
 
-from . import focused_archive
+from . import focused_archive, question_attribution
 from . import research_desk_agent as engine
 from .desk_report import Release, activity
 from .disney_hulu_case import CaseError, read_saved_file
@@ -54,10 +54,11 @@ def is_public(record):
     ) in (ArchiveGateway.VERSION, focused_archive.VERSION)
 
 
-def release(directory, result):
+def release(directory, result, memo=None):
     if not result["memo_sha256"]:
         return None
-    memo = read_saved_file(directory / "memo.md")
+    if memo is None:
+        memo = read_saved_file(directory / "memo.md")
     blocks, passages, refs = [], [], {}
 
     def citation(pid):
@@ -134,9 +135,22 @@ def inspect(directory, record):
     result = (
         selected.audit(directory, archive, record=record) if status in FINISHED else {}
     )
-    report = release(directory, result) if result else None
+    memo = None
+    if result.get("memo_sha256"):
+        result, memo = question_attribution.publish(
+            result, read_saved_file(directory / "memo.md")
+        )
+        status = result["release"]
+    report = release(directory, result, memo) if result else None
     decisions = []
     if result:
+        if result.get("attribution_review"):
+            decisions.append(
+                {
+                    "label": "Question checked against the original wording",
+                    "detail": "The draft attributed a detail to the question that its wording did not establish. The published memo omits the affected passage.",
+                }
+            )
         decisions.extend(
             {"label": "Dated source search", "detail": r["query"]}
             for r in result["searches"]

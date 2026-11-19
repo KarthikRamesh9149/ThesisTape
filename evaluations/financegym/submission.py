@@ -90,6 +90,8 @@ The researcher plans dated searches and receives passages only after the archive
 
 ## Independent comparisons
 
+Before publication, ThesisTape checks whether a statement attributed to the analyst's question appears in the original wording. When the check removes a passage, it retains the original and published hashes and qualifies the report. The same check applies to all configurations and incurs no model charge.
+
 Before the official run we locked reports on 24 historical financial events across six categories. Cases used matched documents, dates and spending limits. Graders saw anonymized reports and eligible evidence before the evaluator opened the later outcomes. Local quality weighted facts at 50%, reasoning at 25% and forecast direction at 25%. Reports with no usable answer counted in the denominator. These weights define the local experiment.
 
 | Configuration | Cases | Facts | Reasoning | Forecast direction | Local quality | Reports released |

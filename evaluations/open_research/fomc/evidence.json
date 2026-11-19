@@ -1,0 +1,42 @@
+{
+  "profiles": {
+    "mixed": {
+      "affected_paragraphs": [],
+      "generations": 9,
+      "original_sha256": "35a9c6a51656d98afb8e2f648906d64f8e69de3250adc16f8103701a24760bd4",
+      "publication_cost_usd": "0",
+      "publication_state": "qualified",
+      "published_sha256": "35a9c6a51656d98afb8e2f648906d64f8e69de3250adc16f8103701a24760bd4",
+      "research_state": "qualified",
+      "reserved_usd": "0",
+      "retrieval": {
+        "eligible_passage_urls": 19,
+        "eligible_sources": 12,
+        "searches": 3,
+        "transport_requests": 42
+      },
+      "settled_usd": "0.2181744"
+    },
+    "single_astra": {
+      "affected_paragraphs": [
+        1,
+        2
+      ],
+      "generations": 3,
+      "original_sha256": "01a67cfa57c3ad401c9cb3ace34c426dd7b14a0677619e825a72fda18e553699",
+      "publication_cost_usd": "0",
+      "publication_state": "qualified",
+      "published_sha256": "823ea2b86ea0193b9675a72d824748d66ab620ffee4080ca3838303bbd656e56",
+      "research_state": "complete",
+      "reserved_usd": "0",
+      "retrieval": {
+        "eligible_passage_urls": 21,
+        "eligible_sources": 9,
+        "searches": 3,
+        "transport_requests": 44
+      },
+      "settled_usd": "0.201976"
+    }
+  },
+  "runs_sha256": "387b9fd9ccafdd76b1c390b135d67ee99722bd1585825c47b169a1bb3a7f976d"
+}
