@@ -15,6 +15,7 @@ from .disney_hulu_case import CaseError
 
 MODEL = "gpt-6.2-sol"
 LUNA = "gpt-6-luna"
+TERRA = "gpt-6.1-terra"
 OPENAI_URL = "https://api.openai.com/v1"
 MAX_OUTPUT_TOKENS = 4096
 RATES = {
@@ -27,6 +28,7 @@ PRICING_URL = "https://developers.openai.com/api/docs/models/gpt-6.2-sol"
 MODEL_RATES = {
     MODEL: RATES,
     LUNA: {"ordinary_input": "0.10", "cached_input": "0.01", "cache_write_30m": "0.125", "output": "0.50"},
+    TERRA: {"ordinary_input": "1.00", "cached_input": "0.05", "cache_write_30m": "1.25", "output": "5.00"},
 }
 MILLION = Decimal(1000000)
 

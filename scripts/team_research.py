@@ -29,6 +29,8 @@ from .sol_research import (
     search_numbers,
 )
 from .team_report import render_candidate, report_prompt, typed_prompt
+from .visual_reader import ROUTES as TABLE_ROUTES
+from .visual_reader import TableTarget, table_research
 
 ROLES = ("filings", "contrary")
 VERSION = "sol-two-luna-v4"
@@ -48,12 +50,23 @@ class Case:
     reporting_currency: str = "USD"
     forecast_choices: tuple[str, ...] = ()
     archive: Path = ARCHIVE
+    archive_objects: Path | None = None
+    table: TableTarget | None = None
 
     def intake(self):
         return {"question": self.question, "cutoff": self.cutoff}
 
+    def corpus(self):
+        return Corpus(self.archive, objects=self.archive_objects)
+
 
 def case_for(name: str) -> Case:
+    if name == "toyota-buybacks":
+        root = SAVED_CASE.parent / "toyota-buybacks-2023-05-11"
+        data = json.loads(read_saved_file(root / "agent/question.json"))
+        return Case(data["case_id"], data["title"], data["question"], data["cutoff"],
+                    reporting_currency="JPY", archive=root / "archive", archive_objects=ARCHIVE / "objects",
+                    table=TableTarget(**data["table"]))
     if name == "nvidia":
         root = SAVED_CASE.parent / "nvidia-revenue-2023-05-25"
         data = json.loads(read_saved_file(root / "agent/question.json"))
@@ -305,6 +318,12 @@ def author(case, ask, opened, reports, action, *, decision=None, forecast=None):
 
 
 def research(case: Case, corpus: Corpus, ask, *, route: str):
+    if route in TABLE_ROUTES:
+        if case.table is None:
+            raise CaseError("The table route needs a located source table")
+        return table_research(case, corpus, ask, route)
+    if case.table is not None:
+        raise CaseError("Choose visual or table-text for a located financial table")
     if route == "forecast" and not case.forecast_choices:
         raise CaseError("The forecast specialist requires a forecast question with declared options")
     decisions = []

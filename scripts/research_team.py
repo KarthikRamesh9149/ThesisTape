@@ -3,6 +3,7 @@
 import argparse
 import json
 import sys
+from dataclasses import asdict
 from datetime import UTC, datetime
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
@@ -11,20 +12,28 @@ from threading import Lock
 from .claim_review import VERSION as REVIEW_VERSION
 from .disney_hulu_case import CaseError, read_saved_file
 from .forecast_specialist import VERSION as FORECAST_VERSION
-from .retrieval_gateway import Corpus
 from .sol_baseline import PROJECT_ROOT, fingerprint, generation_request, json_bytes
-from .sol_provider import MODEL_RATES, OpenAIResponses, project_key
+from .sol_provider import LUNA, MODEL, MODEL_RATES, TERRA, OpenAIResponses, project_key
 from .team_meter import Meter, verify_ledger
 from .team_research import VERSION, Case, case_for, research
+from .visual_reader import ROUTES as TABLE_ROUTES
+from .visual_reader import VERSION as VISUAL_VERSION
 
-CASES = ("disney", "tradeweb", "tradeweb-before", "toyota", "nvidia")
-ROUTES = ("team", "single", "reviewed", "forecast")
+CASES = ("disney", "tradeweb", "tradeweb-before", "toyota", "nvidia", "toyota-buybacks")
+ROUTES = ("team", "single", "reviewed", "forecast", *TABLE_ROUTES)
 
 
 def configuration(case, corpus, route):
+    models = (MODEL, LUNA)
+    if route in TABLE_ROUTES:
+        if not case.table:
+            raise CaseError("The table route needs a located source table")
+        models = (MODEL, TERRA) if route == "visual" else (MODEL,)
     return {
         "schema_version": 3,
         "prompt_version": VERSION,
+        **({"table_version": VISUAL_VERSION, "review_version": VISUAL_VERSION,
+            "table": asdict(case.table)} if route in TABLE_ROUTES else {}),
         **(
             {"review_version": REVIEW_VERSION}
             if route in ("reviewed", "forecast")
@@ -45,10 +54,10 @@ def configuration(case, corpus, route):
         "paid_tool_charges_usd": "0",
         "pricing": {
             "status": "estimate_from_usage",
-            "per_million_usd": MODEL_RATES,
+            "per_million_usd": {model: MODEL_RATES[model] for model in models},
             "sources": [
                 f"https://developers.openai.com/api/docs/models/{model}"
-                for model in MODEL_RATES
+                for model in models
             ],
         },
     }
@@ -59,7 +68,7 @@ def run(
 ):
     if route not in ROUTES:
         raise CaseError("Choose a supported research route")
-    corpus = corpus if corpus is not None else Corpus(case.archive)
+    corpus = corpus if corpus is not None else case.corpus()
     return execute(
         configuration(case, corpus, route),
         directory,
@@ -149,7 +158,7 @@ def execute(config, directory, budget, provider, workflow, *, artifact_name="mem
 
 
 def replay(case: Case, record: dict, *, corpus=None):
-    corpus = corpus if corpus is not None else Corpus(case.archive)
+    corpus = corpus if corpus is not None else case.corpus()
     route = record["route"]
     if route not in ROUTES:
         raise CaseError("Unknown research route")
@@ -208,7 +217,7 @@ def main(argv=None):
     cmds = parser.add_subparsers(dest="command", required=True)
     live = cmds.add_parser("run")
     live.add_argument("--case", choices=CASES, required=True)
-    live.add_argument("--route", choices=ROUTES, default="team")
+    live.add_argument("--route", choices=ROUTES)
     live.add_argument("--budget-usd", default="0.05")
     live.add_argument("--output-dir", type=Path, required=True)
     saved = cmds.add_parser("replay")
@@ -217,9 +226,10 @@ def main(argv=None):
     try:
         if args.command == "run":
             provider = OpenAIResponses(project_key(PROJECT_ROOT / ".env.local"))
+            case = case_for(args.case)
             record = run(
-                case_for(args.case),
-                args.route,
+                case,
+                args.route or ("visual" if case.table else "team"),
                 args.output_dir,
                 Decimal(args.budget_usd),
                 provider,

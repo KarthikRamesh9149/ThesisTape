@@ -42,13 +42,14 @@ class Evidence:
 class Corpus:
     """Trusted control-plane catalog. Only a dated session is exposed to tools."""
 
-    def __init__(self, directory: Path = ARCHIVE):
+    def __init__(self, directory: Path = ARCHIVE, *, objects: Path | None = None):
         data = (directory / "catalog.json").read_bytes()
         catalog = json.loads(data)
         if catalog["schema_version"] != 1:
             raise ValueError("Unsupported retrieval catalog")
         self.digest = sha256(data).hexdigest()
-        self._objects = directory / "objects"
+        self._objects = directory / "objects" if objects is None else objects
+        self._page_images = directory / "objects"
         self._sources = {}
         self._redirects = {}
         self._cache = {}
@@ -268,6 +269,30 @@ class DatedSession:
         with self._lock:
             self._authorize(max_date)
             return self._read(url, locator)
+
+    def page_image(self, passage: Evidence, *, max_date: str) -> bytes | None:
+        """Return only the registered page pixels for a freshly verified, eligible PDF passage."""
+        with self._lock:
+            self._authorize(max_date)
+            hits = self._read(passage.citation_url, passage.locator)
+            page = re.fullmatch(r"PDF p([1-9]\d*) §[1-9]\d*", passage.locator)
+            if hits != (passage,) or page is None:
+                self._finish("page_image", [])
+                return None
+            source = self._eligible[passage.url][1]
+            entry = source.get("page_images", {}).get(page[1])
+            if source["kind"] != "pdf" or not entry:
+                self._finish("page_image", [])
+                return None
+            if entry["pdf_sha256"] != passage.sha256:
+                raise EditionError("Page image belongs to a different PDF edition")
+            # A cached text read cannot vouch for an original or raster that has since changed.
+            object_bytes(self._corpus._objects, passage.sha256, ".pdf")
+            data = object_bytes(self._corpus._page_images, entry["sha256"], ".png")
+            if not data.startswith(b"\x89PNG\r\n\x1a\n"):
+                raise EditionError("Invalid registered PNG")
+            self._finish("page_image", hits)
+            return data
 
     def _read(self, url, locator):
         # Exact, catalogued URL matching. No live network or fallback to a mutable page.
