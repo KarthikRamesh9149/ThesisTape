@@ -1,17 +1,48 @@
 """Reconcile measured project generation costs once per registered assignment and public pilot."""
 
+import argparse
 import json
+import re
 from decimal import Decimal
+from pathlib import Path
 
 from evaluations.paired.grading_recovery import verify_extended_ledger
 from evaluations.paired.reconciliation import sidecar, verify_resolution
 from evaluations.paired.registration import REPO, ROOT
-from scripts.run_checkpoint import load
+from scripts.run_checkpoint import load, publish
+from scripts.sol_baseline import fingerprint, json_bytes
 from scripts.team_meter import verify_ledger
 
+SNAPSHOT = Path(__file__).with_name("cost-records.json")
 
-def report():
+
+def saved_charges(path):
+    value = load(path)
+    records = value["assignments"]
+    if value.get("version") != 1 or value.get("sha256") != fingerprint(
+        json_bytes(records)
+    ):
+        raise ValueError("Project cost snapshot changed")
+    for key, charge in records.items():
+        if not re.fullmatch(r"[0-9a-f]{64}", key) or not charge.get("group"):
+            raise ValueError("Invalid project cost identity")
+        for field in ("paid_usd", "reserved_usd"):
+            amount = Decimal(charge[field])
+            if not amount.is_finite() or amount < 0:
+                raise ValueError("Invalid historical project charge")
+    return records
+
+
+def match_charge(archived, token, group, paid):
+    prior = archived.pop(token, None)
+    if prior and (prior["group"] != group or Decimal(prior["paid_usd"]) > paid):
+        raise ValueError("A live ledger lost an already recorded project charge")
+    return prior
+
+
+def report(*, capture=None, snapshot=SNAPSHOT):
     money, reservations, counts = {}, {}, {}
+    archived = saved_charges(snapshot) if snapshot is not None else {}
 
     def add(group, paid, held=Decimal(0), count=0):
         money[group] = money.get(group, Decimal(0)) + Decimal(paid)
@@ -63,7 +94,23 @@ def report():
             resolved = verify_resolution(rec, load(resolution))
             spent = Decimal(resolved["settled_total_usd"])
             held = {"settled": Decimal(resolved["outstanding_usd"])}
-        add(group, spent, sum(held.values(), Decimal(0)), 1)
+        reserved = sum(held.values(), Decimal(0))
+        key = fingerprint(rec["checkpoint_id"].encode())
+        prior = match_charge(archived, key, group, spent)
+        add(group, spent, reserved, 1)
+        # A snapshot carries incurred development expenses and final benchmark
+        # assignments. Active benchmark calls remain protected by the live gate.
+        running_benchmark = (rec.get("assignment") or {}).get("task_id") and rec[
+            "state"
+        ] in {"running", "paused", "queued"}
+        if capture is not None and not running_benchmark:
+            capture[key] = {
+                "group": group,
+                "paid_usd": str(spent),
+                "reserved_usd": str(reserved),
+            }
+        elif capture is not None and prior:
+            capture[key] = prior
 
     boj = REPO / "runs/open-research/boj-march2024/research/run.json"
     if boj.is_file():
@@ -108,6 +155,10 @@ def report():
         include("FinanceBench independent research", p)
     for p in (REPO / "runs/financebench-grading").glob("*/grade/run.json"):
         include("FinanceBench masked grading", p)
+    for key, charge in archived.items():
+        add(charge["group"], charge["paid_usd"], charge["reserved_usd"], 1)
+        if capture is not None:
+            capture[key] = charge
     return {
         "settled_estimate_usd": str(sum(money.values())),
         "outstanding_usd": str(sum(reservations.values())),
@@ -123,5 +174,24 @@ def report():
     }
 
 
+def snapshot_charges(path=SNAPSHOT):
+    records = {}
+    report(capture=records, snapshot=path if path.exists() else None)
+    blob = {
+        "version": 1,
+        "sha256": fingerprint(json_bytes(records)),
+        "assignments": records,
+    }
+    publish(path, json_bytes(blob))
+    return {"assignments": len(records), "sha256": blob["sha256"]}
+
+
 if __name__ == "__main__":
-    print(json.dumps(report(), indent=2))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--snapshot",
+        action="store_true",
+        help="Save portable cumulative charges from the verified provider ledgers",
+    )
+    args = parser.parse_args()
+    print(json.dumps(snapshot_charges() if args.snapshot else report(), indent=2))

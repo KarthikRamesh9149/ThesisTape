@@ -2,6 +2,18 @@
 
 The official runner uses the analyst desk's public-archive research engine. It matches every output to the original question and cutoff, meters each model generation, and records the raw HTTP evidence needed to rebuild dated retrieval independently. The 400 tasks come from the pinned public release. The maintainers hold the scoring rubric. [Public dataset](https://huggingface.co/datasets/Rujun/FinanceGym/tree/980a80810fdb41c90d8533baa228ddbe6557e9b1) · [Submission rules](https://financegym.github.io/#submit)
 
+## Run or resume the complete workflow
+
+Place the pinned question file at `runs/benchmark_400_public.jsonl`. The status command reads the research records and project balance without calling a model. The paced runner completes outstanding primary investigations. The finish command reviews eligible drafts, conducts independent research on unanswered questions and applies the source checks before exporting the reports. Both research commands can use API credits and enforce the shared project ceiling.
+
+```sh
+.venv/bin/python -B -m evaluations.financegym.workflow status runs/benchmark_400_public.jsonl
+.venv/bin/python -B -m evaluations.financegym.pacing runs/benchmark_400_public.jsonl --workers 3
+.venv/bin/python -B -m evaluations.financegym.workflow finish runs/benchmark_400_public.jsonl runs/financegym-submission
+```
+
+The final directory contains the submission JSONL, a per-question audit and a methodology paper. The workflow also seals and independently replays the private evidence in `evaluations/financegym/results/`. For a new run in a checkout that already contains a sealed benchmark, choose a fresh destination and pass `--evidence-directory` with a fresh directory. To reproduce the already sealed reports, use `evaluations.financegym.evidence verify` with the public question file. That operation runs offline without an API key.
+
 ## Verify the inputs and retrieval
 
 Save the JSONL from the pinned dataset as `runs/benchmark_400_public.jsonl`. Run from the repository root.
@@ -32,6 +44,8 @@ The first six questions used up to three concurrent investigations. After concur
 ```
 
 The owner set a USD 140 ceiling for the entire project during the run. The paced runner admits new research only up to USD 139, leaving a dollar of headroom. It counts development, testing, previous attempts and outstanding provider charges. Simultaneous investigations reserve their entire individual allowances before starting. An interrupted assignment keeps its reservation and can resume under the same allowance.
+
+The portable cost record preserves previously incurred charges when a clean checkout has no operator files. Restoring an original run counts its charge once. Completing the benchmark refreshes the record. Use one active checkout for paid work so concurrent calls share its reservation database. The spending estimates use priced provider receipts. [Portable project cost record](cost-records.json)
 
 ```sh
 .venv/bin/python -B -m evaluations.financegym.budget status

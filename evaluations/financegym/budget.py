@@ -150,7 +150,14 @@ class ProjectBudget:
 
 
 def run_registered_stage(questions, task_id, stage):
-    from . import budget_publication, editorial, recovery, runner, titled_publication
+    from . import (
+        archive_failure,
+        budget_publication,
+        editorial,
+        recovery,
+        runner,
+        titled_publication,
+    )
 
     rows = {row["task_id"]: row for row in runner.tasks(questions)}
     if task_id not in rows:
@@ -181,7 +188,7 @@ def run_registered_stage(questions, task_id, stage):
                         "The original draft already passed independent review"
                     )
         with budget.reserve(record, cap):
-            return recovery.recover_one(row, cfg, extension)
+            return archive_failure.recover_one(row, cfg, extension)
     if not editorial.eligible(row, cfg):
         raise ValueError("This investigation does not need funded editing")
     originals = editorial.folders(row)
@@ -189,8 +196,11 @@ def run_registered_stage(questions, task_id, stage):
         row["question"], row["cutoff"], cfg["archive_version"], originals
     )
     specification = editorial.locked(cfg, extension)
-    with budget.reserve(
-        editorial.ROOT / task_id / "research/run.json", editorial.engine.CAP
+    with (
+        budget.reserve(
+            editorial.ROOT / task_id / "research/run.json", editorial.engine.CAP
+        ),
+        archive_failure.use_archive_failure_verifier(),
     ):
         return editorial.run_one(row, cfg, extension, specification)
 
