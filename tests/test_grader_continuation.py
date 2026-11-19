@@ -5,6 +5,14 @@ from scripts import sol_provider
 
 
 class MaskedGraderContinuation(unittest.TestCase):
+    def test_real_masked_witnesses_and_grader_costs_reproduce_offline(self):
+        from evaluations.paired import grade_evidence
+
+        checked = grade_evidence.verify(grade_evidence.REVISION)
+        self.assertEqual(checked["locked_assignments"], 48)
+        self.assertEqual(checked["verified_generations"], 7)
+        self.assertEqual(checked["confirmed_grading_usd"], "0.762824")
+
     def test_large_grader_limit_is_isolated_from_the_original_research_runtime(self):
         from decimal import Decimal
 
