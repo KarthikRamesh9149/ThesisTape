@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "top_k": 5,
+  "cases": [
+    {
+      "id": "hulu-price",
+      "group": "US filings",
+      "cutoff": "2023-11-02",
+      "question": "As of 2 November 2023, what did Disney expect to pay for NBCUniversal’s stake in Hulu, and what could change the final amount?",
+      "expected": [
+        {
+          "source": "disney-hulu",
+          "locator": "Item 8.01 Other Events. ¶1",
+          "anchors": [
+            "approximately $8.61 billion",
+            "capital call contributions"
+          ]
+        },
+        {
+          "source": "disney-hulu",
+          "locator": "Item 8.01 Other Events. ¶2",
+          "anchors": [
+            "agreed appraisal process",
+            "greater than the guaranteed floor value"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hulu-timing",
+      "group": "US filings",
+      "cutoff": "2023-11-02",
+      "question": "When would Disney pay NBCU if an appraisal put Hulu above the guaranteed purchase price?",
+      "expected": [
+        {
+          "source": "disney-hulu",
+          "locator": "Item 8.01 Other Events. ¶2",
+          "anchors": [
+            "within 45 days of such final determination"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tradeweb-license",
+      "group": "US filings",
+      "cutoff": "2023-10-26T12:00:00Z",
+      "question": "What initial term did Tradeweb and Refinitiv agree for the current market data schedules?",
+      "expected": [
+        {
+          "source": "tradeweb-8k",
+          "locator": "Item 1.01. Entry into a Material Definitive Agreement. ¶2",
+          "anchors": [
+            "November 1, 2023 through October 31, 2025"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tradeweb-correction",
+      "group": "US filings",
+      "cutoff": "2023-10-26T13:17:00Z",
+      "question": "What changed in Tradeweb’s forecast range for adjusted expenses in its amended earnings release?",
+      "expected": [
+        {
+          "source": "tradeweb-8ka",
+          "locator": "Item 2.02. Results of Operations and Financial Condition. ¶1",
+          "anchors": [
+            "from $659 million to $695 million"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "toyota-results",
+      "group": "Issuer tables",
+      "cutoff": "2023-05-10",
+      "question": "What operating income and sales revenues did Toyota report for FY2023 compared with FY2022?",
+      "expected": [
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p2 §2",
+          "anchors": [
+            "Operating income",
+            "Million yen",
+            "37,154,298",
+            "2,725,025",
+            "2,995,697"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "toyota-cash",
+      "group": "Issuer tables",
+      "cutoff": "2023-05-10",
+      "question": "How much cash did Toyota generate from operating activities in FY2023 and how much was used for investing activities?",
+      "expected": [
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p2 §4",
+          "anchors": [
+            "From operating activities",
+            "From investing activities",
+            "Million yen",
+            "FY2023 2,955,076 (1,598,890)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "toyota-guidance",
+      "group": "Issuer tables",
+      "cutoff": "2023-05-11",
+      "question": "What full-year operating income and sales revenues did Toyota forecast for FY2024?",
+      "expected": [
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p3 §1",
+          "anchors": [
+            "Forecast of Consolidated Results for FY2024",
+            "Million yen",
+            "38,000,000",
+            "3,000,000"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ecb-rate",
+      "group": "International regulator",
+      "cutoff": "2023-09-14",
+      "question": "What deposit facility rate did the ECB announce in September and when would the new rates take effect?",
+      "expected": [
+        {
+          "source": "ecb-sep2023",
+          "locator": "PDF p2 §4",
+          "anchors": [
+            "4.50%, 4.75% and 4.00%",
+            "20 September 2023"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ecb-outlook",
+      "group": "International regulator",
+      "cutoff": "2023-09-14",
+      "question": "What did ECB staff project for euro area inflation and economic growth in 2024?",
+      "expected": [
+        {
+          "source": "ecb-sep2023",
+          "locator": "PDF p1 §5",
+          "anchors": [
+            "3.2% in 2024",
+            "1.0% in 2024"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "advance-growth",
+      "group": "Macro vintages",
+      "cutoff": "2023-11-02",
+      "question": "At what annual rate did real US gross domestic product grow in the third quarter of 2023 in the advance estimate?",
+      "expected": [
+        {
+          "source": "bea-q3-advance",
+          "locator": "PDF p1 §3",
+          "anchors": [
+            "annual rate of 4.9 percent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "revised-growth",
+      "group": "Macro vintages",
+      "cutoff": "2023-11-29",
+      "question": "What was the second estimate of third-quarter US real GDP growth and which investment or spending revisions explained the update?",
+      "expected": [
+        {
+          "source": "bea-q3-second",
+          "locator": "PDF p1 §3",
+          "anchors": [
+            "annual rate of 5.2 percent"
+          ]
+        },
+        {
+          "source": "bea-q3-second",
+          "locator": "PDF p1 §4",
+          "anchors": [
+            "upward revisions to nonresidential fixed investment",
+            "downward revision to consumer spending"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lehman-bid",
+      "group": "Archived news",
+      "cutoff": "2008-09-16",
+      "question": "Which remaining bidder withdrew from buying Lehman Brothers over the weekend?",
+      "expected": [
+        {
+          "source": "wikinews-lehman",
+          "locator": "Article ¶2",
+          "anchors": [
+            "last remaining bidder, Barclays PLC bank pulled out"
+          ]
+        }
+      ]
+    }
+  ]
+}

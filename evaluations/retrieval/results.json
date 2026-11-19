@@ -1,0 +1,412 @@
+{
+  "schema_version": 1,
+  "top_k": 5,
+  "catalog_sha256": "4bc99235fbd4c25740055dcc57386a785a60494ae622fb1f415dc690aa28df6b",
+  "labels_sha256": "c022dacdceba0be82e7e9bb7054ded87bc3594444db74ea8b06ac17acda81550",
+  "passages_by_edition": {
+    "disney-hulu": 3,
+    "tradeweb-8k": 7,
+    "tradeweb-8ka": 8,
+    "toyota-fy2023": 8,
+    "ecb-sep2023": 13,
+    "bea-q3-advance": 14,
+    "bea-q3-second": 17,
+    "wikinews-lehman": 8
+  },
+  "total": {
+    "questions": 12,
+    "first_hit_marked": 8,
+    "passages_found": 14,
+    "passages_marked": 14,
+    "citation_checks": 60
+  },
+  "groups": {
+    "US filings": {
+      "questions": 4,
+      "first_hit_marked": 2,
+      "passages_found": 5,
+      "passages_marked": 5,
+      "citation_checks": 20
+    },
+    "Issuer tables": {
+      "questions": 3,
+      "first_hit_marked": 2,
+      "passages_found": 3,
+      "passages_marked": 3,
+      "citation_checks": 15
+    },
+    "International regulator": {
+      "questions": 2,
+      "first_hit_marked": 2,
+      "passages_found": 2,
+      "passages_marked": 2,
+      "citation_checks": 10
+    },
+    "Macro vintages": {
+      "questions": 2,
+      "first_hit_marked": 1,
+      "passages_found": 3,
+      "passages_marked": 3,
+      "citation_checks": 10
+    },
+    "Archived news": {
+      "questions": 1,
+      "first_hit_marked": 1,
+      "passages_found": 1,
+      "passages_marked": 1,
+      "citation_checks": 5
+    }
+  },
+  "cases": [
+    {
+      "id": "hulu-price",
+      "cutoff": "2023-11-02",
+      "gold_ranks": [
+        2,
+        1
+      ],
+      "retrieved": [
+        {
+          "source": "disney-hulu",
+          "locator": "Item 8.01 Other Events. ¶2"
+        },
+        {
+          "source": "disney-hulu",
+          "locator": "Item 8.01 Other Events. ¶1"
+        },
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p3 §2"
+        },
+        {
+          "source": "disney-hulu",
+          "locator": "Item 8.01 Other Events. ¶3"
+        },
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p2 §5"
+        }
+      ]
+    },
+    {
+      "id": "hulu-timing",
+      "cutoff": "2023-11-02",
+      "gold_ranks": [
+        2
+      ],
+      "retrieved": [
+        {
+          "source": "disney-hulu",
+          "locator": "Item 8.01 Other Events. ¶1"
+        },
+        {
+          "source": "disney-hulu",
+          "locator": "Item 8.01 Other Events. ¶2"
+        },
+        {
+          "source": "bea-q3-advance",
+          "locator": "PDF p2 §4"
+        },
+        {
+          "source": "wikinews-lehman",
+          "locator": "Article ¶5"
+        },
+        {
+          "source": "ecb-sep2023",
+          "locator": "PDF p2 §5"
+        }
+      ]
+    },
+    {
+      "id": "tradeweb-license",
+      "cutoff": "2023-10-26T12:00:00Z",
+      "gold_ranks": [
+        1
+      ],
+      "retrieved": [
+        {
+          "source": "tradeweb-8k",
+          "locator": "Item 1.01. Entry into a Material Definitive Agreement. ¶2"
+        },
+        {
+          "source": "tradeweb-8k",
+          "locator": "Item 1.01. Entry into a Material Definitive Agreement. ¶1"
+        },
+        {
+          "source": "tradeweb-8k",
+          "locator": "Item 1.01. Entry into a Material Definitive Agreement. ¶3"
+        },
+        {
+          "source": "tradeweb-8k",
+          "locator": "Item 1.01. Entry into a Material Definitive Agreement. ¶5"
+        },
+        {
+          "source": "tradeweb-8k",
+          "locator": "Item 2.02. Results of Operations and Financial Condition. ¶1"
+        }
+      ]
+    },
+    {
+      "id": "tradeweb-correction",
+      "cutoff": "2023-10-26T13:17:00Z",
+      "gold_ranks": [
+        2
+      ],
+      "retrieved": [
+        {
+          "source": "tradeweb-8ka",
+          "locator": "EXPLANATORY NOTE ¶1"
+        },
+        {
+          "source": "tradeweb-8ka",
+          "locator": "Item 2.02. Results of Operations and Financial Condition. ¶1"
+        },
+        {
+          "source": "tradeweb-8ka",
+          "locator": "Item 1.01. Entry into a Material Definitive Agreement. ¶1"
+        },
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p3 §1"
+        },
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p3 §2"
+        }
+      ]
+    },
+    {
+      "id": "toyota-results",
+      "cutoff": "2023-05-10",
+      "gold_ranks": [
+        2
+      ],
+      "retrieved": [
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p3 §1"
+        },
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p2 §2"
+        },
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p3 §3"
+        },
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p2 §1"
+        },
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p2 §4"
+        }
+      ]
+    },
+    {
+      "id": "toyota-cash",
+      "cutoff": "2023-05-10",
+      "gold_ranks": [
+        1
+      ],
+      "retrieved": [
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p2 §4"
+        },
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p2 §1"
+        },
+        {
+          "source": "wikinews-lehman",
+          "locator": "Article ¶4"
+        },
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p2 §5"
+        },
+        {
+          "source": "wikinews-lehman",
+          "locator": "Article ¶1"
+        }
+      ]
+    },
+    {
+      "id": "toyota-guidance",
+      "cutoff": "2023-05-11",
+      "gold_ranks": [
+        1
+      ],
+      "retrieved": [
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p3 §1"
+        },
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p2 §2"
+        },
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p3 §3"
+        },
+        {
+          "source": "toyota-fy2023",
+          "locator": "PDF p2 §5"
+        },
+        {
+          "source": "wikinews-lehman",
+          "locator": "Article ¶5"
+        }
+      ]
+    },
+    {
+      "id": "ecb-rate",
+      "cutoff": "2023-09-14",
+      "gold_ranks": [
+        1
+      ],
+      "retrieved": [
+        {
+          "source": "ecb-sep2023",
+          "locator": "PDF p2 §4"
+        },
+        {
+          "source": "ecb-sep2023",
+          "locator": "PDF p1 §6"
+        },
+        {
+          "source": "wikinews-lehman",
+          "locator": "Article ¶3"
+        },
+        {
+          "source": "ecb-sep2023",
+          "locator": "PDF p1 §5"
+        },
+        {
+          "source": "ecb-sep2023",
+          "locator": "PDF p1 §4"
+        }
+      ]
+    },
+    {
+      "id": "ecb-outlook",
+      "cutoff": "2023-09-14",
+      "gold_ranks": [
+        1
+      ],
+      "retrieved": [
+        {
+          "source": "ecb-sep2023",
+          "locator": "PDF p1 §5"
+        },
+        {
+          "source": "ecb-sep2023",
+          "locator": "PDF p3 §2"
+        },
+        {
+          "source": "ecb-sep2023",
+          "locator": "PDF p2 §2"
+        },
+        {
+          "source": "ecb-sep2023",
+          "locator": "PDF p1 §4"
+        },
+        {
+          "source": "ecb-sep2023",
+          "locator": "PDF p1 §6"
+        }
+      ]
+    },
+    {
+      "id": "advance-growth",
+      "cutoff": "2023-11-02",
+      "gold_ranks": [
+        1
+      ],
+      "retrieved": [
+        {
+          "source": "bea-q3-advance",
+          "locator": "PDF p1 §3"
+        },
+        {
+          "source": "bea-q3-advance",
+          "locator": "PDF p1 §2"
+        },
+        {
+          "source": "bea-q3-advance",
+          "locator": "PDF p2 §3"
+        },
+        {
+          "source": "bea-q3-advance",
+          "locator": "PDF p2 §4"
+        },
+        {
+          "source": "bea-q3-advance",
+          "locator": "PDF p2 §8"
+        }
+      ]
+    },
+    {
+      "id": "revised-growth",
+      "cutoff": "2023-11-29",
+      "gold_ranks": [
+        2,
+        3
+      ],
+      "retrieved": [
+        {
+          "source": "bea-q3-second",
+          "locator": "PDF p3 §1"
+        },
+        {
+          "source": "bea-q3-second",
+          "locator": "PDF p1 §3"
+        },
+        {
+          "source": "bea-q3-second",
+          "locator": "PDF p1 §4"
+        },
+        {
+          "source": "bea-q3-second",
+          "locator": "PDF p2 §9"
+        },
+        {
+          "source": "bea-q3-second",
+          "locator": "PDF p1 §5"
+        }
+      ]
+    },
+    {
+      "id": "lehman-bid",
+      "cutoff": "2008-09-16",
+      "gold_ranks": [
+        1
+      ],
+      "retrieved": [
+        {
+          "source": "wikinews-lehman",
+          "locator": "Article ¶2"
+        },
+        {
+          "source": "wikinews-lehman",
+          "locator": "Article ¶8"
+        },
+        {
+          "source": "wikinews-lehman",
+          "locator": "Article ¶1"
+        },
+        {
+          "source": "wikinews-lehman",
+          "locator": "Article ¶5"
+        },
+        {
+          "source": "wikinews-lehman",
+          "locator": "Article ¶6"
+        }
+      ]
+    }
+  ]
+}

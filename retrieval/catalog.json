@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "disney-hulu",
+      "family": "disney-hulu-2023-11",
+      "title": "Disney Form 8-K",
+      "edition": "0001744489-23-000206",
+      "url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448923000206/dis-20231101.htm",
+      "published": "2023-11-01T16:30:15-04:00",
+      "version_at": "2023-11-01T16:30:15-04:00",
+      "kind": "edgar",
+      "sha256": "181c8ded332bdf945d0598fc4305140904a47ddc16c150fcbce5562df24cd67e",
+      "proof_url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448923000206/0001744489-23-000206-index.htm",
+      "selection": {
+        "index_sha256": "66055c1730f31213059489cee35dfe4cc8173782d011d94034ca5a96f4b3ea78",
+        "document_title": "dis-20231101",
+        "form": "8-K",
+        "sections": [
+          "Item 8.01 Other Events."
+        ]
+      }
+    },
+    {
+      "id": "tradeweb-8k",
+      "family": "tradeweb-2023-10-26",
+      "title": "Tradeweb Markets Form 8-K",
+      "edition": "0001758730-23-000168",
+      "url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000168/tw-20231026.htm",
+      "published": "2023-10-26T07:01:25-04:00",
+      "version_at": "2023-10-26T07:01:25-04:00",
+      "kind": "edgar",
+      "sha256": "1d695296dded01de487504ceda04a36a2c07880fd4c38a63134026986d47e141",
+      "proof_url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000168/0001758730-23-000168-index.htm",
+      "selection": {
+        "index_sha256": "8614dad88b9a4400076018b078c4b37de22b9e5e04f6a7d81c0f8b5aa48a4fa5",
+        "document_title": "tw-20231026",
+        "form": "8-K",
+        "sections": [
+          "Item 1.01. Entry into a Material Definitive Agreement.",
+          "Item 2.02. Results of Operations and Financial Condition."
+        ]
+      },
+      "search_until": "2023-10-26T09:16:39-04:00"
+    },
+    {
+      "id": "tradeweb-8ka",
+      "family": "tradeweb-2023-10-26",
+      "title": "Tradeweb Markets Form 8-K/A",
+      "edition": "0001758730-23-000171",
+      "url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000171/tw-20231026.htm",
+      "published": "2023-10-26T09:16:39-04:00",
+      "version_at": "2023-10-26T09:16:39-04:00",
+      "kind": "edgar",
+      "sha256": "30c56f7f545cecaf63d3c41de5e1babf1414924ff9e4a1783b4132771d579ff7",
+      "proof_url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000171/0001758730-23-000171-index.htm",
+      "selection": {
+        "index_sha256": "94d6f1d486c05904693f17f6f3998b2dd5a6f996a9724b17d5a2755e58af565b",
+        "document_title": "tw-20231026",
+        "form": "8-K/A",
+        "sections": [
+          "EXPLANATORY NOTE",
+          "Item 1.01. Entry into a Material Definitive Agreement.",
+          "Item 2.02. Results of Operations and Financial Condition."
+        ]
+      }
+    },
+    {
+      "id": "toyota-fy2023",
+      "family": "toyota-fy2023",
+      "title": "Toyota Motor Corporation FY2023 consolidated financial results",
+      "edition": "FY2023 financial summary, English edition",
+      "url": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf",
+      "published": "2023-05-10",
+      "version_at": "2023-05-10",
+      "kind": "pdf",
+      "sha256": "35d198a5a14812731798e5bb917854d675ae6b2e74913c377301120b5a1de08c",
+      "proof_url": "https://global.toyota/en/ir/financial-results/archives/03.html",
+      "selection": {
+        "pages": [
+          2,
+          3
+        ],
+        "dateline_page": 2,
+        "dateline": "May 10, 2023",
+        "headings": {
+          "2": [
+            "(Amounts are rounded",
+            "(2) Consolidated financial position",
+            "(3) Consolidated cash flows",
+            "2. Cash Dividends"
+          ],
+          "3": [
+            "3. Forecast",
+            "Notes",
+            "(Reference)Overview of the Unconsolidated"
+          ]
+        }
+      },
+      "timezone": "Asia/Tokyo"
+    },
+    {
+      "id": "ecb-sep2023",
+      "family": "ecb-sep2023",
+      "title": "European Central Bank monetary policy decisions",
+      "edition": "14 September 2023 release",
+      "url": "https://www.bde.es/f/webbe/GAP/Secciones/SalaPrensa/ComunicadosBCE/DecisionesPoliticaMonetaria/23/pm140923en.pdf",
+      "published": "2023-09-14",
+      "version_at": "2023-09-14",
+      "kind": "pdf",
+      "sha256": "be415f1a2f1740a3dfb5c3219279231843ba12440b2a3c4c735c803c83fbb8df",
+      "proof_url": "https://www.ecb.europa.eu/press/pr/date/2023/html/ecb.mp230914~aab39f8c21.en.html",
+      "selection": {
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "dateline_page": 1,
+        "dateline": "14 September 2023",
+        "exclude_blocks_starting_with": [
+          "European Central Bank Directorate General Communications",
+          "Reproduction is permitted"
+        ]
+      },
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "id": "bea-q3-advance",
+      "family": "bea-gdp-2023q3",
+      "title": "US real GDP, third quarter 2023, advance estimate",
+      "edition": "BEA 23–49",
+      "url": "https://www.bea.gov/sites/default/files/2023-10/gdp3q23_adv.pdf",
+      "published": "2023-10-26T08:30:00-04:00",
+      "version_at": "2023-10-26T08:30:00-04:00",
+      "kind": "pdf",
+      "sha256": "f15a27a3bd67def4bd586fd841809951e9ca6797246d3798eb026c882070c7a0",
+      "proof_url": "https://www.bea.gov/news/2023/gross-domestic-product-third-quarter-2023-advance-estimate",
+      "selection": {
+        "pages": [
+          1,
+          2
+        ],
+        "dateline_page": 1,
+        "dateline": "8:30 a.m. EDT, Thursday, October 26, 2023",
+        "exclude_blocks_starting_with": [
+          "Real GDP: Percent change from preceding quarter",
+          "U.S. Bureau of Economic Analysis Seasonally",
+          "EMBARGOED UNTIL RELEASE AT"
+        ]
+      },
+      "search_until": "2023-11-29T08:30:00-05:00"
+    },
+    {
+      "id": "bea-q3-second",
+      "family": "bea-gdp-2023q3",
+      "title": "US real GDP, third quarter 2023, second estimate",
+      "edition": "BEA 23–55",
+      "url": "https://www.bea.gov/sites/default/files/2023-11/gdp3q23_2nd.pdf",
+      "published": "2023-11-29T08:30:00-05:00",
+      "version_at": "2023-11-29T08:30:00-05:00",
+      "kind": "pdf",
+      "sha256": "78f203b254b7721a87fc1dd72b7318eb73184ef0f6b6b05a51ae8446e4639c55",
+      "proof_url": "https://www.bea.gov/news/2023/gross-domestic-product-second-estimate-corporate-profits-preliminary-estimate-third",
+      "selection": {
+        "pages": [
+          1,
+          2,
+          3
+        ],
+        "dateline_page": 1,
+        "dateline": "8:30 a.m. EST, Wednesday, November 29, 2023",
+        "headings": {
+          "3": [
+            "Updates to GDP",
+            "Updates to Second-Quarter Wages and Salaries",
+            "Release Date for GDP by Industry Quarters"
+          ]
+        },
+        "exclude_blocks_starting_with": [
+          "Real GDP: Percent change from preceding quarter",
+          "U.S. Bureau of Economic Analysis Seasonally",
+          "EMBARGOED UNTIL RELEASE AT"
+        ]
+      },
+      "search_until": "2023-12-21T08:30:00-05:00"
+    },
+    {
+      "id": "wikinews-lehman",
+      "family": "wikinews-lehman",
+      "title": "Lehman Brothers files for bankruptcy",
+      "edition": "693716",
+      "url": "https://en.wikinews.org/w/index.php?oldid=693716",
+      "published": "2008-09-16T15:00:40Z",
+      "version_at": "2008-09-16T15:00:40Z",
+      "kind": "wikinews",
+      "sha256": "321fea148a815389e2b5c90ebdf87bd5180e07306ba2da2dadbf9e7045701207",
+      "proof_url": "https://en.wikinews.org/w/api.php?action=query&format=json&formatversion=2&prop=revisions&revids=693716&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main",
+      "selection": {},
+      "attribution": "Wikinews contributors, Creative Commons Attribution 2.5",
+      "license_url": "https://creativecommons.org/licenses/by/2.5/"
+    }
+  ],
+  "redirects": [
+    {
+      "from": "https://en.wikinews.org/wiki/Special:PermanentLink/693716",
+      "to": "https://en.wikinews.org/w/index.php?oldid=693716",
+      "from_at": "2026-11-19T08:08:00Z",
+      "proof": "HTTP 302 observed from the Wikimedia Special:PermanentLink endpoint. The observation only establishes this mapping from November 2026."
+    }
+  ]
+}

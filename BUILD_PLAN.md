@@ -51,6 +51,8 @@ Start with accession-specific EDGAR filings. Extend coverage to dated internatio
 
 **Completion evidence.** The Disney passage is retrievable and cited. Tests cover a later amendment, an old event reported after the cutoff, an ambiguous timestamp, a cached later version and a known future URL. No future or undated content appears in the model-visible trace. Measure retrieval of manually marked passages across US, international, macro and table-heavy development cases.
 
+**Measured on 19 November 2026.** The shared gateway indexes 78 passages across eight publisher editions. It retrieved all 14 marked passages within the first five results on 12 development questions. The first result was marked on eight questions. All 60 returned citation links reopened the intended passage. The evaluator added the real 2025 Disney filing, warmed the later cache, then reran the 2023 case. Its results, ordering and model-visible trace matched the run without the later filing. [Retrieval results](evaluations/retrieval/results.json) · [Sources and reproduction commands](README.md#search-the-point-in-time-archive)
+
 ### 3. Deliver the first working report with one Sol agent
 
 Run a question through the gateway, a decimal calculator, structured evidence extraction and a Markdown report renderer. Record the prompt version, sources, tool calls, provider-reported token usage and metered tool charges. Calculate cost from the applicable rates and mark it as estimated until reconciled with billing. The controller reserves the allowed spend before dispatch. Replay saved outputs offline.
@@ -95,4 +97,4 @@ At the checked Standard rates, the architecture’s example uses 12,000 input an
 
 **Illustration for the final run.** If all 400 cases used the base allowance and 80 needed that additional pass, text-model usage would be **400 × USD 0.0997 + 80 × USD 0.0810 = USD 46.36**. Search, visual inputs, cache charges, storage, development comparisons and retries are separate. The first live cases establish the actual token distribution. Batch independent offline calls when turnaround permits and apply discounts only to eligible usage. [Batch pricing and turnaround](https://developers.openai.com/api/docs/guides/batch)
 
-**First implementation handoff.** Deliver Step 1’s reproducible Disney case and scoring sheet. Report the evidence and the next checkpoint before progressing under the numbered-step workflow.
+**Next implementation checkpoint.** Connect the single-Sol report to the shared gateway. Compare its selected evidence, memo and cost with the saved Disney baseline before adding specialist routes.

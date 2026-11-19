@@ -84,8 +84,8 @@ def filing_item(data, source):
     return " ".join(filing_blocks(data, source))
 
 
-def verify_index(data, source, file_size):
-    # Both pinned EDGAR index snapshots use this filing-date and document-table markup.
+def verify_index(data, source, file_size, form_type="8-K"):
+    # The filing date and primary-document row must belong to the same EDGAR accession.
     page = data.decode("utf-8")
     filing_date = re.search(
         r'<div class="infoHead">Filing Date</div>\s*<div class="info">([^<]+)</div>', page
@@ -99,9 +99,9 @@ def verify_index(data, source, file_size):
     for row in re.findall(r"<tr>.*?</tr>", page, re.DOTALL):
         if link in row:
             numbers = re.findall(r"<td\b[^>]*>(\d+)</td>", row)
-            if numbers == ["1", str(file_size)] and '>8-K</td>' in row:
+            if numbers == ["1", str(file_size)] and f'>{form_type}</td>' in row:
                 return
-    raise CaseError(f"EDGAR index does not list {source['file']} as the primary 8-K at {file_size} bytes")
+    raise CaseError(f"EDGAR index does not list {source['file']} as the primary {form_type} at {file_size} bytes")
 
 
 def verify_citation(citation, source, item):
