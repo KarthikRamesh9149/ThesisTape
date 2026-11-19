@@ -1,0 +1,486 @@
+{
+  "archive_sha256": "665cd5ae2717a429a1591bc3bb8cda40c8eb540a9150f6d4a4fbd17174ee3dd4",
+  "registration_sha256": "5a13882ac64b393fd941e7c4920ada2e2a920369a82d312d6372cb5e2c8ef710",
+  "rows": [
+    {
+      "arm": "evidence_team_v4",
+      "calls": 8,
+      "case_id": "financebench_id_00839",
+      "memo_sha256": "b5cc27dba1f337785fd255ac4c65a9702dff3be9cb451cd8cfda48105f628718",
+      "record_sha256": "13746379431dea5bd131c42ecebcd9f7d3c0026dd2e1acf9d94e5aec75d919de",
+      "settled_usd": "0.230846",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_00839",
+      "memo_sha256": "2b98f82b217a39ce405d58c1c031f9d51bb74e0de4b186b4c1af65b70fab3201",
+      "record_sha256": "994cc61e9d9de4da9c13fe2584b284b6f0e51adb19922782cbf5111fc24e9311",
+      "settled_usd": "0.181024",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 8,
+      "case_id": "financebench_id_00591",
+      "memo_sha256": "09f3d373de88dae3fa8b9d750495c2bec1f71d0a3b173486f916211ffb3d8e28",
+      "record_sha256": "cbbf8d5acefe001c92b716c5a899982ea8b844bb3ed8b9f1b4b018498a5f9061",
+      "settled_usd": "0.309846",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 5,
+      "case_id": "financebench_id_00591",
+      "memo_sha256": "8b7c9fb9ff0f7c21430bd8d9c3a4cd6e54941b3eea44037650e83431cb1c8141",
+      "record_sha256": "3fd31da14dd1107959d556b854c9e196221eb757bcaa98261714e10c47518741",
+      "settled_usd": "0.311176",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 6,
+      "case_id": "financebench_id_02608",
+      "memo_sha256": "5f86e4b5e8a0820c4fc410a4c96cc191e7c8ea3e0655450dd6611899ad6bb3ed",
+      "record_sha256": "a790ca73f3725830e12ea17f5b48aa0b396232de0cec9a4b636f7f06ac32b7f5",
+      "settled_usd": "0.237602",
+      "state": "qualified",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_02608",
+      "failure": "Required reservation USD 0.25893 exceeds budget USD 0.106152",
+      "record_sha256": "98537d413a74a796f31bff3fb07773f1b0d148d4f76f67b6ac083cf2910335f5",
+      "settled_usd": "0.343848",
+      "state": "failed",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 8,
+      "case_id": "financebench_id_03620",
+      "memo_sha256": "9cfe5ef07f0ef12d02d5e289cb403d2fa512206beae11db58a57d72da78964a8",
+      "record_sha256": "c9afbf4f421cdd5cf62ba7f7c64ed3e928c1f20f3412e803b15baf07bb4495ba",
+      "settled_usd": "0.292680",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 5,
+      "case_id": "financebench_id_03620",
+      "memo_sha256": "6589ce3449bf8ea333bbcd5819c15549d992af82625c499905aa095d424db3c2",
+      "record_sha256": "3cb6b69b82e46b52afb57446d78c60f31851b5506ff45a29ab3a1c779bbed2e5",
+      "settled_usd": "0.334064",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 6,
+      "case_id": "financebench_id_00494",
+      "memo_sha256": "80108e335b8fa128f54c15b894ceab9ecc9b4c740eea22f068694e4df777b2c6",
+      "record_sha256": "957c7b109a794fc560e5a9a16eadab988388151cf0aa0cdfd3b9241bd4c31c21",
+      "settled_usd": "0.200194",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_00494",
+      "memo_sha256": "f5bcdde9016d0898af6853974670daface7bad0e6b0b868c5ab0ecff494c8e8f",
+      "record_sha256": "c7039ceffdcf3147f093659355a91294e2a2c3df2933645b1f028ea7765cab63",
+      "settled_usd": "0.227528",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 6,
+      "case_id": "financebench_id_00302",
+      "memo_sha256": "2b70cdc0f2cb1618d0c4700453290bf5f1f98216f67b9d61290a3d429a54afaa",
+      "record_sha256": "2a3e7b748db769fde7bd83e63cd8bbfdd41defe8f49b6191cdf0be2811d1c3ec",
+      "settled_usd": "0.118118",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_00302",
+      "memo_sha256": "106ae06314739a51b7bd223c4cd450c6fa79f7f37730b1ad7aa38789ddd7ba07",
+      "record_sha256": "3eb3716131d485339e5c40e97ec7379e62cd6af3010ae1d043a21131ff8f68b1",
+      "settled_usd": "0.210696",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 6,
+      "case_id": "financebench_id_01148",
+      "memo_sha256": "f3f18842153188f375295b859446c5a8a66c816cbc5b3e9a01f798984404728f",
+      "record_sha256": "6782be7b8ba4a4952a1bc28c7ca1c1778faee16655ab47b81b5ff25152bfc59d",
+      "settled_usd": "0.129232",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_01148",
+      "memo_sha256": "43517b1ac4c1456a98fa9d86fb6fc75833307c992c461acecf6f6307f7201ddb",
+      "record_sha256": "1fb1ad7b791a80c3632cbf08ca8f4d4bc29cf5d8e69d13e53b2f68ab56135d9a",
+      "settled_usd": "0.199616",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 7,
+      "case_id": "financebench_id_01226",
+      "failure": "The provider response did not complete",
+      "record_sha256": "6589616717fbc11f16bda1fe04c3e2eacc953ce2434831ee1b0c7cf801ead0db",
+      "settled_usd": "0.381370",
+      "state": "failed",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 5,
+      "case_id": "financebench_id_01226",
+      "memo_sha256": "9f1c3373becd3d3c9d70a05f7cc01bab7e5155b22727fdd41c9432bc3f67a12c",
+      "record_sha256": "5d6b8e7a72cddf61c2622d971deca4b7f6099433bad21634891cc05dd3aaea2a",
+      "settled_usd": "0.402808",
+      "state": "qualified",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 8,
+      "case_id": "financebench_id_01346",
+      "memo_sha256": "e102790aaa0f3d7942a998992d4070bf5fb18db802903546cf84dc658b3d6f4e",
+      "record_sha256": "6fecb4e3c9275e4654fd3f2eecab3990920405657e48b6e57f0eadc80248bd82",
+      "settled_usd": "0.274514",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_01346",
+      "memo_sha256": "eb7c6f7dba62b541e1c818aa701899480d3f88157c6acdb7741cf736fea4759c",
+      "record_sha256": "5f8b240c84e7fe86fec6994a4f54e176c6aef061b0b17f39bfdade0327b3f55f",
+      "settled_usd": "0.210320",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 8,
+      "case_id": "financebench_id_00605",
+      "memo_sha256": "9cb22a3e610a2e5e371e104f6529fb4d3bf368921236384346a1fec93a1f43b5",
+      "record_sha256": "524fc84f145e3a132c06881dcc2ebf4e31fb12a56fad80f364301d7c5bc751cb",
+      "settled_usd": "0.227446",
+      "state": "qualified",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_00605",
+      "memo_sha256": "a0517d6f71cdc5fd488b135f124955b1202d9613b9061a1c043b6890929ed5ed",
+      "record_sha256": "d6059addafae40594f794691c937dbc80a756b4203f0867bdedad871373e1b02",
+      "settled_usd": "0.213472",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 6,
+      "case_id": "financebench_id_00552",
+      "memo_sha256": "5c198e82f9f955be00a7969d07c89ec1bc21931c8b2cf516013f36aa222df646",
+      "record_sha256": "07e3a7b2b18053e9c102b7de2b9fa4e4c61aaede72598a0136dd6b7eea045cb8",
+      "settled_usd": "0.174238",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_00552",
+      "memo_sha256": "a56bd196a805bb3cc3777edfbce87fcc205faa76b966ae834a933de90df00899",
+      "record_sha256": "c4dfcd5cc9057152aa0bceba5050484710e26404ac89bf39b7151f1397102038",
+      "settled_usd": "0.210464",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 6,
+      "case_id": "financebench_id_01198",
+      "memo_sha256": "996836be90774a1d5ee3314b4bf40fb437615ac5b35ad8ead08625005884f420",
+      "record_sha256": "e9ec7438f33c157faa7a7c09fe0784423c46fff4741c25b67bf2ef59dea5f6ac",
+      "settled_usd": "0.214370",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_01198",
+      "memo_sha256": "b4e886193d318cb36a8442e1bad182e5cbd0874b34d67063c20dc79b8879524a",
+      "record_sha256": "968184256e3806aea24ca1ca333a1421768403ff3138fc072b5b4e8cfd8484be",
+      "settled_usd": "0.268000",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 8,
+      "case_id": "financebench_id_02119",
+      "memo_sha256": "1f36da4c92fea4d28c36c59fd6a21c3d6547dad2291fe6258e060c8565c208ba",
+      "record_sha256": "3e552f4697be8f27becbeb0fc924281080dc487cee1c3a5ee9db0e95286b1f9a",
+      "settled_usd": "0.376466",
+      "state": "qualified",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_02119",
+      "memo_sha256": "251c5ce4b6daadc9670782c6b0129d5d2d15b3cbafb78bed35c146573d9f8c76",
+      "record_sha256": "c7f90cdbae242b607dd5d81b4c9476ec921fa47b7f533d57c5681083bc76ad4c",
+      "settled_usd": "0.258680",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 6,
+      "case_id": "financebench_id_01244",
+      "memo_sha256": "82be4065286ce83acb2d5d36753284645fd6803120dc54285653fd3dd46be734",
+      "record_sha256": "4c2ce4a9dac13029d14f5648511c74731229622b2097acefa76232da540c5c5d",
+      "settled_usd": "0.143318",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_01244",
+      "memo_sha256": "37efa7ee246d7c53056e3de193df5584c4c67f1e7e803e2220cef997828349d4",
+      "record_sha256": "1889db9b9f21687719f7afb2ea087d31f1436ab815bea927491896286e32f70c",
+      "settled_usd": "0.204744",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 8,
+      "case_id": "financebench_id_01912",
+      "memo_sha256": "9906123d9500026068168eebef1eee94e68f1b35f7dc9f3f378a83256b9c02e3",
+      "record_sha256": "b6dd494aca8a96b3d47fb3dfc1c6ce58ae5434ac6db2514c400206d7d39cd69f",
+      "settled_usd": "0.294326",
+      "state": "qualified",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_01912",
+      "memo_sha256": "ff2fd969bb5ce35ba9623748c3d8ed27dfe84aa33d96bf9e23ce04212620ee3f",
+      "record_sha256": "8e2bbf75a24c135f6148a44c3ae4b8504ac9d9fefe4fbe482c37fe703ee8afb2",
+      "settled_usd": "0.219768",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 6,
+      "case_id": "financebench_id_03531",
+      "memo_sha256": "7f3c53796c8f5b0fc6f930ae3f3de047cfc6649b9dea2e6191c3d3f62d3f1330",
+      "record_sha256": "1cc8a7f56caec3162e2ae9ebcc7e3d0c4b4c2d9138f2bfe29e1d861e9ac86dc8",
+      "settled_usd": "0.109722",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_03531",
+      "memo_sha256": "01d33263d067423e3341f4d7e10e66c4ed8d60fd2dd1cce5fea94dcaac000e0a",
+      "record_sha256": "e1c6c459b327e5aecd10451b343e334a1f0378c3d9a469556d0782d0d0fa594e",
+      "settled_usd": "0.198040",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 8,
+      "case_id": "financebench_id_04784",
+      "memo_sha256": "eba8b5fbbdd8742d4e0f1673beea51a525e2117edaf03603b1f9492d89c85cc0",
+      "record_sha256": "0614ce9016a4d7abeb243f536ba8dd2352908eaf50a810f595d9ade174ae0a8e",
+      "settled_usd": "0.290194",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_04784",
+      "memo_sha256": "c7f80eedd2f2ab9c073414ce1b798bbbc44f5570059ae88ff919db4b652119e6",
+      "record_sha256": "d296d2a8ca93f68eb189d9657c34d8f967eb1630a05a6bec3bb7454efbca2628",
+      "settled_usd": "0.239864",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 6,
+      "case_id": "financebench_id_04103",
+      "memo_sha256": "915e4d7a8579e759b691ed8f623fb480cf75bc5b39115601f55d8b7ffdd96375",
+      "record_sha256": "d578756958984ab5b24cf1111f112658292e65df1b6765b8abb3e27edc537652",
+      "settled_usd": "0.204876",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 5,
+      "case_id": "financebench_id_04103",
+      "memo_sha256": "904ea376e7b51133d62f93ef7ab42beef6884f41ee8ce29f32f66e56e95b2bf0",
+      "record_sha256": "3569dcf67f96d44a99e3df3c12c27ea2e02a146c6759e3f369d2652af413eb06",
+      "settled_usd": "0.384296",
+      "state": "qualified",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 8,
+      "case_id": "financebench_id_00956",
+      "memo_sha256": "14cb564725b8295907726dcbb59bf1c344b5b73b2bb4b9edd427a3c7620777a9",
+      "record_sha256": "9ac69991978569d2da0124ccdd08acb10a968cb911161c5ca8c7192e35cf18a9",
+      "settled_usd": "0.314476",
+      "state": "qualified",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 5,
+      "case_id": "financebench_id_00956",
+      "memo_sha256": "df454e47ed43e623bc0db0d8a947dcaa7a7e9386c3945e801bee18e37720a9b2",
+      "record_sha256": "23e31bb45683d9fb71cf8fe3d6270e4f18c5e1a71ccbe0f856dd9313761fa8df",
+      "settled_usd": "0.354560",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 6,
+      "case_id": "financebench_id_00859",
+      "memo_sha256": "3c3757f5a48ba58a1ca9f32b9ca54ef7ad6615b9beb7d13fe134bf0d22ca4898",
+      "record_sha256": "1c871558a7c5e0dbaf1782cb0e15a3b27bcb7147980ff65324bf0c6b80256626",
+      "settled_usd": "0.136244",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_00859",
+      "memo_sha256": "e7bc0945cb0f879cad1fa8745ee36fa8be7936c4a90043ba604e73df23f9563e",
+      "record_sha256": "b4bbd9100b78a823a8ca688ff852997002e7c4bf4e5c4d8dd14b0a3bf3ec7291",
+      "settled_usd": "0.215872",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 8,
+      "case_id": "financebench_id_01319",
+      "memo_sha256": "48b7e97afadcc88726aa7420b21c0e3d252c3529f6a3044adde32b8722d7b223",
+      "record_sha256": "e73915f8b02a585804986f04acb4af02abc6ad648e73dc08655ab5f176201533",
+      "settled_usd": "0.235650",
+      "state": "qualified",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_01319",
+      "memo_sha256": "f31b1d5016af8cf72ba406d5b7db2dbe8bef5109036378ed6816651c7fa10506",
+      "record_sha256": "ada19fd2d5740f81af33ec5d0101bea003b4641839ba07157aa968afa8245add",
+      "settled_usd": "0.223072",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 8,
+      "case_id": "financebench_id_07966",
+      "memo_sha256": "733cb19b04eabe0aed704dd8dd9a95c074811ba9363a8b659ded1b52ac42b927",
+      "record_sha256": "b16e6ba7cce4bfd5ba38d3af36e21fc8cf84370b9e22f693f5377ebe81c42c7e",
+      "settled_usd": "0.278188",
+      "state": "qualified",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 5,
+      "case_id": "financebench_id_07966",
+      "memo_sha256": "e072a7c6a38dfa40497340cd931ec4429c7057ef923c32e11666831111dba224",
+      "record_sha256": "01a28b5c2c9f7f2f783577cb26377142a0941447d950edf028ac5daea1a85fa9",
+      "settled_usd": "0.360120",
+      "state": "qualified",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 8,
+      "case_id": "financebench_id_03838",
+      "memo_sha256": "654608bf40fd5c217b7ffb7cd17e5a57701e5b06136957cba19e4d505b802f3b",
+      "record_sha256": "327861fc91c4da1baa427e36075ff89232dc2339740881b6c018f81d5212e600",
+      "settled_usd": "0.295392",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 4,
+      "case_id": "financebench_id_03838",
+      "memo_sha256": "78aa7b97aeb9406ed4ff3f23d9fcdb7aa417b5712b84dfa8b53481631fdaf6d0",
+      "record_sha256": "0d52a1932f75418e84d25bbd26470819ad1339ee4ce5175f95bbcba2315c44ce",
+      "settled_usd": "0.288336",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "evidence_team_v4",
+      "calls": 6,
+      "case_id": "financebench_id_03282",
+      "memo_sha256": "dcd7874ad36bf422c6961a13c3326cc0a7d4d5cf5b746d81abe1c8381a2aa3d0",
+      "record_sha256": "ec27e75a3c90643bf4348ca1b21c28482b44190f8f65fd194352d4f1911072e4",
+      "settled_usd": "0.122110",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "arm": "quantitative_astra",
+      "calls": 5,
+      "case_id": "financebench_id_03282",
+      "memo_sha256": "11cb55b74f6c85361bf1710edd825c387a610028ea1d44cbbe3fcc22edbb0367",
+      "record_sha256": "8e4084b945339b504be869a4476acf0c03bbfab9565ad3230a31c0d44a65b54a",
+      "settled_usd": "0.244160",
+      "state": "complete",
+      "unconfirmed_usd": "0"
+    }
+  ]
+}
