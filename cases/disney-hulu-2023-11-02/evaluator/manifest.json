@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "case_id": "disney-hulu-2023-11-02",
+  "source": {
+    "id": "disney-8k-2025-06-09",
+    "file": "dis-20250609.htm",
+    "title": "dis-20250609",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448925000126/dis-20250609.htm",
+    "accession": "0001744489-25-000126",
+    "filing_date": "2025-06-09",
+    "sha256": "d59ad91ce448413bd9c72cd54b00e18d51a0e08c814898c3cf039a33c558cbc8",
+    "section": "Item 7.01 Regulation FD Disclosure."
+  },
+  "edgar_indexes": [
+    {
+      "source_id": "disney-8k-2023-11-01",
+      "file": "0001744489-23-000206-index.htm",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448923000206/0001744489-23-000206-index.htm",
+      "complete_submission_url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448923000206/0001744489-23-000206.txt",
+      "sha256": "66055c1730f31213059489cee35dfe4cc8173782d011d94034ca5a96f4b3ea78"
+    },
+    {
+      "source_id": "disney-8k-2025-06-09",
+      "file": "0001744489-25-000126-index.htm",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448925000126/0001744489-25-000126-index.htm",
+      "complete_submission_url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448925000126/0001744489-25-000126.txt",
+      "sha256": "03f36a43e198fdd675ba2f54b04a12cbc6442cbf2416ed40fe46776798ac9859"
+    }
+  ]
+}

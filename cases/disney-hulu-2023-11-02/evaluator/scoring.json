@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "case_id": "disney-hulu-2023-11-02",
+  "passing_rule": "Award one point for each fully met criterion. Pass requires 3/3, a citation to the 2023 Form 8-K covering the claims, and no material factual or cutoff errors. Accept accurate paraphrases.",
+  "criteria": [
+    {
+      "id": "expected_initial_payment",
+      "requirement": "Disney expected to pay NBCUniversal about USD 8.61 billion on or before 1 December 2023, assuming all outstanding NBCUniversal capital call contributions remained unpaid on that date. The figure was an initial payment estimate as of the cutoff.",
+      "citation": {
+        "source_id": "disney-8k-2023-11-01",
+        "section": "Item 8.01 Other Events.",
+        "anchors": ["December 1, 2023", "approximately $8.61 billion", "remains unpaid"]
+      }
+    },
+    {
+      "id": "whole_company_floor",
+      "requirement": "USD 27.5 billion was the guaranteed floor for the equity value of all of Hulu. NBCUniversal’s equity ownership percentage was applied to the applicable total equity value.",
+      "citation": {
+        "source_id": "disney-8k-2023-11-01",
+        "section": "Item 8.01 Other Events.",
+        "anchors": ["Hulu’s equity fair value", "$27.5 billion"]
+      }
+    },
+    {
+      "id": "appraisal_and_uncertainty",
+      "requirement": "The agreed appraisal could lead to an additional payment to NBCUniversal if Hulu’s final appraised equity value exceeded the floor. The appraisal and final purchase price were still unresolved on 2 November 2023.",
+      "citation": {
+        "source_id": "disney-8k-2023-11-01",
+        "section": "Item 8.01 Other Events.",
+        "anchors": ["agreed appraisal process", "greater than the guaranteed floor value"]
+      }
+    }
+  ],
+  "later_outcome": {
+    "summary": "Disney reported that it paid about USD 8.6 billion in December 2023 and that an additional USD 438.7 million was payable after the contractual appraisal concluded on 9 June 2025. Use this disclosure to spot hindsight in a response. The June 2025 filing falls outside the answer’s cutoff.",
+    "citation": {
+      "source_id": "disney-8k-2025-06-09",
+      "section": "Item 7.01 Regulation FD Disclosure.",
+      "anchors": ["approximately $8.6 billion", "completed on June 9, 2025", "an additional $438.7 million"]
+    }
+  },
+  "examples_of_errors": [
+    "Calling USD 8.61 billion the final purchase price or saying Disney had already paid it by the cutoff.",
+    "Calling USD 27.5 billion the purchase price for NBCUniversal’s stake.",
+    "Omitting the assumption about the unpaid contributions or saying the appraisal could not affect what Disney owed.",
+    "Presenting the USD 438.7 million appraisal outcome as known in November 2023, even if the figure is accurate."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "case_id": "disney-hulu-2023-11-02",
+  "question": "As of 2 November 2023, what did Disney expect to pay for NBCUniversal’s stake in Hulu, and what could change the final amount?",
+  "cutoff": "2023-11-02",
+  "source": {
+    "id": "disney-8k-2023-11-01",
+    "file": "dis-20231101.htm",
+    "title": "dis-20231101",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448923000206/dis-20231101.htm",
+    "accession": "0001744489-23-000206",
+    "filing_date": "2023-11-01",
+    "sha256": "181c8ded332bdf945d0598fc4305140904a47ddc16c150fcbce5562df24cd67e",
+    "section": "Item 8.01 Other Events."
+  }
+}
