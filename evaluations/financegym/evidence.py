@@ -19,13 +19,22 @@ from scripts.run_checkpoint import load
 from scripts.sol_baseline import fingerprint, json_bytes
 from scripts.team_meter import verify_ledger
 
-from . import recovery, reviewed_release, runner, submission
+from . import editorial, recovery, reviewed_release, runner, submission
 
 FOLDER = REPO / "evaluations/financegym/results"
 PORTABLE = re.compile(
     r"(?:run\.json|result\.json|memo\.md|(?:searches|counts)/[0-9a-f]{64}\.json)"
 )
-ENTRY = re.compile(r"([a-z0-9]{24})/(primary|recovery)/(.+)")
+ENTRY = re.compile(r"([a-z0-9]{24})/(primary|recovery|editorial)/(.+)")
+
+
+def attempt_modes(proof):
+    modes = ["primary"]
+    if len(proof.get("attempts", ())) == 2:
+        modes.append("recovery")
+    if "editorial" in proof:
+        modes.append("editorial")
+    return modes
 
 
 def portable(run):
@@ -69,10 +78,13 @@ def seal(questions, directory, dest):
         entries = {}
         for rec in group:
             case = rec["task_id"]
-            locations = [("primary", runner.RESEARCH / case / "research")]
-            if len(rec.get("attempts", ())) == 2:
-                locations.append(("recovery", recovery.OUTPUT / case / "research"))
-            for kind, run in locations:
+            roots = {
+                "primary": runner.RESEARCH,
+                "recovery": recovery.OUTPUT,
+                "editorial": editorial.ROOT,
+            }
+            for kind in attempt_modes(rec):
+                run = roots[kind] / case / "research"
                 for name, raw in portable(run).items():
                     entries[f"{case}/{kind}/{name}"] = raw
         bundle = zipped(entries)
@@ -158,6 +170,11 @@ def verify(questions, root):
             "Published artifact changed",
         )
     rows = runner.tasks(questions)
+    editor_spec = (
+        editorial.locked(cfg, recovery.register(cfg))
+        if "editorial_registration_sha256" in audit
+        else None
+    )
     reports = [
         json.loads(raw) for raw in (root / "answers.jsonl").read_bytes().splitlines()
     ]
@@ -176,11 +193,7 @@ def verify(questions, root):
             allowed = {
                 (row["task_id"], mode)
                 for row, _, proof in group
-                for mode in (
-                    ("primary", "recovery")
-                    if len(proof.get("attempts", ())) == 2
-                    else ("primary",)
-                )
+                for mode in attempt_modes(proof)
             }
             require(
                 len(set(z.namelist())) == len(z.namelist()),
@@ -203,8 +216,10 @@ def verify(questions, root):
                 seen.add(case)
                 chain = proof.get("attempts", [proof])
                 editions, seconds = set(), 0
-                for index, evidence in enumerate(chain):
-                    mode = "recovery" if index else "primary"
+                billing = (
+                    [*chain, proof["editorial"]] if "editorial" in proof else chain
+                )
+                for mode, evidence in zip(attempt_modes(proof), billing, strict=True):
                     run = Path(t) / case / mode
                     receipt_index = load(run / "http-receipt-hashes.json")
                     require(
@@ -238,7 +253,29 @@ def verify(questions, root):
                     if len(chain) == 2
                     else runner.route(row, cfg)
                 )[0]
-                if "reviewed_publication" in proof:
+                if "editorial" in proof:
+                    originals = [
+                        Path(t) / case / name for name in ("primary", "recovery")
+                    ]
+                    require(
+                        reviewed_release.approved_draft(
+                            row,
+                            originals[-1],
+                            load(originals[-1] / "run.json"),
+                            cfg["archive_version"],
+                        )
+                        is None,
+                        "A paid edit replaced an already approved draft",
+                    )
+                    saved, memo = editorial.engine.audit(
+                        row,
+                        cfg["archive_version"],
+                        originals,
+                        run,
+                        editorial.ticket(row, editor_spec, chain),
+                    )
+                    item, visible = runner.reviewed_answer(row, saved, memo)
+                elif "reviewed_publication" in proof:
                     publication = reviewed_release.approved_draft(
                         row, run, rec, cfg["archive_version"]
                     )

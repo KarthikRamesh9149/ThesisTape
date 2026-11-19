@@ -97,6 +97,8 @@ def report():
         include("Official research", p)
     for p in (REPO / "runs/financegym-recovery").glob("*/research/run.json"):
         include("Independent recovery of unanswered official tasks", p)
+    for p in (REPO / "runs/financegym-editorial").glob("*/research/run.json"):
+        include("Funded editing of otherwise unanswered official tasks", p)
     for p in (REPO / "runs/financebench-research").glob("*/*/run.json"):
         include("FinanceBench independent research", p)
     for p in (REPO / "runs/financebench-grading").glob("*/grade/run.json"):

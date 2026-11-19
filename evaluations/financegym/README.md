@@ -50,6 +50,13 @@ If both investigators leave a question unanswered after its optional rewrite fai
 .venv/bin/python -B -m evaluations.financegym.reviewed_release export runs/benchmark_400_public.jsonl runs/financegym-submission
 ```
 
+If neither investigator produced a releasable memo or an independently approved first draft, the [funded editing procedure](editorial-policy.md) can use their original dated passages. A Sol analyst checks calculations, Astra writes, and a fresh Sol review determines which paragraphs can appear in the qualified report. The additional ceiling is USD 0.55. The final export counts these reports and all three stages' expenses. It uses the originally released answer whenever one exists.
+
+```sh
+.venv/bin/python -B -m evaluations.financegym.editorial run runs/benchmark_400_public.jsonl --task-id "$UNANSWERED_TASK_ID"
+.venv/bin/python -B -m evaluations.financegym.editorial export runs/benchmark_400_public.jsonl runs/financegym-submission
+```
+
 ## Prepare the methodology paper and local email
 
 Generate the public-facing paper from the verified 400-row export. The note reports the actual configuration and the independently measured results. The code repository can stay private. Once the paper has a public URL, use the submitter's email address, organization and submission date to generate a local email draft with the exact JSONL attached.
