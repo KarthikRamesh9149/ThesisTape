@@ -2,7 +2,7 @@
 
 ThesisTape is a multi-agent research project for testing investment theses using only information that was public by a chosen date. An analyst will be able to enter a question, a cutoff date and a budget, then trace each material claim in the resulting memo back to its source.
 
-The first implementation milestone is an offline Disney/Hulu case. It uses Disney’s November 2023 Form 8-K to distinguish the payment Disney expected from the price that was still open to appraisal. The evaluation plan compares the multi-agent workflow with a single analyst agent before submitting reports to FinanceGym.
+A single GPT-6.2 Sol analyst can now research the Disney/Hulu case through a dated archive. Starting with the question and cutoff, it found Disney’s November 2023 Form 8-K and wrote a memo that earned 3/3 on the case rubric. The run took 18.188 seconds and cost an estimated USD 0.016218. [Read the memo](evaluations/disney-sol-gateway/memo.md) · [Scoring and cost comparison](evaluations/disney-sol-gateway/evaluation.md)
 
 [Build plan and validation milestones](BUILD_PLAN.md) · [Architecture and model costs (PDF)](ThesisTape-Architecture.pdf)
 
@@ -20,7 +20,7 @@ python3 scripts/disney_hulu_case.py verify --case-dir "$case_workspace/disney-hu
 python3 -B -m unittest discover -s tests -p 'test_disney_hulu_case.py' -v
 ```
 
-Give the research agent the two files in the case’s `agent/` directory. The evaluator uses the separate `evaluator/` directory to grade the answer and check the dated sources. Import and verification run offline.
+The two files in `agent/` form the supplied-filing control. The gateway run takes its question and cutoff from the case and discovers its evidence through search. The evaluator uses the separate `evaluator/` directory to grade the answer and check the dated sources. Import and verification run offline.
 
 The importer reads the saved filings and indexes from the repository by default. Pass `--filings-dir DIR` to read the same four HTML files by their saved names from a single directory. The manifests and scoring sheet come from the versioned case. Reusing a destination with identical files succeeds without rewriting it.
 
@@ -28,25 +28,29 @@ The stored Form 8-K documents are the original HTML payloads inside EDGAR’s co
 
 ## Run the single-Sol baseline
 
-The baseline uses the verified Disney archive and sends only the dated passages to GPT-6.2 Sol. It validates the structured response, links each memo section to the cited filing text, and recomputes the disclosed payment from the sourced inputs with decimal arithmetic. The agent receives the question, cutoff and admitted passages. The scoring sheet and later filing are used from the evaluator side.
+Sol chooses its search terms, inspects dated result previews and selects passages to open. It has up to two searches. Only the selected full passages go into its writing request. The controller checks the quoted evidence, reconciles the amounts with decimal arithmetic and builds citations from the opened sources.
 
-Set up the baseline dependencies with Python 3.12.
+Install both dependencies with Python 3.12. To reproduce the verified result offline, replay the saved provider responses through the archive.
 
 ```sh
 python3.12 -m venv .venv
-.venv/bin/python -m pip install -r requirements-baseline.txt
-.venv/bin/python -B -m unittest discover -s tests -p 'test_sol_baseline.py' -v
+.venv/bin/python -m pip install -r requirements-baseline.txt -r requirements-retrieval.txt
+.venv/bin/python -B -m scripts.sol_baseline replay --run-dir evaluations/disney-sol-gateway > /tmp/thesistape-disney-replay.md
+cmp evaluations/disney-sol-gateway/memo.md /tmp/thesistape-disney-replay.md
+.venv/bin/python -B -m unittest discover -s tests -v
 ```
 
-With `OPENAI_API_KEY` in the ignored project `.env.local` or shell environment, run the CLI using a fresh output path.
+For a new live run, set `OPENAI_API_KEY` in the ignored project `.env.local` or in the shell and choose a fresh output directory.
 
 ```sh
-.venv/bin/python -B -m scripts.sol_baseline run --budget-usd 0.05 --output-dir runs/disney-sol
+.venv/bin/python -B -m scripts.sol_baseline run --retrieval gateway --budget-usd 0.05 --output-dir runs/disney-sol
 .venv/bin/python -B -m scripts.sol_baseline replay --run-dir runs/disney-sol > runs/disney-sol/replayed.md
 cmp runs/disney-sol/memo.md runs/disney-sol/replayed.md
 ```
 
-`memo.md` is the analyst deliverable. `run.json` records the cutoff-bound retrieval, source hash, prompt version, request hash, provider IDs, latency, token counts, arithmetic and cost estimate. The CLI counts input tokens and reserves enough for the output limit before sending one generation request. Replay rechecks those inputs and renders the saved response without contacting OpenAI. Costs use the published Standard rates and remain estimates until reconciled with billing. [OpenAI GPT-6.2 Sol pricing](https://developers.openai.com/api/docs/models/gpt-6.2-sol)
+`memo.md` is the analyst deliverable. The portable `run.json` records the model’s search and passage choices, source hashes, quoted evidence, request fingerprints, token usage, arithmetic and estimated spend. The exact provider identifiers are saved locally in `provider-ids.json`. Before each generation, the controller counts the input tokens and checks that the remaining run budget covers the maximum charge. An unconfirmed request retains its reservation. The cost estimate uses Standard rates. [OpenAI GPT-6.2 Sol pricing](https://developers.openai.com/api/docs/models/gpt-6.2-sol)
+
+Use `--retrieval supplied` to run the original single-call control with the filing passages provided upfront. Both saved runs replay without a key. [Supplied-filing control](evaluations/disney-sol-gateway/supplied-control/memo.md)
 
 ## Search the point-in-time archive
 

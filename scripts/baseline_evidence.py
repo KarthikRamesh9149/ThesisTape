@@ -1,17 +1,26 @@
 """Cutoff-checked retrieval and cited memo validation for the Disney baseline."""
 
-from dataclasses import dataclass
+import json
+import re
 from calendar import month_name
+from collections.abc import Callable
+from dataclasses import dataclass
 from datetime import date
 from decimal import Decimal
-import json
 from pathlib import Path
-import re
 from urllib.parse import quote
 
 from pydantic import BaseModel, ConfigDict, ValidationError
 
-from .disney_hulu_case import CASE_FILES, SAVED_CASE, CaseError, checked_bytes, filing_blocks, read_saved_file, require_entries
+from .disney_hulu_case import (
+    CASE_FILES,
+    SAVED_CASE,
+    CaseError,
+    checked_bytes,
+    filing_blocks,
+    read_saved_file,
+    require_entries,
+)
 
 
 @dataclass(frozen=True)
@@ -102,7 +111,7 @@ class Draft(StrictOutput):
 
 
 MONEY = re.compile(r"(?:\$|USD )(\d+(?:\.\d+)?) (million|billion)\b")
-SCALE = {"million": Decimal("1000000"), "billion": Decimal("1000000000")}
+SCALE = {"million": Decimal(1000000), "billion": Decimal(1000000000)}
 NUMBER = re.compile(r"\d+(?:\.\d+)?")
 PERCENT = re.compile(r"(\d+(?:\.\d+)?)\s*(?:%|percent\b)", re.IGNORECASE)
 UNSAFE_PROSE = re.compile(r"https?://|www\.|[\x00-\x1f\x7f<>\[\]`]", re.IGNORECASE)
@@ -195,18 +204,38 @@ def source_link(source: dict, citation: Citation, label: str) -> str:
 
 
 def render(case: ResearchCase, evidence: RetrievedEvidence, model_text: str) -> tuple[str, dict]:
+    source = evidence.source
+    reference = (
+        f"[The Walt Disney Company Form 8-K, {source['section']}]({source['source_url']}) · "
+        f"Filed {source['filing_date']} · Accession {source['accession']}"
+    )
+    return render_report(
+        case, {p.id: p.text for p in evidence.passages}, model_text,
+        lambda ref, label: source_link(source, ref, label or f"Disney 8-K, {ref.passage_id}"),
+        lambda _: [reference],
+    )
+
+
+def render_report(
+    case: ResearchCase, passages: dict[str, str], model_text: str,
+    link_for: Callable[[Citation, str | None], str], references: Callable[[list[str]], list[str]],
+) -> tuple[str, dict]:
     try:
         draft = Draft.model_validate_json(model_text)
     except ValidationError as error:
         raise CaseError("Sol output did not match the memo schema") from error
-    passages = {passage.id: passage.text for passage in evidence.passages}
     calculation = check_reconciliation(draft.reconciliation, passages)
     reported = Decimal(calculation["reported"])
     payment_figures = {amount_and_resolution(match[0])[0] for match in MONEY.finditer(draft.expected_payment.text)}
     if reported not in payment_figures:
         raise CaseError("Expected-payment paragraph must include the reconciled reported figure")
 
-    source = evidence.source
+    cited: dict[str, None] = {}
+
+    def link(ref: Citation, label: str | None = None) -> str:
+        cited[ref.passage_id] = None
+        return link_for(ref, label)
+
     lines = [
         "# Disney and Hulu",
         "",
@@ -222,10 +251,7 @@ def render(case: ResearchCase, evidence: RetrievedEvidence, model_text: str) -> 
     ):
         text = check_paragraph(paragraph, passages, case.cutoff)
         citations = list(dict.fromkeys((ref.passage_id, ref.quote) for ref in paragraph.citations))
-        links = " ".join(
-            source_link(source, Citation(passage_id=pid, quote=snippet), f"Disney 8-K, {pid}")
-            for pid, snippet in citations
-        )
+        links = " ".join(dict.fromkeys(link(Citation(passage_id=pid, quote=snippet)) for pid, snippet in citations))
         lines.extend((f"## {heading}", "", f"{text} {links}", ""))
 
     def dollars(value: str) -> str:
@@ -236,26 +262,21 @@ def render(case: ResearchCase, evidence: RetrievedEvidence, model_text: str) -> 
         "## Arithmetic check",
         "",
         f"- Guaranteed purchase price **{dollars(calculation['gross'])}**. "
-        + source_link(source, operands.gross.citation, "Disclosed gross"),
+        + link(operands.gross.citation, "Disclosed gross"),
         f"- Unpaid capital contributions **{dollars(calculation['deductions'])}**. "
-        + source_link(source, operands.deductions.citation, "Disclosed deduction"),
+        + link(operands.deductions.citation, "Disclosed deduction"),
         f"- Subtracting the two rounded inputs gives **{dollars(calculation['calculated'])}**.",
         f"- Disney's reported estimate was **{dollars(calculation['reported'])}**. "
-        + source_link(source, operands.reported.citation, "Disclosed estimate"),
+        + link(operands.reported.citation, "Disclosed estimate"),
         "",
     ))
     gap = dollars(format(abs(Decimal(calculation["reported_minus_calculated"])), "f"))
     if Decimal(calculation["reported_minus_calculated"]):
         lines.extend((
-            f"The **{gap}** difference fits within the precision of the published figures. "
-            "The reported estimate is the figure used in this memo.",
+            (f"The **{gap}** difference fits within the precision of the published figures. "
+             "The reported estimate is the figure used in this memo."),
             "",
         ))
-    lines.extend((
-        "## Primary source",
-        "",
-        f"[The Walt Disney Company Form 8-K, {source['section']}]({source['source_url']}) · "
-        f"Filed {source['filing_date']} · Accession {source['accession']}",
-        "",
-    ))
+    sources = references(list(cited))
+    lines.extend(("## Primary source" if len(sources) == 1 else "## Primary sources", "", *sources, ""))
     return "\n".join(lines), calculation

@@ -1,0 +1,82 @@
+{
+  "budget_usd": "0.05",
+  "calculation": {
+    "calculated": "8603000000.00",
+    "currency": "USD",
+    "deductions": "567000000",
+    "gross": "9170000000.00",
+    "operation": "subtract",
+    "reported": "8610000000.00",
+    "reported_minus_calculated": "7000000.00",
+    "rounding_tolerance": "10500000.00"
+  },
+  "case_id": "disney-hulu-2023-11-02",
+  "created_at": "2026-11-19T06:27:31+00:00",
+  "cutoff": "2023-11-02",
+  "elapsed_ms": 11149,
+  "estimated_model_cost_usd": "0.010362",
+  "input_tokens_preflight": 1116,
+  "max_output_tokens": 4096,
+  "memo_sha256": "99fb8d3de31d10aa9819d1e81a40e4bb1b4972200f758a7e62f5d288e4a08d06",
+  "model_output": "{\n  \"expected_payment\": {\n    \"text\": \"As of 2 November 2023, Disney expected to pay NBCUniversal approximately USD 8.61 billion on or before 1 December 2023, assuming the full USD 567.0 million in outstanding capital call contributions remained unpaid on the payment date. Those unpaid contributions would be deducted from the approximately USD 9.17 billion guaranteed purchase price.\",\n    \"citations\": [\n      {\n        \"passage_id\": \"P1\",\n        \"quote\": \"On or before December 1, 2023, Disney is required to pay NBCU the guaranteed purchase price\"\n      },\n      {\n        \"passage_id\": \"P1\",\n        \"quote\": \"Disney expects it will pay NBCU approximately $8.61 billion\"\n      }\n    ]\n  },\n  \"valuation_basis\": {\n    \"text\": \"NBCUniversal exercised its right to require Disney to buy its Hulu stake. The price was based on NBCUniversal’s equity ownership percentage, disclosed as 33% subject to dilution under certain circumstances, applied to the greater of Hulu’s equity fair value and the USD 27.5 billion guaranteed equity value floor.\",\n    \"citations\": [\n      {\n        \"passage_id\": \"P1\",\n        \"quote\": \"which is owned 67% by Disney and 33% by NBCU, subject to dilution under certain circumstances\"\n      },\n      {\n        \"passage_id\": \"P1\",\n        \"quote\": \"the greater of Hulu’s equity fair value or a guaranteed floor value of $27.5 billion\"\n      }\n    ]\n  },\n  \"appraisal_and_uncertainty\": {\n    \"text\": \"Hulu’s equity fair value as of 30 September 2023 remained subject to the agreed appraisal process. If the final appraisal exceeded the floor, Disney would pay NBCUniversal its ownership share of that appraised value less the guaranteed purchase price within 45 days of the final determination. Separately, Disney would share 50% of its estimated U.S. tax savings from the acquisition with NBCUniversal, with those payments expected primarily over 15 years.\",\n    \"citations\": [\n      {\n        \"passage_id\": \"P2\",\n        \"quote\": \"of the equity fair value net of the guaranteed purchase price within 45 days of such final determination.\"\n      },\n      {\n        \"passage_id\": \"P2\",\n        \"quote\": \"Disney will share with NBCU 50% of Disney’s estimated U.S. tax savings resulting from the acquisition\"\n      }\n    ]\n  },\n  \"reconciliation\": {\n    \"gross\": {\n      \"expression\": \"$9.17 billion\",\n      \"citation\": {\n        \"passage_id\": \"P1\",\n        \"quote\": \"approximately $9.17 billion (the “guaranteed purchase price”)\"\n      }\n    },\n    \"deductions\": {\n      \"expression\": \"$567 million\",\n      \"citation\": {\n        \"passage_id\": \"P1\",\n        \"quote\": \"payable to Disney, currently approximately $567 million\"\n      }\n    },\n    \"reported\": {\n      \"expression\": \"$8.61 billion\",\n      \"citation\": {\n        \"passage_id\": \"P1\",\n        \"quote\": \"Disney expects it will pay NBCU approximately $8.61 billion\"\n      }\n    }\n  }\n}",
+  "paid_tool_charges_usd": "0",
+  "pricing": {
+    "per_million_usd": {
+      "cache_write_30m": "2.50",
+      "cached_input": "0.10",
+      "ordinary_input": "2.00",
+      "output": "10.00"
+    },
+    "source_url": "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+    "status": "estimate_from_usage"
+  },
+  "prompt_version": "disney-sol-v1",
+  "provider": {
+    "elapsed_ms": 10583,
+    "ids_sha256": "69c92b128d62d61c051cfe91611996b6533a21b18deabcbcee6db310719ad593",
+    "model": "gpt-6.2-sol",
+    "service_tier": "default",
+    "status": "completed",
+    "usage": {
+      "input_tokens": 1116,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cache_write_tokens_details": {
+          "ttl_12h_tokens": 0,
+          "ttl_30m_tokens": 0
+        },
+        "cached_tokens": 0
+      },
+      "output_tokens": 813,
+      "output_tokens_details": {
+        "reasoning_tokens": 107
+      },
+      "total_tokens": 1929
+    }
+  },
+  "request_sha256": "a06d924f09f196cade40a102e95c382bd3da23d5f9e19e38f5c34090ddf78429",
+  "reservation_usd": "0.04375",
+  "retrieval": {
+    "accession": "0001744489-23-000206",
+    "max_date": "2023-11-02",
+    "operation": "read_archived_edgar_item",
+    "passage_ids": [
+      "P1",
+      "P2",
+      "P3"
+    ]
+  },
+  "run_id": "disney-sol-verified",
+  "schema_version": 1,
+  "source": {
+    "accession": "0001744489-23-000206",
+    "file": "dis-20231101.htm",
+    "filing_date": "2023-11-01",
+    "id": "disney-8k-2023-11-01",
+    "section": "Item 8.01 Other Events.",
+    "sha256": "181c8ded332bdf945d0598fc4305140904a47ddc16c150fcbce5562df24cd67e",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/1744489/000174448923000206/dis-20231101.htm",
+    "title": "dis-20231101"
+  },
+  "state": "complete"
+}

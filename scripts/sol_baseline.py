@@ -1,18 +1,34 @@
 """Run one GPT-6.2 Sol Disney/Hulu memo and replay it offline."""
 
 import argparse
-from datetime import datetime, timezone
+import json
+import sys
+from datetime import UTC, datetime
 from decimal import Decimal, InvalidOperation
 from hashlib import sha256
-import json
 from pathlib import Path
-import sys
 from time import perf_counter
 
-from .baseline_evidence import Draft, ResearchCase, RetrievedEvidence, load_case, render, retrieve
-from .disney_hulu_case import CaseError, SAVED_CASE, read_saved_file
-from .sol_provider import MAX_OUTPUT_TOKENS, MODEL, PRICING_URL, RATES, OpenAIResponses, project_key, reserve, structured_text, usage_cost
-
+from .baseline_evidence import (
+    Draft,
+    ResearchCase,
+    RetrievedEvidence,
+    load_case,
+    render,
+    retrieve,
+)
+from .disney_hulu_case import SAVED_CASE, CaseError, read_saved_file
+from .sol_provider import (
+    MAX_OUTPUT_TOKENS,
+    MODEL,
+    PRICING_URL,
+    RATES,
+    OpenAIResponses,
+    project_key,
+    reserve,
+    structured_text,
+    usage_cost,
+)
 
 PROMPT_VERSION = "disney-sol-v1"
 PROJECT_ROOT = SAVED_CASE.parents[1]
@@ -46,9 +62,13 @@ def build_prompt(case: ResearchCase, evidence: RetrievedEvidence) -> dict:
         "filing_date": evidence.source["filing_date"],
         "passages": [{"id": p.id, "text": p.text} for p in evidence.passages],
     }
+    return memo_prompt(research_input)
+
+
+def memo_prompt(research_input: dict, instructions: str = INSTRUCTIONS) -> dict:
     return {
         "model": MODEL,
-        "instructions": INSTRUCTIONS,
+        "instructions": instructions,
         "input": json_bytes(research_input).decode("utf-8"),
         "reasoning": {"effort": "medium"},
         "text": {
@@ -58,12 +78,12 @@ def build_prompt(case: ResearchCase, evidence: RetrievedEvidence) -> dict:
     }
 
 
-def generation_request(prompt: dict) -> dict:
+def generation_request(prompt: dict, *, max_output_tokens: int = MAX_OUTPUT_TOKENS) -> dict:
     return {
         **prompt,
         "service_tier": "default",
         "store": False,
-        "max_output_tokens": MAX_OUTPUT_TOKENS,
+        "max_output_tokens": max_output_tokens,
         "prompt_cache_options": {"mode": "explicit", "ttl": "30m"},
     }
 
@@ -89,7 +109,7 @@ def run(case: ResearchCase, destination: Path, budget: Decimal, provider: OpenAI
     record = {
         "schema_version": 1,
         "run_id": destination.name,
-        "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "created_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "case_id": case.id,
         "cutoff": case.cutoff.isoformat(),
         "prompt_version": PROMPT_VERSION,
@@ -148,6 +168,9 @@ def run(case: ResearchCase, destination: Path, budget: Decimal, provider: OpenAI
 
 def replay(case: ResearchCase, directory: Path) -> bytes:
     record = json.loads(read_saved_file(directory / "run.json"))
+    if record.get("schema_version") == 2:
+        from .sol_gateway import replay as replay_gateway
+        return replay_gateway(case, record)
     if record.get("schema_version") != 1 or record.get("state") != "complete":
         raise CaseError("The saved run is not complete or has an unsupported schema")
     if record["case_id"] != case.id or record["cutoff"] != case.cutoff.isoformat():
@@ -183,6 +206,8 @@ def main(argv=None) -> int:
     live = commands.add_parser("run", help="Run the bounded live baseline")
     live.add_argument("--agent-dir", type=Path, default=SAVED_CASE / "agent")
     live.add_argument("--output-dir", type=Path, required=True)
+    live.add_argument("--retrieval", choices=("gateway", "supplied"), default="gateway",
+                      help="Search the dated archive (default) or reproduce the supplied-passage control")
     def parse_budget(value):
         try:
             return Decimal(value)
@@ -200,7 +225,10 @@ def main(argv=None) -> int:
             sys.stdout.buffer.write(replay(case, args.run_dir))
         else:
             provider = OpenAIResponses(project_key(PROJECT_ROOT / ".env.local"))
-            record = run(case, args.output_dir, args.budget_usd, provider)
+            execute = run
+            if args.retrieval == "gateway":
+                from .sol_gateway import run as execute
+            record = execute(case, args.output_dir, args.budget_usd, provider)
             print(f"Memo saved to {args.output_dir / 'memo.md'}")
             print(f"Estimated model cost USD {record['estimated_model_cost_usd']} from provider usage")
     except (OSError, ValueError, KeyError, InvalidOperation) as error:

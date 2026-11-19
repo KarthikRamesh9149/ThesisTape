@@ -1,18 +1,17 @@
 """The single-call Responses API adapter and Standard pricing for GPT-6.2 Sol."""
 
-from dataclasses import dataclass
-from decimal import Decimal
 import json
 import os
-from pathlib import Path
 import re
 import shlex
+from dataclasses import dataclass
+from decimal import Decimal
+from pathlib import Path
 from time import perf_counter
 from urllib.error import HTTPError, URLError
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from .disney_hulu_case import CaseError
-
 
 MODEL = "gpt-6.2-sol"
 OPENAI_URL = "https://api.openai.com/v1"
@@ -108,14 +107,16 @@ def nonnegative_integer(value) -> int:
     return value
 
 
-def reserve(input_tokens: int, budget: Decimal) -> Decimal:
+def reserve(input_tokens: int, budget: Decimal, *, max_output_tokens: int = MAX_OUTPUT_TOKENS) -> Decimal:
     tokens = nonnegative_integer(input_tokens)
+    if not 1 <= nonnegative_integer(max_output_tokens) <= MAX_OUTPUT_TOKENS:
+        raise CaseError("Invalid output limit for Sol")
     if tokens > 272000:
         raise CaseError("This baseline uses the short-context Standard rates")
     if not budget.is_finite() or budget <= 0:
         raise CaseError("The USD budget must be a positive finite amount")
     # Reserve at the cache-write rate even when a cache write is not expected.
-    upper = (tokens * Decimal(RATES["cache_write_30m"]) + MAX_OUTPUT_TOKENS * Decimal(RATES["output"])) / MILLION
+    upper = (tokens * Decimal(RATES["cache_write_30m"]) + max_output_tokens * Decimal(RATES["output"])) / MILLION
     if upper > budget:
         raise CaseError(f"Required reservation USD {upper:f} exceeds budget USD {budget:f}")
     return upper

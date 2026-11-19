@@ -111,6 +111,36 @@ class RetrievalGatewayTests(unittest.TestCase):
         ):
             self.assertNotIn(secret, observed)
 
+    def test_real_sol_requests_are_identical_with_future_disney_filing_in_archive(self):
+        try:
+            from scripts import sol_baseline, sol_research
+        except ModuleNotFoundError as error:
+            if error.name == "pydantic":
+                self.skipTest("Install the baseline requirements to replay Sol requests")
+            raise
+        record_path = SAVED_CASE.parents[1] / "evaluations/disney-sol-gateway/run.json"
+        record = json.loads(record_path.read_bytes())
+        mixed, future = self.mixed_disney()
+        with mixed.session("2025-06-09") as session:
+            hits = session.read(future["url"], max_date=session.cutoff)
+            self.assertTrue(any("$438.7 million" in h.text for h in hits))
+            session.search("Hulu appraisal", max_date=session.cutoff)
+        calls = iter(record["calls"])
+
+        def replay(stage, prompt, limit):
+            call = next(calls)
+            payload = sol_baseline.json_bytes(sol_baseline.generation_request(prompt, max_output_tokens=limit))
+            self.assertEqual((stage, sol_baseline.fingerprint(payload)), (call["stage"], call["request_sha256"]))
+            for excluded in (future["title"], future["url"], future["edition"], "$438.7 million"):
+                self.assertNotIn(excluded, payload.decode())
+            return call["output"]
+
+        memo, evidence = sol_research.research(sol_baseline.load_case(SAVED_CASE / "agent"), mixed, replay)
+        self.assertIsNone(next(calls, None))
+        self.assertEqual(memo, record_path.with_name("memo.md").read_bytes())
+        self.assertEqual(evidence["opened"], record["opened"])
+        self.assertEqual(evidence["retrieval"], record["retrieval"])
+
     def test_release_time_not_event_date_and_same_day_amendment(self):
         first, later = (self.sources[name] for name in ("tradeweb-8k", "tradeweb-8ka"))
         for cutoff, original_ok, amendment_ok in (

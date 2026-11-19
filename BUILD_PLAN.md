@@ -59,6 +59,8 @@ Run a question through the gateway, a decimal calculator, structured evidence ex
 
 **Completion evidence.** A real provider run produces a cited Disney memo with the expected payment, the appraisal condition and a clearly marked unknown. A reviewer can open each material figure at its source. Offline replay reproduces the saved report with zero new provider calls. Record the single-agent score, latency and spend as the first baseline.
 
+**Measured on 19 November 2026.** Starting with the Disney question and cutoff alone, Sol searched the shared archive and opened three paragraphs of Item 8.01. The two paragraphs it cited supported all three rubric points. The run took 18.188 seconds and used an estimated USD 0.016218. The supplied-filing control also earned 3/3, in 11.149 seconds at USD 0.010362. Both memos replayed byte for byte offline. Adding the 2025 filing and warming its cache left all three verified gateway request fingerprints unchanged. [Gateway memo](evaluations/disney-sol-gateway/memo.md) · [Rubric and usage comparison](evaluations/disney-sol-gateway/evaluation.md)
+
 ### 4. Add the main orchestrator and specialist routes
 
 Reuse the Step 3 Sol analyst as the lead. Add the two Luna workers, the forecast specialist and an independent review context. Add Terra and Astra as conditional routes. Evidence and review findings return to Sol when a research decision is needed. Code checks dates, numeric operations, scale, currencies and claim-to-source links. The reviewer checks whether the cited passage supports the meaning of the claim.
@@ -97,4 +99,4 @@ At the checked Standard rates, the architecture’s example uses 12,000 input an
 
 **Illustration for the final run.** If all 400 cases used the base allowance and 80 needed that additional pass, text-model usage would be **400 × USD 0.0997 + 80 × USD 0.0810 = USD 46.36**. Search, visual inputs, cache charges, storage, development comparisons and retries are separate. The first live cases establish the actual token distribution. Batch independent offline calls when turnaround permits and apply discounts only to eligible usage. [Batch pricing and turnaround](https://developers.openai.com/api/docs/guides/batch)
 
-**Next implementation checkpoint.** Connect the single-Sol report to the shared gateway. Compare its selected evidence, memo and cost with the saved Disney baseline before adding specialist routes.
+**Next implementation checkpoint.** Step 4 adds the Sol lead’s specialist routes. Start by verifying a filings worker and an independent contrary-evidence worker on the same dated gateway. Compare their evidence, corrections and incremental spend with the Step 3 single-agent baseline.
