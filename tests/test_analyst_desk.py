@@ -247,6 +247,26 @@ class DeskTests(unittest.TestCase):
         self.assertIn("table", [b["kind"] for b in toyota["report"]])
         self.provider.count.assert_not_called()
 
+    def test_public_tsmc_example_is_available_without_a_key_or_paid_request(self):
+        from scripts.sol_baseline import fingerprint
+
+        detail = self.assert_status(200, "/api/runs/example-tsmc")
+        self.assertEqual(
+            (detail["state"], detail["call_count"], detail["spent"]),
+            ("qualified", 8, "0.349358"),
+        )
+        self.assertFalse(detail["can_resume"])
+        _, _, raw = self.request("/api/runs/example-tsmc/memo.md")
+        folder = PROJECT_ROOT / "evaluations/open_research/tsmc/original-passages"
+        self.assertEqual(
+            fingerprint(raw),
+            json.loads((folder / "browser.json").read_bytes())["download_sha256"],
+        )
+        self.assertEqual(raw, (folder / "memo.md").read_bytes())
+        self.assert_status(409, "/api/runs/example-tsmc/resume", body={})
+        self.provider.generate.assert_not_called()
+        self.provider.count.assert_not_called()
+
     def test_unreleased_and_modified_records_do_not_export(self):
         folder = self.root / "cli-copy"
         folder.mkdir()

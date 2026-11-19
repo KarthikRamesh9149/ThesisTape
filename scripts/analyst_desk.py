@@ -6,6 +6,7 @@ import re
 import secrets
 import signal
 import sys
+from contextlib import ExitStack
 from decimal import Decimal, InvalidOperation
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -18,6 +19,7 @@ from . import quantitative_engine
 from . import research_desk_agent as engine
 from .archive_receipts import RecordedHttp
 from .desk_report import inspect_record
+from .desk_snapshot import saved_browser_run
 from .disney_hulu_case import CaseError, read_saved_file
 from .focused_archive import FocusedArchive
 from .question_attribution import publish as confirm_question
@@ -29,6 +31,7 @@ from .temporal_web import ArchiveGateway
 
 ASSETS = PROJECT_ROOT / "desk"
 EXAMPLES = {
+    "example-tsmc": "open_research/tsmc/original-passages",
     "example-twitter": "material_dispute/trial/dispute",
     "example-disney": "first-team/disney-team",
     "example-toyota": "visual_reader/pair/visual",
@@ -79,6 +82,9 @@ class Desk:
         self.jobs = {}
         self.errors = {}
         self.closing = False
+        self.sample_session = ExitStack()
+        self.sample_lock = Lock()
+        self.sample = None
 
     def folders(self):
         for p in self.root.iterdir():
@@ -92,7 +98,15 @@ class Desk:
 
     def directory(self, key):
         if key in EXAMPLES:
-            return PROJECT_ROOT / "evaluations" / EXAMPLES[key]
+            folder = PROJECT_ROOT / "evaluations" / EXAMPLES[key]
+            if key == "example-tsmc":
+                with self.sample_lock:
+                    if self.sample is None:
+                        self.sample, _ = self.sample_session.enter_context(
+                            saved_browser_run(folder)
+                        )
+                    return self.sample
+            return folder
         path = (
             self.root / key if LIVE_ID.fullmatch(key) else dict(self.folders()).get(key)
         )
@@ -118,9 +132,11 @@ class Desk:
         rows = []
         for key, folder in [
             *self.folders(),
-            *((k, self.directory(k)) for k in EXAMPLES),
+            *((k, None) for k in EXAMPLES),
         ]:
             try:
+                if folder is None:
+                    folder = self.directory(key)
                 r = self.record(folder)
                 state = r["state"]
                 if public.is_public(r):
@@ -347,6 +363,9 @@ class Desk:
                 stop.set()
         for thread, _ in jobs:
             thread.join()
+        with self.sample_lock:
+            self.sample_session.close()
+            self.sample = None
 
 
 class Handler(BaseHTTPRequestHandler):
