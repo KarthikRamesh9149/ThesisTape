@@ -2,7 +2,7 @@
 
 ThesisTape is a multi-agent research project for testing investment theses using only information that was public by a chosen date. An analyst will be able to enter a question, a cutoff date and a budget, then trace each material claim in the resulting memo back to its source.
 
-A single GPT-6.2 Sol analyst can now research the Disney/Hulu case through a dated archive. Starting with the question and cutoff, it found Disney’s November 2023 Form 8-K and wrote a memo that earned 3/3 on the case rubric. The run took 18.188 seconds and cost an estimated USD 0.016218. [Read the memo](evaluations/disney-sol-gateway/memo.md) · [Scoring and cost comparison](evaluations/disney-sol-gateway/evaluation.md)
+GPT-6.2 Sol can research a filing alone or lead two GPT-6 Luna workers. The team and the single analyst each earned 3/3 on the Disney/Hulu and Tradeweb development cases. The single analyst was cheaper on both. Moving the Tradeweb cutoff to one second before its amendment led the team to request another search and qualify its answer. [Results and costs](evaluations/first-team/evaluation.md) · [Disney memo](evaluations/first-team/disney-team/memo.md) · [Tradeweb memo](evaluations/first-team/tradeweb-team/memo.md)
 
 [Build plan and validation milestones](BUILD_PLAN.md) · [Architecture and model costs (PDF)](ThesisTape-Architecture.pdf)
 
@@ -25,6 +25,31 @@ The two files in `agent/` form the supplied-filing control. The gateway run take
 The importer reads the saved filings and indexes from the repository by default. Pass `--filings-dir DIR` to read the same four HTML files by their saved names from a single directory. The manifests and scoring sheet come from the versioned case. Reusing a destination with identical files succeeds without rewriting it.
 
 The stored Form 8-K documents are the original HTML payloads inside EDGAR’s complete submissions. The direct HTML responses included an archive script. The saved payloads match EDGAR’s listed sizes and the rest of each direct response byte for byte. The evaluator manifest links to both complete submissions and the index snapshots.
+
+## Run the research team
+
+Sol assigns a filings search and an independent search for contrary evidence. The Luna workers run in parallel. Each uses its own cutoff-bound archive session, opens passages and selects exact source spans. Sol compares their findings and can request one targeted follow-up before writing. The controller verifies citations, runs the Disney calculation and reserves each call against the same run budget, including any calls still in flight.
+
+Install the dependencies from the repository root with Python 3.12. The saved team reports replay offline without an API key.
+
+```sh
+python3.12 -m venv .venv
+.venv/bin/python -m pip install -r requirements-baseline.txt -r requirements-retrieval.txt
+.venv/bin/python -B -m scripts.research_team replay --run-dir evaluations/first-team/disney-team > /tmp/thesistape-team.md
+cmp /tmp/thesistape-team.md evaluations/first-team/disney-team/memo.md
+.venv/bin/python -B -m unittest discover -s tests -v
+```
+
+For a live run, set `OPENAI_API_KEY` in the ignored project `.env.local` or the shell. Use a fresh output directory for each run. The Tradeweb question is identical at the two cutoffs.
+
+```sh
+.venv/bin/python -B -m scripts.research_team run --case disney --route team --budget-usd 0.05 --output-dir runs/disney-team-new
+.venv/bin/python -B -m scripts.research_team run --case tradeweb --route team --budget-usd 0.05 --output-dir runs/tradeweb-team-new
+.venv/bin/python -B -m scripts.research_team run --case tradeweb --route single --budget-usd 0.05 --output-dir runs/tradeweb-single-new
+.venv/bin/python -B -m scripts.research_team run --case tradeweb-before --route team --budget-usd 0.05 --output-dir runs/tradeweb-earlier-new
+```
+
+Each directory contains the memo and a portable `run.json` with assignments, actual search queries, selected excerpts, lead decisions, token usage, timings and costs. The separate `provider-ids.json` is an operator receipt kept under the ignored `runs/` directory. The earlier Tradeweb report lists the passages inspected when the archive could not support a figure. [Earlier report](evaluations/first-team/tradeweb-before/memo.md) · [All recorded development spend](evaluations/first-team/development-usage.json)
 
 ## Run the single-Sol baseline
 

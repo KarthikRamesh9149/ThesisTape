@@ -67,6 +67,8 @@ Reuse the Step 3 Sol analyst as the lead. Add the two Luna workers, the forecast
 
 **Completion evidence.** Real development cases exercise the standard route, a difficult table, a forecast with competing explanations and a material dispute. Demonstrate a targeted repair, a qualified answer when evidence is missing, and re-review after a material edit. Verify live model access and schema handling for every route before counting it as working.
 
+**First specialist route verified on 19 November 2026.** Sol directed two independent Luna searches, compared grounded evidence and wrote a cited report. On Disney the single agent and the team scored 3/3 at USD 0.016218 and USD 0.0216475 respectively. Both initial Tradeweb reports scored 2/3. After a shared report-format fix, both scored 3/3 at USD 0.008032 and USD 0.0117409. Moving the same question to one second before the Tradeweb amendment triggered a live targeted lookup and a qualified report. These are local development results. [Scoring and receipts](evaluations/first-team/evaluation.md)
+
 ### 5. Make the workflow usable and resumable
 
 Provide an analyst screen with question, cutoff and spending limit. Show worker status, the lead’s routing decisions, spend and report. Selecting a material claim opens the original evidence and its locator. The CLI and screen read the same saved run.
@@ -99,4 +101,4 @@ At the checked Standard rates, the architecture’s example uses 12,000 input an
 
 **Illustration for the final run.** If all 400 cases used the base allowance and 80 needed that additional pass, text-model usage would be **400 × USD 0.0997 + 80 × USD 0.0810 = USD 46.36**. Search, visual inputs, cache charges, storage, development comparisons and retries are separate. The first live cases establish the actual token distribution. Batch independent offline calls when turnaround permits and apply discounts only to eligible usage. [Batch pricing and turnaround](https://developers.openai.com/api/docs/guides/batch)
 
-**Next implementation checkpoint.** Step 4 adds the Sol lead’s specialist routes. Start by verifying a filings worker and an independent contrary-evidence worker on the same dated gateway. Compare their evidence, corrections and incremental spend with the Step 3 single-agent baseline.
+**Next implementation checkpoint.** Continue Step 4 with an independent Sol reviewer. On a different real filing, test whether it catches a material claim whose citation fails to support its meaning, sends the claim back to the lead and rechecks the revised memo. Measure the correction and incremental spend. The forecast, visual and dispute routes follow within Step 4.

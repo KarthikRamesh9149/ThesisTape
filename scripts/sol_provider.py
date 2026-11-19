@@ -1,4 +1,4 @@
-"""The single-call Responses API adapter and Standard pricing for GPT-6.2 Sol."""
+"""Responses API transport and Standard short-context rates for the research models."""
 
 import json
 import os
@@ -14,6 +14,7 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 from .disney_hulu_case import CaseError
 
 MODEL = "gpt-6.2-sol"
+LUNA = "gpt-6-luna"
 OPENAI_URL = "https://api.openai.com/v1"
 MAX_OUTPUT_TOKENS = 4096
 RATES = {
@@ -23,6 +24,10 @@ RATES = {
     "output": "10.00",
 }
 PRICING_URL = "https://developers.openai.com/api/docs/models/gpt-6.2-sol"
+MODEL_RATES = {
+    MODEL: RATES,
+    LUNA: {"ordinary_input": "0.10", "cached_input": "0.01", "cache_write_30m": "0.125", "output": "0.50"},
+}
 MILLION = Decimal(1000000)
 
 
@@ -62,7 +67,6 @@ class Result:
 class OpenAIResponses:
     def __init__(self, key: str):
         self._key = key
-        self._http = build_opener(NoRedirect())
 
     def _post(self, path: str, payload: dict) -> Result:
         request = Request(
@@ -73,7 +77,7 @@ class OpenAIResponses:
         )
         start = perf_counter()
         try:
-            with self._http.open(request, timeout=120) as response:
+            with build_opener(NoRedirect()).open(request, timeout=120) as response:
                 request_id = response.headers.get("x-request-id")
                 body = json.load(response)
         except HTTPError as error:
@@ -107,27 +111,29 @@ def nonnegative_integer(value) -> int:
     return value
 
 
-def reserve(input_tokens: int, budget: Decimal, *, max_output_tokens: int = MAX_OUTPUT_TOKENS) -> Decimal:
+def reserve(input_tokens: int, budget: Decimal, *, max_output_tokens: int = MAX_OUTPUT_TOKENS, model: str = MODEL) -> Decimal:
+    rates = MODEL_RATES[model]
     tokens = nonnegative_integer(input_tokens)
     if not 1 <= nonnegative_integer(max_output_tokens) <= MAX_OUTPUT_TOKENS:
-        raise CaseError("Invalid output limit for Sol")
+        raise CaseError("Invalid model output limit")
     if tokens > 272000:
         raise CaseError("This baseline uses the short-context Standard rates")
     if not budget.is_finite() or budget <= 0:
         raise CaseError("The USD budget must be a positive finite amount")
     # Reserve at the cache-write rate even when a cache write is not expected.
-    upper = (tokens * Decimal(RATES["cache_write_30m"]) + max_output_tokens * Decimal(RATES["output"])) / MILLION
+    upper = (tokens * Decimal(rates["cache_write_30m"]) + max_output_tokens * Decimal(rates["output"])) / MILLION
     if upper > budget:
         raise CaseError(f"Required reservation USD {upper:f} exceeds budget USD {budget:f}")
     return upper
 
 
-def usage_cost(body: dict) -> Decimal:
+def usage_cost(body: dict, *, expected_model: str = MODEL) -> Decimal:
     if body.get("service_tier") != "default":
         raise CaseError("The provider did not confirm Standard service")
     model = body.get("model", "")
-    if not isinstance(model, str) or not re.fullmatch(r"gpt-6\.2-sol(?:-\d{4}-\d{2}-\d{2})?", model):
-        raise CaseError("The provider did not return GPT-6.2 Sol")
+    rates = MODEL_RATES[expected_model]
+    if not isinstance(model, str) or not re.fullmatch(re.escape(expected_model) + r"(?:-\d{4}-\d{2}-\d{2})?", model):
+        raise CaseError(f"The provider did not return the requested model {expected_model}")
     usage = body.get("usage")
     if not isinstance(usage, dict):
         raise CaseError("Missing provider usage")
@@ -138,13 +144,22 @@ def usage_cost(body: dict) -> Decimal:
         raise CaseError("Missing provider input-token breakdown")
     cached = nonnegative_integer(details.get("cached_tokens", 0))
     writes = nonnegative_integer(details.get("cache_write_tokens", 0))
+    cache_detail = details.get("cache_write_tokens_details")
+    if cache_detail is not None and (
+        not isinstance(cache_detail, dict)
+        or nonnegative_integer(cache_detail.get("ttl_12h_tokens", 0)) != 0
+        or nonnegative_integer(cache_detail.get("ttl_30m_tokens", 0)) != writes
+    ):
+        raise CaseError("The provider cache-write breakdown differs from the requested 30-minute policy")
+    if "total_tokens" in usage and nonnegative_integer(usage["total_tokens"]) != input_tokens + output_tokens:
+        raise CaseError("Provider token totals do not reconcile")
     if cached + writes > input_tokens or input_tokens > 272000:
         raise CaseError("Provider usage cannot be priced under the baseline's Standard rates")
     return (
-        (input_tokens - cached - writes) * Decimal(RATES["ordinary_input"])
-        + cached * Decimal(RATES["cached_input"])
-        + writes * Decimal(RATES["cache_write_30m"])
-        + output_tokens * Decimal(RATES["output"])
+        (input_tokens - cached - writes) * Decimal(rates["ordinary_input"])
+        + cached * Decimal(rates["cached_input"])
+        + writes * Decimal(rates["cache_write_30m"])
+        + output_tokens * Decimal(rates["output"])
     ) / MILLION
 
 

@@ -1,0 +1,371 @@
+{
+  "attempts": [
+    {
+      "budget_usd": "0.05",
+      "case_id": "disney-hulu-2023-11-02",
+      "created_at": "2026-11-19T08:58:02.689586+00:00",
+      "elapsed_ms": 16710,
+      "estimated_model_cost_usd": "0.0025196",
+      "failure": "Worker excerpts could not be verified against the opened passages",
+      "prompt_version": "sol-two-luna-v1",
+      "route": "team",
+      "run_id": "disney-team-step4",
+      "state": "failed",
+      "unreconciled_reservation_usd": "0",
+      "usage_by_model": {
+        "gpt-6-luna": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 8,
+          "input_tokens": 6356,
+          "output_tokens": 1140,
+          "usd": "0.0012056"
+        },
+        "gpt-6.2-sol": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 192,
+          "output_tokens": 93,
+          "usd": "0.001314"
+        }
+      }
+    },
+    {
+      "budget_usd": "0.05",
+      "case_id": "disney-hulu-2023-11-02",
+      "created_at": "2026-11-19T08:59:53.137086+00:00",
+      "elapsed_ms": 15089,
+      "estimated_model_cost_usd": "0.0024316",
+      "failure": "The provider response did not complete",
+      "prompt_version": "sol-two-luna-v2",
+      "route": "team",
+      "run_id": "disney-team-verified",
+      "state": "failed",
+      "unreconciled_reservation_usd": "0",
+      "usage_by_model": {
+        "gpt-6-luna": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 6,
+          "input_tokens": 4951,
+          "output_tokens": 1125,
+          "usd": "0.0010576"
+        },
+        "gpt-6.2-sol": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 192,
+          "output_tokens": 99,
+          "usd": "0.001374"
+        }
+      }
+    },
+    {
+      "budget_usd": "0.05",
+      "case_id": "disney-hulu-2023-11-02",
+      "created_at": "2026-11-19T09:01:40.407718+00:00",
+      "elapsed_ms": 30001,
+      "estimated_model_cost_usd": "0.0218162",
+      "failure": "Required reservation USD 0.0309275 exceeds budget USD 0.0281838",
+      "prompt_version": "sol-two-luna-v3",
+      "route": "team",
+      "run_id": "disney-team-v3",
+      "state": "failed",
+      "unreconciled_reservation_usd": "0",
+      "usage_by_model": {
+        "gpt-6-luna": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 6,
+          "input_tokens": 4972,
+          "output_tokens": 278,
+          "usd": "0.0006362"
+        },
+        "gpt-6.2-sol": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 3,
+          "input_tokens": 3980,
+          "output_tokens": 1322,
+          "usd": "0.021180"
+        }
+      }
+    },
+    {
+      "artifact": "initial/tradeweb-single.md",
+      "budget_usd": "0.05",
+      "case_id": "tradeweb-expenses-2023-10-26",
+      "created_at": "2026-11-19T09:01:46.939160+00:00",
+      "elapsed_ms": 8643,
+      "estimated_model_cost_usd": "0.006446",
+      "memo_sha256": "ab28a5420faf93c5826fc571123e71bdb70e7e08bc8ded259bf9ff48ff66a63c",
+      "prompt_version": "sol-two-luna-v3",
+      "route": "single",
+      "run_id": "tradeweb-single-v3",
+      "state": "complete",
+      "unreconciled_reservation_usd": "0",
+      "usage_by_model": {
+        "gpt-6.2-sol": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 3,
+          "input_tokens": 2028,
+          "output_tokens": 239,
+          "usd": "0.006446"
+        }
+      }
+    },
+    {
+      "artifact": "initial/tradeweb-team.md",
+      "budget_usd": "0.05",
+      "case_id": "tradeweb-expenses-2023-10-26",
+      "created_at": "2026-11-19T09:04:38.179750+00:00",
+      "elapsed_ms": 17741,
+      "estimated_model_cost_usd": "0.0093324",
+      "memo_sha256": "3eda18403f59b75c060f653091a9de81475415b60875d642e90e9cb2523d9922",
+      "prompt_version": "sol-two-luna-v3",
+      "route": "team",
+      "run_id": "tradeweb-team-final",
+      "state": "complete",
+      "unreconciled_reservation_usd": "0",
+      "usage_by_model": {
+        "gpt-6-luna": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 6,
+          "input_tokens": 4244,
+          "output_tokens": 200,
+          "usd": "0.0005244"
+        },
+        "gpt-6.2-sol": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 3,
+          "input_tokens": 2714,
+          "output_tokens": 338,
+          "usd": "0.008808"
+        }
+      }
+    },
+    {
+      "artifact": "initial/disney-team.md",
+      "budget_usd": "0.05",
+      "case_id": "disney-hulu-2023-11-02",
+      "created_at": "2026-11-19T09:04:38.179751+00:00",
+      "elapsed_ms": 27518,
+      "estimated_model_cost_usd": "0.0212017",
+      "memo_sha256": "ff3579e8e4514cb9bf77d14e19084483b69a425ac4a639f81d82c2d0b2164512",
+      "prompt_version": "sol-two-luna-v3",
+      "route": "team",
+      "run_id": "disney-team-final",
+      "state": "complete",
+      "unreconciled_reservation_usd": "0",
+      "usage_by_model": {
+        "gpt-6-luna": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 6,
+          "input_tokens": 5082,
+          "output_tokens": 279,
+          "usd": "0.0006477"
+        },
+        "gpt-6.2-sol": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 3,
+          "input_tokens": 4022,
+          "output_tokens": 1251,
+          "usd": "0.020554"
+        }
+      }
+    },
+    {
+      "budget_usd": "0.05",
+      "case_id": "disney-hulu-2023-11-02",
+      "created_at": "2026-11-19T09:07:37.945612+00:00",
+      "elapsed_ms": 9402,
+      "estimated_model_cost_usd": "0.0016557",
+      "failure": "Search contains a number absent from the question, cutoff and earlier results",
+      "prompt_version": "sol-two-luna-v4",
+      "route": "team",
+      "run_id": "disney-team-step4-accepted",
+      "state": "failed",
+      "unreconciled_reservation_usd": "0",
+      "usage_by_model": {
+        "gpt-6-luna": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 4,
+          "input_tokens": 2902,
+          "output_tokens": 183,
+          "usd": "0.0003817"
+        },
+        "gpt-6.2-sol": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 192,
+          "output_tokens": 89,
+          "usd": "0.001274"
+        }
+      }
+    },
+    {
+      "artifact": "tradeweb-single/run.json",
+      "budget_usd": "0.05",
+      "case_id": "tradeweb-expenses-2023-10-26",
+      "created_at": "2026-11-19T09:07:47.612297+00:00",
+      "elapsed_ms": 8955,
+      "estimated_model_cost_usd": "0.008032",
+      "memo_sha256": "a7e48cc4997898e716de8d93fcb7e828e0ad7df875f2aacba8d03940434d612f",
+      "prompt_version": "sol-two-luna-v4",
+      "route": "single",
+      "run_id": "tradeweb-single-step4-accepted",
+      "state": "complete",
+      "unreconciled_reservation_usd": "0",
+      "usage_by_model": {
+        "gpt-6.2-sol": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 3,
+          "input_tokens": 2136,
+          "output_tokens": 376,
+          "usd": "0.008032"
+        }
+      }
+    },
+    {
+      "artifact": "tradeweb-team/run.json",
+      "budget_usd": "0.05",
+      "case_id": "tradeweb-expenses-2023-10-26",
+      "created_at": "2026-11-19T09:07:56.814242+00:00",
+      "elapsed_ms": 20397,
+      "estimated_model_cost_usd": "0.0117409",
+      "memo_sha256": "f993af42cfbd536bffc53e9cd5d0e4a87f3f728d3ef881111d785c221fb572fc",
+      "prompt_version": "sol-two-luna-v4",
+      "route": "team",
+      "run_id": "tradeweb-team-step4-accepted",
+      "state": "complete",
+      "unreconciled_reservation_usd": "0",
+      "usage_by_model": {
+        "gpt-6-luna": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 6,
+          "input_tokens": 4234,
+          "output_tokens": 223,
+          "usd": "0.0005349"
+        },
+        "gpt-6.2-sol": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 3,
+          "input_tokens": 3153,
+          "output_tokens": 490,
+          "usd": "0.011206"
+        }
+      }
+    },
+    {
+      "artifact": "initial/tradeweb-before.md",
+      "budget_usd": "0.05",
+      "case_id": "tradeweb-expenses-2023-10-26-before",
+      "created_at": "2026-11-19T09:09:25.002620+00:00",
+      "elapsed_ms": 23279,
+      "estimated_model_cost_usd": "0.0044698",
+      "memo_sha256": "c8ad59d80c5c5802dd520bfdb305894815250741091cb7854ab08a9109684465",
+      "prompt_version": "sol-two-luna-v4",
+      "route": "team",
+      "run_id": "tradeweb-before-checkpoint",
+      "state": "complete",
+      "unreconciled_reservation_usd": "0",
+      "usage_by_model": {
+        "gpt-6-luna": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 10,
+          "input_tokens": 6533,
+          "output_tokens": 229,
+          "usd": "0.0007678"
+        },
+        "gpt-6.2-sol": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 3,
+          "input_tokens": 946,
+          "output_tokens": 181,
+          "usd": "0.003702"
+        }
+      }
+    },
+    {
+      "artifact": "disney-team/run.json",
+      "budget_usd": "0.05",
+      "case_id": "disney-hulu-2023-11-02",
+      "created_at": "2026-11-19T09:09:25.002621+00:00",
+      "elapsed_ms": 25670,
+      "estimated_model_cost_usd": "0.0216475",
+      "memo_sha256": "e3816b63616b2a4945fe0cda1d3e5334bc3065600fdd79294ef368724c75b33e",
+      "prompt_version": "sol-two-luna-v4",
+      "route": "team",
+      "run_id": "disney-team-checkpoint",
+      "state": "complete",
+      "unreconciled_reservation_usd": "0",
+      "usage_by_model": {
+        "gpt-6-luna": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 6,
+          "input_tokens": 4970,
+          "output_tokens": 277,
+          "usd": "0.0006355"
+        },
+        "gpt-6.2-sol": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 3,
+          "input_tokens": 4091,
+          "output_tokens": 1283,
+          "usd": "0.021012"
+        }
+      }
+    },
+    {
+      "artifact": "tradeweb-before/run.json",
+      "budget_usd": "0.05",
+      "case_id": "tradeweb-expenses-2023-10-26-before",
+      "created_at": "2026-11-19T09:13:58.955083+00:00",
+      "elapsed_ms": 21522,
+      "estimated_model_cost_usd": "0.0045051",
+      "memo_sha256": "e23e409ac4219d8c1cda4c07c95441c14483e4d64ce2627371fe4e5f22c4c587",
+      "prompt_version": "sol-two-luna-v4",
+      "route": "team",
+      "run_id": "tradeweb-before-with-sources",
+      "state": "complete",
+      "unreconciled_reservation_usd": "0",
+      "usage_by_model": {
+        "gpt-6-luna": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 10,
+          "input_tokens": 7506,
+          "output_tokens": 245,
+          "usd": "0.0008731"
+        },
+        "gpt-6.2-sol": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "calls": 3,
+          "input_tokens": 936,
+          "output_tokens": 176,
+          "usd": "0.003632"
+        }
+      }
+    }
+  ],
+  "checkpoint_usd": "0.1157985",
+  "prior_recorded_usd": "0.051338",
+  "project_recorded_usd": "0.1671365"
+}

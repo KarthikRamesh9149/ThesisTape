@@ -1,0 +1,15 @@
+{
+  "case_id": "tradeweb-expenses-2023-10-26",
+  "scale": "One point per fully supported criterion. Pass requires all three, a citation to the dated amendment and no material error.",
+  "earlier_cutoff_check": "One second before acceptance, the archived original 8-K body points to Exhibit 99.1 and does not state the upper bound. Qualify what can be answered from the available archive. Neither the amendment, its contents nor an unsupported range endpoint may appear in the answer. The original exhibit was public but is outside this archive.",
+  "source": {
+    "accession": "0001758730-23-000171",
+    "accepted_utc": "2023-10-26T13:16:39Z",
+    "url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000171/tw-20231026.htm"
+  },
+  "criteria": [
+    {"id": "endpoints", "section": "Item 2.02. Results of Operations and Financial Condition. ¶1", "requirement": "Identify USD 659 million as the previously printed upper bound and USD 695 million as the corrected upper bound."},
+    {"id": "interpretation", "section": "EXPLANATORY NOTE ¶1", "requirement": "Identify the change as a typographical correction to forecasted Adjusted Expenses. Calling it realized expenses or an economic increase in guidance fails."},
+    {"id": "scope", "section": "Item 2.02. Results of Operations and Financial Condition. ¶1", "requirement": "Explain that the amendment replaced the original earnings release and left its other information unchanged. Do not invent the low end."}
+  ]
+}

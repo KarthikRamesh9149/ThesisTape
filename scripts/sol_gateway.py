@@ -35,7 +35,7 @@ def configuration(case: ResearchCase, corpus: Corpus) -> dict:
 
 def request_record(stage, payload, input_tokens, budget_remaining) -> dict:
     limit = payload["max_output_tokens"]
-    reservation = reserve(input_tokens, budget_remaining, max_output_tokens=limit)
+    reservation = reserve(input_tokens, budget_remaining, max_output_tokens=limit, model=payload["model"])
     return {
         "stage": stage,
         "request_sha256": fingerprint(json_bytes(payload)),

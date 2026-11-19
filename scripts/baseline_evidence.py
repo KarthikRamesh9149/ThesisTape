@@ -150,9 +150,13 @@ def check_paragraph(paragraph: Paragraph, passages: dict[str, str], cutoff: date
     if any(amount_and_resolution(match[0])[0] not in source_amounts for match in MONEY.finditer(text)):
         raise CaseError("A monetary claim does not match a figure in its cited evidence")
     month = month_name[cutoff.month]
-    cutoff_forms = (cutoff.isoformat(), f"{cutoff.day} {month} {cutoff.year}", f"{month} {cutoff.day}, {cutoff.year}")
+    cutoff_forms = (cutoff.isoformat(), f"{cutoff.day} {month} {cutoff.year}", f"{month} {cutoff.day}, {cutoff.year}",
+                    f"{cutoff.day} {month}", f"{month} {cutoff.day}")
     as_of_date = "|".join(re.escape(value) for value in cutoff_forms)
-    claims = re.sub(rf"\bas of (?:{as_of_date})(?![\w/-])", "", text, flags=re.IGNORECASE)
+    # The intake supports the date of an as-of judgement. A transaction dated
+    # that day still needs independent support from the cited passage.
+    framing = r"(?:as of|(?:not (?:yet )?known|unknown|undetermined|unresolved) on)"
+    claims = re.sub(rf"\b{framing} (?:{as_of_date})(?![\w/-]|,?\s+\d{{4}}\b)", "", text, flags=re.IGNORECASE)
     if (
         set(map(Decimal, NUMBER.findall(claims))) - set(map(Decimal, NUMBER.findall(corpus)))
         or set(map(Decimal, PERCENT.findall(claims))) - set(map(Decimal, PERCENT.findall(corpus)))

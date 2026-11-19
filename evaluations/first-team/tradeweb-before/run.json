@@ -1,0 +1,1018 @@
+{
+  "assignments": {
+    "contrary": "Were there any corrections, exceptions, or unresolved discrepancies by the cutoff concerning Tradeweb’s disclosure about the high end of its adjusted expense forecast range?",
+    "filings": "What did Tradeweb disclose by the cutoff about the high end of its adjusted expense forecast range? Extract the exact wording, relevant dates, and figures."
+  },
+  "budget_usd": "0.05",
+  "calculation": null,
+  "calls": {
+    "contrary.extract": {
+      "confirmed_ms": 7867,
+      "dispatched_ms": 6804,
+      "estimated_model_cost_usd": "0.0000777",
+      "input_tokens_preflight": 717,
+      "max_output_tokens": 960,
+      "model": "gpt-6-luna",
+      "output": "{\"findings\":[]}",
+      "provider": {
+        "elapsed_ms": 1062,
+        "ids_sha256": "cfa56e92632e321c53748a45d6d1a64e28714cb55c500e66c67685c723657c68",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 717,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 12,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 729
+        }
+      },
+      "request_sha256": "1cb88b2d6dce4b5ecd92ea887e0a9d8095b35d514b18e51ce3e334aefcabf31a",
+      "reservation_usd": "0.000569625",
+      "stage": "contrary.extract"
+    },
+    "contrary.search.1": {
+      "confirmed_ms": 4773,
+      "dispatched_ms": 3399,
+      "estimated_model_cost_usd": "0.0000484",
+      "input_tokens_preflight": 339,
+      "max_output_tokens": 512,
+      "model": "gpt-6-luna",
+      "output": {
+        "arguments": {
+          "query": "Tradeweb high end forecast range adjusted expenses disclosure correction exception discrepancy"
+        },
+        "name": "search_archive"
+      },
+      "provider": {
+        "elapsed_ms": 1372,
+        "ids_sha256": "a94c7755e80e2a778ecb6f20678384e581bde57a24099d84e0bed566de460838",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 339,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 29,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 368
+        }
+      },
+      "request_sha256": "af921d03ba6a832c3fda104c1e2fec7ace53ea5260537d34260a78fdae314ca3",
+      "reservation_usd": "0.000298375",
+      "stage": "contrary.search.1"
+    },
+    "contrary.search.2": {
+      "confirmed_ms": 6586,
+      "dispatched_ms": 5289,
+      "estimated_model_cost_usd": "0.0001065",
+      "input_tokens_preflight": 935,
+      "max_output_tokens": 512,
+      "model": "gpt-6-luna",
+      "output": {
+        "arguments": {
+          "passage_ids": [
+            "P3",
+            "P4"
+          ]
+        },
+        "name": "read_passages"
+      },
+      "provider": {
+        "elapsed_ms": 1296,
+        "ids_sha256": "3d36fb1cd837b0d4df320272649757ba4825348e8e056e96cda9d4883c397ec1",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 935,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 26,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 961
+        }
+      },
+      "request_sha256": "a8c730c6c5f55bf45d996eabfdcce766ff16cef6f2183a8c8423cdf21c4fd427",
+      "reservation_usd": "0.000372875",
+      "stage": "contrary.search.2"
+    },
+    "filings.extract": {
+      "confirmed_ms": 10154,
+      "dispatched_ms": 8823,
+      "estimated_model_cost_usd": "0.0001157",
+      "input_tokens_preflight": 1097,
+      "max_output_tokens": 960,
+      "model": "gpt-6-luna",
+      "output": "{\"findings\":[]}",
+      "provider": {
+        "elapsed_ms": 1329,
+        "ids_sha256": "16619bfb1077ef13ad4ef76de33370910cb465fd81e4892e1af959e02c59e65c",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 1097,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 12,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1109
+        }
+      },
+      "request_sha256": "2f96a840583199a488b4dad2335407fbe934f5828ba9ed7060d3db87c1d7ed6d",
+      "reservation_usd": "0.000617125",
+      "stage": "filings.extract"
+    },
+    "filings.search.1": {
+      "confirmed_ms": 5429,
+      "dispatched_ms": 3460,
+      "estimated_model_cost_usd": "0.000049",
+      "input_tokens_preflight": 335,
+      "max_output_tokens": 512,
+      "model": "gpt-6-luna",
+      "output": {
+        "arguments": {
+          "query": "Tradeweb adjusted expenses forecast range high end 2023 guidance earnings call"
+        },
+        "name": "search_archive"
+      },
+      "provider": {
+        "elapsed_ms": 1968,
+        "ids_sha256": "5329db19a0351e5e728ff489d4e04b518f11e24cd873df49958db262a06490e7",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 335,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 31,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 366
+        }
+      },
+      "request_sha256": "17261275df171eb56d1040ab2a74644a5e6261b020348ae72124b2814da98ee0",
+      "reservation_usd": "0.000297875",
+      "stage": "filings.search.1"
+    },
+    "filings.search.2": {
+      "confirmed_ms": 7241,
+      "dispatched_ms": 5648,
+      "estimated_model_cost_usd": "0.0001118",
+      "input_tokens_preflight": 918,
+      "max_output_tokens": 512,
+      "model": "gpt-6-luna",
+      "output": {
+        "arguments": {
+          "query": "Tradeweb adjusted expenses forecast range high end outlook 2023 expense guidance third quarter 2023 earnings release conference call"
+        },
+        "name": "search_archive"
+      },
+      "provider": {
+        "elapsed_ms": 1586,
+        "ids_sha256": "9fae5b9895c5c9dd28d6ce391e7d16f7cb3128827783b2527ce3c55c39ee867e",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 918,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 40,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 958
+        }
+      },
+      "request_sha256": "98a27c540c3a5aef1350220063f650c4a4de42a094c7c5531f458af7c9de2e94",
+      "reservation_usd": "0.00037075",
+      "stage": "filings.search.2"
+    },
+    "filings.search.3": {
+      "confirmed_ms": 8571,
+      "dispatched_ms": 7443,
+      "estimated_model_cost_usd": "0.0001598",
+      "input_tokens_preflight": 1468,
+      "max_output_tokens": 512,
+      "model": "gpt-6-luna",
+      "output": {
+        "arguments": {
+          "passage_ids": [
+            "P5",
+            "P2"
+          ]
+        },
+        "name": "read_passages"
+      },
+      "provider": {
+        "elapsed_ms": 1126,
+        "ids_sha256": "14f3e602157d0ea9c5b7fb74390e78a0a3eec10ffa05abb8560f717737328576",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 1468,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 26,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1494
+        }
+      },
+      "request_sha256": "dbad66399a87218e8d7efeead4bf3314f7be4914a02111ce131625e893e8a4f8",
+      "reservation_usd": "0.0004395",
+      "stage": "filings.search.3"
+    },
+    "followup.filings.extract": {
+      "confirmed_ms": 19045,
+      "dispatched_ms": 16967,
+      "estimated_model_cost_usd": "0.0000503",
+      "input_tokens_preflight": 443,
+      "max_output_tokens": 960,
+      "model": "gpt-6-luna",
+      "output": "{\"findings\":[]}",
+      "provider": {
+        "elapsed_ms": 2076,
+        "ids_sha256": "ee09e08216232832b26be38d77ef1c76536847b5893ad443219da078c0edfa27",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 443,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 12,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 455
+        }
+      },
+      "request_sha256": "69447c0cafef61ff2fc7f1837eb81152422dc20f21dcabba273d5a00b4efe140",
+      "reservation_usd": "0.000535375",
+      "stage": "followup.filings.extract"
+    },
+    "followup.filings.search.1": {
+      "confirmed_ms": 14232,
+      "dispatched_ms": 13088,
+      "estimated_model_cost_usd": "0.0000504",
+      "input_tokens_preflight": 334,
+      "max_output_tokens": 512,
+      "model": "gpt-6-luna",
+      "output": {
+        "arguments": {
+          "query": "Tradeweb adjusted expenses forecast range high end 2023 earnings call October 2023"
+        },
+        "name": "search_archive"
+      },
+      "provider": {
+        "elapsed_ms": 1142,
+        "ids_sha256": "9614279e6296c014784c1375ac48c5be7812dc6991f6948a0148cc84c2ecf447",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 334,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 34,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 368
+        }
+      },
+      "request_sha256": "83e40eac81af8fb94fc5f937e046482c28b50b863f6d258a8efe03a844630c06",
+      "reservation_usd": "0.00029775",
+      "stage": "followup.filings.search.1"
+    },
+    "followup.filings.search.2": {
+      "confirmed_ms": 16728,
+      "dispatched_ms": 14429,
+      "estimated_model_cost_usd": "0.0001035",
+      "input_tokens_preflight": 920,
+      "max_output_tokens": 512,
+      "model": "gpt-6-luna",
+      "output": {
+        "arguments": {
+          "passage_ids": [
+            "P2"
+          ]
+        },
+        "name": "read_passages"
+      },
+      "provider": {
+        "elapsed_ms": 2296,
+        "ids_sha256": "600f6a0290ba997c3d1a3bc26bbd4a1dacc200d0221dc657e0ce0cf6718d2a33",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 920,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 23,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 943
+        }
+      },
+      "request_sha256": "6a5d2e4519d3b5975382a01b1f3de26448fee283d354a9830e8f4b47a7fb544e",
+      "reservation_usd": "0.000371",
+      "stage": "followup.filings.search.2"
+    },
+    "lead.decide.1": {
+      "confirmed_ms": 12901,
+      "dispatched_ms": 10374,
+      "estimated_model_cost_usd": "0.001168",
+      "input_tokens_preflight": 354,
+      "max_output_tokens": 1280,
+      "model": "gpt-6.2-sol",
+      "output": "{\"action\":\"check_filings\",\"instruction\":\"What did Tradeweb disclose by the cutoff about the high end of its adjusted expense forecast range? Provide the dated source passage and any relevant qualifications.\"}",
+      "provider": {
+        "elapsed_ms": 2524,
+        "ids_sha256": "9f56b474054278d1f6b6d0407aede89abebd9696a992e3a2d394c8d742e550e1",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 354,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 46,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 400
+        }
+      },
+      "request_sha256": "0d29b6132c19e1f2175016af14eeb65ae61352c5e50856ccd8549b3bc44478f3",
+      "reservation_usd": "0.013685",
+      "stage": "lead.decide.1"
+    },
+    "lead.decide.2": {
+      "confirmed_ms": 21516,
+      "dispatched_ms": 19312,
+      "estimated_model_cost_usd": "0.001354",
+      "input_tokens_preflight": 397,
+      "max_output_tokens": 1280,
+      "model": "gpt-6.2-sol",
+      "output": "{\"action\":\"qualify\",\"instruction\":\"No source passages or worker findings confirm what Tradeweb disclosed about the high end of its adjusted expense forecast by the cutoff. State that it could not be verified; do not infer a figure or quote.\"}",
+      "provider": {
+        "elapsed_ms": 2201,
+        "ids_sha256": "56093aae3ed39aa5ba8aed09018bf6895513008e51f6a77def652b0279ffed81",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 397,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 56,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 453
+        }
+      },
+      "request_sha256": "a6f2b6443553a97046189939501b0b3e5749d77942a89681c5dfa5604cf9a7a7",
+      "reservation_usd": "0.0137925",
+      "stage": "lead.decide.2"
+    },
+    "lead.plan": {
+      "confirmed_ms": 3183,
+      "dispatched_ms": 496,
+      "estimated_model_cost_usd": "0.00111",
+      "input_tokens_preflight": 185,
+      "max_output_tokens": 768,
+      "model": "gpt-6.2-sol",
+      "output": "{\"filings\":\"What did Tradeweb disclose by the cutoff about the high end of its adjusted expense forecast range? Extract the exact wording, relevant dates, and figures.\",\"contrary\":\"Were there any corrections, exceptions, or unresolved discrepancies by the cutoff concerning Tradeweb’s disclosure about the high end of its adjusted expense forecast range?\"}",
+      "provider": {
+        "elapsed_ms": 2686,
+        "ids_sha256": "9689fa827123565d2de576c67aa9d71d3313b4f99404238bb080afeb4eeaf894",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 185,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 74,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 259
+        }
+      },
+      "request_sha256": "e2c04f88eb74faac32d751e1c61079c92e9f102d3e533be71fd8bcd66831e618",
+      "reservation_usd": "0.0081425",
+      "stage": "lead.plan"
+    }
+  },
+  "case_id": "tradeweb-expenses-2023-10-26-before",
+  "corpus_sha256": "4bc99235fbd4c25740055dcc57386a785a60494ae622fb1f415dc690aa28df6b",
+  "coverage": "qualify",
+  "created_at": "2026-11-19T09:13:58.955083+00:00",
+  "cutoff": "2023-10-26T13:16:38Z",
+  "decisions": [
+    {
+      "action": "check_filings",
+      "instruction": "What did Tradeweb disclose by the cutoff about the high end of its adjusted expense forecast range? Provide the dated source passage and any relevant qualifications."
+    },
+    {
+      "action": "qualify",
+      "instruction": "No source passages or worker findings confirm what Tradeweb disclosed about the high end of its adjusted expense forecast by the cutoff. State that it could not be verified; do not infer a figure or quote."
+    }
+  ],
+  "elapsed_ms": 21522,
+  "estimated_model_cost_usd": "0.0045051",
+  "events": [
+    [
+      "reserve",
+      "lead.plan"
+    ],
+    [
+      "settle",
+      "lead.plan"
+    ],
+    [
+      "reserve",
+      "contrary.search.1"
+    ],
+    [
+      "reserve",
+      "filings.search.1"
+    ],
+    [
+      "settle",
+      "contrary.search.1"
+    ],
+    [
+      "reserve",
+      "contrary.search.2"
+    ],
+    [
+      "settle",
+      "filings.search.1"
+    ],
+    [
+      "reserve",
+      "filings.search.2"
+    ],
+    [
+      "settle",
+      "contrary.search.2"
+    ],
+    [
+      "reserve",
+      "contrary.extract"
+    ],
+    [
+      "settle",
+      "filings.search.2"
+    ],
+    [
+      "reserve",
+      "filings.search.3"
+    ],
+    [
+      "settle",
+      "contrary.extract"
+    ],
+    [
+      "settle",
+      "filings.search.3"
+    ],
+    [
+      "reserve",
+      "filings.extract"
+    ],
+    [
+      "settle",
+      "filings.extract"
+    ],
+    [
+      "reserve",
+      "lead.decide.1"
+    ],
+    [
+      "settle",
+      "lead.decide.1"
+    ],
+    [
+      "reserve",
+      "followup.filings.search.1"
+    ],
+    [
+      "settle",
+      "followup.filings.search.1"
+    ],
+    [
+      "reserve",
+      "followup.filings.search.2"
+    ],
+    [
+      "settle",
+      "followup.filings.search.2"
+    ],
+    [
+      "reserve",
+      "followup.filings.extract"
+    ],
+    [
+      "settle",
+      "followup.filings.extract"
+    ],
+    [
+      "reserve",
+      "lead.decide.2"
+    ],
+    [
+      "settle",
+      "lead.decide.2"
+    ]
+  ],
+  "evidence": {},
+  "memo_sha256": "e23e409ac4219d8c1cda4c07c95441c14483e4d64ce2627371fe4e5f22c4c587",
+  "paid_tool_charges_usd": "0",
+  "pricing": {
+    "per_million_usd": {
+      "gpt-6-luna": {
+        "cache_write_30m": "0.125",
+        "cached_input": "0.01",
+        "ordinary_input": "0.10",
+        "output": "0.50"
+      },
+      "gpt-6.2-sol": {
+        "cache_write_30m": "2.50",
+        "cached_input": "0.10",
+        "ordinary_input": "2.00",
+        "output": "10.00"
+      }
+    },
+    "sources": [
+      "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+      "https://developers.openai.com/api/docs/models/gpt-6-luna"
+    ],
+    "status": "estimate_from_usage"
+  },
+  "prompt_version": "sol-two-luna-v4",
+  "question": "What did Tradeweb disclose about the high end of its forecast range for adjusted expenses?",
+  "route": "team",
+  "run_id": "tradeweb-before-with-sources",
+  "schema_version": 3,
+  "state": "complete",
+  "unreconciled_reservation_usd": "0",
+  "worker_reports": [
+    {
+      "assignment": "What did Tradeweb disclose by the cutoff about the high end of its adjusted expense forecast range? Extract the exact wording, relevant dates, and figures.",
+      "findings": [],
+      "role": "filings"
+    },
+    {
+      "assignment": "Were there any corrections, exceptions, or unresolved discrepancies by the cutoff concerning Tradeweb’s disclosure about the high end of its adjusted expense forecast range?",
+      "findings": [],
+      "role": "contrary"
+    },
+    {
+      "assignment": "What did Tradeweb disclose by the cutoff about the high end of its adjusted expense forecast range? Provide the dated source passage and any relevant qualifications.",
+      "findings": [],
+      "role": "filings"
+    }
+  ],
+  "workers": [
+    {
+      "assignment": "What did Tradeweb disclose by the cutoff about the high end of its adjusted expense forecast range? Extract the exact wording, relevant dates, and figures.",
+      "findings": [],
+      "opened": {
+        "P2": {
+          "available_by_utc": "2023-10-26T11:01:25+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000168/tw-20231026.htm#:~:text=On%20October%2025%2C%202023%2C%20Tradeweb%20Markets%20LLC%20%28%E2%80%9CTradeweb%20Markets%E2%80%9D%29%2C%20a%20wholly%20owned%20subsidiary%20of%20Tradeweb",
+          "edition": "0001758730-23-000168",
+          "locator": "Item 1.01. Entry into a Material Definitive Agreement. ¶1",
+          "published": "2023-10-26T07:01:25-04:00",
+          "sha256": "1d695296dded01de487504ceda04a36a2c07880fd4c38a63134026986d47e141",
+          "source_id": "tradeweb-8k",
+          "text": "On October 25, 2023, Tradeweb Markets LLC (“Tradeweb Markets”), a wholly owned subsidiary of Tradeweb Markets Inc. (the “Company”) entered into a master data license agreement (the “Master Data Agreement”) with Refinitiv US LLC and Refinitiv US Organization LLC (together, the “Refinitiv Parties”), which effective as of November 1, 2023 amends and restates in its entirety the Second Amended and Restated Market Data Agreement, dated November 1, 2018, by and among Tradeweb Markets and the Refinitiv Parties, as amended. Pursuant to the Master Data Agreement, on October 25, 2023, Tradeweb Markets and the Refinitiv Parties entered into separate data schedules (the “Current Data Schedules”) under which Tradeweb Markets will license certain data sets to Refinitiv US LLC and its relevant affiliates (collectively, the “Refinitiv Subscriber”) in exchange for either fixed license fees or fees payable based on a percentage of revenue generated by the Refinitiv Subscriber. As of the date hereof, Tradeweb Markets will provide the Refinitiv Subscriber with certain market data (including real time feeds) for multiple fixed income and derivatives products under a partially exclusive license pursuant to which the Refinitiv Subscriber is permitted to distribute such market data to its customers subject to the terms of the Master Data Agreement. Tradeweb Markets will also earn revenues from the Refinitiv Subscriber for servicing certain of its customers, as well as earn a share of revenue generated from the licensing of 19901 data sets to clients, which utilizes Tradeweb Markets data.",
+          "title": "Tradeweb Markets Form 8-K",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000168/tw-20231026.htm",
+          "version_at": "2023-10-26T07:01:25-04:00"
+        },
+        "P5": {
+          "available_by_utc": "2023-10-26T11:01:25+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000168/tw-20231026.htm#:~:text=On%20October%2026%2C%202023%2C%20Tradeweb%20Markets%20Inc.%20%28the%20%E2%80%9CCompany%E2%80%9D%29%20issued%20a%20press%20release%2C%20a%20copy",
+          "edition": "0001758730-23-000168",
+          "locator": "Item 2.02. Results of Operations and Financial Condition. ¶1",
+          "published": "2023-10-26T07:01:25-04:00",
+          "sha256": "1d695296dded01de487504ceda04a36a2c07880fd4c38a63134026986d47e141",
+          "source_id": "tradeweb-8k",
+          "text": "On October 26, 2023, Tradeweb Markets Inc. (the “Company”) issued a press release, a copy of which is furnished as Exhibit 99.1 hereto and incorporated herein by reference, announcing financial results for the quarter ended September 30, 2023.",
+          "title": "Tradeweb Markets Form 8-K",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000168/tw-20231026.htm",
+          "version_at": "2023-10-26T07:01:25-04:00"
+        }
+      },
+      "role": "filings",
+      "searches": [
+        {
+          "query": "Tradeweb adjusted expenses forecast range high end 2023 guidance earnings call",
+          "results": [
+            {
+              "id": "P1",
+              "locator": "PDF p3 §1",
+              "preview": "3.  Forecast of Consolidated Results for FY2024 (April 1, 2023 through March 31, 2024)\n                                                                                                                                     ",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            },
+            {
+              "id": "P2",
+              "locator": "Item 1.01. Entry into a Material Definitive Agreement. ¶1",
+              "preview": "On October 25, 2023, Tradeweb Markets LLC (“Tradeweb Markets”), a wholly owned subsidiary of Tradeweb Markets Inc. (the “Company”) entered into a master data license agreement (the “Master Data Agreement”) with Refinitiv",
+              "published": "2023-10-26T07:01:25-04:00",
+              "title": "Tradeweb Markets Form 8-K"
+            },
+            {
+              "id": "P3",
+              "locator": "PDF p2 §12",
+              "preview": "The Governing Council stands ready to adjust all of its instruments within its mandate to ensure that inflation returns to its 2% target over the medium term and to preserve the smooth functioning of",
+              "published": "2023-09-14",
+              "title": "European Central Bank monetary policy decisions"
+            },
+            {
+              "id": "P4",
+              "locator": "PDF p2 §5",
+              "preview": "2.  Cash Dividends\n                            Annual cash dividends per common share                  Total amount of                                                                 Ratio of total amount\n               ",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            },
+            {
+              "id": "P5",
+              "locator": "Item 2.02. Results of Operations and Financial Condition. ¶1",
+              "preview": "On October 26, 2023, Tradeweb Markets Inc. (the “Company”) issued a press release, a copy of which is furnished as Exhibit 99.1 hereto and incorporated herein by reference, announcing financial results for the quarter en",
+              "published": "2023-10-26T07:01:25-04:00",
+              "title": "Tradeweb Markets Form 8-K"
+            }
+          ]
+        },
+        {
+          "query": "Tradeweb adjusted expenses forecast range high end outlook 2023 expense guidance third quarter 2023 earnings release conference call",
+          "results": [
+            {
+              "id": "P5",
+              "locator": "Item 2.02. Results of Operations and Financial Condition. ¶1",
+              "preview": "On October 26, 2023, Tradeweb Markets Inc. (the “Company”) issued a press release, a copy of which is furnished as Exhibit 99.1 hereto and incorporated herein by reference, announcing financial results for the quarter en",
+              "published": "2023-10-26T07:01:25-04:00",
+              "title": "Tradeweb Markets Form 8-K"
+            },
+            {
+              "id": "P4",
+              "locator": "PDF p2 §5",
+              "preview": "2.  Cash Dividends\n                            Annual cash dividends per common share                  Total amount of                                                                 Ratio of total amount\n               ",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            },
+            {
+              "id": "P1",
+              "locator": "PDF p3 §1",
+              "preview": "3.  Forecast of Consolidated Results for FY2024 (April 1, 2023 through March 31, 2024)\n                                                                                                                                     ",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            },
+            {
+              "id": "P6",
+              "locator": "PDF p1 §4",
+              "preview": "The GDP estimate released today is based on source data that are incomplete or subject to further revision by the source agency (refer to “Source Data for the Advance Estimate” on page 2). The “second” estimate for the t",
+              "published": "2023-10-26T08:30:00-04:00",
+              "title": "US real GDP, third quarter 2023, advance estimate"
+            },
+            {
+              "id": "P2",
+              "locator": "Item 1.01. Entry into a Material Definitive Agreement. ¶1",
+              "preview": "On October 25, 2023, Tradeweb Markets LLC (“Tradeweb Markets”), a wholly owned subsidiary of Tradeweb Markets Inc. (the “Company”) entered into a master data license agreement (the “Master Data Agreement”) with Refinitiv",
+              "published": "2023-10-26T07:01:25-04:00",
+              "title": "Tradeweb Markets Form 8-K"
+            }
+          ]
+        }
+      ],
+      "trace": [
+        {
+          "max_date": "2023-10-26T13:16:38Z",
+          "operation": "search",
+          "results": [
+            "toyota-fy2023/PDF p3 §1",
+            "tradeweb-8k/Item 1.01. Entry into a Material Definitive Agreement. ¶1",
+            "ecb-sep2023/PDF p2 §12",
+            "toyota-fy2023/PDF p2 §5",
+            "tradeweb-8k/Item 2.02. Results of Operations and Financial Condition. ¶1"
+          ]
+        },
+        {
+          "max_date": "2023-10-26T13:16:38Z",
+          "operation": "search",
+          "results": [
+            "tradeweb-8k/Item 2.02. Results of Operations and Financial Condition. ¶1",
+            "toyota-fy2023/PDF p2 §5",
+            "toyota-fy2023/PDF p3 §1",
+            "bea-q3-advance/PDF p1 §4",
+            "tradeweb-8k/Item 1.01. Entry into a Material Definitive Agreement. ¶1"
+          ]
+        },
+        {
+          "max_date": "2023-10-26T13:16:38Z",
+          "operation": "read",
+          "results": [
+            "tradeweb-8k/Item 2.02. Results of Operations and Financial Condition. ¶1"
+          ]
+        },
+        {
+          "max_date": "2023-10-26T13:16:38Z",
+          "operation": "read",
+          "results": [
+            "tradeweb-8k/Item 1.01. Entry into a Material Definitive Agreement. ¶1"
+          ]
+        }
+      ]
+    },
+    {
+      "assignment": "Were there any corrections, exceptions, or unresolved discrepancies by the cutoff concerning Tradeweb’s disclosure about the high end of its adjusted expense forecast range?",
+      "findings": [],
+      "opened": {
+        "P3": {
+          "available_by_utc": "2023-10-26T11:01:25+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000168/tw-20231026.htm#:~:text=On%20October%2026%2C%202023%2C%20Tradeweb%20Markets%20Inc.%20%28the%20%E2%80%9CCompany%E2%80%9D%29%20issued%20a%20press%20release%2C%20a%20copy",
+          "edition": "0001758730-23-000168",
+          "locator": "Item 2.02. Results of Operations and Financial Condition. ¶1",
+          "published": "2023-10-26T07:01:25-04:00",
+          "sha256": "1d695296dded01de487504ceda04a36a2c07880fd4c38a63134026986d47e141",
+          "source_id": "tradeweb-8k",
+          "text": "On October 26, 2023, Tradeweb Markets Inc. (the “Company”) issued a press release, a copy of which is furnished as Exhibit 99.1 hereto and incorporated herein by reference, announcing financial results for the quarter ended September 30, 2023.",
+          "title": "Tradeweb Markets Form 8-K",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000168/tw-20231026.htm",
+          "version_at": "2023-10-26T07:01:25-04:00"
+        },
+        "P4": {
+          "available_by_utc": "2023-10-26T11:01:25+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000168/tw-20231026.htm#:~:text=In%20accordance%20with%20General%20Instruction%20B.2%20of%20Form%208%2DK%2C%20the%20information%20in%20this%20Item%202.02",
+          "edition": "0001758730-23-000168",
+          "locator": "Item 2.02. Results of Operations and Financial Condition. ¶2",
+          "published": "2023-10-26T07:01:25-04:00",
+          "sha256": "1d695296dded01de487504ceda04a36a2c07880fd4c38a63134026986d47e141",
+          "source_id": "tradeweb-8k",
+          "text": "In accordance with General Instruction B.2 of Form 8-K, the information in this Item 2.02 of this Current Report on Form 8-K, including Exhibit 99.1 attached hereto, shall not be deemed “filed” for the purposes of Section 18 of the Securities Exchange Act of 1934, as amended (the “Exchange Act”), or otherwise subject to the liabilities of that section, nor shall it be deemed incorporated by reference in any filing under the Securities Act of 1933, as amended, or the Exchange Act, except as shall be expressly set forth by specific reference in such a filing.",
+          "title": "Tradeweb Markets Form 8-K",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000168/tw-20231026.htm",
+          "version_at": "2023-10-26T07:01:25-04:00"
+        }
+      },
+      "role": "contrary",
+      "searches": [
+        {
+          "query": "Tradeweb high end forecast range adjusted expenses disclosure correction exception discrepancy",
+          "results": [
+            {
+              "id": "P1",
+              "locator": "PDF p2 §12",
+              "preview": "The Governing Council stands ready to adjust all of its instruments within its mandate to ensure that inflation returns to its 2% target over the medium term and to preserve the smooth functioning of",
+              "published": "2023-09-14",
+              "title": "European Central Bank monetary policy decisions"
+            },
+            {
+              "id": "P2",
+              "locator": "PDF p2 §5",
+              "preview": "2.  Cash Dividends\n                            Annual cash dividends per common share                  Total amount of                                                                 Ratio of total amount\n               ",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            },
+            {
+              "id": "P3",
+              "locator": "Item 2.02. Results of Operations and Financial Condition. ¶1",
+              "preview": "On October 26, 2023, Tradeweb Markets Inc. (the “Company”) issued a press release, a copy of which is furnished as Exhibit 99.1 hereto and incorporated herein by reference, announcing financial results for the quarter en",
+              "published": "2023-10-26T07:01:25-04:00",
+              "title": "Tradeweb Markets Form 8-K"
+            },
+            {
+              "id": "P4",
+              "locator": "Item 2.02. Results of Operations and Financial Condition. ¶2",
+              "preview": "In accordance with General Instruction B.2 of Form 8-K, the information in this Item 2.02 of this Current Report on Form 8-K, including Exhibit 99.1 attached hereto, shall not be deemed “filed” for the purposes of Sectio",
+              "published": "2023-10-26T07:01:25-04:00",
+              "title": "Tradeweb Markets Form 8-K"
+            },
+            {
+              "id": "P5",
+              "locator": "PDF p1 §4",
+              "preview": "Inflation continues to decline but is still expected to remain too high for too long. The Governing Council is determined to ensure that inflation returns to its 2% medium-term target in a timely manner. In order to rein",
+              "published": "2023-09-14",
+              "title": "European Central Bank monetary policy decisions"
+            }
+          ]
+        }
+      ],
+      "trace": [
+        {
+          "max_date": "2023-10-26T13:16:38Z",
+          "operation": "search",
+          "results": [
+            "ecb-sep2023/PDF p2 §12",
+            "toyota-fy2023/PDF p2 §5",
+            "tradeweb-8k/Item 2.02. Results of Operations and Financial Condition. ¶1",
+            "tradeweb-8k/Item 2.02. Results of Operations and Financial Condition. ¶2",
+            "ecb-sep2023/PDF p1 §4"
+          ]
+        },
+        {
+          "max_date": "2023-10-26T13:16:38Z",
+          "operation": "read",
+          "results": [
+            "tradeweb-8k/Item 2.02. Results of Operations and Financial Condition. ¶1"
+          ]
+        },
+        {
+          "max_date": "2023-10-26T13:16:38Z",
+          "operation": "read",
+          "results": [
+            "tradeweb-8k/Item 2.02. Results of Operations and Financial Condition. ¶2"
+          ]
+        }
+      ]
+    },
+    {
+      "assignment": "What did Tradeweb disclose by the cutoff about the high end of its adjusted expense forecast range? Provide the dated source passage and any relevant qualifications.",
+      "findings": [],
+      "opened": {
+        "P2": {
+          "available_by_utc": "2023-10-26T11:01:25+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000168/tw-20231026.htm#:~:text=On%20October%2026%2C%202023%2C%20Tradeweb%20Markets%20Inc.%20%28the%20%E2%80%9CCompany%E2%80%9D%29%20issued%20a%20press%20release%2C%20a%20copy",
+          "edition": "0001758730-23-000168",
+          "locator": "Item 2.02. Results of Operations and Financial Condition. ¶1",
+          "published": "2023-10-26T07:01:25-04:00",
+          "sha256": "1d695296dded01de487504ceda04a36a2c07880fd4c38a63134026986d47e141",
+          "source_id": "tradeweb-8k",
+          "text": "On October 26, 2023, Tradeweb Markets Inc. (the “Company”) issued a press release, a copy of which is furnished as Exhibit 99.1 hereto and incorporated herein by reference, announcing financial results for the quarter ended September 30, 2023.",
+          "title": "Tradeweb Markets Form 8-K",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000168/tw-20231026.htm",
+          "version_at": "2023-10-26T07:01:25-04:00"
+        }
+      },
+      "role": "filings",
+      "searches": [
+        {
+          "query": "Tradeweb adjusted expenses forecast range high end 2023 earnings call October 2023",
+          "results": [
+            {
+              "id": "P1",
+              "locator": "Item 1.01. Entry into a Material Definitive Agreement. ¶1",
+              "preview": "On October 25, 2023, Tradeweb Markets LLC (“Tradeweb Markets”), a wholly owned subsidiary of Tradeweb Markets Inc. (the “Company”) entered into a master data license agreement (the “Master Data Agreement”) with Refinitiv",
+              "published": "2023-10-26T07:01:25-04:00",
+              "title": "Tradeweb Markets Form 8-K"
+            },
+            {
+              "id": "P2",
+              "locator": "Item 2.02. Results of Operations and Financial Condition. ¶1",
+              "preview": "On October 26, 2023, Tradeweb Markets Inc. (the “Company”) issued a press release, a copy of which is furnished as Exhibit 99.1 hereto and incorporated herein by reference, announcing financial results for the quarter en",
+              "published": "2023-10-26T07:01:25-04:00",
+              "title": "Tradeweb Markets Form 8-K"
+            },
+            {
+              "id": "P3",
+              "locator": "PDF p3 §1",
+              "preview": "3.  Forecast of Consolidated Results for FY2024 (April 1, 2023 through March 31, 2024)\n                                                                                                                                     ",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            },
+            {
+              "id": "P4",
+              "locator": "PDF p2 §5",
+              "preview": "2.  Cash Dividends\n                            Annual cash dividends per common share                  Total amount of                                                                 Ratio of total amount\n               ",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            },
+            {
+              "id": "P5",
+              "locator": "PDF p2 §12",
+              "preview": "The Governing Council stands ready to adjust all of its instruments within its mandate to ensure that inflation returns to its 2% target over the medium term and to preserve the smooth functioning of",
+              "published": "2023-09-14",
+              "title": "European Central Bank monetary policy decisions"
+            }
+          ]
+        }
+      ],
+      "trace": [
+        {
+          "max_date": "2023-10-26T13:16:38Z",
+          "operation": "search",
+          "results": [
+            "tradeweb-8k/Item 1.01. Entry into a Material Definitive Agreement. ¶1",
+            "tradeweb-8k/Item 2.02. Results of Operations and Financial Condition. ¶1",
+            "toyota-fy2023/PDF p3 §1",
+            "toyota-fy2023/PDF p2 §5",
+            "ecb-sep2023/PDF p2 §12"
+          ]
+        },
+        {
+          "max_date": "2023-10-26T13:16:38Z",
+          "operation": "read",
+          "results": [
+            "tradeweb-8k/Item 2.02. Results of Operations and Financial Condition. ¶1"
+          ]
+        }
+      ]
+    }
+  ]
+}

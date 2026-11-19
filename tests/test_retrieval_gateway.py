@@ -141,6 +141,36 @@ class RetrievalGatewayTests(unittest.TestCase):
         self.assertEqual(evidence["opened"], record["opened"])
         self.assertEqual(evidence["retrieval"], record["retrieval"])
 
+    def test_team_cannot_observe_evaluator_filing_even_after_later_cache_warmup(self):
+        try:
+            from scripts import sol_baseline, team_research
+        except ModuleNotFoundError as error:
+            if error.name == "pydantic":
+                self.skipTest("Install the baseline requirements to replay team requests")
+            raise
+        record_path = SAVED_CASE.parents[1] / "evaluations/first-team/disney-team/run.json"
+        record = json.loads(record_path.read_bytes())
+        mixed, future = self.mixed_disney()
+        with mixed.session("2025-06-09") as session:
+            self.assertTrue(session.read(future["url"], max_date=session.cutoff))
+            session.search("Hulu appraisal", max_date=session.cutoff)
+        observed = set()
+
+        def ask(stage, prompt, limit):
+            actual = record["calls"][stage]
+            self.assertEqual(limit, actual.get("requested_output_tokens", actual["max_output_tokens"]))
+            payload = sol_baseline.json_bytes(sol_baseline.generation_request(prompt, max_output_tokens=actual["max_output_tokens"]))
+            self.assertEqual(sol_baseline.fingerprint(payload), actual["request_sha256"])
+            for excluded in (future["title"], future["url"], future["edition"], "$438.7 million"):
+                self.assertNotIn(excluded, payload.decode())
+            observed.add(stage)
+            return actual["output"]
+
+        memo, trace = team_research.research(team_research.case_for("disney"), mixed, ask, route="team")
+        self.assertEqual(observed, set(record["calls"]))
+        self.assertEqual(memo, record_path.with_name("memo.md").read_bytes())
+        self.assertEqual(trace["workers"], record["workers"])
+
     def test_release_time_not_event_date_and_same_day_amendment(self):
         first, later = (self.sources[name] for name in ("tradeweb-8k", "tradeweb-8ka"))
         for cutoff, original_ok, amendment_ok in (

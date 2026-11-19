@@ -1,0 +1,322 @@
+{
+  "assignments": {},
+  "budget_usd": "0.05",
+  "calculation": null,
+  "calls": {
+    "lead.memo": {
+      "confirmed_ms": 8948,
+      "dispatched_ms": 4434,
+      "estimated_model_cost_usd": "0.004932",
+      "input_tokens_preflight": 881,
+      "max_output_tokens": 2560,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"paragraphs\": [\n    {\n      \"text\": \"Tradeweb corrected the high end of its forecast range for adjusted expenses upward from USD 659 million to USD 695 million, citing a typographical error. The correction affected only the high end.\",\n      \"citations\": [\n        {\n          \"passage_id\": \"P1\",\n          \"quote\": \"The Amended Earnings Release corrects the high end of the range of expected Adjusted Expenses from $659 million to $695 million.\"\n        },\n        {\n          \"passage_id\": \"P2\",\n          \"quote\": \"solely to correct the range of forecasted Adjusted Expenses set forth in the Company’s Original Earnings Release due to a typographical error.\"\n        }\n      ]\n    }\n  ],\n  \"filing_history\": {\n    \"text\": \"Amendment No. 1 to the original Form 8-K replaced the original earnings release with an amended release attached as Exhibit 99.1. All other information in the original filing and release remained unchanged.\",\n    \"citations\": [\n      {\n        \"passage_id\": \"P1\",\n        \"quote\": \"This Amendment No. 1 replaces the Original Earnings Release with the amended earnings release, attached hereto as Exhibit 99.1\"\n      },\n      {\n        \"passage_id\": \"P2\",\n        \"quote\": \"All other information contained in the Original Form 8-K, including the Original Earnings Release, remains unchanged.\"\n      }\n    ]\n  }\n}",
+      "provider": {
+        "elapsed_ms": 4512,
+        "ids_sha256": "2e7ed8dfdf4089ffd32e39c1561725f790378ef2c53c8aac90c9f90d7465e325",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 881,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 317,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1198
+        }
+      },
+      "request_sha256": "403782c566a49427600f9ba56cd135616ea244dffe5aca67b9b135f895ad6f63",
+      "reservation_usd": "0.0278025",
+      "stage": "lead.memo"
+    },
+    "lead.search.1": {
+      "confirmed_ms": 2013,
+      "dispatched_ms": 257,
+      "estimated_model_cost_usd": "0.000922",
+      "input_tokens_preflight": 296,
+      "max_output_tokens": 512,
+      "model": "gpt-6.2-sol",
+      "output": {
+        "arguments": {
+          "query": "Tradeweb high end forecast range adjusted expenses guidance October 26 2023 earnings"
+        },
+        "name": "search_archive"
+      },
+      "provider": {
+        "elapsed_ms": 1754,
+        "ids_sha256": "ce534486740f72b1cc3e79c09447c88872bf509c89fcdbb0df9bb459c069a67f",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 296,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 33,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 329
+        }
+      },
+      "request_sha256": "9615b45530c7170a5a2434f5d5a03bcebaf99e3c3cbf8b28468f1a463dc1e3ed",
+      "reservation_usd": "0.00586",
+      "stage": "lead.search.1"
+    },
+    "lead.search.2": {
+      "confirmed_ms": 4097,
+      "dispatched_ms": 2565,
+      "estimated_model_cost_usd": "0.002178",
+      "input_tokens_preflight": 959,
+      "max_output_tokens": 512,
+      "model": "gpt-6.2-sol",
+      "output": {
+        "arguments": {
+          "passage_ids": [
+            "P1",
+            "P2"
+          ]
+        },
+        "name": "read_passages"
+      },
+      "provider": {
+        "elapsed_ms": 1531,
+        "ids_sha256": "f635d0365e6581373cf548d1453725be250e35da833a7f416e76e7e099d90a93",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 959,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 26,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 985
+        }
+      },
+      "request_sha256": "72e449b6415c8ef74a4c8d7e7158da56a58c666776eb728574bdc16bc2191d9f",
+      "reservation_usd": "0.0075175",
+      "stage": "lead.search.2"
+    }
+  },
+  "case_id": "tradeweb-expenses-2023-10-26",
+  "corpus_sha256": "4bc99235fbd4c25740055dcc57386a785a60494ae622fb1f415dc690aa28df6b",
+  "coverage": "write",
+  "created_at": "2026-11-19T09:07:47.612297+00:00",
+  "cutoff": "2023-10-26T13:17:00Z",
+  "decisions": [],
+  "elapsed_ms": 8955,
+  "estimated_model_cost_usd": "0.008032",
+  "events": [
+    [
+      "reserve",
+      "lead.search.1"
+    ],
+    [
+      "settle",
+      "lead.search.1"
+    ],
+    [
+      "reserve",
+      "lead.search.2"
+    ],
+    [
+      "settle",
+      "lead.search.2"
+    ],
+    [
+      "reserve",
+      "lead.memo"
+    ],
+    [
+      "settle",
+      "lead.memo"
+    ]
+  ],
+  "evidence": {
+    "P1": {
+      "available_by_utc": "2023-10-26T13:16:39+00:00",
+      "citation_url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000171/tw-20231026.htm#:~:text=On%20October%2026%2C%202023%2C%20the%20Company%20filed%20the%20Original%20Form%208%2DK%2C%20which%20included%20the%20Original",
+      "edition": "0001758730-23-000171",
+      "locator": "Item 2.02. Results of Operations and Financial Condition. ¶1",
+      "published": "2023-10-26T09:16:39-04:00",
+      "sha256": "30c56f7f545cecaf63d3c41de5e1babf1414924ff9e4a1783b4132771d579ff7",
+      "source_id": "tradeweb-8ka",
+      "text": "On October 26, 2023, the Company filed the Original Form 8-K, which included the Original Earnings Release. This Amendment No. 1 replaces the Original Earnings Release with the amended earnings release, attached hereto as Exhibit 99.1 (the “Amended Earnings Release”). The Amended Earnings Release corrects the high end of the range of expected Adjusted Expenses from $659 million to $695 million. All other information contained in the Original Earnings Release remains unchanged. See “Forward-Looking Statements” and “Non-GAAP Financial Measures” in the Amended Earnings Release for additional information.",
+      "title": "Tradeweb Markets Form 8-K/A",
+      "url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000171/tw-20231026.htm",
+      "version_at": "2023-10-26T09:16:39-04:00"
+    },
+    "P2": {
+      "available_by_utc": "2023-10-26T13:16:39+00:00",
+      "citation_url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000171/tw-20231026.htm#:~:text=On%20October%2026%2C%202023%2C%20Tradeweb%20Markets%20Inc.%20%28the%20%E2%80%9CCompany%E2%80%9D%29%20filed%20a%20Form%208%2DK%20%28%E2%80%9COriginal%20Form",
+      "edition": "0001758730-23-000171",
+      "locator": "EXPLANATORY NOTE ¶1",
+      "published": "2023-10-26T09:16:39-04:00",
+      "sha256": "30c56f7f545cecaf63d3c41de5e1babf1414924ff9e4a1783b4132771d579ff7",
+      "source_id": "tradeweb-8ka",
+      "text": "On October 26, 2023, Tradeweb Markets Inc. (the “Company”) filed a Form 8-K (“Original Form 8-K”) with the U.S. Securities and Exchange Commission (“SEC”), which included the earnings release that was furnished on Exhibit 99.1 to the Original Form 8-K (the “Original Earnings Release”). The Company is filing this Amendment No. 1 to the Original Form 8-K (“Amendment No. 1”) solely to correct the range of forecasted Adjusted Expenses set forth in the Company’s Original Earnings Release due to a typographical error. All other information contained in the Original Form 8-K, including the Original Earnings Release, remains unchanged.",
+      "title": "Tradeweb Markets Form 8-K/A",
+      "url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000171/tw-20231026.htm",
+      "version_at": "2023-10-26T09:16:39-04:00"
+    }
+  },
+  "memo_sha256": "a7e48cc4997898e716de8d93fcb7e828e0ad7df875f2aacba8d03940434d612f",
+  "paid_tool_charges_usd": "0",
+  "pricing": {
+    "per_million_usd": {
+      "gpt-6-luna": {
+        "cache_write_30m": "0.125",
+        "cached_input": "0.01",
+        "ordinary_input": "0.10",
+        "output": "0.50"
+      },
+      "gpt-6.2-sol": {
+        "cache_write_30m": "2.50",
+        "cached_input": "0.10",
+        "ordinary_input": "2.00",
+        "output": "10.00"
+      }
+    },
+    "sources": [
+      "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+      "https://developers.openai.com/api/docs/models/gpt-6-luna"
+    ],
+    "status": "estimate_from_usage"
+  },
+  "prompt_version": "sol-two-luna-v4",
+  "question": "What did Tradeweb disclose about the high end of its forecast range for adjusted expenses?",
+  "route": "single",
+  "run_id": "tradeweb-single-step4-accepted",
+  "schema_version": 3,
+  "state": "complete",
+  "unreconciled_reservation_usd": "0",
+  "worker_reports": [],
+  "workers": [
+    {
+      "assignment": "What did Tradeweb disclose about the high end of its forecast range for adjusted expenses?",
+      "findings": [],
+      "opened": {
+        "P1": {
+          "available_by_utc": "2023-10-26T13:16:39+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000171/tw-20231026.htm#:~:text=On%20October%2026%2C%202023%2C%20the%20Company%20filed%20the%20Original%20Form%208%2DK%2C%20which%20included%20the%20Original",
+          "edition": "0001758730-23-000171",
+          "locator": "Item 2.02. Results of Operations and Financial Condition. ¶1",
+          "published": "2023-10-26T09:16:39-04:00",
+          "sha256": "30c56f7f545cecaf63d3c41de5e1babf1414924ff9e4a1783b4132771d579ff7",
+          "source_id": "tradeweb-8ka",
+          "text": "On October 26, 2023, the Company filed the Original Form 8-K, which included the Original Earnings Release. This Amendment No. 1 replaces the Original Earnings Release with the amended earnings release, attached hereto as Exhibit 99.1 (the “Amended Earnings Release”). The Amended Earnings Release corrects the high end of the range of expected Adjusted Expenses from $659 million to $695 million. All other information contained in the Original Earnings Release remains unchanged. See “Forward-Looking Statements” and “Non-GAAP Financial Measures” in the Amended Earnings Release for additional information.",
+          "title": "Tradeweb Markets Form 8-K/A",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000171/tw-20231026.htm",
+          "version_at": "2023-10-26T09:16:39-04:00"
+        },
+        "P2": {
+          "available_by_utc": "2023-10-26T13:16:39+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000171/tw-20231026.htm#:~:text=On%20October%2026%2C%202023%2C%20Tradeweb%20Markets%20Inc.%20%28the%20%E2%80%9CCompany%E2%80%9D%29%20filed%20a%20Form%208%2DK%20%28%E2%80%9COriginal%20Form",
+          "edition": "0001758730-23-000171",
+          "locator": "EXPLANATORY NOTE ¶1",
+          "published": "2023-10-26T09:16:39-04:00",
+          "sha256": "30c56f7f545cecaf63d3c41de5e1babf1414924ff9e4a1783b4132771d579ff7",
+          "source_id": "tradeweb-8ka",
+          "text": "On October 26, 2023, Tradeweb Markets Inc. (the “Company”) filed a Form 8-K (“Original Form 8-K”) with the U.S. Securities and Exchange Commission (“SEC”), which included the earnings release that was furnished on Exhibit 99.1 to the Original Form 8-K (the “Original Earnings Release”). The Company is filing this Amendment No. 1 to the Original Form 8-K (“Amendment No. 1”) solely to correct the range of forecasted Adjusted Expenses set forth in the Company’s Original Earnings Release due to a typographical error. All other information contained in the Original Form 8-K, including the Original Earnings Release, remains unchanged.",
+          "title": "Tradeweb Markets Form 8-K/A",
+          "url": "https://www.sec.gov/Archives/edgar/data/1758730/000175873023000171/tw-20231026.htm",
+          "version_at": "2023-10-26T09:16:39-04:00"
+        }
+      },
+      "role": "lead",
+      "searches": [
+        {
+          "query": "Tradeweb high end forecast range adjusted expenses guidance October 26 2023 earnings",
+          "results": [
+            {
+              "id": "P1",
+              "locator": "Item 2.02. Results of Operations and Financial Condition. ¶1",
+              "preview": "On October 26, 2023, the Company filed the Original Form 8-K, which included the Original Earnings Release. This Amendment No. 1 replaces the Original Earnings Release with the amended earnings release, attached hereto a",
+              "published": "2023-10-26T09:16:39-04:00",
+              "title": "Tradeweb Markets Form 8-K/A"
+            },
+            {
+              "id": "P2",
+              "locator": "EXPLANATORY NOTE ¶1",
+              "preview": "On October 26, 2023, Tradeweb Markets Inc. (the “Company”) filed a Form 8-K (“Original Form 8-K”) with the U.S. Securities and Exchange Commission (“SEC”), which included the earnings release that was furnished on Exhibi",
+              "published": "2023-10-26T09:16:39-04:00",
+              "title": "Tradeweb Markets Form 8-K/A"
+            },
+            {
+              "id": "P3",
+              "locator": "Item 1.01. Entry into a Material Definitive Agreement. ¶1",
+              "preview": "On October 25, 2023, Tradeweb Markets LLC (“Tradeweb Markets”), a wholly owned subsidiary of Tradeweb Markets Inc. (the “Company”) entered into a master data license agreement (the “Master Data Agreement”) with Refinitiv",
+              "published": "2023-10-26T09:16:39-04:00",
+              "title": "Tradeweb Markets Form 8-K/A"
+            },
+            {
+              "id": "P4",
+              "locator": "PDF p2 §5",
+              "preview": "2.  Cash Dividends\n                            Annual cash dividends per common share                  Total amount of                                                                 Ratio of total amount\n               ",
+              "published": "2023-05-10",
+              "title": "Toyota Motor Corporation FY2023 consolidated financial results"
+            },
+            {
+              "id": "P5",
+              "locator": "Item 1.01. Entry into a Material Definitive Agreement. ¶5",
+              "preview": "On October 26, 2023, the Company issued a press release announcing its entry into the Master Data Agreement, a copy of which is filed as Exhibit 99.2 to this Current Report on Form 8-K and incorporated herein by referenc",
+              "published": "2023-10-26T09:16:39-04:00",
+              "title": "Tradeweb Markets Form 8-K/A"
+            }
+          ]
+        }
+      ],
+      "trace": [
+        {
+          "max_date": "2023-10-26T13:17:00Z",
+          "operation": "search",
+          "results": [
+            "tradeweb-8ka/Item 2.02. Results of Operations and Financial Condition. ¶1",
+            "tradeweb-8ka/EXPLANATORY NOTE ¶1",
+            "tradeweb-8ka/Item 1.01. Entry into a Material Definitive Agreement. ¶1",
+            "toyota-fy2023/PDF p2 §5",
+            "tradeweb-8ka/Item 1.01. Entry into a Material Definitive Agreement. ¶5"
+          ]
+        },
+        {
+          "max_date": "2023-10-26T13:17:00Z",
+          "operation": "read",
+          "results": [
+            "tradeweb-8ka/Item 2.02. Results of Operations and Financial Condition. ¶1"
+          ]
+        },
+        {
+          "max_date": "2023-10-26T13:17:00Z",
+          "operation": "read",
+          "results": [
+            "tradeweb-8ka/EXPLANATORY NOTE ¶1"
+          ]
+        }
+      ]
+    }
+  ]
+}

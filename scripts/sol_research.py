@@ -7,7 +7,7 @@ from dataclasses import asdict
 
 from .baseline_evidence import Citation, ResearchCase, render_report
 from .disney_hulu_case import CaseError
-from .retrieval_gateway import Corpus, Evidence
+from .retrieval_gateway import Corpus, DatedSession, Evidence
 from .sol_baseline import INSTRUCTIONS, json_bytes, memo_prompt
 from .sol_provider import MODEL
 
@@ -77,7 +77,7 @@ def decision_prompt(context: dict, tools: list[dict]) -> dict:
 def tool_decision(body: dict) -> dict:
     items = [item for item in body.get("output", []) if item.get("type") != "reasoning"]
     if body.get("status") != "completed" or len(items) != 1 or items[0].get("type") != "function_call":
-        raise CaseError("Sol must return one completed archive tool call")
+        raise CaseError("Expected one completed archive tool call")
     call = items[0]
     if call.get("status", "completed") != "completed" or not isinstance(call.get("arguments"), str):
         raise CaseError("Incomplete archive tool call")
@@ -90,97 +90,123 @@ def tool_decision(body: dict) -> dict:
     return {"name": call.get("name"), "arguments": args}
 
 
-def research(case: ResearchCase, corpus: Corpus, ask: Callable) -> tuple[bytes, dict]:
-    intake = {"question": case.question, "cutoff": case.cutoff.isoformat()}
+def query_text(args):
+    query = args.get("query")
+    if set(args) != {"query"} or not isinstance(query, str) or not 1 <= len(query.strip()) <= 500:
+        raise CaseError("Expected one nonempty archive search query of at most 500 characters")
+    return query
+
+
+def discover(
+    intake: dict,
+    archive: DatedSession,
+    ask: Callable,
+    *,
+    model: str = MODEL,
+    instructions: str = FIND,
+    allow_empty: bool = False,
+    repair_query: bool = False,
+) -> tuple[dict[str, Evidence], list]:
     history = []
     candidates: dict[str, Evidence] = {}
     handles: dict[tuple[str, str], str] = {}
     opened: dict[str, Evidence] = {}
-    with corpus.session(intake["cutoff"]) as archive:
-        for round_number in range(MAX_SEARCHES + 1):
-            tools = []
-            if round_number < MAX_SEARCHES:
-                tools.append(SEARCH)
-            if candidates:
-                tools.append(READ)
-            if not tools:
-                raise CaseError("No eligible passages found after the search allowance")
-            context = {**intake, "searches": history} if history else intake
-            decision = ask("discovery", decision_prompt(context, tools), 512)
-            if (
-                not isinstance(decision, dict)
-                or set(decision) != {"name", "arguments"}
-                or not isinstance(decision["name"], str)
-                or not isinstance(decision["arguments"], dict)
-            ):
-                raise CaseError("Expected an archive tool name and an argument object")
-            name, args = decision["name"], decision["arguments"]
-            if name not in {tool["name"] for tool in tools}:
-                raise CaseError("Sol selected a tool outside this stage")
-            if name == "read_passages":
-                ids = args.get("passage_ids")
-                if (
-                    set(args) != {"passage_ids"}
-                    or not isinstance(ids, list)
-                    or any(not isinstance(i, str) or i not in candidates for i in ids)
-                    or len(ids) != len(set(ids))
-                ):
-                    raise CaseError("Only distinct passage IDs returned by search may be opened")
-                if not ids:
-                    raise CaseError("Sol found insufficient evidence to write the memo")
-                for pid in ids:
-                    hit = candidates[pid]
-                    found = archive.read(hit.citation_url, locator=hit.locator, max_date=archive.cutoff)
-                    if found != (hit,):
-                        raise CaseError("Selected citation did not reopen its original passage")
-                    opened[pid] = found[0]
+    repair_available = repair_query
+    for round_number in range(MAX_SEARCHES + 1):
+        tools = []
+        if round_number < MAX_SEARCHES:
+            tools.append(SEARCH)
+        if candidates:
+            tools.append(READ)
+        if not tools:
+            if allow_empty:
                 break
+            raise CaseError("No eligible passages found after the search allowance")
+        context = {**intake, "searches": history} if history else intake
+        prompt = decision_prompt(context, tools)
+        prompt.update(model=model, instructions=instructions)
+        decision = ask("discovery", prompt, 512)
+        if (
+            not isinstance(decision, dict)
+            or set(decision) != {"name", "arguments"}
+            or not isinstance(decision["name"], str)
+            or not isinstance(decision["arguments"], dict)
+        ):
+            raise CaseError("Expected an archive tool name and an argument object")
+        name, args = decision["name"], decision["arguments"]
+        if name not in {tool["name"] for tool in tools}:
+            raise CaseError("The analyst selected a tool outside this stage")
+        if name == "read_passages":
+            ids = args.get("passage_ids")
+            if (
+                set(args) != {"passage_ids"}
+                or not isinstance(ids, list)
+                or any(not isinstance(i, str) or i not in candidates for i in ids)
+                or len(ids) != len(set(ids))
+            ):
+                raise CaseError("Only distinct passage IDs returned by search may be opened")
+            if not ids and not allow_empty:
+                raise CaseError("The analyst found insufficient evidence to write the memo")
+            for pid in ids:
+                hit = candidates[pid]
+                found = archive.read(hit.citation_url, locator=hit.locator, max_date=archive.cutoff)
+                if found != (hit,):
+                    raise CaseError("Selected citation did not reopen its original passage")
+                opened[pid] = found[0]
+            break
 
-            query = args.get("query")
-            if set(args) != {"query"} or not isinstance(query, str) or not 1 <= len(query.strip()) <= 500:
-                raise CaseError("Expected one nonempty archive search query of at most 500 characters")
-            known = [case.question, archive.cutoff]
-            for search in history:
-                for result in search["results"]:
-                    known.extend((result["title"], result["published"], result["locator"], result["preview"]))
-            if search_numbers(query) - search_numbers(" ".join(known)):
-                raise CaseError(
-                    "Search contains a number absent from the question, cutoff and earlier results"
-                )
-            previews = []
-            for hit in archive.search(query.strip(), limit=RESULT_LIMIT, max_date=archive.cutoff):
-                pid = handles.setdefault((hit.url, hit.locator), f"P{len(handles) + 1}")
-                candidates[pid] = hit
-                previews.append(
-                    {
-                        "id": pid,
-                        "title": hit.title,
-                        "published": hit.published,
-                        "locator": hit.locator,
-                        "preview": hit.text[:220],
-                    }
-                )
-            history.append({"query": query, "results": previews})
+        query = query_text(args)
+        known = [intake["question"], archive.cutoff]
+        for search in history:
+            for result in search["results"]:
+                known.extend((result["title"], result["published"], result["locator"], result["preview"]))
+        allowed_numbers = search_numbers(" ".join(known))
+        if repair_available and search_numbers(query) - allowed_numbers:
+            repair_available = False
+            retry = decision_prompt(
+                {
+                    **context,
+                    "validation_feedback": "The lookup was rejected before search. Search again using names and concepts only. Omit dates, numbers, form codes and guesses.",
+                },
+                [SEARCH],
+            )
+            retry.update(model=model, instructions=instructions)
+            corrected = ask("query_repair", retry, 512)
+            if (
+                not isinstance(corrected, dict)
+                or corrected.get("name") != "search_archive"
+                or not isinstance(corrected.get("arguments"), dict)
+            ):
+                raise CaseError("Expected a fresh search after the controller rejected a query")
+            query = query_text(corrected["arguments"])
+        if search_numbers(query) - allowed_numbers:
+            raise CaseError("Search contains a number absent from the question, cutoff and earlier results")
+        previews = []
+        for hit in archive.search(query.strip(), limit=RESULT_LIMIT, max_date=archive.cutoff):
+            pid = handles.setdefault((hit.url, hit.locator), f"P{len(handles) + 1}")
+            candidates[pid] = hit
+            previews.append(
+                {
+                    "id": pid,
+                    "title": hit.title,
+                    "published": hit.published,
+                    "locator": hit.locator,
+                    "preview": hit.text[:220],
+                }
+            )
+        history.append({"query": query, "results": previews})
 
-        prompt = memo_prompt(
-            {
-                **intake,
-                "passages": [
-                    {
-                        "id": pid,
-                        "title": hit.title,
-                        "published": hit.published,
-                        "locator": hit.locator,
-                        "text": hit.text,
-                    }
-                    for pid, hit in opened.items()
-                ],
-            },
-            WRITE,
-        )
-        model_text = ask("memo", prompt, 3072)
-        trace = archive.trace
+    return opened, history
 
+
+def passage_context(opened: dict[str, Evidence]) -> list[dict]:
+    return [
+        {"id": pid, "title": hit.title, "published": hit.published, "locator": hit.locator, "text": hit.text}
+        for pid, hit in opened.items()
+    ]
+
+
+def render_disney(case: ResearchCase, opened: dict[str, Evidence], model_text: str) -> tuple[bytes, dict]:
     def link(ref: Citation, label: str | None) -> str:
         hit = opened[ref.passage_id]
         return f"[{label or f'{hit.title}, {hit.locator}'}]({hit.citation_url})"
@@ -196,7 +222,18 @@ def research(case: ResearchCase, corpus: Corpus, ask: Callable) -> tuple[bytes, 
     memo, calculation = render_report(
         case, {pid: h.text for pid, h in opened.items()}, model_text, link, references
     )
-    return memo.encode(), {
+    return memo.encode(), calculation
+
+
+def research(case: ResearchCase, corpus: Corpus, ask: Callable) -> tuple[bytes, dict]:
+    intake = {"question": case.question, "cutoff": case.cutoff.isoformat()}
+    with corpus.session(intake["cutoff"]) as archive:
+        opened, history = discover(intake, archive, ask)
+        prompt = memo_prompt({**intake, "passages": passage_context(opened)}, WRITE)
+        model_text = ask("memo", prompt, 3072)
+        trace = archive.trace
+    memo, calculation = render_disney(case, opened, model_text)
+    return memo, {
         "searches": history,
         "opened": {pid: asdict(hit) for pid, hit in opened.items()},
         "retrieval": trace,
