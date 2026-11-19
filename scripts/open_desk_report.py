@@ -6,10 +6,10 @@ from types import SimpleNamespace
 from . import research_desk_agent as engine
 from .desk_report import Release, activity
 from .disney_hulu_case import CaseError, read_saved_file
-from .paired_research import formula
 from .research_team import check_configuration
 from .team_meter import verify_ledger
 from .temporal_web import ArchiveGateway, checked_doc, cutoff_day
+from .verified_arithmetic import formula
 
 COLLECTION = "historical-web"
 LABEL = "Public historical sources"
@@ -103,7 +103,10 @@ def release(directory, result):
 
 def inspect(directory, record):
     archive = SavedArchive(record["cutoff"])
-    cfg = engine.configuration(
+    selected = engine
+    if record["research_profile"] in {"evidence_team", "evidence_team_v2"}:
+        from . import quantitative_engine as selected
+    cfg = selected.configuration(
         record["question"],
         record["cutoff"],
         Decimal(record["budget_usd"]),
@@ -115,7 +118,7 @@ def inspect(directory, record):
     spent, held = verify_ledger(record, partial=True)
     status = record["state"]
     result = (
-        engine.audit(directory, archive, record=record) if status in FINISHED else {}
+        selected.audit(directory, archive, record=record) if status in FINISHED else {}
     )
     report = release(directory, result) if result else None
     decisions = []
@@ -139,6 +142,7 @@ def inspect(directory, record):
         + {
             "mixed": "research team",
             "evidence_team": "research team with quantitative review",
+            "evidence_team_v2": "research team with quantitative review",
             "single_astra": "single Astra",
             "single_sol": "single Sol",
         }[record["research_profile"]],

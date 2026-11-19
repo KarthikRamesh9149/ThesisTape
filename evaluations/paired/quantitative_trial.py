@@ -6,7 +6,7 @@ from pathlib import Path
 
 from scripts.packet_archive import PacketArchive
 from scripts.paired_packet import PacketCorpus, packet_digest
-from scripts.research_desk_agent import audit, run
+from scripts.quantitative_engine import audit, run
 from scripts.run_checkpoint import load
 from scripts.sol_provider import OpenAIResponses, project_key
 
@@ -14,7 +14,7 @@ from . import corpus
 from .product_audit import CountJournal
 
 
-def trial(case_id, directory, cap, key_file, live):
+def trial(case_id, directory, cap, key_file, live, profile="evidence_team_v2"):
     packet = directory / "input"
     if not packet.exists() and live:
         directory.mkdir(parents=True, exist_ok=True)
@@ -33,7 +33,7 @@ def trial(case_id, directory, cap, key_file, live):
             output,
             None,
             cap,
-            profile="evidence_team",
+            profile=profile,
             gateway=archive,
             provider=CountJournal(
                 output / "counts", OpenAIResponses(project_key(key_file))
@@ -64,7 +64,15 @@ if __name__ == "__main__":
     parser.add_argument("--cap", default="0.45")
     parser.add_argument("--key-file", type=Path, default=Path(".env.local"))
     parser.add_argument("--live", action="store_true")
+    parser.add_argument(
+        "--profile",
+        choices=("evidence_team", "evidence_team_v2"),
+        default="evidence_team_v2",
+    )
     a = parser.parse_args()
     print(
-        json.dumps(trial(a.case_id, a.directory, a.cap, a.key_file, a.live), indent=2)
+        json.dumps(
+            trial(a.case_id, a.directory, a.cap, a.key_file, a.live, a.profile),
+            indent=2,
+        )
     )

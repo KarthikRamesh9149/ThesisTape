@@ -7,6 +7,7 @@ from decimal import Decimal
 from pydantic import Field
 
 from . import research_desk_agent as core
+from . import research_terms
 from . import verified_arithmetic as math
 from .baseline_evidence import StrictOutput
 from .disney_hulu_case import CaseError
@@ -63,6 +64,78 @@ class Gaps(StrictOutput):
     searches: list[core.Search] = Field(max_length=2)
 
 
+def render(
+    question,
+    cutoff,
+    paragraphs,
+    passages,
+    calculations,
+    qualified,
+    *,
+    inline_locators=False,
+):
+    lines = [
+        "# Investment research memo",
+        "",
+        f"As of {cutoff}",
+        "",
+        "**Research question**",
+        question,
+        "",
+    ]
+    if qualified:
+        lines += [
+            "Some parts of the question could not be established from eligible evidence.",
+            "",
+        ]
+    used = []
+    named = {}
+
+    def citation(pid):
+        p = passages[pid]
+        n = named.setdefault(p["url"], len(named) + 1)
+        locator = p["proof"].get("locator") if inline_locators else None
+        label = f"{n}, {locator}" if locator else str(n)
+        return f"[{label}]({p['url']})"
+
+    for section in core.SECTIONS:
+        group = [p for p in paragraphs if p["section"] == section]
+        if group:
+            lines += ["## " + section, ""]
+            for p in group:
+                lines += [
+                    p["text"]
+                    + " "
+                    + " ".join(dict.fromkeys(citation(pid) for pid in p["pids"])),
+                    "",
+                ]
+                used.extend(p["calculation_ids"])
+    if used:
+        lines += ["## Checked calculations", ""]
+        required = set(used)
+        for i, c in reversed(calculations.items()):
+            if i in required:
+                required.update(x for x in (c["left"], c["right"]) if x in calculations)
+        for i, c in calculations.items():
+            if i in required:
+                lines += [
+                    "- "
+                    + math.formula(i, c)
+                    + " "
+                    + " ".join(
+                        dict.fromkeys(citation(pid) for pid in c["evidence_ids"])
+                    )
+                ]
+        lines.append("")
+    if named:
+        lines += ["## Sources", ""]
+        for url, n in named.items():
+            p = next(v for v in passages.values() if v["url"] == url)
+            title = re.sub(r"[\[\]\r\n]", "", p["title"])
+            lines.append(f"{n}. [{title}]({url}), available by {p['available']}.")
+    return ("\n".join(lines).rstrip() + "\n").encode()
+
+
 def mark_identifiers(paragraph, passages):
     """Bind exact identifiers like Form 10-K when a draft leaves them outside a source marker."""
     cited = list(
@@ -102,14 +175,19 @@ def merge(results, question, validator):
     )
 
 
-def review(draft, context, passages, calculations, ask, stage):
+def review(draft, context, passages, calculations, ask, stage, *, revision=1):
     compiled, rejected = {}, {}
     question, cutoff = context["question"], context["cutoff"]
     for i, p in enumerate(draft.paragraphs, 1):
         key = f"A{i}"
         try:
             p = mark_identifiers(p, passages)
-            compiled[key] = core.compile_paragraph(
+            compiler = (
+                research_terms.compile_paragraph
+                if revision >= 2
+                else core.compile_paragraph
+            )
+            compiled[key] = compiler(
                 p,
                 question,
                 cutoff,
@@ -122,7 +200,7 @@ def review(draft, context, passages, calculations, ask, stage):
     if not compiled:
         return [], rejected, ["No publishable evidence paragraph."]
     used = {pid for p in compiled.values() for pid in p["pids"]}
-    visible = core.render(
+    visible = render(
         question,
         cutoff,
         list(compiled.values()),
@@ -137,12 +215,17 @@ def review(draft, context, passages, calculations, ask, stage):
         "paragraphs": compiled,
         "originals": core.brief_sources(passages, used),
     }
+    reviewer = REVIEW
+    if revision >= 2:
+        material.pop("decision")
+        material.pop("requirements")
+        reviewer += " Evaluate completeness against the user's original question. A planner's research tactics are optional. If the question asks for issuer figures, one controlling issuer document can support them. An independent source is required only when explicitly requested or when the cited document cannot support a material assertion. Interpret the supplied comparison tolerance as a rule defined by the user, not an issuer forecast. Distinguish a missing requested fact from a suggested extra."
     if hasattr(draft, "direction"):
         material["direction"] = draft.direction
     verdict = core.Review.model_validate_json(
         ask(
             stage,
-            typed_prompt(MODEL, REVIEW, material, core.Review, effort="medium"),
+            typed_prompt(MODEL, reviewer, material, core.Review, effort="medium"),
             2000,
         )
     )
@@ -161,16 +244,19 @@ def review(draft, context, passages, calculations, ask, stage):
     )
 
 
-def research(question, cutoff, gateway, ask):
+def research(question, cutoff, gateway, ask, *, revision=1):
     rule = getattr(gateway, "forecast_rule", None)
     verify = getattr(gateway, "check_source", checked_doc)
     task = {"question": question, "cutoff": cutoff}
     if rule:
         task["forecast_rule"] = rule
+    planner = PLAN
+    if revision >= 2:
+        planner += " Keep answer requirements limited to what the user actually requested. Independent corroboration can be a search strategy without being an answer requirement. Financial inputs requested by the user need verified sources. A requested period and the user's definition of a forecast band are task parameters."
     plan = Plan.model_validate_json(
         ask(
             "orchestrator.plan",
-            typed_prompt(MODEL, PLAN, task, Plan, effort="medium"),
+            typed_prompt(MODEL, planner, task, Plan, effort="medium"),
             1400,
         )
     )
@@ -270,6 +356,8 @@ rate. Explicitly distinguish the forecast from what the sources show. You are as
     }
     kind = core.ForecastDraft if rule else core.Draft
     policy = WRITE
+    if revision >= 2:
+        policy += " A time period in the question and the user's inclusive comparison rule are definitions for this task. Describe them as the requested period or the question's tolerance. Do not describe either as an unverified financial premise. {{BAND}} renders only the numerical tolerance, for example ±2%. Include a full calendar date only if it occurs in a cited source or verbatim in the question. Put the verified prior and current figures in the first paragraph when a comparison is requested."
     if rule:
         policy += " Use {{BAND}} for the task's threshold; use {{Cn}} for computed bounds. State the selected direction itself in the Outlook text and the direction field."
     raw = ask(
@@ -277,7 +365,7 @@ rate. Explicitly distinguish the forecast from what the sources show. You are as
     )
     draft = kind.model_validate_json(raw)
     good, blocked, missing = review(
-        draft, context, passages, calculations, ask, "review.initial"
+        draft, context, passages, calculations, ask, "review.initial", revision=revision
     )
     reviews = [{"approved": len(good), "blocked": blocked, "missing": missing}]
     if blocked or missing:
@@ -297,7 +385,13 @@ rate. Explicitly distinguish the forecast from what the sources show. You are as
         if raw:
             candidate = kind.model_validate_json(raw)
             repaired, rejected, gaps = review(
-                candidate, context, passages, calculations, ask, "review.recheck"
+                candidate,
+                context,
+                passages,
+                calculations,
+                ask,
+                "review.recheck",
+                revision=revision,
             )
             # A failed rewrite cannot discard an already verified first draft.
             initial_coverage = {p["section"] for p in good}
@@ -332,7 +426,7 @@ rate. Explicitly distinguish the forecast from what the sources show. You are as
     }
     if not good:
         return None, {**base, "release": "withheld"}
-    memo = core.render(
+    memo = render(
         question, cutoff, good, passages, calculations, qualified, inline_locators=True
     )
     if rule:

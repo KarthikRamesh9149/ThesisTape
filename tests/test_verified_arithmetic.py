@@ -5,7 +5,7 @@ from scripts import research_desk_agent as core
 from scripts import reviewed_research as reviewed
 from scripts import verified_arithmetic as math
 from scripts.disney_hulu_case import CaseError
-from scripts.paired_research import formula
+from scripts.verified_arithmetic import formula
 
 
 class VerifiedArithmetic(unittest.TestCase):
@@ -110,3 +110,48 @@ class VerifiedArithmetic(unittest.TestCase):
         result, errors = math.compile_plan([op], self.passages, self.rule)
         self.assertFalse(result)
         self.assertIn("C1", errors)
+
+
+class TaskDates(unittest.TestCase):
+    def test_full_date_must_come_from_an_eligible_source_or_the_question(self):
+        from scripts.research_terms import compile_paragraph
+
+        q = "Compare the result for March 2021, using the supplied tolerance."
+        passages = {
+            "P1": {
+                "text": "Outlook for March 31, 2021. Profit was 200,000 million yen."
+            }
+        }
+
+        def attempt(template):
+            p = core.Paragraph(
+                section="Answer",
+                text=template,
+                citations=[
+                    core.Ref(passage="P1", quote="Profit was 200,000 million yen.")
+                ],
+            )
+            return compile_paragraph(
+                p,
+                q,
+                "2020-05-07",
+                passages,
+                {},
+                {"mode": "relative", "tolerance": "0.02", "unit": "yen"},
+            )["text"]
+
+        self.assertEqual(
+            attempt("The period ends {{Q|March 31, 2021}}."),
+            "The period ends March 31, 2021.",
+        )
+        self.assertEqual(
+            attempt("For {{Q|March 2021}}, the question defines a {{BAND}} tolerance."),
+            "For March 2021, the question defines a ±2% tolerance.",
+        )
+        for template in (
+            "The period ends {{Q|March 30, 2021}}.",
+            "Profit was {{Q|200,001}} million.",
+            "The original says {{P1|200,001}}.",
+        ):
+            with self.subTest(template=template), self.assertRaises(CaseError):
+                attempt(template)

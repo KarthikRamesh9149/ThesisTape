@@ -132,3 +132,13 @@ def checked_operation(op, opened, calculated, rule):
         "expression": expression,
         "evidence_ids": refs,
     }
+
+
+def formula(ident, result):
+    from .paired_research import formula as original
+
+    if "expression" not in result:
+        return original(ident, result)
+    value = Decimal(result["value"])
+    formatted = f"≈ {value:,.6f}" if value.as_tuple().exponent < -6 else f"= {value:,f}"
+    return f"{ident}. {result['label']} ({result['unit']}) — {result['expression']} {formatted}"

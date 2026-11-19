@@ -300,16 +300,7 @@ def checked_findings(raw, passages):
     return accepted
 
 
-def render(
-    question,
-    cutoff,
-    paragraphs,
-    passages,
-    calculations,
-    qualified,
-    *,
-    inline_locators=False,
-):
+def render(question, cutoff, paragraphs, passages, calculations, qualified):
     lines = [
         "# Investment research memo",
         "",
@@ -330,9 +321,7 @@ def render(
     def citation(pid):
         p = passages[pid]
         n = named.setdefault(p["url"], len(named) + 1)
-        locator = p["proof"].get("locator") if inline_locators else None
-        label = f"{n}, {locator}" if locator else str(n)
-        return f"[{label}]({p['url']})"
+        return f"[{n}]({p['url']})"
 
     for section in SECTIONS:
         group = [p for p in paragraphs if p["section"] == section]
@@ -427,10 +416,6 @@ def reviewed_draft(
 
 
 def research(question, cutoff, gateway, dispatch, *, profile="mixed"):
-    if profile == "evidence_team":
-        from .reviewed_research import research as reviewed
-
-        return reviewed(question, cutoff, gateway, dispatch)
     if profile not in ("mixed", "single_sol", "single_astra"):
         raise CaseError("Unknown research profile")
     single = profile != "mixed"
@@ -648,7 +633,7 @@ def configuration(question, cutoff, budget, gateway, profile, assignment):
         raise CaseError("The selected archive is bound to another cutoff")
     if not isinstance(question, str) or not 10 <= len(question.strip()) <= 6000:
         raise CaseError("Provide a substantive research question")
-    if profile not in ("mixed", "single_astra", "single_sol", "evidence_team"):
+    if profile not in ("mixed", "single_astra", "single_sol"):
         raise CaseError("Unknown agent configuration")
     selected = MODEL if profile == "single_sol" else ASTRA
     return {
@@ -657,12 +642,8 @@ def configuration(question, cutoff, budget, gateway, profile, assignment):
         "workflow": VERSION,
         "research_profile": profile,
         "archive_version": gateway.VERSION if gateway else ArchiveGateway.VERSION,
-        "research_model": MODEL if profile in {"mixed", "evidence_team"} else selected,
-        "worker_model": LUNA
-        if profile == "mixed"
-        else MODEL
-        if profile == "evidence_team"
-        else None,
+        "research_model": MODEL if profile == "mixed" else selected,
+        "worker_model": LUNA if profile == "mixed" else None,
         "author_model": selected,
         "budget_spec": str(budget),
         "assignment": assignment,
@@ -809,20 +790,8 @@ def main():
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--archive", type=Path, default=ROOT / "runs/dated-web")
     parser.add_argument("--budget-usd", type=Decimal, required=True)
-    parser.add_argument(
-        "--profile",
-        choices=("mixed", "evidence_team", "single_sol", "single_astra"),
-        default="mixed",
-    )
     args = parser.parse_args()
-    result = run(
-        args.question,
-        args.cutoff,
-        args.output,
-        args.archive,
-        args.budget_usd,
-        profile=args.profile,
-    )
+    result = run(args.question, args.cutoff, args.output, args.archive, args.budget_usd)
     print(
         json.dumps(
             {k: result[k] for k in ("release", "memo_sha256", "model_cost_usd")},

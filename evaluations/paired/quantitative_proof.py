@@ -10,7 +10,7 @@ from pathlib import Path
 
 from scripts.packet_archive import PacketArchive
 from scripts.paired_packet import PacketCorpus
-from scripts.research_desk_agent import audit
+from scripts.quantitative_engine import audit
 from scripts.run_checkpoint import load
 from scripts.sol_baseline import fingerprint, json_bytes
 from scripts.sol_provider import OpenAIResponses, project_key
