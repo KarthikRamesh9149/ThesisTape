@@ -161,3 +161,61 @@ class ConditionalRecoveryTests(unittest.TestCase):
             )
         )
         self.assertFalse(submission.verified_selection(config, report, None))
+
+    def test_an_offline_publication_must_retain_both_failures_and_zero_incremental_cost(
+        self,
+    ):
+        cfg = {
+            "profiles_by_task": {"x": "single_astra"},
+            "unanswered_recovery": {"profile": "evidence_team_v4", "cap_usd": "0.45"},
+        }
+        a = {
+            "state": "failed",
+            "profile": "single_astra",
+            "report_sha256": None,
+            "estimated_cost_usd": "0.10",
+            "outstanding_usd": "0",
+        }
+        b = {**a, "profile": "evidence_team_v4", "original_run_sha256": "source"}
+        publication = {
+            "method": "independently_reviewed_first_draft",
+            "source_run_sha256": "source",
+            "report_sha256": "report",
+            "approved_paragraphs": 3,
+            "published_paragraphs": 2,
+            "additional_model_generations": 0,
+            "additional_model_cost_usd": "0",
+        }
+        proof = {
+            "attempts": [a, b],
+            "task_id": "x",
+            "primary_profile": "single_astra",
+            "profile": "evidence_team_v4",
+            "state": "qualified",
+            "report_sha256": "report",
+            "estimated_cost_usd": "0.20",
+            "outstanding_usd": "0",
+            "reviewed_publication": publication,
+        }
+        self.assertTrue(
+            submission.verified_selection(cfg, proof, "recovery", "publication")
+        )
+        self.assertFalse(submission.verified_selection(cfg, proof, "recovery"))
+        for changed in (
+            {"attempts": [a, {**b, "report_sha256": "already released"}]},
+            {"reviewed_publication": {**publication, "source_run_sha256": "other"}},
+            {"reviewed_publication": {**publication, "published_paragraphs": 4}},
+            {
+                "reviewed_publication": {
+                    **publication,
+                    "additional_model_generations": 1,
+                }
+            },
+            {"state": "complete"},
+        ):
+            with self.subTest(changed=changed):
+                self.assertFalse(
+                    submission.verified_selection(
+                        cfg, {**proof, **changed}, "recovery", "publication"
+                    )
+                )

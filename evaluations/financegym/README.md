@@ -44,6 +44,12 @@ git commit -m "Register independent recovery of unanswered FinanceGym questions"
 .venv/bin/python -B -m evaluations.financegym.recovery export runs/benchmark_400_public.jsonl runs/financegym-submission
 ```
 
+If both investigators leave a question unanswered after its optional rewrite fails, the independently reviewed first draft can sometimes support a qualified report. The [publication rule](reviewed-release.md) was recorded during the official run. Its export reuses the accepted paragraphs, reports these cases separately and includes both original failures and their costs. It makes zero new provider calls.
+
+```sh
+.venv/bin/python -B -m evaluations.financegym.reviewed_release export runs/benchmark_400_public.jsonl runs/financegym-submission
+```
+
 ## Prepare the methodology paper and local email
 
 Generate the public-facing paper from the verified 400-row export. The note reports the actual configuration and the independently measured results. The code repository can stay private. Once the paper has a public URL, use the submitter's email address, organization and submission date to generate a local email draft with the exact JSONL attached.
