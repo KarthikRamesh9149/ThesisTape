@@ -1,0 +1,12 @@
+{
+  "archive_sha256": "665cd5ae2717a429a1591bc3bb8cda40c8eb540a9150f6d4a4fbd17174ee3dd4",
+  "assignments": 48,
+  "cases": 24,
+  "confirmed_model_cost_usd": "11.895946",
+  "cutoff_violations": 0,
+  "dated_searches": 185,
+  "failed_reproduced": 2,
+  "provider_generations": 272,
+  "released": 46,
+  "unconfirmed_usd": "0"
+}
