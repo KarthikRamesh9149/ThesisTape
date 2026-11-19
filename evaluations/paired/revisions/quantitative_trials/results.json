@@ -1,0 +1,36 @@
+[
+  {
+    "F": 2,
+    "O": 1,
+    "R": 2,
+    "amount_usd": "0.365550",
+    "cap_usd": "0.45",
+    "case_id": "nintendo-fy2021-guidance",
+    "direction": "higher",
+    "grader_usd": "0.137784",
+    "material_claims": 21,
+    "memo_sha256": "3305bbe857345e4101813612b59097611e5a66c34c560995a26b30c67025f944",
+    "new_searches": 2,
+    "observed_direction": "higher",
+    "original_generation_receipts": 8,
+    "state": "qualified",
+    "supported_claims": 21
+  },
+  {
+    "F": 3,
+    "O": 0,
+    "R": 2,
+    "amount_usd": "0.361894",
+    "cap_usd": "0.45",
+    "case_id": "canon-fy2022-interim-outlook",
+    "direction": "undetermined",
+    "grader_usd": "0.152752",
+    "material_claims": 19,
+    "memo_sha256": "fc3d01098c80c73dea63c4e682699a135a93aa706c467b42bc902862f6692acd",
+    "new_searches": 2,
+    "observed_direction": "lower",
+    "original_generation_receipts": 8,
+    "state": "qualified",
+    "supported_claims": 19
+  }
+]
