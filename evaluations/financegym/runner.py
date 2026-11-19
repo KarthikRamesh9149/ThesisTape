@@ -6,7 +6,7 @@ import math
 import re
 import tempfile
 from collections import Counter
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from datetime import datetime
 from decimal import Decimal
 from importlib.metadata import version
@@ -265,7 +265,7 @@ def capture_one(root, row, m):
                     "estimated_model_cost_usd",
                     "unreconciled_reservation_usd",
                 )
-            } | {"task_id": row["task_id"]}
+            } | {"task_id": row["task_id"], "already_recorded": True}
     try:
         archive = FocusedArchive(
             row["cutoff"],
@@ -300,6 +300,9 @@ def capture_one(root, row, m):
         "state": rec["state"],
         "estimated_model_cost_usd": str(spent),
         "unreconciled_reservation_usd": str(sum(pending.values(), Decimal(0))),
+        "provider_failure": rec.get("failure", "")
+        if str(rec.get("failure", "")).startswith("OpenAI ")
+        else None,
     }
 
 
@@ -311,8 +314,30 @@ def run(path, root, workers, limit):
     )
     root.mkdir(parents=True, exist_ok=True)
     with own_run(root), ThreadPoolExecutor(max_workers=workers) as pool:
-        for status in pool.map(lambda row: capture_one(root, row, m), rows[:limit]):
-            print(json.dumps(status), flush=True)
+        schedule = iter(rows[:limit])
+        active = set()
+        incident = None
+        while True:
+            while incident is None and len(active) < workers:
+                next_row = next(schedule, None)
+                if next_row is None:
+                    break
+                active.add(pool.submit(capture_one, root, next_row, m))
+            if not active:
+                break
+            done, active = wait(active, return_when=FIRST_COMPLETED)
+            for item in done:
+                status = item.result()
+                print(json.dumps(status), flush=True)
+                if not status.get("already_recorded") and (
+                    status["state"] == "needs_reconciliation"
+                    or status.get("provider_failure")
+                ):
+                    incident = status["task_id"]
+        if incident:
+            raise ValueError(
+                f"Provider incident on {incident}. Active tasks drained and all original charges were retained."
+            )
 
 
 def answer(row, saved, memo):

@@ -16,6 +16,34 @@ from scripts.temporal_web import ArchiveGateway
 
 
 class FinanceGymAdapterTests(unittest.TestCase):
+    def test_an_unconfirmed_provider_call_stops_new_dispatches_and_a_resume_skips_it(
+        self,
+    ):
+        import contextlib
+        import io
+
+        rows = [{"task_id": str(i)} for i in range(4)]
+        with (
+            tempfile.TemporaryDirectory() as t,
+            patch.object(runner, "tasks", return_value=rows),
+            patch.object(runner, "locked", return_value={}),
+            contextlib.redirect_stdout(io.StringIO()),
+        ):
+            root = Path(t)
+            first = {"task_id": "0", "state": "needs_reconciliation"}
+            with patch.object(runner, "capture_one", return_value=first) as work:
+                with self.assertRaisesRegex(ValueError, "Active tasks drained"):
+                    runner.run(None, root, 1, 4)
+                self.assertEqual(work.call_count, 1)
+            retained = {**first, "already_recorded": True}
+            values = [
+                retained,
+                *({"task_id": str(i), "state": "complete"} for i in range(1, 4)),
+            ]
+            with patch.object(runner, "capture_one", side_effect=values) as work:
+                runner.run(None, root, 1, 4)
+                self.assertEqual(work.call_count, 4)
+
     def test_original_ecb_memo_retains_its_exact_request_citations_and_cutoff(self):
         with zipfile.ZipFile(ecb.FOLDER / "run.zip") as z:
             data, memo = json.loads(z.read("result.json")), z.read("memo.md")
