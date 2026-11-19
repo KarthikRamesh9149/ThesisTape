@@ -54,3 +54,10 @@ Generate the public-facing paper from the verified 400-row export. The note repo
   --contact "$SUBMITTER_EMAIL" --org "$SUBMITTER_ORGANIZATION" \
   --published-paper "$PUBLIC_PAPER_URL" --submission-date "$SUBMISSION_DATE"
 ```
+
+The private evidence archive stores the original and published research, dated passages, model usage, and hashes of the operator's HTTP receipts. The verifier rebuilds all 400 submitted reports from those recorded inputs with the network disabled.
+
+```sh
+.venv/bin/python -B -m evaluations.financegym.evidence seal runs/benchmark_400_public.jsonl runs/financegym-submission
+.venv/bin/python -B -m evaluations.financegym.evidence verify runs/benchmark_400_public.jsonl
+```

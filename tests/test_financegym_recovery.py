@@ -4,12 +4,30 @@ import zipfile
 from pathlib import Path
 from unittest.mock import patch
 
-from evaluations.financegym import recovery, submission
+from evaluations.financegym import evidence, recovery, submission
 from evaluations.open_research import fomc
 from scripts.sol_baseline import json_bytes
 
 
 class ConditionalRecoveryTests(unittest.TestCase):
+    def test_portable_archive_includes_only_explicit_evidence_and_checks_private_ids(
+        self,
+    ):
+        with tempfile.TemporaryDirectory() as t:
+            run = Path(t) / "research"
+            run.mkdir()
+            (run / "provider-ids.json").write_bytes(
+                json_bytes({"stage": {"response_id": "private-test-identity"}})
+            )
+            (run / ".env.local").write_text("test sentinel")
+            (run / "run.json").write_text("{}")
+            self.assertEqual(
+                set(evidence.portable(run)), {"run.json", "http-receipt-hashes.json"}
+            )
+            (run / "run.json").write_text("private-test-identity")
+            with self.assertRaisesRegex(ValueError, "Private receipt identity"):
+                evidence.portable(run)
+
     def test_live_qualified_reports_are_ineligible_even_when_their_coverage_differs(
         self,
     ):
