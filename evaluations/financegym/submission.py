@@ -348,6 +348,15 @@ def paper(questions, directory):
             methods += f"\n\nFor {audit['title_lookup_releases']} of those edited reports, both investigators had retrieved zero passages. A later retrieval rule retried their original queries with capitalization variants of entity titles present in the question. It kept the cutoff, original query terms and result limits. The editor received the resulting historical passages. All earlier failures and the time spent on the retry were retained."
         if audit.get("primary_draft_review_attempts"):
             methods += f"\n\nAfter the owner set a USD 140 total project budget, we prospectively allowed one independent Sol review of a primary draft whose optional revision exceeded its allowance. It required a source-checked answer and a separate supporting section. We retained the original wording only when both survived independent review. The reviewer made no searches and had a USD 0.075 ceiling. Across {audit['primary_draft_review_attempts']} such reviews, {audit['primary_draft_review_releases']} qualified reports were released for a total additional USD {Decimal(audit['primary_draft_review_cost_usd']):.2f}. Earlier independent investigations kept their original outcomes."
+    damaged = [
+        a
+        for task in audit["tasks_audited"]
+        for a in task.get("attempts", [])
+        if "archive_failure" in a
+    ]
+    if damaged:
+        label = "failure" if len(damaged) == 1 else "failures"
+        methods += f"\n\nWe reproduced {len(damaged)} PDF parsing {label} from the original dated searches and HTTP bytes. Each affected question retains its original research cost and follows the same independent recovery procedure as other unanswered questions."
     metrics = primary["metrics"]
     rows = "\n".join(
         f"| {NAMES[k]} | {v['cases']} | {v['F']:.1%} | {v['R']:.1%} | {v['O']:.1%} | {v['Q']:.1%} | {v['released']} |"

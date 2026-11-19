@@ -5,11 +5,15 @@ import json
 import time
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
+from decimal import Decimal
 from itertools import islice
 from pathlib import Path
 
+from pypdf.errors import PdfReadError
+
 from evaluations.paired.corpus import require
 from scripts.run_checkpoint import load, own_run
+from scripts.team_meter import verify_ledger
 
 from . import runner
 from .budget import ProjectBudget
@@ -34,6 +38,48 @@ def next_wave(workers, maximum, previous_throttled, status):
     return workers, 20, True
 
 
+def capture_attempt(record, row, assigned, cap, execute):
+    try:
+        return execute()
+    except PdfReadError:
+        if not record.is_file():
+            raise
+        rec = load(record)
+        if (
+            rec.get("state") != "failed"
+            or rec.get("failure") != "PdfReadError"
+            or rec.get("assignment") != assigned
+            or rec.get("cutoff") != row["cutoff"]
+            or rec.get("question") != row["question"]
+            or rec.get("budget_usd") != cap
+        ):
+            raise
+        spent, held = verify_ledger(rec, partial=True)
+        require(
+            not held and spent <= Decimal(cap), "Parser failure has unsettled spend"
+        )
+        return {
+            "task_id": row["task_id"],
+            "state": rec["state"],
+            "estimated_model_cost_usd": str(spent),
+            "unreconciled_reservation_usd": "0",
+            "provider_failure": None,
+        }
+
+
+def capture_primary(root, row, cfg, budget):
+    record = root / row["task_id"] / "research/run.json"
+    cap = runner.route(row, cfg)[2]
+    with budget.reserve(record, cap):
+        return capture_attempt(
+            record,
+            row,
+            runner.assignment(row, cfg),
+            cap,
+            lambda: runner.capture_one(root, row, cfg),
+        )
+
+
 def run(questions, maximum=3, *, root=None, sleep=time.sleep):
     require(1 <= maximum <= 4, "Choose between one and four concurrent investigations")
     root = root or runner.RESEARCH
@@ -51,9 +97,7 @@ def run(questions, maximum=3, *, root=None, sleep=time.sleep):
         rows = iter(r for r in runner.tasks(questions) if pending(r))
 
         def capture(row):
-            record = root / row["task_id"] / "research/run.json"
-            with budget.reserve(record, runner.route(row, cfg)[2]):
-                return runner.capture_one(root, row, cfg)
+            return capture_primary(root, row, cfg, budget)
 
         width, previous = maximum, False
         while group := list(islice(rows, width)):

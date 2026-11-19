@@ -20,6 +20,7 @@ from scripts.sol_baseline import fingerprint, json_bytes
 from scripts.team_meter import verify_ledger
 
 from . import (
+    archive_failure,
     budget_publication,
     editorial,
     recovery,
@@ -34,6 +35,7 @@ FOLDER = REPO / "evaluations/financegym/results"
 PORTABLE = re.compile(
     r"(?:run\.json|result\.json|memo\.md|(?:searches|counts)/[0-9a-f]{64}\.json)"
 )
+FAILED_PDF = re.compile(r"failed-pdf/[0-9a-f]{64}\.bin")
 ENTRY = re.compile(
     r"([a-z0-9]{24})/(primary|recovery|editorial|title_lookup|primary_draft_review)/(.+)"
 )
@@ -54,7 +56,7 @@ def artifact_modes(proof):
     ]
 
 
-def portable(run):
+def portable(run, failure=None):
     files = [
         p
         for p in (run / "run.json", run / "result.json", run / "memo.md")
@@ -84,6 +86,7 @@ def portable(run):
         p.stem: fingerprint(p.read_bytes()) for p in sorted(receipts.glob("*.json"))
     }
     entries["http-receipt-hashes.json"] = json_bytes(index)
+    entries.update(archive_failure.failed_pdf_files(run, failure))
     return entries
 
 
@@ -107,7 +110,12 @@ def seal(questions, directory, dest):
                     if kind == "primary_draft_review"
                     else roots[kind] / case / "research"
                 )
-                for name, raw in portable(run).items():
+                failure = None
+                if kind == "primary":
+                    failure = rec.get("attempts", [rec])[0].get("archive_failure")
+                elif kind == "recovery":
+                    failure = rec["attempts"][1].get("archive_failure")
+                for name, raw in portable(run, failure).items():
                     entries[f"{case}/{kind}/{name}"] = raw
         bundle = zipped(entries)
         name = f"receipts-{number:02d}.zip"
@@ -245,6 +253,7 @@ def replay_case(
         run = folder / mode
         check_receipt_index(run, evidence["transport_requests"])
         rec = load(run / "run.json")
+        archive_failure.verify_certificate(run, evidence)
         collect_identities(rec, provider_receipts)
         if "original_run_sha256" in evidence:
             require(
@@ -406,7 +415,9 @@ def verify(questions, root):
                     m
                     and (m[1], m[2]) in allowed
                     and (
-                        PORTABLE.fullmatch(m[3]) or m[3] == "http-receipt-hashes.json"
+                        PORTABLE.fullmatch(m[3])
+                        or FAILED_PDF.fullmatch(m[3])
+                        or m[3] == "http-receipt-hashes.json"
                     ),
                     "Unexpected portable research entry",
                 )

@@ -78,11 +78,17 @@ One issuer search exposed case-sensitive title matching after both original inve
 .venv/bin/python -B -m evaluations.financegym.titled_publication export runs/benchmark_400_public.jsonl runs/financegym-submission
 ```
 
-Under the USD 140 total budget, the system can first give a fresh Sol reviewer an existing primary draft when its optional revision exceeded the individual allowance. Only an original answer plus another section that both pass independent review can be released. One review costs at most USD 0.075. A withheld review and its charges stay in the record if the independent research team then takes the question. The 33 independent investigations already dispatched when this policy was recorded retain their original routes. Use the following export for the complete candidate. [Prospective eligibility and review](budget-review-policy.md)
+Under the USD 140 total budget, the system can first give a fresh Sol reviewer an existing primary draft when its optional revision exceeded the individual allowance. Only an original answer plus another section that both pass independent review can be released. One review costs at most USD 0.075. A withheld review and its charges stay in the record if the independent research team then takes the question. The 33 independent investigations already dispatched when this policy was recorded retain their original routes. Use the independent reviewer for an eligible existing draft. [Prospective eligibility and review](budget-review-policy.md)
 
 ```sh
 .venv/bin/python -B -m evaluations.financegym.budget_publication run runs/benchmark_400_public.jsonl --task-id "$UNANSWERED_TASK_ID"
-.venv/bin/python -B -m evaluations.financegym.budget_publication export runs/benchmark_400_public.jsonl runs/financegym-submission
+```
+
+When a damaged PDF interrupted a dated search, the original attempt kept its failure, timestamp and charge. The separate verifier repeats the paid plan from recorded output and reconstructs every search from the original HTTP bytes with the network disabled. The private replay package includes the malformed PDF so another machine can reproduce the parser error. The final export uses this verifier throughout the existing publication procedure.
+
+```sh
+.venv/bin/python -B -m evaluations.financegym.archive_failure verify runs/benchmark_400_public.jsonl 6a04cfe2a3882eb36cfc9305
+.venv/bin/python -B -m evaluations.financegym.archive_failure export runs/benchmark_400_public.jsonl runs/financegym-submission
 ```
 
 ## Prepare the methodology paper and local email
