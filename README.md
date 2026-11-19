@@ -14,25 +14,17 @@ Replaying the same responses with revised evidence checks produced the single-As
 
 ## Ask a historical finance question
 
-Start the local analyst desk and choose **New research → Public historical sources**. Enter the question, the last eligible UTC date and a USD spending limit. The report links each cited claim to the dated passage. Run activity shows the participating models, settled cost and remaining reservations.
+Install the [Python 3.12 research dependencies](#run-the-research-team), start the local analyst desk and choose **New research → Public historical sources**. Enter the question, the last eligible UTC date and a USD spending limit. The report links each cited claim to the dated passage. Run activity shows the participating models, settled cost and remaining reservations.
 
 ```sh
 .venv/bin/python -B -m scripts.analyst_desk --port 8765
 ```
 
-Open `http://127.0.0.1:8765`. The browser can export the same verified Markdown the CLI produces. The live ECB trial cost USD 0.2052854 and its download reproduced offline. [ECB report and browser checks](evaluations/open_research/ecb/evaluation.md) · [Boeing acquisition report](evaluations/open_research/boeing/reviewed.md)
-
-## Open the analyst desk
-
-From the repository root, use Python 3.12 and the [research dependencies](#run-the-research-team).
-
-```sh
-.venv/bin/python -B -m scripts.analyst_desk
-```
+The live ECB trial cost USD 0.2052854 and its download reproduced offline. [ECB report and browser checks](evaluations/open_research/ecb/evaluation.md) · [Boeing acquisition report](evaluations/open_research/boeing/reviewed.md)
 
 Open [the local desk](http://127.0.0.1:8765/). **Saved runs** opens real reports, including their call history, with no API key or model usage. Select a numbered citation to read its dated passage and locator. **Open original** links to the publisher. **Export .md** downloads the same bytes as the CLI.
 
-**New research** takes a question, source collection, UTC cutoff and per-run USD limit. A date without a time includes that entire UTC day. Live runs use the project’s `OPENAI_API_KEY`. **Run activity** shows dispatched assignments, routing decisions, estimated charges from returned token usage and outstanding reservations. **Pause run** lets in-flight requests settle. **Resume run** continues under the original cutoff and cap. The three intake collections cover the dated research archive, Twitter merger filings and NVIDIA earnings filings. Questions outside their coverage can produce a qualified memo.
+**New research** takes a question, source collection, UTC cutoff and per-run USD limit. A date without a time includes that entire UTC day. Live runs use the project’s `OPENAI_API_KEY`. **Run activity** shows dispatched assignments, routing decisions, estimated charges from returned token usage and outstanding reservations. **Pause run** lets in-flight requests settle. **Resume run** continues under the original cutoff and cap. The public archive accepts open research questions. Three curated collections cover the dated research archive, Twitter merger filings and NVIDIA earnings filings. Questions outside their coverage can produce a qualified memo.
 
 The desk binds to loopback and saves each intake to its own folder under `runs/desk/`. Use `--runs-dir DIRECTORY` to open a different parent folder of CLI runs. The CLI accepts the same free-form intake with `run --question "…" --cutoff 2023-10-27 --collection archive --budget-usd 0.10 --output-dir runs/desk/my-run`. Replay a completed run offline with `python -m scripts.research_team replay --run-dir DIRECTORY`. [Browser verification and measured costs](evaluations/analyst_desk/evaluation.md)
 

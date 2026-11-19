@@ -6,6 +6,7 @@ import json
 import re
 import tempfile
 import zipfile
+from concurrent.futures import ThreadPoolExecutor
 from decimal import Decimal
 from pathlib import Path
 from typing import Literal
@@ -246,68 +247,69 @@ def key_file(split, member, revision=REVISION):
 def grade_asof(split, revision=REVISION):
     index, bundle = locked_inputs(split, revision)
     keys = key_file(split, "asof.json", revision)["cases"]
-    rows = []
-    with bundle:
-        for row in sorted(index["rows"], key=lambda r: (r["case_id"], r["alias"])):
-            alias = row["alias"]
-            if row["memo_sha256"] is None:
-                assessment, price = empty("No released report."), "0"
-            else:
-                memo = bundle.read(alias + "/memo.md")
-                saved = bundle.read(alias + "/run.json")
-                corpus.require(
-                    fingerprint(memo) == row["memo_sha256"]
-                    and fingerprint(saved) == row["record_sha256"],
-                    "Changed grading material",
-                )
-                research = json.loads(saved)
-                if "result_sha256" in research:
-                    raw_result = bundle.read(alias + "/result.json")
-                    corpus.require(
-                        fingerprint(raw_result) == research["result_sha256"],
-                        "Changed production result",
-                    )
-                    evidence = json.loads(raw_result)["evidence"]
-                    research = {
-                        **research,
-                        "direction": row["direction"],
-                        "evidence": {
-                            pid: {
-                                "source_id": h["proof"]["source_id"],
-                                "title": h["title"],
-                                "locator": h["proof"]["locator"],
-                                "published": h["available"],
-                                "citation_url": h["url"],
-                                "text": h["text"],
-                            }
-                            for pid, h in evidence.items()
-                        },
-                    }
-                payload = masked_context(research, memo, keys[row["case_id"]]["facts"])
-                if not payload["paragraphs"]:
-                    assessment, price = (
-                        empty("Qualified report with no cited material claim."),
-                        "0",
-                    )
-                else:
-                    assessment, price = grade_one(
-                        payload,
-                        REPO
-                        / "runs/study-grading-v2"
-                        / revision.name
-                        / split
-                        / alias
-                        / "grade",
-                    )
-            rows.append(
-                {
-                    "alias": alias,
-                    "memo_sha256": row["memo_sha256"],
-                    "assessment": assessment,
-                    "evaluator_cost_usd": price,
-                }
+    def assess(row):
+        alias = row["alias"]
+        if row["memo_sha256"] is None:
+            assessment, price = empty("No released report."), "0"
+        else:
+            memo = bundle.read(alias + "/memo.md")
+            saved = bundle.read(alias + "/run.json")
+            corpus.require(
+                fingerprint(memo) == row["memo_sha256"]
+                and fingerprint(saved) == row["record_sha256"],
+                "Changed grading material",
             )
-            print(alias, price, flush=True)
+            research = json.loads(saved)
+            if "result_sha256" in research:
+                raw_result = bundle.read(alias + "/result.json")
+                corpus.require(
+                    fingerprint(raw_result) == research["result_sha256"],
+                    "Changed production result",
+                )
+                evidence = json.loads(raw_result)["evidence"]
+                research = {
+                    **research,
+                    "direction": row["direction"],
+                    "evidence": {
+                        pid: {
+                            "source_id": h["proof"]["source_id"],
+                            "title": h["title"],
+                            "locator": h["proof"]["locator"],
+                            "published": h["available"],
+                            "citation_url": h["url"],
+                            "text": h["text"],
+                        }
+                        for pid, h in evidence.items()
+                    },
+                }
+            payload = masked_context(research, memo, keys[row["case_id"]]["facts"])
+            if not payload["paragraphs"]:
+                assessment, price = (
+                    empty("Qualified report with no cited material claim."),
+                    "0",
+                )
+            else:
+                assessment, price = grade_one(
+                    payload,
+                    REPO
+                    / "runs/study-grading-v2"
+                    / revision.name
+                    / split
+                    / alias
+                    / "grade",
+                )
+        return {
+        "alias": alias,
+        "memo_sha256": row["memo_sha256"],
+        "assessment": assessment,
+        "evaluator_cost_usd": price,
+    }
+)
+print(alias, price, flush=True
+
+    ordered = sorted(index["rows"], key=lambda r: (r["case_id"], r["alias"]))
+    with bundle, ThreadPoolExecutor(max_workers=2) as pool:
+        rows = list(pool.map(assess, ordered))
     artifact = {
         "split": split,
         "method": "Masked OpenAI Astra as-of grading, with exact report and source excerpt checks",
