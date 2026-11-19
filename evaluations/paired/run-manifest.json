@@ -1,0 +1,389 @@
+{
+  "arms": {
+    "mixed": {
+      "bindings": {
+        "contrary": "gpt-6-luna",
+        "dispute": "gpt-6.2-astra",
+        "filings": "gpt-6-luna",
+        "forecast": "gpt-6.2-sol",
+        "lead": "gpt-6.2-sol",
+        "review": "gpt-6.2-sol",
+        "visual": "gpt-6.1-terra"
+      },
+      "fixed_plan": false,
+      "forecast": true,
+      "model_override": null,
+      "single": false
+    },
+    "mixed_fixed_plan": {
+      "bindings": {
+        "contrary": "gpt-6-luna",
+        "dispute": "gpt-6.2-astra",
+        "filings": "gpt-6-luna",
+        "forecast": "gpt-6.2-sol",
+        "lead": "gpt-6.2-sol",
+        "review": "gpt-6.2-sol",
+        "visual": "gpt-6.1-terra"
+      },
+      "fixed_plan": true,
+      "forecast": true,
+      "model_override": null,
+      "single": false
+    },
+    "mixed_no_forecast": {
+      "bindings": {
+        "contrary": "gpt-6-luna",
+        "dispute": "gpt-6.2-astra",
+        "filings": "gpt-6-luna",
+        "lead": "gpt-6.2-sol",
+        "review": "gpt-6.2-sol",
+        "visual": "gpt-6.1-terra"
+      },
+      "fixed_plan": false,
+      "forecast": false,
+      "model_override": null,
+      "single": false
+    },
+    "single_astra": {
+      "bindings": {
+        "analyst": "gpt-6.2-astra",
+        "visual": "gpt-6.2-astra"
+      },
+      "fixed_plan": false,
+      "forecast": true,
+      "model_override": "gpt-6.2-astra",
+      "single": true
+    },
+    "single_sol": {
+      "bindings": {
+        "analyst": "gpt-6.2-sol",
+        "visual": "gpt-6.2-sol"
+      },
+      "fixed_plan": false,
+      "forecast": true,
+      "model_override": "gpt-6.2-sol",
+      "single": true
+    },
+    "sol_team": {
+      "bindings": {
+        "contrary": "gpt-6.2-sol",
+        "dispute": "gpt-6.2-sol",
+        "filings": "gpt-6.2-sol",
+        "forecast": "gpt-6.2-sol",
+        "lead": "gpt-6.2-sol",
+        "review": "gpt-6.2-sol",
+        "visual": "gpt-6.2-sol"
+      },
+      "fixed_plan": false,
+      "forecast": true,
+      "model_override": "gpt-6.2-sol",
+      "single": false
+    }
+  },
+  "budgets_usd": {
+    "comparison_ceiling": "23.20",
+    "development_ceiling": "13.60",
+    "official_planning_reserve": "60.00",
+    "paid_tool_fees": "0",
+    "per_case_arm": "0.20",
+    "prior_project_estimate": "0.5785677",
+    "project_cap": "100.00"
+  },
+  "code_revision": "7d9dd31c362fabec8c1c0262ec88687fdbd7668f",
+  "corpus_revision": "819cb0bd21a9279fa267e882e44460536adcd72f",
+  "freeze_sha256": "5e3ede24d1236a7e85a20061df27888395b49428e837ffd751a41ce873eb34ae",
+  "models": {
+    "cache_ttl": "30m",
+    "discovery": "Project /v1/models listed the four exact aliases on 2026-11-20 Sydney. No dated snapshots were listed.",
+    "rate_card": {
+      "gpt-6-luna": {
+        "cache_write_30m": "0.125",
+        "cached_input": "0.01",
+        "ordinary_input": "0.10",
+        "output": "0.50"
+      },
+      "gpt-6.1-terra": {
+        "cache_write_30m": "1.25",
+        "cached_input": "0.05",
+        "ordinary_input": "1.00",
+        "output": "5.00"
+      },
+      "gpt-6.2-astra": {
+        "cache_write_30m": "10.00",
+        "cached_input": "0.40",
+        "ordinary_input": "8.00",
+        "output": "40.00"
+      },
+      "gpt-6.2-sol": {
+        "cache_write_30m": "2.50",
+        "cached_input": "0.10",
+        "ordinary_input": "2.00",
+        "output": "10.00"
+      }
+    },
+    "receipt_model": "retain the returned model ID",
+    "service_tier": "default",
+    "sources": [
+      "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+      "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+      "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
+    ],
+    "store": false
+  },
+  "policy": {
+    "ambiguous_charge": "retain reservation until reconciled",
+    "extra_targeted_assignments": 1,
+    "factual_forecast_ablation": "reuse mixed report and cost; zero additional dispatches",
+    "failures": "one attempt; retain terminal failures",
+    "output_token_limits": {
+      "adjudicate": 1536,
+      "coverage": 1280,
+      "extract": 960,
+      "forecast": 2048,
+      "plan": 768,
+      "review": 2048,
+      "search": 512,
+      "tools": 1100,
+      "visual": 800,
+      "write": 2560
+    },
+    "protected_usd": {
+      "adjudication": "0.060",
+      "revision": "0.022"
+    },
+    "reasoning": "low for discovery, planning, extraction, tools and visual; medium for forecast, writing and review",
+    "structured_repairs": {
+      "draft": 1,
+      "forecast": 1,
+      "review_revision": 1,
+      "search": 1,
+      "tool_plan": 1
+    },
+    "transport_retries": 0,
+    "workers": 2
+  },
+  "prompt_sha256": {
+    "adjudication": "7f49f25a57aa5f3a3a543024f49f564eb0dc34ec3a1d0a76c6222fcd051ad15e",
+    "conflict": "c2aac91df960de1f65145f29d3409ab8658782e74e49ae29f3cedfe5db11cc22",
+    "contrary": "7301fb59acf02514b54e406c24efa9fcae8ee6592f139b0e3c489e098a494d81",
+    "filings": "7908a55c03a85a72e86de48c0440a67ba9016037e7033ff4863db6c277a55f5b",
+    "forecast": "edb0ffe93cfa1b518cf48d4fd3a9b4a289300ee52d47459fd1b1f7d15c7d3767",
+    "image": "31a5f22c8a6179ff85d337d2437ceaca7155f2b778a9cb1d4848876581f39249",
+    "review": "37f57ecea0654c222c97997d9feebe417fe26be4d79b9e3060a261a57cd373b0",
+    "scripts.claim_review.review_once": "c78aa18217b1cb3c546046cceeea4e6babe238357ae2dffb8dc01533b539ff12",
+    "scripts.forecast_specialist.analyze": "04e8ec0ecc40fe1266966d0b7082c3daff9cabc2cef3da635d69901133ad5277",
+    "scripts.material_dispute.adjudicate": "cc3e4f6078a605196232acc7e1a28d27e60dd458d3dfc15405dfa35eb4220c2c",
+    "scripts.material_dispute.inspect": "cdda4a528c9d320dbaecc1d92b5b684bc0c1f63f88f52bcd8f84bb5d1021f4d1",
+    "scripts.paired_research.workflow": "08ef3442f521546371942ebaf11c7e4412420f077d7ec1c1326d60dda9ba0d9a",
+    "scripts.paired_tools.inspect_evidence": "8827b6bc9ab694487ce4548ee7ad614ee0c0a4af6e909ff5931c6f17c71358f9",
+    "scripts.sol_research.decision_prompt": "f06903d75237fb866fbcfa185792a004bb863c919a2291e73c5586703fd65341",
+    "scripts.sol_research.discover": "e9269d29d2406a74534de1bf95382ee44ad4bac805d6cb80c6514f4ab49d84f5",
+    "scripts.team_report.typed_prompt": "d1de98a9a74238c23af5fdcd13ed2c45b05d75a7100e2a83c3cae04524af3287",
+    "scripts.team_research.lead_decision": "6810c786d23616a38ea00185f21e80854a7b0e438e9df41fb40d5d379322e143",
+    "scripts.team_research.lookup": "d9d9a3ebec1c4a6b0fd702b5eb73040faf5a824f6f7d063b7f66bb23228cc123",
+    "scripts.team_research.team_evidence": "f4f084b89d15b4e56d629be9810a0377c7fd3529477d366f86d3d323c8effcfe",
+    "scripts.team_research.worker": "62177d37dcef5223d592d7d5b0922e08d0f0ae8c17d3b9d83c8905f7e7dd22d0",
+    "search": "747f7382990d66ba45aed0b2f7979ecb3085c9b4b7d90f9e7aa6475898cfeaac",
+    "tools": "aeeea444838c595600208c1b705963fead5019f9cb6508e17f4d16f02d756cda",
+    "writer": "75787bfed26cac74aa05e2dbd75c9f3497ff2483dd03c3beafceade28195a362"
+  },
+  "runtime": {
+    "packages": {
+      "cryptography": "50.0.2",
+      "fonttools": "4.68.0",
+      "pydantic": "2.14.3",
+      "pydantic-core": "2.50.4",
+      "pypdf": "7.1.1"
+    },
+    "pdf_renderer": "pdftoppm version 26.05.0",
+    "python": "3.12.14",
+    "sqlite": "3.53.1"
+  },
+  "runtime_files_sha256": {
+    "evaluations/paired/corpus.py": "a277712097915bcb7ecd8cf9fc860368a15c095eb8c3e38c17b3f533eb4bb3ae",
+    "evaluations/paired/readiness.py": "29ee7bdeab63976c7c995707e5c4b26ab574b4c5053314ec5c2a95bb1a0fdd0b",
+    "evaluations/paired/registration.py": "7ac755baf3165f7d90158ef29019c51a8e13519ee08faf50451697c78fedb78d",
+    "evaluations/paired/runner.py": "dd06592430b928a1e6c17ef748826b000d8363e7a5b64e4b56e30eb46bc086f6",
+    "requirements-baseline.txt": "bdfcf80898f7fcd3021586dea1001cc42681f6eabeda66e225bf5104fa5755ce",
+    "requirements-retrieval.txt": "3c4f4337be39e684576a7326cda029960cc68f65944d0a7c28494da2ea575005",
+    "scripts/baseline_evidence.py": "21ba6c8618a7d02a6f0c6c6cf2045ea9c4a941196c58c7b574d228b30d8593e7",
+    "scripts/claim_review.py": "aff9f0e63d2ee0ea595a006e56c2af0f06f80399d058b40e0a8ec0fc0dfd5723",
+    "scripts/disney_hulu_case.py": "0cdf324db6bfaba00436eec285f556892ed2b8551d25a41731091d4e4426b7a5",
+    "scripts/edgar_exhibits.py": "da4a55fbaf86c3e5cc14483a6e4fc206fcf106bfed757d873e1de20363f5d449",
+    "scripts/forecast_specialist.py": "d52f52ccb43815cc1f2d0d8b6e3eb1c0a1c2e986b2a64b8fce41734932002bd9",
+    "scripts/material_dispute.py": "3f0c30639d01d41da1607d1da24ea5630bf36d593d64278935e94b262f90db57",
+    "scripts/paired_packet.py": "8484656a6820019c7c921fa1e5a07576f32610e6ba0715b1f5073c588b045388",
+    "scripts/paired_research.py": "69f6a3a698ff2dffe90bd9340e92fd5c12553e6da2c55e6c3e45970aafe43a74",
+    "scripts/paired_tools.py": "b95617c82c4ddd49c9d0cf8a4dd956dd606145e4ac853b97845fc70c90ce3989",
+    "scripts/research_team.py": "5f57a0e818f65dc83f0b7ab4f6f99ea3275460145acf2c49d1f30aabb9434ac7",
+    "scripts/retrieval_gateway.py": "d17c39c72fcf759e3ea714e7f646dbc76d7c552b3ae0562b681a0a4a3e27fc97",
+    "scripts/retrieval_sources.py": "fd8e06d94d9490772027d1a1aa1886f03d8c2bd80773949f9d2b5ec2cca69b71",
+    "scripts/run_checkpoint.py": "5a91795be1f4a7cb76e648f69194bbe65c91aa48ac7864d9e8d8c4aed4e94c25",
+    "scripts/sol_baseline.py": "ed85bf0b183e82e778e3a40d4086186ea6ad7df5ef530bb1a78a1b3c0d752ad1",
+    "scripts/sol_gateway.py": "d752b91457f2960f70f54a969c99017ef52c7c6eb55262e5eee05a0a35af5683",
+    "scripts/sol_provider.py": "ee807a75d0c4e3fa21764abebdf3673b90f7d95a2513a1f3740ccef3c968a595",
+    "scripts/sol_research.py": "e88aea56e9c62ef61547ee650ddd42e64d534ab393c5b8f6ec74c480fcd98a0f",
+    "scripts/team_meter.py": "72c17b74df905ffc11c186eddfae6f63d64d298b4a61eca98c78ab6b30f6e09e",
+    "scripts/team_report.py": "e72fc1fcd7dc9d766845387746c76f88c22f9c5a655183d8cb89ab484dab9d6c",
+    "scripts/team_research.py": "0c251d2436e97856183d1a9343876030793e0832dc29194e1df2f46b53ec9067",
+    "scripts/visual_reader.py": "c71c4e4ac060ad64759f96afaaf44f77c1dfa13951b0f8758c53e7dcc6249a65"
+  },
+  "schedule": [
+    {
+      "arms": [
+        "single_sol",
+        "sol_team",
+        "mixed",
+        "single_astra",
+        "mixed_fixed_plan",
+        "mixed_no_forecast"
+      ],
+      "case_id": "nintendo-fy2021-guidance",
+      "packet_sha256": "b6d9dad17a9dad79ad5a5a0a4209db3e986467a1f2bdace2cb18b6343c10796b"
+    },
+    {
+      "arms": [
+        "mixed_fixed_plan",
+        "mixed",
+        "single_sol",
+        "sol_team",
+        "single_astra"
+      ],
+      "case_id": "jd-footasylum-remittal-2021",
+      "packet_sha256": "c258dbe526f361dc1c594dd5f51704b3c55dad3c8e15ac2e42020084893e501a"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "mixed_fixed_plan",
+        "single_sol",
+        "sol_team",
+        "mixed"
+      ],
+      "case_id": "alleghany-merger-2022",
+      "packet_sha256": "162f1f6ac67007969c7575a4f8cccb72a8ad5bfcd2d75b474010a4a94875d847"
+    },
+    {
+      "arms": [
+        "single_sol",
+        "sol_team",
+        "mixed_no_forecast",
+        "single_astra",
+        "mixed_fixed_plan",
+        "mixed"
+      ],
+      "case_id": "fomc-june-2019",
+      "packet_sha256": "7cb8668d965098f9d50168c6fa4efff8c359955f32508313dfbac4ad2baef5a7"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "single_sol",
+        "mixed_fixed_plan",
+        "mixed",
+        "sol_team",
+        "mixed_no_forecast"
+      ],
+      "case_id": "fomc-march-2022",
+      "packet_sha256": "a5e9aa8e26f3c17c7e6364c4a88c533d6b8734ff881b53c9879f5aa3f830159c"
+    },
+    {
+      "arms": [
+        "mixed",
+        "mixed_no_forecast",
+        "sol_team",
+        "mixed_fixed_plan",
+        "single_astra",
+        "single_sol"
+      ],
+      "case_id": "treasury-9128286b1-2019-02-06",
+      "packet_sha256": "08c3e86c60afb5cf651d2f88b4279559b74b1c8e67ed85004472e33110cf01d5"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "mixed_fixed_plan",
+        "single_sol",
+        "sol_team",
+        "mixed"
+      ],
+      "case_id": "berkshire-2018-q2-earnings",
+      "packet_sha256": "91be326bd3e77595720606c5f3b981431dbecc71b566c8e14db76298f27b8ad7"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "sol_team",
+        "mixed_fixed_plan",
+        "mixed",
+        "mixed_no_forecast",
+        "single_sol"
+      ],
+      "case_id": "canon-fy2022-interim-outlook",
+      "packet_sha256": "1c62d1d8fef56a6093c776ae4f9b2b75fea77a10749f6965e55bfd8d3e83dfe0"
+    },
+    {
+      "arms": [
+        "sol_team",
+        "mixed",
+        "single_sol",
+        "mixed_no_forecast",
+        "mixed_fixed_plan",
+        "single_astra"
+      ],
+      "case_id": "bea-19q1-advance",
+      "packet_sha256": "8174416e3fed88b8916ae28e896687b412c19665bde4c057af39702644b89e95"
+    },
+    {
+      "arms": [
+        "mixed_fixed_plan",
+        "single_sol",
+        "mixed",
+        "sol_team",
+        "single_astra"
+      ],
+      "case_id": "berkshire-2020-q1-loss",
+      "packet_sha256": "8ccae3ea275803e5e6356cf65f20d93f2caf50a8e0efa305d24ee3285e5b1324"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "single_sol",
+        "mixed_fixed_plan",
+        "mixed_no_forecast",
+        "sol_team",
+        "mixed"
+      ],
+      "case_id": "treasury-91282cfr7-2022-10-20",
+      "packet_sha256": "e883e4fd4b8fc49f7616c57c62fa307de28f5d290b65ed34052bb5250aaf4b52"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "mixed_fixed_plan",
+        "mixed",
+        "sol_team",
+        "mixed_no_forecast",
+        "single_sol"
+      ],
+      "case_id": "bea-20q4-advance",
+      "packet_sha256": "e35387d585264d46ef42dff31cf13bc063aedea8494349820fdb59772c9ca4b8"
+    }
+  ],
+  "tools": {
+    "image_long_side_pixels": 1400,
+    "max_calculations": 8,
+    "passage_chars": 1750,
+    "results_per_search": 5,
+    "searches_per_lookup": 2,
+    "tools": [
+      "search_archive",
+      "read_passages",
+      "page_image",
+      "decimal_calculator"
+    ],
+    "visual_pages_per_report": 1
+  },
+  "version": 1
+}

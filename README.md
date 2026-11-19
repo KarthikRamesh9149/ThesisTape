@@ -6,7 +6,7 @@ GPT-6.2 Sol can research a filing alone or lead two GPT-6 Luna workers. The team
 
 [Build plan and validation milestones](BUILD_PLAN.md) · [Architecture and model costs (PDF)](ThesisTape-Architecture.pdf)
 
-The next comparison uses 12 development and 24 blind financial research cases. Its scoring rules, dated publisher PDFs and spending limits are frozen. The verifier checks every case offline. [Paired evaluation protocol and reproduction commands](evaluations/paired/protocol.md)
+The comparison uses 12 development and 24 blind financial research cases with frozen scoring rules, publisher PDFs and spending limits. On the first development event, Nintendo’s FY2021 guidance, all six configurations independently reopened identical evidence under separate USD 0.20 caps. The first paid comparison is pending. [Evaluation protocol](evaluations/paired/protocol.md) · [Runner verification and reproduction commands](evaluations/paired/runner.md)
 
 ![ThesisTape research workflow showing the lead orchestrator, evidence workers, independent review and final report.](ThesisTape-Architecture.png)
 
