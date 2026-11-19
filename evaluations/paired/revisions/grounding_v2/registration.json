@@ -1,0 +1,163 @@
+{
+  "budgets_usd": {
+    "blind_ceiling": "14.40",
+    "development_ceiling": "20.40",
+    "per_case_arm": "0.30"
+  },
+  "code_revision": "afff7dc56b2c9d308e0a60d06085f25090ef0120",
+  "parent_manifest_sha256": "18c5914a855cd31d3ddaa19f85d503acac29590683ebb91fa1284da592c3cfa7",
+  "policy": {
+    "cap_amendment": "Equal prospective ceiling for every new arm on development and blind cases; the historical full repair needed USD 0.293626 including prior usage.",
+    "development_disclosure": "The Nintendo event and its previously generated drafts were used to develop the new validator. No v1 response is reused in scored v2 assignments.",
+    "inherited": "All other settings and endpoints follow the parent manifest.",
+    "patch_output_limit": 768
+  },
+  "runtime_sha256": {
+    "evaluations/paired/study.py": "846a70d7f95c04f8468067d75a594448d13df03c5a78b66148014ddb10f2e0c6",
+    "scripts/paired_grounding.py": "e91c91e20b58736b5741b988e289445bd6ac6b1802ea7ce1c960a288c27700d9",
+    "scripts/paired_v2.py": "10f2d31ee1be1501ee4e727863b6ce8db90b68f4751cdbaab6c9e5dc3280e3fa"
+  },
+  "schedule": [
+    {
+      "arms": [
+        "single_sol",
+        "sol_team",
+        "mixed",
+        "single_astra",
+        "mixed_fixed_plan",
+        "mixed_no_forecast"
+      ],
+      "case_id": "nintendo-fy2021-guidance",
+      "packet_sha256": "b6d9dad17a9dad79ad5a5a0a4209db3e986467a1f2bdace2cb18b6343c10796b"
+    },
+    {
+      "arms": [
+        "mixed_fixed_plan",
+        "mixed",
+        "single_sol",
+        "sol_team",
+        "single_astra"
+      ],
+      "case_id": "jd-footasylum-remittal-2021",
+      "packet_sha256": "c258dbe526f361dc1c594dd5f51704b3c55dad3c8e15ac2e42020084893e501a"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "mixed_fixed_plan",
+        "single_sol",
+        "sol_team",
+        "mixed"
+      ],
+      "case_id": "alleghany-merger-2022",
+      "packet_sha256": "162f1f6ac67007969c7575a4f8cccb72a8ad5bfcd2d75b474010a4a94875d847"
+    },
+    {
+      "arms": [
+        "single_sol",
+        "sol_team",
+        "mixed_no_forecast",
+        "single_astra",
+        "mixed_fixed_plan",
+        "mixed"
+      ],
+      "case_id": "fomc-june-2019",
+      "packet_sha256": "7cb8668d965098f9d50168c6fa4efff8c359955f32508313dfbac4ad2baef5a7"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "single_sol",
+        "mixed_fixed_plan",
+        "mixed",
+        "sol_team",
+        "mixed_no_forecast"
+      ],
+      "case_id": "fomc-march-2022",
+      "packet_sha256": "a5e9aa8e26f3c17c7e6364c4a88c533d6b8734ff881b53c9879f5aa3f830159c"
+    },
+    {
+      "arms": [
+        "mixed",
+        "mixed_no_forecast",
+        "sol_team",
+        "mixed_fixed_plan",
+        "single_astra",
+        "single_sol"
+      ],
+      "case_id": "treasury-9128286b1-2019-02-06",
+      "packet_sha256": "08c3e86c60afb5cf651d2f88b4279559b74b1c8e67ed85004472e33110cf01d5"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "mixed_fixed_plan",
+        "single_sol",
+        "sol_team",
+        "mixed"
+      ],
+      "case_id": "berkshire-2018-q2-earnings",
+      "packet_sha256": "91be326bd3e77595720606c5f3b981431dbecc71b566c8e14db76298f27b8ad7"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "sol_team",
+        "mixed_fixed_plan",
+        "mixed",
+        "mixed_no_forecast",
+        "single_sol"
+      ],
+      "case_id": "canon-fy2022-interim-outlook",
+      "packet_sha256": "1c62d1d8fef56a6093c776ae4f9b2b75fea77a10749f6965e55bfd8d3e83dfe0"
+    },
+    {
+      "arms": [
+        "sol_team",
+        "mixed",
+        "single_sol",
+        "mixed_no_forecast",
+        "mixed_fixed_plan",
+        "single_astra"
+      ],
+      "case_id": "bea-19q1-advance",
+      "packet_sha256": "8174416e3fed88b8916ae28e896687b412c19665bde4c057af39702644b89e95"
+    },
+    {
+      "arms": [
+        "mixed_fixed_plan",
+        "single_sol",
+        "mixed",
+        "sol_team",
+        "single_astra"
+      ],
+      "case_id": "berkshire-2020-q1-loss",
+      "packet_sha256": "8ccae3ea275803e5e6356cf65f20d93f2caf50a8e0efa305d24ee3285e5b1324"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "single_sol",
+        "mixed_fixed_plan",
+        "mixed_no_forecast",
+        "sol_team",
+        "mixed"
+      ],
+      "case_id": "treasury-91282cfr7-2022-10-20",
+      "packet_sha256": "e883e4fd4b8fc49f7616c57c62fa307de28f5d290b65ed34052bb5250aaf4b52"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "mixed_fixed_plan",
+        "mixed",
+        "sol_team",
+        "mixed_no_forecast",
+        "single_sol"
+      ],
+      "case_id": "bea-20q4-advance",
+      "packet_sha256": "e35387d585264d46ef42dff31cf13bc063aedea8494349820fdb59772c9ca4b8"
+    }
+  ],
+  "study": "paired-grounding-v2"
+}
