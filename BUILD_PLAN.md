@@ -79,6 +79,8 @@ On the development cases compare **single Sol**, **the same workflow with Sol in
 
 **Decision evidence.** Report paired differences and uncertainty, separate factual and forecast scores, citation support, qualified or incomplete reports, and mean and 95th-percentile cost and latency. Have an analyst review a blinded sample and record correction time. Before opening the blind set, define the smallest quality loss the analyst would accept for a lower cost. Advance the mixed team if its traces show zero cutoff violations and it either improves quality at the same spending limit or meets that quality tolerance at lower measured cost. If the result is inconclusive or leads to a redesign, confirm on fresh cases. FinanceGym’s withheld rubric determines the official score.
 
+**Gate for the official run.** Require a passed date and citation audit, paired results from the independent blind cases, and a cost projection based on measured usage. The projection must cover the full run and leave room for failures and retries within the remaining API credits.
+
 ### 7. Freeze and run the official 400
 
 Pin the code revision, dependency lock, model snapshots where available, returned model IDs, prompts, retrieval configuration, source manifest and benchmark-file hash. Replace illustrative costs with the pilot’s measured spend and set an authorised run ceiling. Run only the selected candidate over the official set. Preserve the original question and cutoff exactly when resuming or exporting.
@@ -86,6 +88,8 @@ Pin the code revision, dependency lock, model snapshots where available, returne
 **Submission evidence.** Validate exactly one cited report per original task, all 400 present, every search cutoff recorded, all costs reconciled and unresolved cases included. Prepare `answers.jsonl` with `question`, `cutoff` and `report`, plus the system metadata and public repository or paper link required by the maintainers. Publish or send the package with the user’s authorisation. Record the returned Overall score, both component scores, uncertainty and the leading comparable entry at grading. [Official data](https://huggingface.co/datasets/Rujun/FinanceGym) · [Submission instructions](https://financegym.github.io/#submit)
 
 ## Spending plan
+
+The project API ceiling is **USD 100** across development, verification and the official benchmark run. Track spend cumulatively. Every USD 0.10 of average cost per case corresponds to USD 40 for the 400 reports.
 
 At the checked Standard rates, the architecture’s example uses 12,000 input and 1,000 billed output tokens across Luna calls, and 24,000 input and 5,000 billed output tokens across all Sol calls, including any planning. That totals **USD 0.0997**. An additional Astra pass at 4,000 input and 1,000 output plus a Sol recheck at 2,000 input and 500 output adds **USD 0.0810**. [OpenAI Docs pricing](https://developers.openai.com/api/docs/pricing) · [Luna pricing](https://developers.openai.com/api/docs/models/gpt-6-luna)
 

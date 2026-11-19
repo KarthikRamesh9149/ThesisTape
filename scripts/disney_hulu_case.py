@@ -65,7 +65,7 @@ def checked_bytes(files, path, expected_hash):
     return data
 
 
-def filing_item(data, source):
+def filing_blocks(data, source):
     document = ElementTree.fromstring(data)
     if document.findtext(f"{XHTML}head/{XHTML}title") != source["title"]:
         raise CaseError(f"Unexpected title for {source['file']}")
@@ -77,7 +77,11 @@ def filing_item(data, source):
         start = blocks.index(source["section"]) + 1
     except ValueError as error:
         raise CaseError(f"{source['section']} is missing in {source['file']}") from error
-    return " ".join(takewhile(lambda block: not re.match(r"Item \d+\.\d{2}\b", block), blocks[start:]))
+    return tuple(takewhile(lambda block: not re.match(r"Item \d+\.\d{2}\b", block), blocks[start:]))
+
+
+def filing_item(data, source):
+    return " ".join(filing_blocks(data, source))
 
 
 def verify_index(data, source, file_size):
