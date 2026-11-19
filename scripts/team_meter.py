@@ -12,7 +12,7 @@ from .sol_provider import (
     MILLION,
     MODEL_RATES,
     OpenAIResponses,
-    reserve,
+    reservation_cost,
     structured_text,
     usage_cost,
 )
@@ -21,7 +21,7 @@ from .sol_research import tool_decision
 
 def funded_limit(stage, model, input_tokens, available, desired):
     if stage not in ("lead.memo", "lead.memo_repair", "lead.revise", "review.initial", "review.recheck",
-                     "forecast.analyze", "forecast.repair"):
+                     "forecast.analyze", "forecast.repair", "dispute.adjudicate"):
         return desired
     rates = MODEL_RATES[model]
     affordable = int(
@@ -58,16 +58,32 @@ class Meter:
         )
         save_run(self.directory, self.record)
 
-    def __call__(self, stage: str, prompt: dict, limit: int):
+    def __call__(self, stage: str, prompt: dict, limit: int, *, keep_usd: Decimal | None = None):
         model = prompt["model"]
         tokens = self.provider.count(prompt)
         with self.lock:
-            if self.stopped or stage in self.record["calls"]:
+            if self.stopped or stage in self.record["calls"] or stage in self.record.get("skipped_calls", {}):
                 raise CaseError("A stopped or duplicate assignment cannot dispatch")
             available = self.budget - self.spent - sum(self.pending.values())
+            if keep_usd is not None:
+                if not keep_usd.is_finite() or keep_usd < 0:
+                    raise CaseError("Invalid protected review allowance")
+                available -= keep_usd
             granted = funded_limit(stage, model, tokens, available, limit)
             payload = generation_request(prompt, max_output_tokens=granted)
+            if keep_usd is not None and reservation_cost(tokens, granted, model) > available:
+                self.record.setdefault("skipped_calls", {})[stage] = {
+                    "stage": stage, "model": model, "input_tokens_preflight": tokens,
+                    "max_output_tokens": granted, "requested_output_tokens": limit,
+                    "request_sha256": fingerprint(json_bytes(payload)), "protected_usd": str(keep_usd),
+                    "checked_ms": self.elapsed(),
+                }
+                self.record["events"].append(["skip", stage])
+                self.save()
+                return None
             call = request_record(stage, payload, tokens, available)
+            if keep_usd is not None:
+                call["protected_usd"] = str(keep_usd)
             if limit != granted:
                 call["requested_output_tokens"] = limit
             self.pending[stage] = Decimal(call["reservation_usd"])
@@ -110,33 +126,40 @@ class Meter:
 
 def verify_ledger(record: dict) -> None:
     budget = Decimal(record["budget_usd"])
+    if not budget.is_finite() or budget <= 0:
+        raise CaseError("Invalid run budget")
     spent = Decimal(0)
     pending = {}
     dispatched = set()
+    skipped = set()
     last_ms = 0
     for event, stage in record["events"]:
-        if stage not in record["calls"]:
+        entries = record.get("skipped_calls", {}) if event == "skip" else record["calls"]
+        if stage not in entries:
             raise CaseError("Ledger event has no provider call")
-        call = record["calls"][stage]
+        call = entries[stage]
         model = call["model"]
         if model not in MODEL_RATES or call["stage"] != stage:
             raise CaseError("Invalid route or model in the ledger")
-        if event == "reserve" and stage not in dispatched:
-            available = budget - spent - sum(pending.values())
+        if event in ("reserve", "skip") and stage not in dispatched | skipped:
+            protected = Decimal(call.get("protected_usd", "0"))
+            if not protected.is_finite() or protected < 0:
+                raise CaseError("Invalid protected review allowance")
+            available = budget - spent - sum(pending.values()) - protected
             requested = call.get("requested_output_tokens", call["max_output_tokens"])
             granted = funded_limit(stage, model, call["input_tokens_preflight"], available, requested)
             if granted != call["max_output_tokens"]:
                 raise CaseError("The output allowance differs from the remaining budget")
-            amount = reserve(
-                call["input_tokens_preflight"],
-                available,
-                max_output_tokens=call["max_output_tokens"],
-                model=model,
-            )
-            if amount != Decimal(call["reservation_usd"]):
-                raise CaseError("Saved reservation differs from the applicable model rates")
-            pending[stage] = amount
-            dispatched.add(stage)
+            amount = reservation_cost(call["input_tokens_preflight"], granted, model)
+            if event == "skip":
+                if "protected_usd" not in call or amount <= available:
+                    raise CaseError("Skipped assignment was affordable")
+                skipped.add(stage)
+            else:
+                if amount > available or amount != Decimal(call["reservation_usd"]):
+                    raise CaseError("Saved reservation differs from the applicable model rates or budget")
+                pending[stage] = amount
+                dispatched.add(stage)
         elif event == "settle" and stage in pending:
             cost = usage_cost(call["provider"], expected_model=model)
             check_usage(call, cost)
@@ -146,7 +169,7 @@ def verify_ledger(record: dict) -> None:
             del pending[stage]
         else:
             raise CaseError("Out-of-order or duplicate spend event")
-        stamp = call["dispatched_ms" if event == "reserve" else "confirmed_ms"]
+        stamp = call[{"reserve": "dispatched_ms", "settle": "confirmed_ms", "skip": "checked_ms"}[event]]
         if type(stamp) is not int or stamp < last_ms or stamp > record.get("elapsed_ms", stamp):
             raise CaseError("Provider event timing does not agree with the run clock")
         if event == "settle":
@@ -157,6 +180,7 @@ def verify_ledger(record: dict) -> None:
     if (
         pending
         or dispatched != set(record["calls"])
+        or skipped != set(record.get("skipped_calls", {}))
         or spent != Decimal(record["estimated_model_cost_usd"])
         or Decimal(record["unreconciled_reservation_usd"]) != 0
     ):

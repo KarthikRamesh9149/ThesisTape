@@ -111,6 +111,7 @@ class Draft(StrictOutput):
 
 
 MONEY = re.compile(r"(?:\$|USD )(\d+(?:\.\d+)?) (million|billion)\b")
+PER_SHARE = re.compile(r"(?<![\w$])(?:US\$|\$|USD )(\d+(?:\.\d+)?)\s+(?:per|a)\s+(?:common\s+)?share\b", re.IGNORECASE)
 SCALE = {"million": Decimal(1000000), "billion": Decimal(1000000000)}
 NUMBER = re.compile(r"\d+(?:,\d{3})*(?:\.\d+)?")
 PERCENT = re.compile(r"(\d+(?:\.\d+)?)\s*(?:%|percent\b)", re.IGNORECASE)
@@ -173,7 +174,10 @@ def check_paragraph(paragraph: Paragraph, passages: dict[str, str], cutoff: date
 
 def check_claim_numbers(text, corpus, cutoff, *, forecast_periods=(), cited_editions=()):
     source_amounts = {amount_and_resolution(match[0])[0] for match in MONEY.finditer(corpus)}
-    if re.search(r"\$|\b(?:USD|dollars)\b", MONEY.sub("", text), re.IGNORECASE):
+    source_prices = set(map(Decimal, PER_SHARE.findall(corpus)))
+    if set(map(Decimal, PER_SHARE.findall(text))) - source_prices:
+        raise CaseError("A per-share price does not match the price and unit in its cited evidence")
+    if re.search(r"\$|\b(?:USD|dollars)\b", PER_SHARE.sub("", MONEY.sub("", text)), re.IGNORECASE):
         raise CaseError("A money claim is missing a recognised currency or scale")
     if any(amount_and_resolution(match[0])[0] not in source_amounts for match in MONEY.finditer(text)):
         raise CaseError("A monetary claim does not match a figure in its cited evidence")

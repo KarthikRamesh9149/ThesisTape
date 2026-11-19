@@ -12,19 +12,33 @@ from threading import Lock
 from .claim_review import VERSION as REVIEW_VERSION
 from .disney_hulu_case import CaseError, read_saved_file
 from .forecast_specialist import VERSION as FORECAST_VERSION
+from .material_dispute import VERSION as DISPUTE_VERSION
 from .sol_baseline import PROJECT_ROOT, fingerprint, generation_request, json_bytes
-from .sol_provider import LUNA, MODEL, MODEL_RATES, TERRA, OpenAIResponses, project_key
+from .sol_provider import (
+    ASTRA,
+    LUNA,
+    MODEL,
+    MODEL_RATES,
+    TERRA,
+    OpenAIResponses,
+    project_key,
+)
 from .team_meter import Meter, verify_ledger
 from .team_research import VERSION, Case, case_for, research
 from .visual_reader import ROUTES as TABLE_ROUTES
 from .visual_reader import VERSION as VISUAL_VERSION
 
-CASES = ("disney", "tradeweb", "tradeweb-before", "toyota", "nvidia", "toyota-buybacks", "toyota-buybacks-actual")
-ROUTES = ("team", "single", "reviewed", "forecast", *TABLE_ROUTES)
+CASES = ("disney", "tradeweb", "tradeweb-before", "toyota", "nvidia", "toyota-buybacks", "toyota-buybacks-actual",
+         "twitter-deal", "twitter-price")
+ROUTES = ("team", "single", "reviewed", "forecast", "dispute", *TABLE_ROUTES)
 
 
 def configuration(case, corpus, route):
     models = (MODEL, LUNA)
+    if case.source_urls:
+        models = (MODEL,)
+    if route == "dispute":
+        models = (*models, ASTRA)
     if route in TABLE_ROUTES:
         if not case.table:
             raise CaseError("The table route needs a located source table")
@@ -32,11 +46,13 @@ def configuration(case, corpus, route):
     return {
         "schema_version": 3,
         "prompt_version": VERSION,
+        **({"source_file_sha256": fingerprint(json_bytes(list(case.source_urls)))} if case.source_urls else {}),
+        **({"dispute_version": DISPUTE_VERSION} if route == "dispute" or case.source_urls else {}),
         **({"table_version": VISUAL_VERSION, "review_version": VISUAL_VERSION,
             "table": asdict(case.table)} if route in TABLE_ROUTES else {}),
         **(
             {"review_version": REVIEW_VERSION}
-            if route in ("reviewed", "forecast")
+            if route in ("reviewed", "forecast", "dispute")
             else {}
         ),
         **(
@@ -191,19 +207,30 @@ def reproduce(record, config, workflow):
     seen = set()
     lock = Lock()
 
-    def ask(stage, prompt, limit):
+    def ask(stage, prompt, limit, *, keep_usd=None):
+        skips = record.get("skipped_calls", {})
         with lock:
-            if stage not in record["calls"] or stage in seen:
+            entry = record["calls"].get(stage, skips.get(stage))
+            if entry is None or stage in seen:
                 raise CaseError("Missing or duplicate model call during replay")
+            if keep_usd is not None:
+                # Conditional spending decisions run after the earlier assignments have joined.
+                dispatch = "skip" if stage in skips else "reserve"
+                offset = record["events"].index([dispatch, stage])
+                earlier = {s for event, s in record["events"][:offset] if event in ("settle", "skip")}
+                if earlier != seen:
+                    raise CaseError("Conditional spending decision is out of order")
             seen.add(stage)
-        return recorded_output(record["calls"][stage], stage, prompt, limit)
+        if entry.get("protected_usd") != (str(keep_usd) if keep_usd is not None else None):
+            raise CaseError("Protected review allowance changed")
+        return recorded_output({**entry, "output": None} if stage in skips else entry, stage, prompt, limit)
 
     memo, trace = workflow(ask)
     state, digest = release_state(
         memo, trace, review_required="review_version" in config
     )
     if (
-        seen != set(record["calls"])
+        seen != set(record["calls"]) | set(record.get("skipped_calls", {}))
         or digest != record["memo_sha256"]
         or record["state"] != state
         or any(record.get(k) != v for k, v in trace.items())
@@ -229,7 +256,7 @@ def main(argv=None):
             case = case_for(args.case)
             record = run(
                 case,
-                args.route or ("visual" if case.table else "team"),
+                args.route or ("visual" if case.table else "dispute" if case.source_urls else "team"),
                 args.output_dir,
                 Decimal(args.budget_usd),
                 provider,

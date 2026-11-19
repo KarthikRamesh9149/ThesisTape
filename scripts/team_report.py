@@ -86,6 +86,11 @@ def report_prompt(case, action, data):
             "When citing tables copy exact header or row excerpts, including internal spacing."
         )
     instructions = BRIEF.format(currency_rule=currency_rule)
+    if case.source_urls:
+        instructions = BRIEF.format(currency_rule="For a per-share consideration use USD followed by the printed price and 'per share'.")
+        instructions += ("\nAnswer the actual question about the deal file. Attribute material assertions to the "
+                         "party making them. Distinguish agreements or adjudicated facts from disputed positions "
+                         "and future outcomes. Use up to four citations per paragraph where distinct sources are necessary.")
     return typed_prompt(MODEL, instructions, data, Brief, effort="medium")
 
 

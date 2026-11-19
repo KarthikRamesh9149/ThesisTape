@@ -16,6 +16,7 @@ from .disney_hulu_case import CaseError
 MODEL = "gpt-6.2-sol"
 LUNA = "gpt-6-luna"
 TERRA = "gpt-6.1-terra"
+ASTRA = "gpt-6.2-astra"
 OPENAI_URL = "https://api.openai.com/v1"
 MAX_OUTPUT_TOKENS = 4096
 RATES = {
@@ -29,6 +30,7 @@ MODEL_RATES = {
     MODEL: RATES,
     LUNA: {"ordinary_input": "0.10", "cached_input": "0.01", "cache_write_30m": "0.125", "output": "0.50"},
     TERRA: {"ordinary_input": "1.00", "cached_input": "0.05", "cache_write_30m": "1.25", "output": "5.00"},
+    ASTRA: {"ordinary_input": "8.00", "cached_input": "0.40", "cache_write_30m": "10.00", "output": "40.00"},
 }
 MILLION = Decimal(1000000)
 
@@ -113,17 +115,21 @@ def nonnegative_integer(value) -> int:
     return value
 
 
-def reserve(input_tokens: int, budget: Decimal, *, max_output_tokens: int = MAX_OUTPUT_TOKENS, model: str = MODEL) -> Decimal:
+def reservation_cost(input_tokens: int, max_output_tokens: int, model: str) -> Decimal:
     rates = MODEL_RATES[model]
     tokens = nonnegative_integer(input_tokens)
     if not 1 <= nonnegative_integer(max_output_tokens) <= MAX_OUTPUT_TOKENS:
         raise CaseError("Invalid model output limit")
     if tokens > 272000:
         raise CaseError("This baseline uses the short-context Standard rates")
+    # Reserve at the cache-write rate even when a cache write is not expected.
+    return (tokens * Decimal(rates["cache_write_30m"]) + max_output_tokens * Decimal(rates["output"])) / MILLION
+
+
+def reserve(input_tokens: int, budget: Decimal, *, max_output_tokens: int = MAX_OUTPUT_TOKENS, model: str = MODEL) -> Decimal:
+    upper = reservation_cost(input_tokens, max_output_tokens, model)
     if not budget.is_finite() or budget <= 0:
         raise CaseError("The USD budget must be a positive finite amount")
-    # Reserve at the cache-write rate even when a cache write is not expected.
-    upper = (tokens * Decimal(rates["cache_write_30m"]) + max_output_tokens * Decimal(rates["output"])) / MILLION
     if upper > budget:
         raise CaseError(f"Required reservation USD {upper:f} exceeds budget USD {budget:f}")
     return upper

@@ -19,6 +19,7 @@ from .baseline_evidence import (
 from .claim_review import review_candidate
 from .disney_hulu_case import SAVED_CASE, CaseError, read_saved_file
 from .forecast_specialist import analyze
+from .material_dispute import review_dispute
 from .retrieval_gateway import ARCHIVE, Corpus, Evidence
 from .sol_baseline import fingerprint, json_bytes
 from .sol_provider import LUNA, MODEL
@@ -52,6 +53,7 @@ class Case:
     archive: Path = ARCHIVE
     archive_objects: Path | None = None
     table: TableTarget | None = None
+    source_urls: tuple[str, ...] = ()
 
     def intake(self):
         return {"question": self.question, "cutoff": self.cutoff}
@@ -61,6 +63,13 @@ class Case:
 
 
 def case_for(name: str) -> Case:
+    if name in ("twitter-deal", "twitter-price"):
+        root = SAVED_CASE.parent / "twitter-merger-2022-07-11"
+        data = json.loads(read_saved_file(root / "agent/question.json"))
+        if name == "twitter-price":
+            data.update(json.loads(read_saved_file(root / "agent/price-only.json")))
+        return Case(data["case_id"], data["title"], data["question"], data["cutoff"],
+                    archive=root / "archive", source_urls=tuple(data["source_urls"]))
     if name in ("toyota-buybacks", "toyota-buybacks-actual"):
         root = SAVED_CASE.parent / "toyota-buybacks-2023-05-11"
         data = json.loads(read_saved_file(root / "agent/question.json"))
@@ -332,7 +341,17 @@ def research(case: Case, corpus: Corpus, ask, *, route: str):
         raise CaseError("The forecast specialist requires a forecast question with declared options")
     decisions = []
     plan = {}
-    if route in ("team", "reviewed", "forecast"):
+    packet_trace = {}
+    if case.source_urls:
+        if route not in ("reviewed", "dispute"):
+            raise CaseError("Use reviewed or dispute for an assigned source file")
+        with corpus.session(case.cutoff) as session:
+            hits = list(dict.fromkeys(hit for url in case.source_urls for hit in session.read(url, max_date=case.cutoff)))
+            opened = {f"P{i}": hit for i, hit in enumerate(hits, 1)}
+            packet_trace["source_reads"] = session.trace
+        work, reports = [], []
+        action = "write" if opened else "qualify"
+    elif route in ("team", "reviewed", "forecast", "dispute"):
         instructions = """You are the lead financial analyst. Delegate two independent, short lookup assignments.
 The filings worker extracts the terms, dates and numbers. The contrary worker independently looks for
 corrections, exceptions, or unresolved evidence. Give each a neutral research question.
@@ -353,6 +372,7 @@ Do not suggest any answers, figures, dates, filing IDs or specific source. Use w
         raise CaseError("Unknown research route")
     review = {}
     forecast = None
+    dispute = None
     if not opened:
         action = "qualify"
         memo, arithmetic = qualified_memo(case, work), None
@@ -363,12 +383,18 @@ Do not suggest any answers, figures, dates, filing IDs or specific source. Use w
             case, ask, opened, reports, action, decision=decisions[-1] if decisions else None, forecast=forecast
         )
         memo, arithmetic = candidate.memo, candidate.calculation
-        if route in ("reviewed", "forecast"):
+        if route == "dispute" or case.source_urls:
+            memo, arithmetic, review, dispute = review_dispute(
+                case, corpus, opened, action, candidate, ask, enabled=route == "dispute"
+            )
+        elif route in ("reviewed", "forecast"):
             memo, arithmetic, review = review_candidate(case, corpus, opened, action, candidate, ask)
-    if route in ("reviewed", "forecast") and not opened:
+    if route in ("reviewed", "forecast", "dispute") and not opened:
         review = {"status": "no_financial_claims", "rounds": [], "released_memo_sha256": fingerprint(memo)}
     return memo, {
-        **({"review": review} if route in ("reviewed", "forecast") else {}),
+        **packet_trace,
+        **({"review": review} if route in ("reviewed", "forecast", "dispute") else {}),
+        **({"dispute": dispute} if route == "dispute" or case.source_urls else {}),
         **({"forecast_specialist": forecast} if route == "forecast" else {}),
         "assignments": plan,
         "workers": [w.record() for w in work],
