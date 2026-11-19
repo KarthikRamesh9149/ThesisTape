@@ -31,6 +31,14 @@ The first six questions used up to three concurrent investigations. After concur
 .venv/bin/python -B -m evaluations.financegym.pacing runs/benchmark_400_public.jsonl --workers 3
 ```
 
+The owner set a USD 140 ceiling for the entire project during the run. The paced runner admits new research only up to USD 139, leaving a dollar of headroom. It counts development, testing, previous attempts and outstanding provider charges. Simultaneous investigations reserve their entire individual allowances before starting. An interrupted assignment keeps its reservation and can resume under the same allowance.
+
+```sh
+.venv/bin/python -B -m evaluations.financegym.budget status
+.venv/bin/python -B -m evaluations.financegym.budget recovery runs/benchmark_400_public.jsonl --task-id "$UNANSWERED_TASK_ID"
+.venv/bin/python -B -m evaluations.financegym.budget editorial runs/benchmark_400_public.jsonl --task-id "$UNANSWERED_TASK_ID"
+```
+
 ## Export for grading
 
 ```sh

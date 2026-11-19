@@ -113,7 +113,7 @@ Pin the code revision, dependency lock, model snapshots where available, returne
 
 ## Spending plan
 
-The original project allocation was **USD 100**. The owner subsequently authorized additional API use for quality and submission. The revised study applies a common USD 0.30 ceiling per assignment and retains all charges. Track spend cumulatively. Every USD 0.10 of average cost per case corresponds to USD 40 for the 400 reports.
+The original project allocation was **USD 100**. During the official run the owner set a **USD 140 hard ceiling for the whole project**, including development and testing. The shared budget admits new benchmark assignments only up to USD 139 in recorded costs and reservations. It reserves the full allowance of each concurrent investigation and preserves unresolved provider charges. Every USD 0.10 of average cost per case corresponds to USD 40 for the 400 reports. [Budget controls](evaluations/financegym/README.md)
 
 At the checked Standard rates, the architecture’s example uses 12,000 input and 1,000 billed output tokens across Luna calls, and 24,000 input and 5,000 billed output tokens across all Sol calls, including any planning. That totals **USD 0.0997**. An additional Astra pass at 4,000 input and 1,000 output plus a Sol recheck at 2,000 input and 500 output adds **USD 0.0810**. [OpenAI Docs pricing](https://developers.openai.com/api/docs/pricing) · [Luna pricing](https://developers.openai.com/api/docs/models/gpt-6-luna)
 

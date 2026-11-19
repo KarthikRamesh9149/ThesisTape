@@ -12,6 +12,7 @@ from evaluations.paired.corpus import require
 from scripts.run_checkpoint import load, own_run
 
 from . import runner
+from .budget import ProjectBudget
 
 
 def transport_status(folders):
@@ -38,6 +39,7 @@ def run(questions, maximum=3, *, root=None, sleep=time.sleep):
     root = root or runner.RESEARCH
     root.mkdir(parents=True, exist_ok=True)
     cfg = runner.locked()
+    budget = ProjectBudget()
     with own_run(root), ThreadPoolExecutor(max_workers=maximum) as pool:
 
         def pending(row):
@@ -47,9 +49,15 @@ def run(questions, maximum=3, *, root=None, sleep=time.sleep):
             }
 
         rows = iter(r for r in runner.tasks(questions) if pending(r))
+
+        def capture(row):
+            record = root / row["task_id"] / "research/run.json"
+            with budget.reserve(record, runner.route(row, cfg)[2]):
+                return runner.capture_one(root, row, cfg)
+
         width, previous = maximum, False
         while group := list(islice(rows, width)):
-            states = list(pool.map(lambda r: runner.capture_one(root, r, cfg), group))
+            states = list(pool.map(capture, group))
             for state in states:
                 print(json.dumps(state), flush=True)
             require(
