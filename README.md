@@ -55,11 +55,22 @@ Each directory contains the memo and a portable `run.json` with assignments, act
 
 Use `--route reviewed` to send the team’s memo to a fresh Sol reviewer. It reopens the original passages at the case cutoff and assesses every material paragraph, any filing history and the Disney arithmetic. A material rejection goes to the lead for one correction. The controller exports the exact memo that passes review. If the revision still fails review, the verdict and drafts remain in the run record and the CLI exits with status 2. A search that yields no usable evidence returns a qualified notice listing the passages inspected.
 
-On Toyota’s real FY2024 forecast table, the reviewer accepted the original and caught a deliberately changed metric with identical numbers and citations. The complete correction branch added USD 0.011550 to the shared draft. [Paired evaluation and replay instructions](evaluations/citation_review/evaluation.md) · [Reviewed memo](evaluations/citation_review/challenge/memo.md) · [Cumulative spend](evaluations/citation_review/usage.json)
+On Toyota’s real FY2024 forecast table, the reviewer accepted the original and caught a deliberately changed metric with identical numbers and citations. The complete correction branch added USD 0.011550 to the shared draft. [Paired evaluation and replay instructions](evaluations/citation_review/evaluation.md) · [Reviewed memo](evaluations/citation_review/challenge/memo.md) · [Spend through citation review](evaluations/citation_review/usage.json)
 
 ```sh
 .venv/bin/python -B -m evaluations.citation_review.experiment check
 .venv/bin/python -B -m scripts.research_team run --case toyota --route reviewed --budget-usd 0.09 --output-dir runs/toyota-reviewed-new
+```
+
+### Run a forecast
+
+Use `--route forecast` for a Sol specialist that gives the lead a base case, causal driver, alternative and observable revision signal. Each point refers to a dated source. The independent reviewer checks the forecast’s factual premises and whether the conclusion follows from them. The same question also runs through `--route reviewed` for comparison.
+
+On NVIDIA’s Q2 FY2024 revenue, the specialist memo earned 6/6 and the reviewed control 5/6 for their cutoff-based analyses. Both predicted revenue within guidance, and NVIDIA reported revenue above the range. [Reports, missed forecast and costs](evaluations/forecast_specialist/evaluation.md) · [Cumulative spend](evaluations/forecast_specialist/usage.json)
+
+```sh
+.venv/bin/python -B -m evaluations.forecast_specialist.experiment check
+.venv/bin/python -B -m scripts.research_team run --case nvidia --route forecast --budget-usd 0.12 --output-dir runs/nvidia-forecast-new
 ```
 
 ## Run the single-Sol baseline

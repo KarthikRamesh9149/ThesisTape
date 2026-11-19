@@ -76,7 +76,7 @@ def sections(source, original, index):
     header, sep, body = original.partition(b"<TEXT>")
     if (
         not sep
-        or not body.rstrip().endswith(b"</TEXT>\n</DOCUMENT>")
+        or not re.search(rb"</TEXT>\r?\n</DOCUMENT>\s*\Z", body)
         or not date
         or not accession
         or date[1] != source["published"][:10]
@@ -106,6 +106,15 @@ def sections(source, original, index):
             "EDGAR index does not confirm this exhibit, sequence and byte size"
         )
     paragraphs = ExhibitProse(body.decode()).paragraphs
+    quarter = re.search(r"\bQ([1-4])\b", source["title"])
+    year = re.search(r"\bFY(\d{4})\b", source["title"])
+    if quarter and year:
+        ordinal = ("first", "second", "third", "fourth")[int(quarter[1]) - 1]
+        printed = rf"\b(?:{ordinal} quarter (?:of )?fiscal (?:year )?{year[1]}|Q{quarter[1]}\s*(?:FY|Fiscal)\s*{year[1]})\b"
+        if not re.search(printed, " ".join(paragraphs[:3]), re.IGNORECASE):
+            raise ValueError(
+                "The exhibit's printed fiscal period differs from its catalog title"
+            )
 
     def find(prefix):
         matches = [i for i, p in enumerate(paragraphs) if p.startswith(prefix)]

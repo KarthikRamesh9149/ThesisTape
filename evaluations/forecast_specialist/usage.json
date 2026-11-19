@@ -1,0 +1,57 @@
+{
+  "attempts": {
+    "control": {
+      "elapsed_ms": 8293,
+      "estimated_usd": "0.010732",
+      "generations": 1,
+      "state": "complete",
+      "unreconciled_reservation_usd": "0"
+    },
+    "grade-control": {
+      "elapsed_ms": 8721,
+      "estimated_usd": "0.01177",
+      "generations": 1,
+      "state": "complete",
+      "unreconciled_reservation_usd": "0"
+    },
+    "grade-specialist": {
+      "elapsed_ms": 11101,
+      "estimated_usd": "0.012948",
+      "generations": 1,
+      "state": "complete",
+      "unreconciled_reservation_usd": "0"
+    },
+    "history/control": {
+      "elapsed_ms": 42464,
+      "estimated_usd": "0.0374329",
+      "generations": 12,
+      "state": "complete",
+      "unreconciled_reservation_usd": "0"
+    },
+    "history/note": {
+      "elapsed_ms": 15051,
+      "estimated_usd": "0.013622",
+      "generations": 2,
+      "state": "failed",
+      "unreconciled_reservation_usd": "0"
+    },
+    "history/writer": {
+      "elapsed_ms": 18511,
+      "estimated_usd": "0.023206",
+      "generations": 2,
+      "state": "failed",
+      "unreconciled_reservation_usd": "0"
+    },
+    "specialist": {
+      "elapsed_ms": 13731,
+      "estimated_usd": "0.014562",
+      "generations": 1,
+      "state": "complete",
+      "unreconciled_reservation_usd": "0"
+    }
+  },
+  "checkpoint_usd": "0.1242729",
+  "prior_project_usd": "0.1954950",
+  "project_cap_usd": "100",
+  "project_recorded_usd": "0.3197679"
+}

@@ -6,16 +6,40 @@ from tempfile import TemporaryDirectory
 from unittest.mock import Mock
 
 from evaluations.forecast_specialist import experiment as ev
+from scripts.baseline_evidence import strip_forecast_metadata
 from scripts.disney_hulu_case import CaseError
 from scripts.edgar_exhibits import sections, submission_exhibit
 from scripts.forecast_specialist import analyze
 from scripts.retrieval_gateway import Corpus
 from scripts.sol_baseline import json_bytes
+from scripts.sol_research import search_numbers
 from scripts.team_report import render_candidate
 from scripts.team_research import case_for, research
 
 
 class ForecastTests(unittest.TestCase):
+    def test_reporting_metadata_cannot_supply_a_financial_amount(self):
+        from decimal import Decimal
+
+        def numeric_content(value, hits):
+            return {
+                Decimal(v) for v in search_numbers(strip_forecast_metadata(value, hits))
+            }
+
+        hits = list(self.opened.values())
+        self.assertEqual(
+            numeric_content("On 24 May 2023, NVIDIA reported FY2024 Q1 results.", hits),
+            set(),
+        )
+        self.assertIn(
+            Decimal(24), numeric_content("The company paid USD 24 billion.", hits)
+        )
+        self.assertIn(
+            Decimal(24), numeric_content("Shipments arrived on 24 May 2023.", hits)
+        )
+        self.assertIn(Decimal(1), numeric_content("Revenue rose 1%.", hits))
+        self.assertIn(Decimal(3), numeric_content("Q3 sales recovered.", hits))
+
     def setUp(self):
         self.case = case_for("nvidia")
         self.corpus = Corpus(self.case.archive)
@@ -71,6 +95,9 @@ class ForecastTests(unittest.TestCase):
         index = (objects / (self.s["selection"]["index_sha256"] + ".htm")).read_bytes()
         with self.assertRaisesRegex(ValueError, "byte size"):
             list(sections(self.s, contents, index.replace(b">306664<", b">306665<")))
+        wrong_title = {**self.s, "title": self.s["title"].replace("Q1", "Q3")}
+        with self.assertRaisesRegex(ValueError, "printed fiscal period"):
+            list(sections(wrong_title, contents, index))
         with self.assertRaisesRegex(ValueError, "ambiguous"):
             submission_exhibit(contents + contents, "q1fy24pr.htm")
         point = {

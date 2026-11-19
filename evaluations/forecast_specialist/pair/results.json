@@ -1,0 +1,44 @@
+{
+  "arms": {
+    "control": {
+      "base_call": "within",
+      "effective_cost_usd": "0.0481649",
+      "effective_elapsed_ms": 50757,
+      "factual_out_of_2": 1,
+      "outcome_out_of_1": 0,
+      "reasoning_out_of_4": 4,
+      "total_out_of_6": 5,
+      "used_workflow_usd": "0.0270769"
+    },
+    "specialist": {
+      "base_call": "within",
+      "effective_cost_usd": "0.0579609",
+      "effective_elapsed_ms": 65375,
+      "factual_out_of_2": 2,
+      "outcome_out_of_1": 0,
+      "reasoning_out_of_4": 4,
+      "total_out_of_6": 6,
+      "used_workflow_usd": "0.0394709"
+    }
+  },
+  "case_id": "nvidia-revenue-2023-05-25",
+  "common_cost_usd": "0.0065709",
+  "equal_cap_usd": "0.12",
+  "grading_cost_usd": "0.024718",
+  "historical_attempts_usd": {
+    "control": "0.0374329",
+    "note": "0.013622",
+    "writer": "0.023206"
+  },
+  "incremental_workflow_usd": "0.0097960",
+  "outcome": {
+    "above_boundary_usd_billions": "11.2200",
+    "actual_usd_billions": "13.51",
+    "below_boundary_usd_billions": "10.7800",
+    "bucket": "above",
+    "guidance_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24pr.htm#:~:text=NVIDIA%E2%80%99s%20outlook%20for%20the%20second%20quarter%20of%20fiscal%202024%20is%20as%20follows%3A%20%E2%80%A2Revenue%20is%20expected",
+    "outcome_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000171/q2fy24pr.htm#:~:text=SANTA%20CLARA%2C%20Calif.%E2%80%94Aug.%2023%2C%202023%E2%80%95NVIDIA%20%28NASDAQ%3A%20NVDA%29%20today%20reported%20revenue%20for%20the%20second%20quarter%20ended"
+  },
+  "pair_and_grading_usd": "0.1242729",
+  "schema_version": 1
+}

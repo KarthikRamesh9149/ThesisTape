@@ -1,0 +1,1289 @@
+{
+  "assignments": {
+    "contrary": "What corrections, exceptions, or unresolved evidence available at the cutoff could support a different revenue outcome, and what observable signal before earnings could help distinguish between outcomes?",
+    "filings": "What were the terms, dates, and figures of NVIDIA’s second-quarter fiscal-year revenue guidance as of the cutoff, and what drivers did management disclose?"
+  },
+  "budget_usd": "0.12",
+  "calculation": null,
+  "calls": {
+    "contrary.extract": {
+      "confirmed_ms": 12141,
+      "dispatched_ms": 10796,
+      "estimated_model_cost_usd": "0.0001769",
+      "input_tokens_preflight": 1399,
+      "max_output_tokens": 960,
+      "model": "gpt-6-luna",
+      "output": "{\"findings\":[{\"span_id\":\"P2.S1\",\"kind\":\"fact\"},{\"span_id\":\"P3.S4\",\"kind\":\"qualification\"},{\"span_id\":\"P4.S1\",\"kind\":\"correction\"},{\"span_id\":\"P5.S3\",\"kind\":\"fact\"},{\"span_id\":\"P5.S4\",\"kind\":\"qualification\"}]}",
+      "provider": {
+        "elapsed_ms": 1344,
+        "ids_sha256": "0518950742ade0467909ae57e480129df7820152a61b1b1a70219785ebd83c47",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 1399,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 74,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1473
+        }
+      },
+      "request_sha256": "98e9ff732e8314491eb001c4fc2ca6469ce801091cc606a9a921673ac9cfb786",
+      "reservation_usd": "0.000654875",
+      "stage": "contrary.extract"
+    },
+    "contrary.search.1": {
+      "confirmed_ms": 8167,
+      "dispatched_ms": 5565,
+      "estimated_model_cost_usd": "0.0000611",
+      "input_tokens_preflight": 376,
+      "max_output_tokens": 512,
+      "model": "gpt-6-luna",
+      "output": {
+        "arguments": {
+          "query": "NVIDIA Q2 FY2024 revenue guidance May 2023 earnings outlook data center gaming supply demand correction exceptions alternative signal before earnings SEC 10-Q"
+        },
+        "name": "search_archive"
+      },
+      "provider": {
+        "elapsed_ms": 2602,
+        "ids_sha256": "3297616b18b69400d6ea6c9a033645adb5595bb100f319b3f664b10d31e3bc5a",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 376,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 47,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 423
+        }
+      },
+      "request_sha256": "27f2a08cc9f53fa6472a05faf390d9eff1fa5ca09c42adf26f39fdb35fdc4aa1",
+      "reservation_usd": "0.000303",
+      "stage": "contrary.search.1"
+    },
+    "contrary.search.2": {
+      "confirmed_ms": 10604,
+      "dispatched_ms": 8659,
+      "estimated_model_cost_usd": "0.0001208",
+      "input_tokens_preflight": 1033,
+      "max_output_tokens": 512,
+      "model": "gpt-6-luna",
+      "output": {
+        "arguments": {
+          "passage_ids": [
+            "P1",
+            "P2",
+            "P3",
+            "P4",
+            "P5"
+          ]
+        },
+        "name": "read_passages"
+      },
+      "provider": {
+        "elapsed_ms": 1944,
+        "ids_sha256": "9e5f04a6858a5d529b04373a113c5d758b794afddb828d6923c2908754403216",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 1033,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 35,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1068
+        }
+      },
+      "request_sha256": "ca5b4a73d1c2b75f20c67f8a6e004882d73e6fcfbe5b65913d8358047f739cff",
+      "reservation_usd": "0.000385125",
+      "stage": "contrary.search.2"
+    },
+    "filings.extract": {
+      "confirmed_ms": 14273,
+      "dispatched_ms": 12392,
+      "estimated_model_cost_usd": "0.0001732",
+      "input_tokens_preflight": 1367,
+      "max_output_tokens": 960,
+      "model": "gpt-6-luna",
+      "output": "{\"findings\":[{\"span_id\":\"P1.S1\",\"kind\":\"fact\"},{\"span_id\":\"P3.S1\",\"kind\":\"fact\"},{\"span_id\":\"P3.S2\",\"kind\":\"fact\"},{\"span_id\":\"P3.S3\",\"kind\":\"fact\"},{\"span_id\":\"P3.S4\",\"kind\":\"fact\"}]}",
+      "provider": {
+        "elapsed_ms": 1878,
+        "ids_sha256": "e74634e713241486fa63f52ab857a8d242dbf58e0e97654790a77ae67c771ea0",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 1367,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 73,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1440
+        }
+      },
+      "request_sha256": "cd70656fcd7a703d767791502111017e2a64e702945e68dcc4a47ee0eaba7818",
+      "reservation_usd": "0.000650875",
+      "stage": "filings.extract"
+    },
+    "filings.query_repair": {
+      "confirmed_ms": 10742,
+      "dispatched_ms": 8083,
+      "estimated_model_cost_usd": "0.0000567",
+      "input_tokens_preflight": 402,
+      "max_output_tokens": 512,
+      "model": "gpt-6-luna",
+      "output": {
+        "arguments": {
+          "query": "NVIDIA second-quarter fiscal-year revenue guidance management drivers revenue data center gaming supply demand"
+        },
+        "name": "search_archive"
+      },
+      "provider": {
+        "elapsed_ms": 2657,
+        "ids_sha256": "b04e5da01e74e057836fc70c649007e7802a8adf17de53f5198ff404bc6c3077",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 402,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 33,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 435
+        }
+      },
+      "request_sha256": "a250edefcbfaa091bf229423a2b3c406ae9f5b608067dce6f0c1029b58a1f910",
+      "reservation_usd": "0.00030625",
+      "stage": "filings.query_repair"
+    },
+    "filings.search.1": {
+      "confirmed_ms": 7882,
+      "dispatched_ms": 5147,
+      "estimated_model_cost_usd": "0.000058",
+      "input_tokens_preflight": 370,
+      "max_output_tokens": 512,
+      "model": "gpt-6-luna",
+      "output": {
+        "arguments": {
+          "query": "NVIDIA Q1 fiscal 2024 earnings May 24 2023 second quarter revenue guidance drivers demand generative AI supply"
+        },
+        "name": "search_archive"
+      },
+      "provider": {
+        "elapsed_ms": 2735,
+        "ids_sha256": "91392fc71e613e6bd35ff994c02e91234e1c03d93fe396b29b068b5e9f5b5c38",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 370,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 42,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 412
+        }
+      },
+      "request_sha256": "5944030dfa71220da3b7cb2575800fff4c64aab92bb43e616b4dea22fbec5f6e",
+      "reservation_usd": "0.00030225",
+      "stage": "filings.search.1"
+    },
+    "filings.search.2": {
+      "confirmed_ms": 12187,
+      "dispatched_ms": 11217,
+      "estimated_model_cost_usd": "0.0001162",
+      "input_tokens_preflight": 987,
+      "max_output_tokens": 512,
+      "model": "gpt-6-luna",
+      "output": {
+        "arguments": {
+          "passage_ids": [
+            "P1",
+            "P2",
+            "P3",
+            "P4",
+            "P5"
+          ]
+        },
+        "name": "read_passages"
+      },
+      "provider": {
+        "elapsed_ms": 969,
+        "ids_sha256": "3fa0a9e09a7ee9e3d57fbc0a366d3f23e0c6b7651b89a08937f2fae1efe18f09",
+        "model": "gpt-6-luna",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 987,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 35,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1022
+        }
+      },
+      "request_sha256": "b5857698c8c350ba6d0c8a1c74aff56fa10c19cda609e4cc52c58bd2e07500f8",
+      "reservation_usd": "0.000379375",
+      "stage": "filings.search.2"
+    },
+    "lead.decide.1": {
+      "confirmed_ms": 18082,
+      "dispatched_ms": 14510,
+      "estimated_model_cost_usd": "0.004548",
+      "input_tokens_preflight": 1754,
+      "max_output_tokens": 1280,
+      "model": "gpt-6.2-sol",
+      "output": "{\"action\":\"write\",\"instruction\":\"Use within $10.78–$11.22 billion as the May 25 base case: the new guidance already reflects surging AI demand and a planned supply ramp. Above range is plausible if NVIDIA ships more Hopper GPUs than planned. Watch for cloud providers confirming earlier-than-expected broad availability of H100 instances before earnings; that would tilt the forecast toward above range. The reports agree on guidance and demand, but neither establishes shipment timing.\"}",
+      "provider": {
+        "elapsed_ms": 3571,
+        "ids_sha256": "0beb3536bdb0894f4d7975ca99b8b497adc61c91cab781d014bf11c6198e5e15",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 1754,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 104,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1858
+        }
+      },
+      "request_sha256": "fb12a97a6d8d1ec13a43f14415a98eeaabb5e5427029858289ec6dfeaa17da0b",
+      "reservation_usd": "0.017185",
+      "stage": "lead.decide.1"
+    },
+    "lead.memo": {
+      "confirmed_ms": 25969,
+      "dispatched_ms": 18302,
+      "estimated_model_cost_usd": "0.009774",
+      "input_tokens_preflight": 2082,
+      "max_output_tokens": 2560,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"choice\": \"within\",\n  \"known_facts\": {\n    \"text\": \"On May 24, 2023, NVIDIA guided to Q2 FY2024 total revenue of USD 11.00 billion, plus or minus 2%. Management said it was increasing supply to meet surging demand.\",\n    \"citations\": [\n      {\"passage_id\": \"P1\", \"quote\": \"Revenue is expected to be $11.00 billion, plus or minus 2%.\"},\n      {\"passage_id\": \"P2\", \"quote\": \"We are significantly increasing our supply to meet surging demand for them\"}\n    ]\n  },\n  \"base_case\": {\n    \"text\": \"As of May 25, my base case is that Q2 FY2024 total revenue finishes within guidance. The new outlook likely already accounts for strong AI demand and the planned supply ramp; strong demand alone is not a reason to expect a beat.\",\n    \"citations\": [\n      {\"passage_id\": \"P4\", \"quote\": \"led by growing demand for generative AI and large language models using GPUs based on our NVIDIA Hopper and Ampere architectures.\"},\n      {\"passage_id\": \"P2\", \"quote\": \"We are significantly increasing our supply to meet surging demand for them\"}\n    ]\n  },\n  \"alternative\": {\n    \"text\": \"Above guidance is plausible if NVIDIA ships more Hopper GPUs than planned and books the extra sales in Q2. Management reported that H100 was in production, but did not establish when shipments would reach customers.\",\n    \"citations\": [\n      {\"passage_id\": \"P2\", \"quote\": \"Our entire data center family of products — H100, Grace CPU, Grace Hopper Superchip, NVLink, Quantum 400 InfiniBand and BlueField-3 DPU — is in production.\"},\n      {\"passage_id\": \"P4\", \"quote\": \"The revenue growth reflects strong demand from large consumer internet companies and cloud service providers.\"}\n    ]\n  },\n  \"revision_signal\": {\n    \"text\": \"Before earnings, I would tilt toward above guidance if major cloud providers confirm broad availability of H100 instances earlier than expected. Broad access, rather than a limited preview, would suggest faster shipments, though it would not prove that NVIDIA booked the sales in Q2.\",\n    \"citations\": [\n      {\"passage_id\": \"P4\", \"quote\": \"The revenue growth reflects strong demand from large consumer internet companies and cloud service providers.\"},\n      {\"passage_id\": \"P2\", \"quote\": \"We are significantly increasing our supply to meet surging demand for them\"}\n    ]\n  }\n}",
+      "provider": {
+        "elapsed_ms": 7659,
+        "ids_sha256": "43d05378f9782a3c7c2d4d9e7e7aa59c19b1899b51451285f9fcf338fb115d7a",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 2082,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 561,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 2643
+        }
+      },
+      "request_sha256": "76343ca85de2339cf44071f33a2944872db05d0c6ea36fce817a05d192fe1b8a",
+      "reservation_usd": "0.030805",
+      "stage": "lead.memo"
+    },
+    "lead.memo_repair": {
+      "confirmed_ms": 34520,
+      "dispatched_ms": 26186,
+      "estimated_model_cost_usd": "0.010308",
+      "input_tokens_preflight": 2099,
+      "max_output_tokens": 2560,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"choice\": \"within\",\n  \"known_facts\": {\n    \"text\": \"As of May 25, 2023, NVIDIA’s management guidance for Q2 FY2024 total revenue was USD 11.00 billion, plus or minus 2%. Management reported surging demand and said it was increasing supply.\",\n    \"citations\": [\n      {\n        \"passage_id\": \"P1\",\n        \"quote\": \"Revenue is expected to be $11.00 billion, plus or minus 2%.\"\n      },\n      {\n        \"passage_id\": \"P2\",\n        \"quote\": \"We are significantly increasing our supply to meet surging demand for them\"\n      }\n    ]\n  },\n  \"base_case\": {\n    \"text\": \"I expect Q2 FY2024 total revenue to finish within guidance. The new outlook likely already accounts for strong AI demand and the planned supply ramp. Demand alone does not show that NVIDIA can ship more GPUs within the quarter than management expected.\",\n    \"citations\": [\n      {\n        \"passage_id\": \"P2\",\n        \"quote\": \"We are significantly increasing our supply to meet surging demand for them\"\n      },\n      {\n        \"passage_id\": \"P4\",\n        \"quote\": \"led by growing demand for generative AI and large language models using GPUs based on our NVIDIA Hopper and Ampere architectures.\"\n      }\n    ]\n  },\n  \"alternative\": {\n    \"text\": \"Above guidance is plausible if NVIDIA ships more Hopper GPUs during the quarter than management planned. Strong demand from cloud providers and large internet companies makes it likely that extra supply would find buyers.\",\n    \"citations\": [\n      {\n        \"passage_id\": \"P4\",\n        \"quote\": \"The revenue growth reflects strong demand from large consumer internet companies and cloud service providers.\"\n      },\n      {\n        \"passage_id\": \"P2\",\n        \"quote\": \"Our entire data center family of products — H100, Grace CPU, Grace Hopper Superchip, NVLink, Quantum 400 InfiniBand and BlueField-3 DPU — is in production.\"\n      }\n    ]\n  },\n  \"revision_signal\": {\n    \"text\": \"Before earnings, I would shift toward above guidance if major cloud providers confirm that H100 instances became broadly available earlier than expected during Q2. That would suggest faster deliveries; NVIDIA’s production announcement did not establish shipment timing.\",\n    \"citations\": [\n      {\n        \"passage_id\": \"P2\",\n        \"quote\": \"Our entire data center family of products — H100, Grace CPU, Grace Hopper Superchip, NVLink, Quantum 400 InfiniBand and BlueField-3 DPU — is in production.\"\n      },\n      {\n        \"passage_id\": \"P4\",\n        \"quote\": \"The revenue growth reflects strong demand from large consumer internet companies and cloud service providers.\"\n      }\n    ]\n  }\n}",
+      "provider": {
+        "elapsed_ms": 8332,
+        "ids_sha256": "fa5546819518e207c08d94218056ecd23e108b2a17a83746fd1d32a588704f9a",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 2099,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 611,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 2710
+        }
+      },
+      "request_sha256": "8624de2cbe371a835dc64438d5c0186b08572882f07bb56d97d1d2bd9f45a242",
+      "reservation_usd": "0.0308475",
+      "stage": "lead.memo_repair"
+    },
+    "lead.plan": {
+      "confirmed_ms": 4973,
+      "dispatched_ms": 1384,
+      "estimated_model_cost_usd": "0.00126",
+      "input_tokens_preflight": 220,
+      "max_output_tokens": 768,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"filings\": \"What were the terms, dates, and figures of NVIDIA’s second-quarter fiscal-year revenue guidance as of the cutoff, and what drivers did management disclose?\",\n  \"contrary\": \"What corrections, exceptions, or unresolved evidence available at the cutoff could support a different revenue outcome, and what observable signal before earnings could help distinguish between outcomes?\"\n}",
+      "provider": {
+        "elapsed_ms": 3588,
+        "ids_sha256": "1b705d3d5ed9231b0fc45d6c07532da4a40058595ef73857a03f81a65812ee8b",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 220,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 82,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 302
+        }
+      },
+      "request_sha256": "d8a39894f96109c376f150bfb4ec01f27678fbbea88ef9f58e89aee178b2fbc4",
+      "reservation_usd": "0.00823",
+      "stage": "lead.plan"
+    },
+    "review.initial": {
+      "confirmed_ms": 42452,
+      "dispatched_ms": 34743,
+      "estimated_model_cost_usd": "0.01078",
+      "input_tokens_preflight": 3075,
+      "max_output_tokens": 2048,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"findings\": [\n    {\n      \"claim_id\": \"known_facts\",\n      \"verdict\": \"supported\",\n      \"reason\": \"P1 gives NVIDIA’s Q2 FY2024 total revenue guidance as $11.00 billion plus or minus 2%, not as a reported result. P2 says NVIDIA was increasing supply to meet surging demand. Both were published before the May 25 cutoff.\",\n      \"evidence_ids\": [\"P1\", \"P2\"]\n    },\n    {\n      \"claim_id\": \"base_case\",\n      \"verdict\": \"supported\",\n      \"reason\": \"P2 documents the planned supply increase, and P4 documents strong AI-related GPU demand. It is reasonable to infer that the new outlook reflects those conditions. Neither passage shows that shipments could exceed management’s plan, so a within-range forecast is defensible, though not established by the evidence.\",\n      \"evidence_ids\": [\"P2\", \"P4\"]\n    },\n    {\n      \"claim_id\": \"alternative\",\n      \"verdict\": \"supported\",\n      \"reason\": \"P2 confirms H100 was in production, and P4 identifies strong demand from cloud providers and large internet companies. Together they make an upside scenario plausible if NVIDIA ships more Hopper GPUs than planned, without establishing that extra shipments will occur.\",\n      \"evidence_ids\": [\"P4\", \"P2\"]\n    },\n    {\n      \"claim_id\": \"revision_signal\",\n      \"verdict\": \"supported\",\n      \"reason\": \"P2 establishes production, not shipment timing, and P4 identifies cloud providers as a source of demand. Public confirmation of broad H100 availability ahead of an expected rollout would be observable before earnings and could suggest faster deliveries, though it would not prove higher quarterly revenue.\",\n      \"evidence_ids\": [\"P2\", \"P4\"]\n    }\n  ],\n  \"addresses_question\": true,\n  \"coverage_reason\": \"The memo consistently picks within guidance for total Q2 FY2024 revenue, explains why strong demand alone does not imply a beat, offers a distinct above-guidance scenario, and identifies a public pre-earnings signal that would change the forecast. It keeps the forecast separate from facts known at the cutoff.\"\n}",
+      "provider": {
+        "elapsed_ms": 7705,
+        "ids_sha256": "e9ec6d7be42e0ba85137f642225ff830e339efbb618780f36a27e7ddf82e0bc3",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 3075,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 463,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 3538
+        }
+      },
+      "request_sha256": "0bbcd393c338c41013038625f29da92bf518b70e9b7234fd204cad4988945d2d",
+      "reservation_usd": "0.0281675",
+      "stage": "review.initial"
+    }
+  },
+  "case_id": "nvidia-revenue-2023-05-25",
+  "corpus_sha256": "0b43e28d424f0f1bea42e232b3efa1b5f67912433a147b4fb8a0cbd5ab26f03e",
+  "coverage": "write",
+  "created_at": "2026-11-19T10:27:56.296467+00:00",
+  "cutoff": "2023-05-25",
+  "decisions": [
+    {
+      "action": "write",
+      "instruction": "Use within $10.78–$11.22 billion as the May 25 base case: the new guidance already reflects surging AI demand and a planned supply ramp. Above range is plausible if NVIDIA ships more Hopper GPUs than planned. Watch for cloud providers confirming earlier-than-expected broad availability of H100 instances before earnings; that would tilt the forecast toward above range. The reports agree on guidance and demand, but neither establishes shipment timing."
+    }
+  ],
+  "elapsed_ms": 42464,
+  "estimated_model_cost_usd": "0.0374329",
+  "events": [
+    [
+      "reserve",
+      "lead.plan"
+    ],
+    [
+      "settle",
+      "lead.plan"
+    ],
+    [
+      "reserve",
+      "filings.search.1"
+    ],
+    [
+      "reserve",
+      "contrary.search.1"
+    ],
+    [
+      "settle",
+      "filings.search.1"
+    ],
+    [
+      "reserve",
+      "filings.query_repair"
+    ],
+    [
+      "settle",
+      "contrary.search.1"
+    ],
+    [
+      "reserve",
+      "contrary.search.2"
+    ],
+    [
+      "settle",
+      "contrary.search.2"
+    ],
+    [
+      "settle",
+      "filings.query_repair"
+    ],
+    [
+      "reserve",
+      "contrary.extract"
+    ],
+    [
+      "reserve",
+      "filings.search.2"
+    ],
+    [
+      "settle",
+      "contrary.extract"
+    ],
+    [
+      "settle",
+      "filings.search.2"
+    ],
+    [
+      "reserve",
+      "filings.extract"
+    ],
+    [
+      "settle",
+      "filings.extract"
+    ],
+    [
+      "reserve",
+      "lead.decide.1"
+    ],
+    [
+      "settle",
+      "lead.decide.1"
+    ],
+    [
+      "reserve",
+      "lead.memo"
+    ],
+    [
+      "settle",
+      "lead.memo"
+    ],
+    [
+      "reserve",
+      "lead.memo_repair"
+    ],
+    [
+      "settle",
+      "lead.memo_repair"
+    ],
+    [
+      "reserve",
+      "review.initial"
+    ],
+    [
+      "settle",
+      "review.initial"
+    ]
+  ],
+  "evidence": {
+    "P1": {
+      "available_by_utc": "2023-05-24T20:22:18+00:00",
+      "citation_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm#:~:text=Second%20Quarter%20of%20Fiscal%202024%20Outlook%20Outlook%20for%20the%20second%20quarter%20of%20fiscal%202024%20is",
+      "edition": "0001045810-23-000087",
+      "locator": "Second-quarter guidance",
+      "published": "2023-05-24T16:22:18-04:00",
+      "sha256": "660cd01125a1ad26dea9cfdf6f5aef42341be5160448e4b8883e1d64ecfe0b96",
+      "source_id": "nvda-q1fy24cfocommentary",
+      "text": "Second Quarter of Fiscal 2024 Outlook Outlook for the second quarter of fiscal 2024 is as follows: •Revenue is expected to be $11.00 billion, plus or minus 2%.",
+      "title": "NVIDIA FY2024 Q1 CFO commentary",
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm",
+      "version_at": "2023-05-24T16:22:18-04:00"
+    },
+    "P2": {
+      "available_by_utc": "2023-05-24T20:22:18+00:00",
+      "citation_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24pr.htm#:~:text=%E2%80%9CThe%20computer%20industry%20is%20going%20through%20two%20simultaneous%20transitions%20%E2%80%94%20accelerated%20computing%20and%20generative%20AI%2C%E2%80%9D",
+      "edition": "0001045810-23-000087",
+      "locator": "Demand and production",
+      "published": "2023-05-24T16:22:18-04:00",
+      "sha256": "58170909689e27d334123667174bc3043ea4f3be9b63f95cbe2688d85d9d6dbc",
+      "source_id": "nvda-q1fy24pr",
+      "text": "“The computer industry is going through two simultaneous transitions — accelerated computing and generative AI,” said Jensen Huang, founder and CEO of NVIDIA. “A trillion dollars of installed global data center infrastructure will transition from general purpose to accelerated computing as companies race to apply generative AI into every product, service and business process. “Our entire data center family of products — H100, Grace CPU, Grace Hopper Superchip, NVLink, Quantum 400 InfiniBand and BlueField-3 DPU — is in production. We are significantly increasing our supply to meet surging demand for them,” he said.",
+      "title": "NVIDIA FY2024 Q1 earnings release",
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24pr.htm",
+      "version_at": "2023-05-24T16:22:18-04:00"
+    },
+    "P3": {
+      "available_by_utc": "2023-05-24T20:22:18+00:00",
+      "citation_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm#:~:text=Gaming%20revenue%20was%20down%2038%25%20from%20a%20year%20ago%20and%20up%2022%25%20sequentially.%20The%20year%2Don%2Dyear",
+      "edition": "0001045810-23-000087",
+      "locator": "Gaming and professional visualization",
+      "published": "2023-05-24T16:22:18-04:00",
+      "sha256": "660cd01125a1ad26dea9cfdf6f5aef42341be5160448e4b8883e1d64ecfe0b96",
+      "source_id": "nvda-q1fy24cfocommentary",
+      "text": "Gaming revenue was down 38% from a year ago and up 22% sequentially. The year-on-year decrease reflects weaker demand due to the macroeconomic slowdown and lower shipments to normalize channel inventory levels. The sequential increase was driven by the ramp of our new GeForce RTX 40 Series GPUs for desktops and laptops based on the Ada Lovelace architecture. Professional Visualization revenue was down 53% from a year ago and up 31% sequentially. The year-on-year decrease reflects lower sell-in to partners to help reduce channel inventory levels. The sequential increase was driven by higher demand for desktop and mobile workstation GPUs.",
+      "title": "NVIDIA FY2024 Q1 CFO commentary",
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm",
+      "version_at": "2023-05-24T16:22:18-04:00"
+    },
+    "P4": {
+      "available_by_utc": "2023-05-24T20:22:18+00:00",
+      "citation_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm#:~:text=Revenue%20was%20%247.19%20billion%2C%20down%2013%25%20from%20a%20year%20ago%20and%20up%2019%25%20sequentially.%20Data",
+      "edition": "0001045810-23-000087",
+      "locator": "Revenue and Data Center demand",
+      "published": "2023-05-24T16:22:18-04:00",
+      "sha256": "660cd01125a1ad26dea9cfdf6f5aef42341be5160448e4b8883e1d64ecfe0b96",
+      "source_id": "nvda-q1fy24cfocommentary",
+      "text": "Revenue was $7.19 billion, down 13% from a year ago and up 19% sequentially. Data Center revenue was a record, up 14% from a year ago and up 18% sequentially, led by growing demand for generative AI and large language models using GPUs based on our NVIDIA Hopper and Ampere architectures. The revenue growth reflects strong demand from large consumer internet companies and cloud service providers. Enterprise demand for GPU platforms was strong, although general purpose networking solutions declined both sequentially and from a year ago.",
+      "title": "NVIDIA FY2024 Q1 CFO commentary",
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm",
+      "version_at": "2023-05-24T16:22:18-04:00"
+    }
+  },
+  "forecast_choices": [
+    "below",
+    "within",
+    "above"
+  ],
+  "forecast_version": "sol-forecast-v1",
+  "memo_sha256": "219881776552fed196a87efe43a3b3c3a90e985835823023d43f06c5fa0471e0",
+  "paid_tool_charges_usd": "0",
+  "pricing": {
+    "per_million_usd": {
+      "gpt-6-luna": {
+        "cache_write_30m": "0.125",
+        "cached_input": "0.01",
+        "ordinary_input": "0.10",
+        "output": "0.50"
+      },
+      "gpt-6.2-sol": {
+        "cache_write_30m": "2.50",
+        "cached_input": "0.10",
+        "ordinary_input": "2.00",
+        "output": "10.00"
+      }
+    },
+    "sources": [
+      "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+      "https://developers.openai.com/api/docs/models/gpt-6-luna"
+    ],
+    "status": "estimate_from_usage"
+  },
+  "prompt_version": "sol-two-luna-v4",
+  "question": "As of 25 May 2023, would NVIDIA’s total revenue for Q2 FY2024 finish below, within or above its own guidance range? Pick a base case, explain the driver, give a plausible alternative and identify an observable signal before the earnings release that would change your view.",
+  "review": {
+    "released_memo_sha256": "219881776552fed196a87efe43a3b3c3a90e985835823023d43f06c5fa0471e0",
+    "rounds": [
+      {
+        "approved": true,
+        "assessment": {
+          "addresses_question": true,
+          "coverage_reason": "The memo consistently picks within guidance for total Q2 FY2024 revenue, explains why strong demand alone does not imply a beat, offers a distinct above-guidance scenario, and identifies a public pre-earnings signal that would change the forecast. It keeps the forecast separate from facts known at the cutoff.",
+          "findings": [
+            {
+              "claim_id": "known_facts",
+              "evidence_ids": [
+                "P1",
+                "P2"
+              ],
+              "reason": "P1 gives NVIDIA’s Q2 FY2024 total revenue guidance as $11.00 billion plus or minus 2%, not as a reported result. P2 says NVIDIA was increasing supply to meet surging demand. Both were published before the May 25 cutoff.",
+              "verdict": "supported"
+            },
+            {
+              "claim_id": "base_case",
+              "evidence_ids": [
+                "P2",
+                "P4"
+              ],
+              "reason": "P2 documents the planned supply increase, and P4 documents strong AI-related GPU demand. It is reasonable to infer that the new outlook reflects those conditions. Neither passage shows that shipments could exceed management’s plan, so a within-range forecast is defensible, though not established by the evidence.",
+              "verdict": "supported"
+            },
+            {
+              "claim_id": "alternative",
+              "evidence_ids": [
+                "P4",
+                "P2"
+              ],
+              "reason": "P2 confirms H100 was in production, and P4 identifies strong demand from cloud providers and large internet companies. Together they make an upside scenario plausible if NVIDIA ships more Hopper GPUs than planned, without establishing that extra shipments will occur.",
+              "verdict": "supported"
+            },
+            {
+              "claim_id": "revision_signal",
+              "evidence_ids": [
+                "P2",
+                "P4"
+              ],
+              "reason": "P2 establishes production, not shipment timing, and P4 identifies cloud providers as a source of demand. Public confirmation of broad H100 availability ahead of an expected rollout would be observable before earnings and could suggest faster deliveries, though it would not prove higher quarterly revenue.",
+              "verdict": "supported"
+            }
+          ]
+        },
+        "draft": {
+          "alternative": {
+            "citations": [
+              {
+                "passage_id": "P4",
+                "quote": "The revenue growth reflects strong demand from large consumer internet companies and cloud service providers."
+              },
+              {
+                "passage_id": "P2",
+                "quote": "Our entire data center family of products — H100, Grace CPU, Grace Hopper Superchip, NVLink, Quantum 400 InfiniBand and BlueField-3 DPU — is in production."
+              }
+            ],
+            "text": "Above guidance is plausible if NVIDIA ships more Hopper GPUs during the quarter than management planned. Strong demand from cloud providers and large internet companies makes it likely that extra supply would find buyers."
+          },
+          "base_case": {
+            "citations": [
+              {
+                "passage_id": "P2",
+                "quote": "We are significantly increasing our supply to meet surging demand for them"
+              },
+              {
+                "passage_id": "P4",
+                "quote": "led by growing demand for generative AI and large language models using GPUs based on our NVIDIA Hopper and Ampere architectures."
+              }
+            ],
+            "text": "I expect Q2 FY2024 total revenue to finish within guidance. The new outlook likely already accounts for strong AI demand and the planned supply ramp. Demand alone does not show that NVIDIA can ship more GPUs within the quarter than management expected."
+          },
+          "choice": "within",
+          "known_facts": {
+            "citations": [
+              {
+                "passage_id": "P1",
+                "quote": "Revenue is expected to be $11.00 billion, plus or minus 2%."
+              },
+              {
+                "passage_id": "P2",
+                "quote": "We are significantly increasing our supply to meet surging demand for them"
+              }
+            ],
+            "text": "As of May 25, 2023, NVIDIA’s management guidance for Q2 FY2024 total revenue was USD 11.00 billion, plus or minus 2%. Management reported surging demand and said it was increasing supply."
+          },
+          "revision_signal": {
+            "citations": [
+              {
+                "passage_id": "P2",
+                "quote": "Our entire data center family of products — H100, Grace CPU, Grace Hopper Superchip, NVLink, Quantum 400 InfiniBand and BlueField-3 DPU — is in production."
+              },
+              {
+                "passage_id": "P4",
+                "quote": "The revenue growth reflects strong demand from large consumer internet companies and cloud service providers."
+              }
+            ],
+            "text": "Before earnings, I would shift toward above guidance if major cloud providers confirm that H100 instances became broadly available earlier than expected during Q2. That would suggest faster deliveries; NVIDIA’s production announcement did not establish shipment timing."
+          }
+        },
+        "draft_sha256": "7e91b9482864c35125195466c04b1d57672049b7cbfb49da5c956eb34f10b0db",
+        "memo_sha256": "219881776552fed196a87efe43a3b3c3a90e985835823023d43f06c5fa0471e0",
+        "retrieval": [
+          {
+            "max_date": "2023-05-25",
+            "operation": "read",
+            "results": [
+              "nvda-q1fy24cfocommentary/Second-quarter guidance"
+            ]
+          },
+          {
+            "max_date": "2023-05-25",
+            "operation": "read",
+            "results": [
+              "nvda-q1fy24pr/Demand and production"
+            ]
+          },
+          {
+            "max_date": "2023-05-25",
+            "operation": "read",
+            "results": [
+              "nvda-q1fy24cfocommentary/Gaming and professional visualization"
+            ]
+          },
+          {
+            "max_date": "2023-05-25",
+            "operation": "read",
+            "results": [
+              "nvda-q1fy24cfocommentary/Revenue and Data Center demand"
+            ]
+          }
+        ]
+      }
+    ],
+    "status": "approved"
+  },
+  "review_version": "sol-citation-review-v1",
+  "route": "reviewed",
+  "run_id": "control",
+  "schema_version": 3,
+  "state": "complete",
+  "unreconciled_reservation_usd": "0",
+  "worker_reports": [
+    {
+      "assignment": "What were the terms, dates, and figures of NVIDIA’s second-quarter fiscal-year revenue guidance as of the cutoff, and what drivers did management disclose?",
+      "findings": [
+        {
+          "end": 159,
+          "kind": "fact",
+          "passage_id": "P1",
+          "quote": "Second Quarter of Fiscal 2024 Outlook Outlook for the second quarter of fiscal 2024 is as follows: •Revenue is expected to be $11.00 billion, plus or minus 2%.",
+          "start": 0
+        },
+        {
+          "end": 158,
+          "kind": "fact",
+          "passage_id": "P2",
+          "quote": "“The computer industry is going through two simultaneous transitions — accelerated computing and generative AI,” said Jensen Huang, founder and CEO of NVIDIA.",
+          "start": 0
+        },
+        {
+          "end": 348,
+          "kind": "fact",
+          "passage_id": "P2",
+          "quote": "“A trillion dollars of installed global data center infrastructure will transition from general purpose to accelerated computing as companies race to apply generative AI into every product,",
+          "start": 159
+        },
+        {
+          "end": 535,
+          "kind": "fact",
+          "passage_id": "P2",
+          "quote": "service and business process. “Our entire data center family of products — H100, Grace CPU, Grace Hopper Superchip, NVLink, Quantum 400 InfiniBand and BlueField-3 DPU — is in production.",
+          "start": 349
+        },
+        {
+          "end": 621,
+          "kind": "fact",
+          "passage_id": "P2",
+          "quote": "We are significantly increasing our supply to meet surging demand for them,” he said.",
+          "start": 536
+        }
+      ],
+      "role": "filings"
+    },
+    {
+      "assignment": "What corrections, exceptions, or unresolved evidence available at the cutoff could support a different revenue outcome, and what observable signal before earnings could help distinguish between outcomes?",
+      "findings": [
+        {
+          "end": 159,
+          "kind": "fact",
+          "passage_id": "P1",
+          "quote": "Second Quarter of Fiscal 2024 Outlook Outlook for the second quarter of fiscal 2024 is as follows: •Revenue is expected to be $11.00 billion, plus or minus 2%.",
+          "start": 0
+        },
+        {
+          "end": 621,
+          "kind": "qualification",
+          "passage_id": "P2",
+          "quote": "We are significantly increasing our supply to meet surging demand for them,” he said.",
+          "start": 536
+        },
+        {
+          "end": 210,
+          "kind": "correction",
+          "passage_id": "P3",
+          "quote": "Gaming revenue was down 38% from a year ago and up 22% sequentially. The year-on-year decrease reflects weaker demand due to the macroeconomic slowdown and lower shipments to normalize channel inventory levels.",
+          "start": 0
+        },
+        {
+          "end": 446,
+          "kind": "fact",
+          "passage_id": "P4",
+          "quote": "The revenue growth reflects strong demand from large consumer internet companies and cloud service providers. Enterprise demand for GPU platforms was strong,",
+          "start": 289
+        },
+        {
+          "end": 540,
+          "kind": "qualification",
+          "passage_id": "P4",
+          "quote": "although general purpose networking solutions declined both sequentially and from a year ago.",
+          "start": 447
+        }
+      ],
+      "role": "contrary"
+    }
+  ],
+  "workers": [
+    {
+      "assignment": "What were the terms, dates, and figures of NVIDIA’s second-quarter fiscal-year revenue guidance as of the cutoff, and what drivers did management disclose?",
+      "findings": [
+        {
+          "end": 159,
+          "kind": "fact",
+          "passage_id": "P1",
+          "quote": "Second Quarter of Fiscal 2024 Outlook Outlook for the second quarter of fiscal 2024 is as follows: •Revenue is expected to be $11.00 billion, plus or minus 2%.",
+          "start": 0
+        },
+        {
+          "end": 158,
+          "kind": "fact",
+          "passage_id": "P3",
+          "quote": "“The computer industry is going through two simultaneous transitions — accelerated computing and generative AI,” said Jensen Huang, founder and CEO of NVIDIA.",
+          "start": 0
+        },
+        {
+          "end": 348,
+          "kind": "fact",
+          "passage_id": "P3",
+          "quote": "“A trillion dollars of installed global data center infrastructure will transition from general purpose to accelerated computing as companies race to apply generative AI into every product,",
+          "start": 159
+        },
+        {
+          "end": 535,
+          "kind": "fact",
+          "passage_id": "P3",
+          "quote": "service and business process. “Our entire data center family of products — H100, Grace CPU, Grace Hopper Superchip, NVLink, Quantum 400 InfiniBand and BlueField-3 DPU — is in production.",
+          "start": 349
+        },
+        {
+          "end": 621,
+          "kind": "fact",
+          "passage_id": "P3",
+          "quote": "We are significantly increasing our supply to meet surging demand for them,” he said.",
+          "start": 536
+        }
+      ],
+      "opened": {
+        "P1": {
+          "available_by_utc": "2023-05-24T20:22:18+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm#:~:text=Second%20Quarter%20of%20Fiscal%202024%20Outlook%20Outlook%20for%20the%20second%20quarter%20of%20fiscal%202024%20is",
+          "edition": "0001045810-23-000087",
+          "locator": "Second-quarter guidance",
+          "published": "2023-05-24T16:22:18-04:00",
+          "sha256": "660cd01125a1ad26dea9cfdf6f5aef42341be5160448e4b8883e1d64ecfe0b96",
+          "source_id": "nvda-q1fy24cfocommentary",
+          "text": "Second Quarter of Fiscal 2024 Outlook Outlook for the second quarter of fiscal 2024 is as follows: •Revenue is expected to be $11.00 billion, plus or minus 2%.",
+          "title": "NVIDIA FY2024 Q1 CFO commentary",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm",
+          "version_at": "2023-05-24T16:22:18-04:00"
+        },
+        "P2": {
+          "available_by_utc": "2023-05-24T20:22:18+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24pr.htm#:~:text=NVIDIA%E2%80%99s%20outlook%20for%20the%20second%20quarter%20of%20fiscal%202024%20is%20as%20follows%3A%20%E2%80%A2Revenue%20is%20expected",
+          "edition": "0001045810-23-000087",
+          "locator": "Second-quarter revenue outlook",
+          "published": "2023-05-24T16:22:18-04:00",
+          "sha256": "58170909689e27d334123667174bc3043ea4f3be9b63f95cbe2688d85d9d6dbc",
+          "source_id": "nvda-q1fy24pr",
+          "text": "NVIDIA’s outlook for the second quarter of fiscal 2024 is as follows: •Revenue is expected to be $11.00 billion, plus or minus 2%.",
+          "title": "NVIDIA FY2024 Q1 earnings release",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24pr.htm",
+          "version_at": "2023-05-24T16:22:18-04:00"
+        },
+        "P3": {
+          "available_by_utc": "2023-05-24T20:22:18+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24pr.htm#:~:text=%E2%80%9CThe%20computer%20industry%20is%20going%20through%20two%20simultaneous%20transitions%20%E2%80%94%20accelerated%20computing%20and%20generative%20AI%2C%E2%80%9D",
+          "edition": "0001045810-23-000087",
+          "locator": "Demand and production",
+          "published": "2023-05-24T16:22:18-04:00",
+          "sha256": "58170909689e27d334123667174bc3043ea4f3be9b63f95cbe2688d85d9d6dbc",
+          "source_id": "nvda-q1fy24pr",
+          "text": "“The computer industry is going through two simultaneous transitions — accelerated computing and generative AI,” said Jensen Huang, founder and CEO of NVIDIA. “A trillion dollars of installed global data center infrastructure will transition from general purpose to accelerated computing as companies race to apply generative AI into every product, service and business process. “Our entire data center family of products — H100, Grace CPU, Grace Hopper Superchip, NVLink, Quantum 400 InfiniBand and BlueField-3 DPU — is in production. We are significantly increasing our supply to meet surging demand for them,” he said.",
+          "title": "NVIDIA FY2024 Q1 earnings release",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24pr.htm",
+          "version_at": "2023-05-24T16:22:18-04:00"
+        },
+        "P4": {
+          "available_by_utc": "2023-05-24T20:22:18+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm#:~:text=Gaming%20revenue%20was%20down%2038%25%20from%20a%20year%20ago%20and%20up%2022%25%20sequentially.%20The%20year%2Don%2Dyear",
+          "edition": "0001045810-23-000087",
+          "locator": "Gaming and professional visualization",
+          "published": "2023-05-24T16:22:18-04:00",
+          "sha256": "660cd01125a1ad26dea9cfdf6f5aef42341be5160448e4b8883e1d64ecfe0b96",
+          "source_id": "nvda-q1fy24cfocommentary",
+          "text": "Gaming revenue was down 38% from a year ago and up 22% sequentially. The year-on-year decrease reflects weaker demand due to the macroeconomic slowdown and lower shipments to normalize channel inventory levels. The sequential increase was driven by the ramp of our new GeForce RTX 40 Series GPUs for desktops and laptops based on the Ada Lovelace architecture. Professional Visualization revenue was down 53% from a year ago and up 31% sequentially. The year-on-year decrease reflects lower sell-in to partners to help reduce channel inventory levels. The sequential increase was driven by higher demand for desktop and mobile workstation GPUs.",
+          "title": "NVIDIA FY2024 Q1 CFO commentary",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm",
+          "version_at": "2023-05-24T16:22:18-04:00"
+        },
+        "P5": {
+          "available_by_utc": "2023-05-24T20:22:18+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm#:~:text=Revenue%20was%20%247.19%20billion%2C%20down%2013%25%20from%20a%20year%20ago%20and%20up%2019%25%20sequentially.%20Data",
+          "edition": "0001045810-23-000087",
+          "locator": "Revenue and Data Center demand",
+          "published": "2023-05-24T16:22:18-04:00",
+          "sha256": "660cd01125a1ad26dea9cfdf6f5aef42341be5160448e4b8883e1d64ecfe0b96",
+          "source_id": "nvda-q1fy24cfocommentary",
+          "text": "Revenue was $7.19 billion, down 13% from a year ago and up 19% sequentially. Data Center revenue was a record, up 14% from a year ago and up 18% sequentially, led by growing demand for generative AI and large language models using GPUs based on our NVIDIA Hopper and Ampere architectures. The revenue growth reflects strong demand from large consumer internet companies and cloud service providers. Enterprise demand for GPU platforms was strong, although general purpose networking solutions declined both sequentially and from a year ago.",
+          "title": "NVIDIA FY2024 Q1 CFO commentary",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm",
+          "version_at": "2023-05-24T16:22:18-04:00"
+        }
+      },
+      "role": "filings",
+      "searches": [
+        {
+          "query": "NVIDIA second-quarter fiscal-year revenue guidance management drivers revenue data center gaming supply demand",
+          "results": [
+            {
+              "id": "P1",
+              "locator": "Second-quarter guidance",
+              "preview": "Second Quarter of Fiscal 2024 Outlook Outlook for the second quarter of fiscal 2024 is as follows: •Revenue is expected to be $11.00 billion, plus or minus 2%.",
+              "published": "2023-05-24T16:22:18-04:00",
+              "title": "NVIDIA FY2024 Q1 CFO commentary"
+            },
+            {
+              "id": "P2",
+              "locator": "Second-quarter revenue outlook",
+              "preview": "NVIDIA’s outlook for the second quarter of fiscal 2024 is as follows: •Revenue is expected to be $11.00 billion, plus or minus 2%.",
+              "published": "2023-05-24T16:22:18-04:00",
+              "title": "NVIDIA FY2024 Q1 earnings release"
+            },
+            {
+              "id": "P3",
+              "locator": "Demand and production",
+              "preview": "“The computer industry is going through two simultaneous transitions — accelerated computing and generative AI,” said Jensen Huang, founder and CEO of NVIDIA. “A trillion dollars of installed global data center infrastru",
+              "published": "2023-05-24T16:22:18-04:00",
+              "title": "NVIDIA FY2024 Q1 earnings release"
+            },
+            {
+              "id": "P4",
+              "locator": "Gaming and professional visualization",
+              "preview": "Gaming revenue was down 38% from a year ago and up 22% sequentially. The year-on-year decrease reflects weaker demand due to the macroeconomic slowdown and lower shipments to normalize channel inventory levels. The seque",
+              "published": "2023-05-24T16:22:18-04:00",
+              "title": "NVIDIA FY2024 Q1 CFO commentary"
+            },
+            {
+              "id": "P5",
+              "locator": "Revenue and Data Center demand",
+              "preview": "Revenue was $7.19 billion, down 13% from a year ago and up 19% sequentially. Data Center revenue was a record, up 14% from a year ago and up 18% sequentially, led by growing demand for generative AI and large language mo",
+              "published": "2023-05-24T16:22:18-04:00",
+              "title": "NVIDIA FY2024 Q1 CFO commentary"
+            }
+          ]
+        }
+      ],
+      "trace": [
+        {
+          "max_date": "2023-05-25",
+          "operation": "search",
+          "results": [
+            "nvda-q1fy24cfocommentary/Second-quarter guidance",
+            "nvda-q1fy24pr/Second-quarter revenue outlook",
+            "nvda-q1fy24pr/Demand and production",
+            "nvda-q1fy24cfocommentary/Gaming and professional visualization",
+            "nvda-q1fy24cfocommentary/Revenue and Data Center demand"
+          ]
+        },
+        {
+          "max_date": "2023-05-25",
+          "operation": "read",
+          "results": [
+            "nvda-q1fy24cfocommentary/Second-quarter guidance"
+          ]
+        },
+        {
+          "max_date": "2023-05-25",
+          "operation": "read",
+          "results": [
+            "nvda-q1fy24pr/Second-quarter revenue outlook"
+          ]
+        },
+        {
+          "max_date": "2023-05-25",
+          "operation": "read",
+          "results": [
+            "nvda-q1fy24pr/Demand and production"
+          ]
+        },
+        {
+          "max_date": "2023-05-25",
+          "operation": "read",
+          "results": [
+            "nvda-q1fy24cfocommentary/Gaming and professional visualization"
+          ]
+        },
+        {
+          "max_date": "2023-05-25",
+          "operation": "read",
+          "results": [
+            "nvda-q1fy24cfocommentary/Revenue and Data Center demand"
+          ]
+        }
+      ]
+    },
+    {
+      "assignment": "What corrections, exceptions, or unresolved evidence available at the cutoff could support a different revenue outcome, and what observable signal before earnings could help distinguish between outcomes?",
+      "findings": [
+        {
+          "end": 159,
+          "kind": "fact",
+          "passage_id": "P2",
+          "quote": "Second Quarter of Fiscal 2024 Outlook Outlook for the second quarter of fiscal 2024 is as follows: •Revenue is expected to be $11.00 billion, plus or minus 2%.",
+          "start": 0
+        },
+        {
+          "end": 621,
+          "kind": "qualification",
+          "passage_id": "P3",
+          "quote": "We are significantly increasing our supply to meet surging demand for them,” he said.",
+          "start": 536
+        },
+        {
+          "end": 210,
+          "kind": "correction",
+          "passage_id": "P4",
+          "quote": "Gaming revenue was down 38% from a year ago and up 22% sequentially. The year-on-year decrease reflects weaker demand due to the macroeconomic slowdown and lower shipments to normalize channel inventory levels.",
+          "start": 0
+        },
+        {
+          "end": 446,
+          "kind": "fact",
+          "passage_id": "P5",
+          "quote": "The revenue growth reflects strong demand from large consumer internet companies and cloud service providers. Enterprise demand for GPU platforms was strong,",
+          "start": 289
+        },
+        {
+          "end": 540,
+          "kind": "qualification",
+          "passage_id": "P5",
+          "quote": "although general purpose networking solutions declined both sequentially and from a year ago.",
+          "start": 447
+        }
+      ],
+      "opened": {
+        "P1": {
+          "available_by_utc": "2023-05-24T20:22:18+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24pr.htm#:~:text=SANTA%20CLARA%2C%20Calif.%2DMay%2024%2C%202023%2D%20NVIDIA%20%28NASDAQ%3A%20NVDA%29%20today%20reported%20revenue%20for%20the%20first%20quarter",
+          "edition": "0001045810-23-000087",
+          "locator": "First-quarter revenue",
+          "published": "2023-05-24T16:22:18-04:00",
+          "sha256": "58170909689e27d334123667174bc3043ea4f3be9b63f95cbe2688d85d9d6dbc",
+          "source_id": "nvda-q1fy24pr",
+          "text": "SANTA CLARA, Calif.-May 24, 2023- NVIDIA (NASDAQ: NVDA) today reported revenue for the first quarter ended April 30, 2023, of $7.19 billion, down 13% from a year ago and up 19% from the previous quarter.",
+          "title": "NVIDIA FY2024 Q1 earnings release",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24pr.htm",
+          "version_at": "2023-05-24T16:22:18-04:00"
+        },
+        "P2": {
+          "available_by_utc": "2023-05-24T20:22:18+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm#:~:text=Second%20Quarter%20of%20Fiscal%202024%20Outlook%20Outlook%20for%20the%20second%20quarter%20of%20fiscal%202024%20is",
+          "edition": "0001045810-23-000087",
+          "locator": "Second-quarter guidance",
+          "published": "2023-05-24T16:22:18-04:00",
+          "sha256": "660cd01125a1ad26dea9cfdf6f5aef42341be5160448e4b8883e1d64ecfe0b96",
+          "source_id": "nvda-q1fy24cfocommentary",
+          "text": "Second Quarter of Fiscal 2024 Outlook Outlook for the second quarter of fiscal 2024 is as follows: •Revenue is expected to be $11.00 billion, plus or minus 2%.",
+          "title": "NVIDIA FY2024 Q1 CFO commentary",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm",
+          "version_at": "2023-05-24T16:22:18-04:00"
+        },
+        "P3": {
+          "available_by_utc": "2023-05-24T20:22:18+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24pr.htm#:~:text=%E2%80%9CThe%20computer%20industry%20is%20going%20through%20two%20simultaneous%20transitions%20%E2%80%94%20accelerated%20computing%20and%20generative%20AI%2C%E2%80%9D",
+          "edition": "0001045810-23-000087",
+          "locator": "Demand and production",
+          "published": "2023-05-24T16:22:18-04:00",
+          "sha256": "58170909689e27d334123667174bc3043ea4f3be9b63f95cbe2688d85d9d6dbc",
+          "source_id": "nvda-q1fy24pr",
+          "text": "“The computer industry is going through two simultaneous transitions — accelerated computing and generative AI,” said Jensen Huang, founder and CEO of NVIDIA. “A trillion dollars of installed global data center infrastructure will transition from general purpose to accelerated computing as companies race to apply generative AI into every product, service and business process. “Our entire data center family of products — H100, Grace CPU, Grace Hopper Superchip, NVLink, Quantum 400 InfiniBand and BlueField-3 DPU — is in production. We are significantly increasing our supply to meet surging demand for them,” he said.",
+          "title": "NVIDIA FY2024 Q1 earnings release",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24pr.htm",
+          "version_at": "2023-05-24T16:22:18-04:00"
+        },
+        "P4": {
+          "available_by_utc": "2023-05-24T20:22:18+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm#:~:text=Gaming%20revenue%20was%20down%2038%25%20from%20a%20year%20ago%20and%20up%2022%25%20sequentially.%20The%20year%2Don%2Dyear",
+          "edition": "0001045810-23-000087",
+          "locator": "Gaming and professional visualization",
+          "published": "2023-05-24T16:22:18-04:00",
+          "sha256": "660cd01125a1ad26dea9cfdf6f5aef42341be5160448e4b8883e1d64ecfe0b96",
+          "source_id": "nvda-q1fy24cfocommentary",
+          "text": "Gaming revenue was down 38% from a year ago and up 22% sequentially. The year-on-year decrease reflects weaker demand due to the macroeconomic slowdown and lower shipments to normalize channel inventory levels. The sequential increase was driven by the ramp of our new GeForce RTX 40 Series GPUs for desktops and laptops based on the Ada Lovelace architecture. Professional Visualization revenue was down 53% from a year ago and up 31% sequentially. The year-on-year decrease reflects lower sell-in to partners to help reduce channel inventory levels. The sequential increase was driven by higher demand for desktop and mobile workstation GPUs.",
+          "title": "NVIDIA FY2024 Q1 CFO commentary",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm",
+          "version_at": "2023-05-24T16:22:18-04:00"
+        },
+        "P5": {
+          "available_by_utc": "2023-05-24T20:22:18+00:00",
+          "citation_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm#:~:text=Revenue%20was%20%247.19%20billion%2C%20down%2013%25%20from%20a%20year%20ago%20and%20up%2019%25%20sequentially.%20Data",
+          "edition": "0001045810-23-000087",
+          "locator": "Revenue and Data Center demand",
+          "published": "2023-05-24T16:22:18-04:00",
+          "sha256": "660cd01125a1ad26dea9cfdf6f5aef42341be5160448e4b8883e1d64ecfe0b96",
+          "source_id": "nvda-q1fy24cfocommentary",
+          "text": "Revenue was $7.19 billion, down 13% from a year ago and up 19% sequentially. Data Center revenue was a record, up 14% from a year ago and up 18% sequentially, led by growing demand for generative AI and large language models using GPUs based on our NVIDIA Hopper and Ampere architectures. The revenue growth reflects strong demand from large consumer internet companies and cloud service providers. Enterprise demand for GPU platforms was strong, although general purpose networking solutions declined both sequentially and from a year ago.",
+          "title": "NVIDIA FY2024 Q1 CFO commentary",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm",
+          "version_at": "2023-05-24T16:22:18-04:00"
+        }
+      },
+      "role": "contrary",
+      "searches": [
+        {
+          "query": "NVIDIA Q2 FY2024 revenue guidance May 2023 earnings outlook data center gaming supply demand correction exceptions alternative signal before earnings SEC 10-Q",
+          "results": [
+            {
+              "id": "P1",
+              "locator": "First-quarter revenue",
+              "preview": "SANTA CLARA, Calif.-May 24, 2023- NVIDIA (NASDAQ: NVDA) today reported revenue for the first quarter ended April 30, 2023, of $7.19 billion, down 13% from a year ago and up 19% from the previous quarter.",
+              "published": "2023-05-24T16:22:18-04:00",
+              "title": "NVIDIA FY2024 Q1 earnings release"
+            },
+            {
+              "id": "P2",
+              "locator": "Second-quarter guidance",
+              "preview": "Second Quarter of Fiscal 2024 Outlook Outlook for the second quarter of fiscal 2024 is as follows: •Revenue is expected to be $11.00 billion, plus or minus 2%.",
+              "published": "2023-05-24T16:22:18-04:00",
+              "title": "NVIDIA FY2024 Q1 CFO commentary"
+            },
+            {
+              "id": "P3",
+              "locator": "Demand and production",
+              "preview": "“The computer industry is going through two simultaneous transitions — accelerated computing and generative AI,” said Jensen Huang, founder and CEO of NVIDIA. “A trillion dollars of installed global data center infrastru",
+              "published": "2023-05-24T16:22:18-04:00",
+              "title": "NVIDIA FY2024 Q1 earnings release"
+            },
+            {
+              "id": "P4",
+              "locator": "Gaming and professional visualization",
+              "preview": "Gaming revenue was down 38% from a year ago and up 22% sequentially. The year-on-year decrease reflects weaker demand due to the macroeconomic slowdown and lower shipments to normalize channel inventory levels. The seque",
+              "published": "2023-05-24T16:22:18-04:00",
+              "title": "NVIDIA FY2024 Q1 CFO commentary"
+            },
+            {
+              "id": "P5",
+              "locator": "Revenue and Data Center demand",
+              "preview": "Revenue was $7.19 billion, down 13% from a year ago and up 19% sequentially. Data Center revenue was a record, up 14% from a year ago and up 18% sequentially, led by growing demand for generative AI and large language mo",
+              "published": "2023-05-24T16:22:18-04:00",
+              "title": "NVIDIA FY2024 Q1 CFO commentary"
+            }
+          ]
+        }
+      ],
+      "trace": [
+        {
+          "max_date": "2023-05-25",
+          "operation": "search",
+          "results": [
+            "nvda-q1fy24pr/First-quarter revenue",
+            "nvda-q1fy24cfocommentary/Second-quarter guidance",
+            "nvda-q1fy24pr/Demand and production",
+            "nvda-q1fy24cfocommentary/Gaming and professional visualization",
+            "nvda-q1fy24cfocommentary/Revenue and Data Center demand"
+          ]
+        },
+        {
+          "max_date": "2023-05-25",
+          "operation": "read",
+          "results": [
+            "nvda-q1fy24pr/First-quarter revenue"
+          ]
+        },
+        {
+          "max_date": "2023-05-25",
+          "operation": "read",
+          "results": [
+            "nvda-q1fy24cfocommentary/Second-quarter guidance"
+          ]
+        },
+        {
+          "max_date": "2023-05-25",
+          "operation": "read",
+          "results": [
+            "nvda-q1fy24pr/Demand and production"
+          ]
+        },
+        {
+          "max_date": "2023-05-25",
+          "operation": "read",
+          "results": [
+            "nvda-q1fy24cfocommentary/Gaming and professional visualization"
+          ]
+        },
+        {
+          "max_date": "2023-05-25",
+          "operation": "read",
+          "results": [
+            "nvda-q1fy24cfocommentary/Revenue and Data Center demand"
+          ]
+        }
+      ]
+    }
+  ]
+}

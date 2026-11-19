@@ -1,13 +1,14 @@
 """A dated, source-grounded forecast note for the lead analyst."""
 
-from decimal import Decimal
+import re
+from datetime import date
 
 from pydantic import Field, ValidationError
 
-from .baseline_evidence import UNSAFE_PROSE, StrictOutput
+from .baseline_evidence import UNSAFE_PROSE, StrictOutput, check_claim_numbers
 from .disney_hulu_case import CaseError
 from .sol_provider import MODEL
-from .sol_research import passage_context, search_numbers
+from .sol_research import passage_context
 from .team_report import typed_prompt
 
 VERSION = "sol-forecast-v1"
@@ -71,15 +72,21 @@ def analyze(case, opened, ask):
                     or UNSAFE_PROSE.search(point.text)
                 ):
                     raise CaseError(f"Invalid source references or prose in {name}")
-                evidence = " ".join(
-                    [case.question, case.cutoff, *(opened[i].text for i in ids)]
-                )
-                if {Decimal(v) for v in search_numbers(point.text)} - {
-                    Decimal(v) for v in search_numbers(evidence)
-                }:
+                hits = [opened[i] for i in point.evidence_ids]
+                try:
+                    check_claim_numbers(
+                        point.text,
+                        " ".join(h.text for h in hits),
+                        date.fromisoformat(case.cutoff[:10]),
+                        forecast_periods=re.findall(
+                            r"\b(?:Q[1-4]|FY\d{4})\b", case.question
+                        ),
+                        cited_editions=hits,
+                    )
+                except CaseError as error:
                     raise CaseError(
                         f"Use only numbers printed in the cited passages in {name}"
-                    )
+                    ) from error
             return result.model_dump()
         except (ValidationError, CaseError) as error:
             if stage == "forecast.repair":

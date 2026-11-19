@@ -22,9 +22,11 @@ from scripts.research_team import (
     run,
 )
 from scripts.retrieval_gateway import Corpus, Evidence
+from scripts.retrieval_sources import instant
 from scripts.sol_baseline import PROJECT_ROOT, fingerprint, json_bytes
 from scripts.sol_provider import MODEL, OpenAIResponses, project_key
 from scripts.sol_research import passage_context
+from scripts.team_meter import verify_ledger
 from scripts.team_report import typed_prompt
 from scripts.team_research import case_for, research
 
@@ -58,40 +60,119 @@ def check_export(folder, name, data):
         raise CaseError(f"Export differs from verified replay in {folder.name}")
 
 
-def paired_workflow(control, corpus, cap):
-    if control["route"] != "reviewed" or Decimal(control["budget_usd"]) != cap:
-        raise CaseError("Control must use the preregistered reviewed route and cap")
-    common = {s: c for s, c in control["calls"].items() if s.startswith(SHARED)}
-    shared_cost = sum(Decimal(c["estimated_model_cost_usd"]) for c in common.values())
+def shared_calls(reference):
+    return {s: c for s, c in reference["calls"].items() if s.startswith(SHARED)}
+
+
+def paid_cost(calls):
+    return sum(
+        (Decimal(c["estimated_model_cost_usd"]) for c in calls.values()), Decimal(0)
+    )
+
+
+def history_for(directory, corpus, cap):
+    """A completed local validation failure can have fully settled, reusable provider calls."""
+    folder = directory / "history"
+    if not folder.exists():
+        return None
+    history = {key: load_run(folder / key) for key in ("control", "note", "writer")}
+    first, note, writer = (history[k] for k in ("control", "note", "writer"))
+    expected = configuration(CASE, corpus, "reviewed")
+    for receipt in history.values():
+        verify_ledger(receipt)
+        for key in ("case_id", "cutoff", "question", "corpus_sha256", "pricing"):
+            if receipt[key] != expected[key]:
+                raise CaseError(
+                    "Historical receipt belongs to a different case or source set"
+                )
+    if (
+        first["route"] != "reviewed"
+        or first["state"] != "complete"
+        or Decimal(first["budget_usd"]) != cap
+        or fingerprint(read_saved_file(folder / "control/memo.md"))
+        != first["memo_sha256"]
+        or set(note["calls"]) != {"forecast.analyze", "forecast.repair"}
+        or set(writer["calls"]) != {"lead.memo", "lead.memo_repair"}
+        or writer["prior_attempt_sha256"] != fingerprint(json_bytes(note))
+    ):
+        raise CaseError(
+            "Invalid history for reuse of the original forecast and first drafts"
+        )
+    common = paid_cost(shared_calls(first))
+    for key, start in (
+        ("note", cap - common),
+        ("writer", cap - common - Decimal(note["estimated_model_cost_usd"])),
+    ):
+        receipt = history[key]
+        if (
+            receipt["state"] != "failed"
+            or receipt["control_sha256"] != fingerprint(json_bytes(first))
+            or receipt["protocol_sha256"]
+            != fingerprint(read_saved_file(EVALUATOR / "protocol.json"))
+            or Decimal(receipt["budget_usd"]) != start
+        ):
+            raise CaseError(
+                "Historical attempt changed its parent, rubric or available budget"
+            )
+        check_export(folder / key, "memo.md", None)
+    return history
+
+
+def funded_fork(reference, corpus, cap, route, history=None):
+    common = shared_calls(reference)
+    reused = dict(common)
+    shared_cost = paid_cost(common)
+    prior_cost = Decimal(0)
+    elapsed = max(c["confirmed_ms"] for c in common.values())
+    if history and route == "reviewed":
+        reused["lead.memo"] = reference["calls"]["lead.memo"]
+        prior_cost = Decimal(reference["estimated_model_cost_usd"]) - shared_cost
+        elapsed = reference["elapsed_ms"]
+    if history and route == "forecast":
+        for key, stage in (("note", "forecast.analyze"), ("writer", "lead.memo")):
+            receipt = history[key]
+            reused[stage] = receipt["calls"][stage]
+            prior_cost += Decimal(receipt["estimated_model_cost_usd"])
+            elapsed += receipt["elapsed_ms"]
     config = {
-        **configuration(CASE, corpus, "forecast"),
-        "route": "forecast-paired",
-        "control_sha256": fingerprint(json_bytes(control)),
+        **configuration(CASE, corpus, route),
+        "route": route + "-paired",
+        "control_sha256": fingerprint(json_bytes(reference)),
         "protocol_sha256": fingerprint(read_saved_file(EVALUATOR / "protocol.json")),
         "total_cap_usd": str(cap),
         "shared_cost_usd": str(shared_cost),
         "shared_generations": len(common),
-        "shared_elapsed_ms": max(c["confirmed_ms"] for c in common.values()),
+        "prepaid_usd": str(shared_cost + prior_cost),
+        "prepaid_elapsed_ms": elapsed,
+        "used_prepaid_usd": str(paid_cost(reused)),
+        "history_sha256": {
+            k: fingerprint(json_bytes(v)) for k, v in (history or {}).items()
+        },
+        "reused_stages": sorted(reused),
     }
 
     def workflow(ask):
         seen, lock = set(), Lock()
 
         def dispatch(stage, prompt, limit):
-            if not stage.startswith(SHARED):
+            if not stage.startswith(SHARED) and stage not in reused:
                 return ask(stage, prompt, limit)
             with lock:
-                if stage in seen or stage not in common:
-                    raise CaseError("Treatment changed the shared investigation")
+                if stage in seen or stage not in reused:
+                    raise CaseError(
+                        "The paired investigation or prepaid stages changed"
+                    )
                 seen.add(stage)
-            return recorded_output(common[stage], stage, prompt, limit)
+            return recorded_output(reused[stage], stage, prompt, limit)
 
-        memo, trace = research(CASE, corpus, dispatch, route="forecast")
-        if seen != common.keys() or any(control[k] != trace[k] for k in PAIRED_FIELDS):
+        memo, trace = research(CASE, corpus, dispatch, route=route)
+        if seen != reused.keys() or any(
+            reference[k] != trace[k] for k in PAIRED_FIELDS
+        ):
             raise CaseError("The paired arms received different research or evidence")
         return memo, trace
 
-    return config, cap - shared_cost, workflow
+    return config, cap - shared_cost - prior_cost, workflow
 
 
 class Mark(StrictOutput):
@@ -212,12 +293,12 @@ def actual_outcome(rules):
         spec["actual_source"],
         spec["actual_locator"],
     )
-    if actual.available_by_utc[:10] <= CASE.cutoff:
+    if instant(actual.available_by_utc) <= instant(CASE.cutoff, "UTC"):
         raise CaseError("The outcome must postdate the decision")
-    midpoint, tolerance = re.findall(
+    ((midpoint, tolerance),) = re.findall(
         r"Revenue is expected to be \$([\d.]+) billion, plus or minus ([\d.]+)%",
         guide.text,
-    )[0]
+    )
     (revenue,) = re.findall(
         r"reported revenue for the second quarter ended [^,]+, \d{4}, of \$([\d.]+) billion",
         actual.text,
@@ -251,23 +332,32 @@ class Arm:
 def trial(directory, *, provider=None):
     rules, corpus = protocol(), Corpus(CASE.archive)
     cap = Decimal(rules["case_cap_usd"])
-    control_dir = directory / "control"
-    if provider and not control_dir.exists():
-        run(CASE, "reviewed", control_dir, cap, provider, corpus=corpus)
-    control = load_run(control_dir)
-    arms = {"control": Arm(control, replay(CASE, control, corpus=corpus))}
-    check_export(control_dir, "memo.md", arms["control"].memo)
-    config, available, workflow = paired_workflow(control, corpus, cap)
-    target = directory / "specialist"
-    if provider and not target.exists():
-        execute(config, target, available, provider, workflow)
-    treatment = load_run(target)
-    if Decimal(treatment["budget_usd"]) != available:
-        raise CaseError("Paired spending ceiling changed")
-    arms["specialist"] = Arm(treatment, reproduce(treatment, config, workflow))
-    check_export(target, "memo.md", arms["specialist"].memo)
-
-    opened = {pid: Evidence(**h) for pid, h in control["evidence"].items()}
+    history = history_for(directory, corpus, cap)
+    reference = history["control"] if history else None
+    arms = {}
+    for label, route in (("control", "reviewed"), ("specialist", "forecast")):
+        folder = directory / label
+        if label == "control" and history is None:
+            if provider and not folder.exists():
+                run(CASE, route, folder, cap, provider, corpus=corpus)
+            record = load_run(folder)
+            if record["route"] != route or Decimal(record["budget_usd"]) != cap:
+                raise CaseError("Control differs from preregistered route or ceiling")
+            memo = replay(CASE, record, corpus=corpus)
+            reference = record
+        else:
+            config, available, workflow = funded_fork(
+                reference, corpus, cap, route, history
+            )
+            if provider and not folder.exists():
+                execute(config, folder, available, provider, workflow)
+            record = load_run(folder)
+            if Decimal(record["budget_usd"]) != available:
+                raise CaseError("Paired spending ceiling changed")
+            memo = reproduce(record, config, workflow)
+        check_export(folder, "memo.md", memo)
+        arms[label] = Arm(record, memo)
+    opened = {pid: Evidence(**h) for pid, h in reference["evidence"].items()}
     scores = {}
     grading_cost = Decimal(0)
     grade_cap = Decimal(rules["grading_cap_usd_per_report"])
@@ -298,19 +388,20 @@ def trial(directory, *, provider=None):
         choice = "undetermined"
         if arm.memo and arm.record["review"]["status"] == "approved":
             choice = arm.record["review"]["rounds"][-1]["draft"]["choice"]
-        shared = (
-            Decimal(config["shared_cost_usd"]) if label == "specialist" else Decimal(0)
-        )
+        fresh = Decimal(arm.record["estimated_model_cost_usd"])
         scores[label] = {
             "factual_out_of_2": facts,
             "reasoning_out_of_4": total - facts,
             "total_out_of_6": total,
             "base_call": choice,
             "effective_cost_usd": str(
-                shared + Decimal(arm.record["estimated_model_cost_usd"])
+                fresh + Decimal(arm.record.get("prepaid_usd", "0"))
+            ),
+            "used_workflow_usd": str(
+                fresh + Decimal(arm.record.get("used_prepaid_usd", "0"))
             ),
             "effective_elapsed_ms": arm.record["elapsed_ms"]
-            + (config["shared_elapsed_ms"] if label == "specialist" else 0),
+            + arm.record.get("prepaid_elapsed_ms", 0),
         }
     # Both reports and both cutoff-only assessments are fixed before this file is opened.
     outcome = actual_outcome(rules)
@@ -322,7 +413,10 @@ def trial(directory, *, provider=None):
         "equal_cap_usd": str(cap),
         "arms": scores,
         "outcome": outcome,
-        "common_cost_usd": config["shared_cost_usd"],
+        "common_cost_usd": str(paid_cost(shared_calls(reference))),
+        "historical_attempts_usd": {
+            k: v["estimated_model_cost_usd"] for k, v in (history or {}).items()
+        },
         "grading_cost_usd": str(grading_cost),
         "incremental_workflow_usd": str(
             Decimal(scores["specialist"]["effective_cost_usd"])
@@ -330,6 +424,9 @@ def trial(directory, *, provider=None):
         ),
         "pair_and_grading_usd": str(
             grading_cost
+            + sum(
+                Decimal(v["estimated_model_cost_usd"]) for v in (history or {}).values()
+            )
             + sum(Decimal(a.record["estimated_model_cost_usd"]) for a in arms.values())
         ),
     }

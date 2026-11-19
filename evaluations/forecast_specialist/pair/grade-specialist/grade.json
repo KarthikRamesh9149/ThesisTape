@@ -1,0 +1,67 @@
+{
+  "alternative": {
+    "awarded": true,
+    "excerpts": [
+      "An above-range result is plausible if NVIDIA ships more Hopper GPUs than its outlook assumes and recognizes the additional revenue in Q2.",
+      "Management reported rising supply and surging demand, but did not establish how much would ship by quarter-end."
+    ],
+    "reason": "Offers an above-range outcome if Hopper shipments exceed the outlook’s assumptions and the extra revenue is recognized in Q2. Reported demand and the supply ramp make that premise plausible.",
+    "source_ids": [
+      "P2",
+      "P4"
+    ]
+  },
+  "causal_driver": {
+    "awarded": true,
+    "excerpts": [
+      "Strong cloud and internet-company demand was already lifting Data Center revenue, and I expect the announced supply ramp to turn enough of that demand into shipments and recognized revenue in Q2."
+    ],
+    "reason": "Links the May 24 reports of strong cloud and internet-company demand and rising supply to a mechanism: more available products can ship to customers and generate recognized revenue in Q2.",
+    "source_ids": [
+      "P2",
+      "P4"
+    ]
+  },
+  "guidance": {
+    "awarded": true,
+    "excerpts": [
+      "On 24 May 2023, NVIDIA guided to Q2 FY2024 revenue of USD 11.00 billion, plus or minus 2%."
+    ],
+    "reason": "Attributes the USD 11.00 billion midpoint and ±2% tolerance for Q2 FY2024 to NVIDIA, separately from the analyst forecast.",
+    "source_ids": [
+      "P1"
+    ]
+  },
+  "historical_evidence": {
+    "awarded": true,
+    "excerpts": [
+      "It reported Q1 revenue of USD 7.19 billion, up 19% sequentially, so the outlook called for a substantial step-up."
+    ],
+    "reason": "Correctly uses Q1 FY2024 consolidated revenue of USD 7.19 billion, up 19% sequentially, to show the size of the step-up implied by guidance.",
+    "source_ids": [
+      "P4"
+    ]
+  },
+  "horizon_and_base": {
+    "awarded": true,
+    "excerpts": [
+      "As of 25 May 2023, I expect Q2 FY2024 total revenue to finish within guidance."
+    ],
+    "reason": "Explicitly forecasts that Q2 FY2024 total revenue will finish within NVIDIA’s guidance range.",
+    "source_ids": [
+      "P1"
+    ]
+  },
+  "revision_signal": {
+    "awarded": true,
+    "excerpts": [
+      "Before earnings, I would move toward an above-range forecast if major cloud providers confirmed broad H100 instance availability ahead of their announced schedules, backed by more GPUs delivered by quarter-end than planned.",
+      "An earlier launch alone would not establish higher NVIDIA shipments."
+    ],
+    "reason": "Names a pre-release signal: major cloud providers confirm broad H100 availability ahead of schedule, with evidence of more quarter-end GPU deliveries than planned. That would move the forecast toward above range; an early launch alone would not.",
+    "source_ids": [
+      "P2",
+      "P4"
+    ]
+  }
+}

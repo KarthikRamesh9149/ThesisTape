@@ -137,13 +137,41 @@ def citation_text(citation: Citation, passages: dict[str, str]) -> str:
     return passage
 
 
-def check_paragraph(paragraph: Paragraph, passages: dict[str, str], cutoff: date, *, forecast_periods=()) -> str:
+def strip_forecast_metadata(text, hits):
+    """A cited title can establish a fiscal label and a dateline can establish a reporting date."""
+    for h in hits:
+        for period in re.findall(r"\b(?:Q[1-4]|FY\d{4})\b", h.title, re.IGNORECASE):
+            text = re.sub(rf"\b{re.escape(period)}\b", "", text, flags=re.IGNORECASE)
+        day = date.fromisoformat(h.published[:10])
+        dates = (
+            day.isoformat(),
+            f"{day.day} {day:%B %Y}",
+            f"{day:%B} {day.day}, {day.year}",
+        )
+        for form in dates:
+            # Only remove a date when it describes publication. Keep financial figures
+            # and transaction dates subject to the original body-level number check.
+            text = re.sub(
+                rf"\bon {re.escape(form)}(?=,? [^.;\n]{{0,65}}?\b(?:reported|disclosed|announced|published|filed|guided)\b)",
+                "",
+                text,
+                flags=re.IGNORECASE,
+            )
+    return text
+
+
+def check_paragraph(paragraph: Paragraph, passages: dict[str, str], cutoff: date, *, forecast_periods=(), cited_editions=()) -> str:
     text = paragraph.text.strip()
     if not 1 <= len(text) <= 950 or UNSAFE_PROSE.search(text):
         raise CaseError("Memo paragraphs must contain plain text and no model-supplied links")
     if not 1 <= len(paragraph.citations) <= 4:
         raise CaseError("Each memo paragraph needs one to four citations")
     corpus = " ".join(citation_text(citation, passages) for citation in paragraph.citations)
+    check_claim_numbers(text, corpus, cutoff, forecast_periods=forecast_periods, cited_editions=cited_editions)
+    return text
+
+
+def check_claim_numbers(text, corpus, cutoff, *, forecast_periods=(), cited_editions=()):
     source_amounts = {amount_and_resolution(match[0])[0] for match in MONEY.finditer(corpus)}
     if re.search(r"\$|\b(?:USD|dollars)\b", MONEY.sub("", text), re.IGNORECASE):
         raise CaseError("A money claim is missing a recognised currency or scale")
@@ -157,6 +185,7 @@ def check_paragraph(paragraph: Paragraph, passages: dict[str, str], cutoff: date
     # that day still needs independent support from the cited passage.
     framing = r"(?:as of|(?:not (?:yet )?known|unknown|undetermined|unresolved) on)"
     claims = re.sub(rf"\b{framing} (?:{as_of_date})(?![\w/-]|,?\s+\d{{4}}\b)", "", text, flags=re.IGNORECASE)
+    claims = strip_forecast_metadata(claims, cited_editions)
     for period in forecast_periods:
         claims = re.sub(rf"\b{re.escape(period)}\b", "", claims, flags=re.IGNORECASE)
 
@@ -168,7 +197,6 @@ def check_paragraph(paragraph: Paragraph, passages: dict[str, str], cutoff: date
         or set(map(Decimal, PERCENT.findall(claims))) - set(map(Decimal, PERCENT.findall(corpus)))
     ):
         raise CaseError("A numerical claim does not appear in its cited evidence")
-    return text
 
 
 def check_reconciliation(reconciliation: Reconciliation, passages: dict[str, str]) -> dict:

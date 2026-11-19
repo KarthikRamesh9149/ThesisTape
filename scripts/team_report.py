@@ -208,7 +208,15 @@ def render_sections(case, opened, action, draft, sections):
     )
     for heading, p in sections:
         text = check_paragraph(
-            p, texts, date.fromisoformat(case.cutoff[:10]), forecast_periods=periods
+            p,
+            texts,
+            date.fromisoformat(case.cutoff[:10]),
+            forecast_periods=periods,
+            cited_editions=[
+                opened[c.passage_id] for c in p.citations if c.passage_id in opened
+            ]
+            if case.forecast_choices
+            else (),
         )
         links = dict.fromkeys(
             f"[{h.title}, {h.locator}]({h.citation_url})"
