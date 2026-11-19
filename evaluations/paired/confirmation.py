@@ -21,11 +21,11 @@ from scripts.team_meter import verify_ledger
 
 from . import corpus as data
 from .event_audit import verify_private
-from .grounding_replay import trace
 from .reconciliation import replay_lost, sidecar, verify_resolution
 from .registration import REPO, ROOT, git
 from .runner import TERMINAL, admission, config
 from .study import REVISION, VERSION, locked, run_schedule
+from .terminal_audit import verify_failure
 
 PROTOCOL = ROOT / "protocol.json"
 
@@ -243,13 +243,15 @@ def lock_reports(split):
             elif state in ("complete", "withheld"):
                 memo = reproduce(record, cfg, partial(workflow, corpus, actual))
             else:
-                result = trace(record, corpus, actual, workflow)
-                data.require(
-                    result["status"] in {"new_request_required", "validation_stopped"}
-                    and result["matched_requests"]
-                    == len(record["calls"]) + len(record.get("skipped_calls", {})),
-                    "Failed run did not reproduce its full receipt history",
+                incident = REVISION / "host-incidents" / split / cid / (arm + ".json")
+                incident_record = (
+                    json.loads(committed(incident)) if incident.is_file() else None
                 )
+                verify_failure(record, corpus, actual, workflow, incident_record)
+                if incident_record:
+                    entries["host-incidents/" + record["checkpoint_id"] + ".json"] = (
+                        json_bytes(incident_record)
+                    )
             memo_path = loc / "run/memo.md"
             data.require(
                 (memo_path.read_bytes() if memo_path.is_file() else None) == memo,
