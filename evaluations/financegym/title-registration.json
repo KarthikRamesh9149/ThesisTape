@@ -1,0 +1,9 @@
+{
+  "editorial_registration_sha256": "4d1fa9c3de9ed8faffe6305d9eaf94fc19da66d77c168fc4cf2f57580568543b",
+  "sources": {
+    "evaluations/financegym/title-policy.md": "2b05cfd5c758fbfbb1d1e8dcbd3bf9abbadec40545ad26ea01fd453f9d3adbea",
+    "evaluations/financegym/title_lookup.py": "f652675502c6eaff06ab5d079ce6d794d4493a3494100a5b6c74265e586508f9",
+    "evaluations/financegym/titled_publication.py": "91fb03919ab98a3b477192db4e05cfe1d881c1a5466ec9cbece60c82772821bb"
+  },
+  "version": 1
+}
