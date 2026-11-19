@@ -1,30 +1,38 @@
-"""Run or replay the Sol-led financial research team."""
+"""Run, resume or replay the Sol-led financial research team."""
 
 import argparse
-import json
+import shlex
 import sys
 from dataclasses import asdict
 from datetime import UTC, datetime
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from threading import Lock
+from uuid import uuid4
 
 from .claim_review import VERSION as REVIEW_VERSION
 from .disney_hulu_case import CaseError, read_saved_file
 from .forecast_specialist import VERSION as FORECAST_VERSION
 from .material_dispute import LEGACY_VERSION
 from .material_dispute import VERSION as DISPUTE_VERSION
-from .sol_baseline import PROJECT_ROOT, fingerprint, generation_request, json_bytes
+from .run_checkpoint import (
+    PauseRequested,
+    load,
+    own_run,
+    pause_on_signal,
+    publish,
+    specification,
+    sync_directory,
+)
+from .sol_baseline import fingerprint, json_bytes
 from .sol_provider import (
     ASTRA,
     LUNA,
     MODEL,
     MODEL_RATES,
     TERRA,
-    OpenAIResponses,
-    project_key,
 )
-from .team_meter import Meter, verify_ledger
+from .team_meter import Meter, check_decision_order, recorded_output, verify_ledger
 from .team_research import VERSION, Case, case_for, research
 from .visual_reader import ROUTES as TABLE_ROUTES
 from .visual_reader import VERSION as VISUAL_VERSION
@@ -81,7 +89,7 @@ def configuration(case, corpus, route, *, dispute_version=DISPUTE_VERSION):
 
 
 def run(
-    case: Case, route: str, directory: Path, budget: Decimal, provider, *, corpus=None
+    case: Case, route: str, directory: Path, budget: Decimal, provider, *, corpus=None, pause=None
 ):
     if route not in ROUTES:
         raise CaseError("Choose a supported research route")
@@ -92,6 +100,7 @@ def run(
         budget,
         provider,
         lambda ask: research(case, corpus, ask, route=route),
+        pause=pause,
     )
 
 
@@ -133,11 +142,12 @@ def release_state(memo, trace, *, review_required):
     raise CaseError("No review decision authorizes this release")
 
 
-def execute(config, directory, budget, provider, workflow, *, artifact_name="memo.md"):
+def execute(config, directory, budget, provider, workflow, *, artifact_name="memo.md", pause=None):
     if not budget.is_finite() or budget <= 0:
         raise CaseError("Choose a positive finite USD budget")
     try:
         directory.mkdir(parents=True, exist_ok=False, mode=0o700)
+        sync_directory(directory.parent)
     except FileExistsError as error:
         raise CaseError("Use a fresh output directory for a paid run") from error
     record = {
@@ -146,20 +156,28 @@ def execute(config, directory, budget, provider, workflow, *, artifact_name="mem
         "state": "running",
         "budget_usd": format(budget, "f"),
         "created_at": datetime.now(UTC).isoformat(),
+        "checkpoint_id": uuid4().hex,
     }
-    meter = Meter(directory, record, provider)
+    record["specification_sha256"] = specification(config, record)
+    with own_run(directory):
+        meter = Meter(directory, record, provider, pause=pause)
+        return finish(config, meter, workflow, artifact_name)
+
+
+def finish(config, meter, workflow, artifact_name):
+    record = meter.record
     try:
         memo, trace = workflow(meter)
+        if meter.seen != set(record["calls"]) | set(record.get("skipped_calls", {})):
+            raise CaseError("The workflow did not use every saved assignment")
         verify_ledger(record)
         state, digest = release_state(
             memo, trace, review_required="review_version" in config
         )
         record.update(state=state, memo_sha256=digest, **trace)
-        if memo is not None:
-            tmp = directory / ".memo.tmp"
-            tmp.write_bytes(memo)
-            meter.save()
-            tmp.replace(directory / artifact_name)
+    except (PauseRequested, KeyboardInterrupt):
+        record.update(state="paused")
+        raise
     except Exception as error:
         record.update(
             state="failed",
@@ -169,12 +187,13 @@ def execute(config, directory, budget, provider, workflow, *, artifact_name="mem
         )
         raise
     finally:
-        record["elapsed_ms"] = meter.elapsed()
         meter.save()
+    if memo is not None:
+        publish(meter.directory / artifact_name, memo)
     return record
 
 
-def replay(case: Case, record: dict, *, corpus=None):
+def saved_workflow(case, record, corpus):
     corpus = corpus if corpus is not None else case.corpus()
     route = record["route"]
     if route not in ROUTES:
@@ -182,31 +201,83 @@ def replay(case: Case, record: dict, *, corpus=None):
     version = record.get("dispute_version", DISPUTE_VERSION)
     if version not in (DISPUTE_VERSION, LEGACY_VERSION):
         raise CaseError("Unknown dispute review version")
-    return reproduce(
-        record,
+    return (
         configuration(case, corpus, route, dispute_version=version),
         lambda ask: research(case, corpus, ask, route=route, dispute_version=version),
     )
 
 
-def recorded_output(call, stage, prompt, limit):
-    payload = generation_request(prompt, max_output_tokens=call["max_output_tokens"])
-    if (
-        call["request_sha256"] != fingerprint(json_bytes(payload))
-        or call["model"] != prompt["model"]
-        or call.get("requested_output_tokens", call["max_output_tokens"]) != limit
+def replay(case: Case, record: dict, *, corpus=None):
+    return reproduce(record, *saved_workflow(case, record, corpus))
+
+
+def check_configuration(record, config):
+    if any(record.get(k) != v for k, v in config.items()):
+        raise CaseError("Saved configuration, case or corpus changed")
+    if ("specification_sha256" in record or "checkpoint_id" in record) and (
+        record.get("specification_sha256") != specification(config, record)
     ):
-        raise CaseError(f"Request fingerprint or route changed for {stage}")
-    return call["output"]
+        raise CaseError("Saved run identity, configuration or budget changed")
+
+
+def saved_case(record):
+    for key in CASES:
+        case = case_for(key)
+        if case.id == record["case_id"]:
+            return case
+    raise CaseError("Unknown saved research case")
+
+
+def resume_terminal(directory, record):
+    memo = replay(saved_case(record), record)
+    path = directory / "memo.md"
+    if path.exists() or path.is_symlink():
+        if read_saved_file(path) != memo:
+            raise CaseError("The saved memo differs from the reviewed release")
+    elif memo is not None:
+        publish(path, memo)
+    return record
+
+
+def resume(directory, provider=None, *, pause=None):
+    if directory.is_symlink() or not directory.is_dir():
+        raise CaseError("Expected an existing local run directory")
+    path = directory / "memo.md"
+    record = load(directory / "run.json")
+    if record["state"] == "withheld" or (record["state"] == "complete" and path.is_file()):
+        return resume_terminal(directory, record)
+    with own_run(directory):
+        record = load(directory / "run.json")
+        if record["state"] in ("complete", "withheld"):
+            return resume_terminal(directory, record)
+        case = saved_case(record)
+        config, workflow = saved_workflow(case, record, case.corpus())
+        check_configuration(record, config)
+        if record["state"] not in ("running", "paused", "failed", "needs_reconciliation"):
+            raise CaseError("Unknown saved run state")
+        if path.exists() or path.is_symlink():
+            raise CaseError("An unfinished run already has an exported memo")
+        meter = Meter(directory, record, provider, continuing=True, pause=pause)
+        if "checkpoint_id" not in record:
+            # Older runs saved normalized results and operator IDs separately.
+            record.update(checkpoint_id=uuid4().hex, legacy_settled=sorted(set(record["calls"]) - meter.pending.keys()))
+            record["specification_sha256"] = specification(config, record)
+            meter.save()
+        prior = sorted(set(record["calls"]) - meter.pending.keys())
+        recovered = meter.restore()
+        record.setdefault("resumptions", []).append({
+            "at": datetime.now(UTC).isoformat(), "already_settled": prior, "recovered_receipts": recovered,
+        })
+        record.pop("failure", None)
+        record["state"] = "running"
+        meter.save()
+        return finish(config, meter, workflow, "memo.md")
 
 
 def reproduce(record, config, workflow):
-    if record.get("state") not in ("complete", "withheld") or any(
-        record.get(k) != v for k, v in config.items()
-    ):
-        raise CaseError(
-            "The run is incomplete or its configuration, case or corpus changed"
-        )
+    if record.get("state") not in ("complete", "withheld"):
+        raise CaseError("The run is incomplete")
+    check_configuration(record, config)
     verify_ledger(record)
     seen = set()
     lock = Lock()
@@ -218,16 +289,9 @@ def reproduce(record, config, workflow):
             if entry is None or stage in seen:
                 raise CaseError("Missing or duplicate model call during replay")
             if keep_usd is not None:
-                # Conditional spending decisions run after the earlier assignments have joined.
-                dispatch = "skip" if stage in skips else "reserve"
-                offset = record["events"].index([dispatch, stage])
-                earlier = {s for event, s in record["events"][:offset] if event in ("settle", "skip")}
-                if earlier != seen:
-                    raise CaseError("Conditional spending decision is out of order")
+                check_decision_order(record, stage, seen)
             seen.add(stage)
-        if entry.get("protected_usd") != (str(keep_usd) if keep_usd is not None else None):
-            raise CaseError("Protected review allowance changed")
-        return recorded_output({**entry, "output": None} if stage in skips else entry, stage, prompt, limit)
+        return recorded_output(entry, stage, prompt, limit, keep_usd)
 
     memo, trace = workflow(ask)
     state, digest = release_state(
@@ -253,47 +317,46 @@ def main(argv=None):
     live.add_argument("--output-dir", type=Path, required=True)
     saved = cmds.add_parser("replay")
     saved.add_argument("--run-dir", type=Path, required=True)
+    cont = cmds.add_parser("resume", help="Continue this run under its original spending limit")
+    cont.add_argument("--run-dir", type=Path, required=True)
     args = parser.parse_args(argv)
     try:
-        if args.command == "run":
-            provider = OpenAIResponses(project_key(PROJECT_ROOT / ".env.local"))
-            case = case_for(args.case)
-            record = run(
-                case,
-                args.route or ("visual" if case.table else "dispute" if case.source_urls else "team"),
-                args.output_dir,
-                Decimal(args.budget_usd),
-                provider,
-            )
+        if args.command in ("run", "resume"):
+            directory = args.output_dir if args.command == "run" else args.run_dir
+            with pause_on_signal() as pause:
+                if args.command == "resume":
+                    record = resume(directory, pause=pause)
+                else:
+                    case = case_for(args.case)
+                    record = run(
+                        case,
+                        args.route or ("visual" if case.table else "dispute" if case.source_urls else "team"),
+                        directory, Decimal(args.budget_usd), None, pause=pause,
+                    )
             if record["state"] == "withheld":
                 print(
-                    f"Memo withheld after review. See {args.output_dir / 'run.json'}.",
+                    f"Memo withheld after review. See {directory / 'run.json'}.",
                     file=sys.stderr,
                 )
                 return 2
             print(
-                f"Saved {args.output_dir / 'memo.md'} in {record['elapsed_ms']} ms. Estimated USD {record['estimated_model_cost_usd']}."
+                f"Saved {directory / 'memo.md'} in {record['elapsed_ms']} ms. Estimated USD {record['estimated_model_cost_usd']}."
             )
         else:
-            record = json.loads(read_saved_file(args.run_dir / "run.json"))
-            for key in CASES:
-                case = case_for(key)
-                if case.id == record["case_id"]:
-                    memo = replay(case, record)
-                    saved_memo = args.run_dir / "memo.md"
-                    if saved_memo.exists() and (
-                        memo is None or read_saved_file(saved_memo) != memo
-                    ):
-                        raise CaseError(
-                            "The saved memo differs from the replayed release"
-                        )
-                    if memo is None:
-                        print("Replayed the withheld decision.", file=sys.stderr)
-                        return 2
-                    sys.stdout.buffer.write(memo)
-                    break
-            else:
-                raise CaseError("Unknown saved case")
+            record = load(args.run_dir / "run.json")
+            memo = replay(saved_case(record), record)
+            saved_memo = args.run_dir / "memo.md"
+            if saved_memo.exists() and read_saved_file(saved_memo) != memo:
+                raise CaseError("The saved memo differs from the replayed release")
+            if memo is None:
+                print("Replayed the withheld decision.", file=sys.stderr)
+                return 2
+            sys.stdout.buffer.write(memo)
+    except PauseRequested:
+        print(f"Run paused. Resume with: python -m scripts.research_team resume --run-dir {shlex.quote(str(directory))}", file=sys.stderr)
+        return 130
+    except KeyboardInterrupt:
+        return 130
     except (OSError, ValueError, KeyError, InvalidOperation) as error:
         print(f"Research error: {error}", file=sys.stderr)
         return 1
