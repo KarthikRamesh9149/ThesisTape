@@ -12,6 +12,16 @@ Replaying the same responses with revised evidence checks produced the single-As
 
 ![ThesisTape research workflow showing the lead orchestrator, evidence workers, independent review and final report.](ThesisTape-Architecture.png)
 
+## Ask a historical finance question
+
+Start the local analyst desk and choose **New research → Public historical sources**. Enter the question, the last eligible UTC date and a USD spending limit. The report links each cited claim to the dated passage. Run activity shows the participating models, settled cost and remaining reservations.
+
+```sh
+.venv/bin/python -B -m scripts.analyst_desk --port 8765
+```
+
+Open `http://127.0.0.1:8765`. The browser can export the same verified Markdown the CLI produces. The live ECB trial cost USD 0.2052854 and its download reproduced offline. [ECB report and browser checks](evaluations/open_research/ecb/evaluation.md) · [Boeing acquisition report](evaluations/open_research/boeing/reviewed.md)
+
 ## Open the analyst desk
 
 From the repository root, use Python 3.12 and the [research dependencies](#run-the-research-team).

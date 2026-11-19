@@ -8,6 +8,8 @@ const el = (tag, text, cls) => {
 const labels = {
   complete: "Complete",
   withheld: "Withheld",
+  qualified: "Qualified",
+  insufficient_evidence: "Insufficient evidence",
   queued: "Queued",
   running: "Running",
   failed: "Stopped",
@@ -97,6 +99,7 @@ function setStatus(r) {
   notice("run-error", message);
 }
 function emptyText(r) {
+  if (r.state === "insufficient_evidence") return "The dated searches found no eligible evidence for this question.";
   if (r.state === "withheld") return "The review did not authorize a memo for export.";
   if (r.state === "failed" || r.state === "needs_reconciliation")
     return "No memo was released. Run activity shows the last recorded assignment.";
@@ -255,7 +258,7 @@ async function chooseSource(n, focus = false) {
       el("strong", p.title),
       el(
         "p",
-        (new URL(p.url).hostname === "www.sec.gov" ? "Filed " : "Published ") + day(p.published),
+        (new URL(p.url).hostname === "www.sec.gov" ? "Filed " : "Available by ") + day(p.published),
       ),
       el("p", p.locator),
       a,
@@ -452,7 +455,7 @@ $("intake").onsubmit = async (e) => {
   e.preventDefault();
   if (submitting) return;
   const question = $("research-question").value.trim(),
-    time = $("new-time").value;
+    time = $("new-time").disabled ? "" : $("new-time").value;
   if (!question) {
     notice("intake-error", "Enter a research question.");
     return;
@@ -500,7 +503,16 @@ async function init() {
     token = s.token;
     for (const [value, label] of Object.entries(s.collections))
       $("collection").add(new Option(label, value));
-    $("collection").value = "archive";
+    $("collection").onchange = () => {
+      const byDay = $("collection").value === "historical-web";
+      $("new-time").disabled = byDay;
+      $("new-time").parentElement.hidden = byDay;
+      $("cutoff-help").textContent = byDay
+        ? "Public archives use the end of the selected UTC day."
+        : "Leave the time blank to use the end of the UTC day.";
+    };
+    $("collection").value = "historical-web";
+    $("collection").onchange();
     openRun(hashRun() || s.runs[0]?.id || "example-twitter");
   } catch (err) {
     $("loading").hidden = true;

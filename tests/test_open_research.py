@@ -1,6 +1,6 @@
 import unittest
 
-from evaluations.open_research import boeing
+from evaluations.open_research import boeing, ecb
 from scripts.research_desk_agent import Draft, Paragraph, assemble_revision
 
 
@@ -28,3 +28,9 @@ class InvestmentMemoTests(unittest.TestCase):
         self.assertEqual(observed["checked_searches"], 3)
         self.assertEqual(observed["matching_historical_generations"], 8)
         self.assertEqual(observed["reviews"][-1]["approved"], 4)
+
+    def test_ecb_public_desk_export_with_dated_sources_replays_offline(self):
+        proof = ecb.verify()
+        self.assertEqual(proof["calls"], 9)
+        self.assertEqual(proof["state"], "complete")
+        self.assertEqual(proof["page_errors"], [])

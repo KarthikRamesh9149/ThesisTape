@@ -13,6 +13,8 @@ from pathlib import Path
 from threading import Event, Lock, Thread
 from urllib.parse import urlsplit
 
+from . import open_desk_report as public
+from . import research_desk_agent as engine
 from .desk_report import inspect_record
 from .disney_hulu_case import CaseError, read_saved_file
 from .research_team import ROUTES, queue_research, resume, saved_case
@@ -29,7 +31,7 @@ EXAMPLES = {
     "example-tradeweb-desk": "analyst_desk/proof",
 }
 LIVE_ID = re.compile(r"desk-[a-f0-9]{32}")
-TERMINAL = {"complete", "withheld"}
+TERMINAL = public.FINISHED
 
 
 class DeskError(CaseError):
@@ -101,7 +103,9 @@ class Desk:
     @staticmethod
     def record(directory):
         r = load(directory / "run.json")
-        if r.get("schema_version") != 3 or r.get("route") not in ROUTES:
+        if not public.is_public(r) and (
+            r.get("schema_version") != 3 or r.get("route") not in ROUTES
+        ):
             raise DeskError(404, "This file is not a research-team run.")
         return r
 
@@ -113,13 +117,17 @@ class Desk:
         ]:
             try:
                 r = self.record(folder)
-                case = saved_case(r)
+                if public.is_public(r):
+                    title, question, cutoff = public.TITLE, r["question"], r["cutoff"]
+                else:
+                    case = saved_case(r)
+                    title, question, cutoff = case.title, case.question, case.cutoff
                 rows.append(
                     {
                         "id": key,
-                        "title": case.title,
-                        "question": case.question,
-                        "cutoff": case.cutoff,
+                        "title": title,
+                        "question": question,
+                        "cutoff": cutoff,
                         "state": r["state"],
                         "created": r["created_at"],
                         "example": key in EXAMPLES,
@@ -137,7 +145,9 @@ class Desk:
     def inspect(self, key):
         folder = self.directory(key)
         record = self.record(folder)
-        info, report = inspect_record(folder, record)
+        info, report = (public.inspect if public.is_public(record) else inspect_record)(
+            folder, record
+        )
         with self.lock:
             owned = key in self.jobs
             info.update(
@@ -162,7 +172,21 @@ class Desk:
 
         def work():
             try:
-                resume(directory, self.provider, pause=stop)
+                r = self.record(directory)
+                if public.is_public(r):
+                    engine.run(
+                        r["question"],
+                        r["cutoff"],
+                        directory,
+                        directory / ".archive",
+                        r["budget_usd"],
+                        provider=self.provider,
+                        pause=stop,
+                        profile=r["research_profile"],
+                        assignment=r["assignment"],
+                    )
+                else:
+                    resume(directory, self.provider, pause=stop)
             except PauseRequested:
                 pass
             # This thread is the UI error boundary. Unexpected provider errors may
@@ -193,7 +217,13 @@ class Desk:
             r"[0-9a-f]{32}", request_id
         ):
             raise DeskError(400, "Invalid request ID.")
-        case = analyst_case(fields["question"], fields["cutoff"], fields["collection"])
+        web = fields["collection"] == public.COLLECTION
+        if web:
+            question, cutoff = public.intake(fields["question"], fields["cutoff"])
+        else:
+            case = analyst_case(
+                fields["question"], fields["cutoff"], fields["collection"]
+            )
         budget = limit(fields["budget"])
         key = "desk-" + request_id
         directory = self.root / key
@@ -201,11 +231,26 @@ class Desk:
             if self.closing:
                 raise DeskError(503, "The desk is shutting down.")
             if not directory.exists() and not directory.is_symlink():
-                queue_research(case, directory, budget)
+                if web:
+                    engine.run(
+                        question,
+                        cutoff,
+                        directory,
+                        directory / ".archive",
+                        budget,
+                        queued=True,
+                    )
+                else:
+                    queue_research(case, directory, budget)
                 self.start_locked(key, directory)
             else:
                 r = self.record(self.directory(key))
-                if saved_case(r) != case or Decimal(r["budget_usd"]) != budget:
+                same = public.is_public(r) == web and (
+                    (r["question"], r["cutoff"]) == (question, cutoff)
+                    if web
+                    else saved_case(r) == case
+                )
+                if not same or Decimal(r["budget_usd"]) != budget:
                     raise DeskError(
                         409, "This request ID already belongs to a different intake."
                     )
@@ -226,7 +271,12 @@ class Desk:
                 key not in self.jobs and self.record(directory)["state"] not in TERMINAL
             ):
                 # Give the caller an immediate ownership error if the CLI is still working.
-                with own_run(directory):
+                owner = (
+                    directory.parent / ("." + directory.name + ".lock")
+                    if public.is_public(self.record(directory))
+                    else directory
+                )
+                with own_run(owner):
                     pass
                 self.start_locked(key, directory)
         return {"id": key}
@@ -314,7 +364,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self.reply(
                     {
                         "token": desk.token,
-                        "collections": COLLECTIONS,
+                        "collections": {public.COLLECTION: public.LABEL, **COLLECTIONS},
                         "runs": desk.library(),
                     }
                 )

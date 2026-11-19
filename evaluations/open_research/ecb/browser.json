@@ -1,0 +1,16 @@
+{
+  "archive_sha256": "2524a447cc2c00a5bdb8c48dc52a93110f9da41a24ee887d2521c398b253a775",
+  "calls": 9,
+  "download_bytes": 3802,
+  "download_sha256": "28abf9292836ea0f4c41317e8f80ffaf7e36aed4272ec324623f0fae178b1f26",
+  "first_source": "https://web.archive.org/web/20240606210424/https://www.ecb.europa.eu/press/press_conference/monetary-policy-statement/shared/pdf/ecb.ds240606~f4d2c4833d.en.pdf?3d009dc9ec7917c832fe9a5a41e12fcd",
+  "page_errors": [],
+  "passages": 5,
+  "reserved": "0",
+  "spent": "0.2052854",
+  "state": "complete",
+  "viewport_widths": [
+    1440,
+    390
+  ]
+}
