@@ -55,7 +55,7 @@ def metrics(rows):
     }
 
 
-def select(rows):
+def select(rows, mixed_arms=("mixed", "mixed_fixed_plan", "mixed_no_forecast")):
     by_arm = defaultdict(list)
     for r in rows:
         by_arm[r["arm"]].append(r)
@@ -89,7 +89,7 @@ def select(rows):
 
     return (
         stats,
-        winner(("mixed", "mixed_fixed_plan", "mixed_no_forecast")),
+        winner(mixed_arms),
         winner(("single_sol", "single_astra")),
     )
 

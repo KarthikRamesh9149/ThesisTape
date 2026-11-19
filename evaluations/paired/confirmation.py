@@ -72,19 +72,19 @@ def input_zip(split):
     )
 
 
-def registry(split):
+def registry(split, revision=REVISION):
     if split == "development":
         return json.loads(
             data.checked_file(ROOT, load(ROOT / "freeze.json"), "development.json")
         )
     data.require(split == "blind", "Invalid study partition")
-    committed(REVISION / "finalists.json")
+    committed(revision / "finalists.json")
     with input_zip(split) as z:
         return json.loads(z.read("inputs.json"))
 
 
-def export_blind(cid, output):
-    selected = [c for c in registry("blind") if c["case_id"] == cid]
+def export_blind(cid, output, revision=REVISION):
+    selected = [c for c in registry("blind", revision) if c["case_id"] == cid]
     data.require(
         len(selected) == 1 and not output.exists(), "Unknown or duplicate blind packet"
     )

@@ -75,7 +75,7 @@ def masked_context(record, memo, facts):
         if line.startswith("## "):
             heading = line[3:]
             continue
-        if not heading or not line.strip():
+        if not heading or heading == "Sources" or not line.strip():
             continue
         links = LINK.findall(line)
         if not links:
@@ -223,8 +223,8 @@ def grade_one(payload, path, provider=None):
         return assessment, str(total)
 
 
-def locked_inputs(split):
-    folder = REVISION / split
+def locked_inputs(split, revision=REVISION):
+    folder = revision / split
     index = json.loads(committed(folder / "reports.json"))
     bundle = committed(folder / "reports.zip")
     corpus.require(
@@ -234,18 +234,18 @@ def locked_inputs(split):
     return index, zipfile.ZipFile(io.BytesIO(bundle))
 
 
-def key_file(split, member):
+def key_file(split, member, revision=REVISION):
     if member == "outcomes.json":
-        committed(REVISION / split / "asof-scores.json")
+        committed(revision / split / "asof-scores.json")
     archive = f"evaluator/{split}-grading.zip"
     raw = corpus.checked_file(ROOT, load(ROOT / "freeze.json"), archive)
     with zipfile.ZipFile(io.BytesIO(raw)) as z:
         return json.loads(z.read(member))
 
 
-def grade_asof(split):
-    index, bundle = locked_inputs(split)
-    keys = key_file(split, "asof.json")["cases"]
+def grade_asof(split, revision=REVISION):
+    index, bundle = locked_inputs(split, revision)
+    keys = key_file(split, "asof.json", revision)["cases"]
     rows = []
     with bundle:
         for row in sorted(index["rows"], key=lambda r: (r["case_id"], r["alias"])):
@@ -260,9 +260,30 @@ def grade_asof(split):
                     and fingerprint(saved) == row["record_sha256"],
                     "Changed grading material",
                 )
-                payload = masked_context(
-                    json.loads(saved), memo, keys[row["case_id"]]["facts"]
-                )
+                research = json.loads(saved)
+                if "result_sha256" in research:
+                    raw_result = bundle.read(alias + "/result.json")
+                    corpus.require(
+                        fingerprint(raw_result) == research["result_sha256"],
+                        "Changed production result",
+                    )
+                    evidence = json.loads(raw_result)["evidence"]
+                    research = {
+                        **research,
+                        "direction": row["direction"],
+                        "evidence": {
+                            pid: {
+                                "source_id": h["proof"]["source_id"],
+                                "title": h["title"],
+                                "locator": h["proof"]["locator"],
+                                "published": h["available"],
+                                "citation_url": h["url"],
+                                "text": h["text"],
+                            }
+                            for pid, h in evidence.items()
+                        },
+                    }
+                payload = masked_context(research, memo, keys[row["case_id"]]["facts"])
                 if not payload["paragraphs"]:
                     assessment, price = (
                         empty("Qualified report with no cited material claim."),
@@ -271,7 +292,12 @@ def grade_asof(split):
                 else:
                     assessment, price = grade_one(
                         payload,
-                        REPO / "runs/study-grading-v2" / split / alias / "grade",
+                        REPO
+                        / "runs/study-grading-v2"
+                        / revision.name
+                        / split
+                        / alias
+                        / "grade",
                     )
             rows.append(
                 {
@@ -288,11 +314,11 @@ def grade_asof(split):
         "reports_sha256": fingerprint(json_bytes(index)),
         "rows": rows,
     }
-    write_once(REVISION / split / "asof-scores.json", json_bytes(artifact))
+    write_once(revision / split / "asof-scores.json", json_bytes(artifact))
 
 
-def score(split):
-    folder = REVISION / split
+def score(split, revision=REVISION):
+    folder = revision / split
     index = json.loads(committed(folder / "reports.json"))
     asof = json.loads(committed(folder / "asof-scores.json"))
     corpus.require(
@@ -305,8 +331,8 @@ def score(split):
         "Incomplete or repeated grader assignment",
     )
     # Only after the as-of commit do we read this separate evaluator file.
-    observations = key_file(split, "outcomes.json")
-    cases = {r["case_id"]: r for r in registry(split)}
+    observations = key_file(split, "outcomes.json", revision)
+    cases = {r["case_id"]: r for r in registry(split, revision)}
     rows = []
     for research in index["rows"]:
         note = judgments[research["alias"]]
@@ -341,7 +367,7 @@ def score(split):
                 "evaluator_cost_usd": note["evaluator_cost_usd"],
             }
         )
-    if split == "development":
+    if split == "development" and any(r["arm"] == "mixed_no_forecast" for r in rows):
         rows.extend(
             {
                 **r,

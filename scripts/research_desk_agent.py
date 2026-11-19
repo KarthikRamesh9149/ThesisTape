@@ -15,19 +15,22 @@ from pydantic import Field
 
 from .baseline_evidence import StrictOutput
 from .disney_hulu_case import CaseError
+from .packet_archive import SavedSearches
 from .paired_research import formula
 from .paired_tools import Operation, calculate
 from .research_team import check_configuration, new_record
-from .run_checkpoint import load, own_run, publish
+from .run_checkpoint import PauseRequested, load, own_run, publish
 from .sol_baseline import fingerprint, json_bytes
 from .sol_provider import ASTRA, LUNA, MODEL
-from .team_meter import Meter, verify_ledger
+from .team_meter import Meter, recorded_output, verify_ledger
 from .team_report import typed_prompt
 from .temporal_web import ArchiveGateway, checked_doc, cutoff_day, rank_blocks
 
 VERSION = "archived-research-v2"
 ROOT = Path(__file__).resolve().parents[1]
-MARK = re.compile(r"\{\{(P[1-9]\d*|Q)\|([^{}\n]{1,160})\}\}|\{\{(C[1-9]\d*|DATE)\}\}")
+MARK = re.compile(
+    r"\{\{(P[1-9]\d*|Q)\|([^{}\n]{1,160})\}\}|\{\{(C[1-9]\d*|DATE|BAND)\}\}"
+)
 ID = re.compile(r"\bP[1-9]\d*\b")
 SECTIONS = ("Answer", "Evidence", "Outlook", "What would change the view")
 PLANNER = """Plan research for the supplied question as of its cutoff. Name the actual decision and split it into
@@ -113,6 +116,10 @@ class Draft(StrictOutput):
     paragraphs: list[Paragraph] = Field(min_length=1, max_length=9)
 
 
+class ForecastDraft(Draft):
+    direction: Literal["lower", "within", "higher", "undetermined"]
+
+
 class Decision(StrictOutput):
     paragraph: str
     accept: bool
@@ -169,7 +176,19 @@ def literal_in(literal, text):
     return False
 
 
-def compile_paragraph(p, question, cutoff, passages, calculations):
+def band_text(rule):
+    if not rule:
+        raise CaseError("No comparison band was supplied for this case")
+    tolerance = Decimal(rule["tolerance"])
+    if not tolerance:
+        return "unchanged"
+    if rule["mode"] == "relative":
+        return f"an inclusive ±{format((100 * tolerance).normalize(), 'f')}% band around the reference"
+    unit = "percentage points" if "percent" in rule["unit"] else "ratio points"
+    return f"an inclusive ±{format(tolerance.normalize(), 'f')} {unit} band around the reference"
+
+
+def compile_paragraph(p, question, cutoff, passages, calculations, rule=None):
     cited = list(dict.fromkeys(evidence_id(ref, passages) for ref in p.citations))
     raw = MARK.sub("", p.text)
     if re.search(r"\d|\{\{|\}\}|https?://|[<>]|\]\(|\[[Pp]\d", raw) or "\n" in p.text:
@@ -180,6 +199,8 @@ def compile_paragraph(p, question, cutoff, passages, calculations):
 
     def insert(m):
         ident, value, special = m.groups()
+        if special == "BAND":
+            return band_text(rule)
         if special == "DATE":
             return cutoff
         if special is not None:
@@ -228,13 +249,13 @@ def compile_paragraph(p, question, cutoff, passages, calculations):
     }
 
 
-def merge_sources(results, question):
+def merge_sources(results, question, validate=checked_doc):
     by_url = {}
     for response in results:
         if response["request"]["max_date"] != results[0]["request"]["max_date"]:
             raise CaseError("Cross-cutoff retrieval merge")
         for source in response["sources"]:
-            checked_doc(source, response["request"]["max_date"])
+            validate(source, response["request"]["max_date"])
             existing = by_url.setdefault(source["url"], {**source, "blocks": []})
             if existing["proof"] != source["proof"]:
                 raise CaseError("Edition or original changed between searches")
@@ -351,19 +372,28 @@ def assemble_revision(draft, blocked, patch):
     return Draft(paragraphs=retained)
 
 
-def reviewed_draft(draft, context, ask, *, stage, passages, calculations):
+def reviewed_draft(
+    draft, context, ask, *, stage, passages, calculations, independent=True
+):
     compiled = {}
     blocked = {}
     for index, p in enumerate(draft.paragraphs, 1):
         key = f"A{index}"
         try:
             compiled[key] = compile_paragraph(
-                p, context["question"], context["cutoff"], passages, calculations
+                p,
+                context["question"],
+                context["cutoff"],
+                passages,
+                calculations,
+                context.get("forecast_rule"),
             )
         except CaseError as exc:
             blocked[key] = str(exc)
     if not compiled:
         return [], blocked, ["No supported paragraphs compiled."]
+    if not independent:
+        return list(compiled.values()), blocked, []
     relevant = {pid for p in compiled.values() for pid in p["pids"]}
     data = {
         "question": context["question"],
@@ -372,6 +402,8 @@ def reviewed_draft(draft, context, ask, *, stage, passages, calculations):
         "originals": brief_sources(passages, relevant),
         "calculations": calculations,
     }
+    if context.get("forecast_rule"):
+        data.update(forecast_rule=context["forecast_rule"], direction=draft.direction)
     review = Review.model_validate_json(
         ask(stage, typed_prompt(MODEL, REVIEW, data, Review, effort="medium"), 2200)
     )
@@ -383,8 +415,24 @@ def reviewed_draft(draft, context, ask, *, stage, passages, calculations):
     return [p for k, p in compiled.items() if k in approved], blocked, review.missing
 
 
-def research(question, cutoff, gateway, ask):
+def research(question, cutoff, gateway, dispatch, *, profile="mixed"):
+    if profile not in ("mixed", "single_sol", "single_astra"):
+        raise CaseError("Unknown research profile")
+    single = profile != "mixed"
+    rule = getattr(gateway, "forecast_rule", None)
+    draft_type = ForecastDraft if rule else Draft
+    writer = WRITE
+    if rule:
+        writer += " This case asks for one direction relative to its registered comparator. State the direction plainly in Outlook and in the direction field. Use {{BAND}} to print its inclusive threshold. The controller prints the verified PDF page in each source title. Treat the supplied question dates as the task horizon."
+
+    def ask(stage, prompt, limit, **kwargs):
+        if single:
+            prompt = {**prompt, "model": MODEL if profile == "single_sol" else ASTRA}
+        return dispatch(stage, prompt, limit, **kwargs)
+
     base = {"question": question, "cutoff": cutoff}
+    if rule:
+        base["forecast_rule"] = rule
     plan = Plan.model_validate_json(
         ask(
             "orchestrator.plan",
@@ -406,7 +454,9 @@ def research(question, cutoff, gateway, ask):
 
     with ThreadPoolExecutor(max_workers=3) as pool:
         results = list(pool.map(search, plan.searches))
-    passages = merge_sources(results, question)
+    passages = merge_sources(
+        results, question, getattr(gateway, "check_source", checked_doc)
+    )
     trace = {
         "plan": plan.model_dump(),
         "searches": [
@@ -442,17 +492,25 @@ def research(question, cutoff, gateway, ask):
             passages,
         )
 
-    with ThreadPoolExecutor(max_workers=3) as pool:
-        fact = pool.submit(worker, "fundamentals", ANALYST, LUNA, 1250)
-        contrary = pool.submit(worker, "contrary", ANALYST, LUNA, 1250)
-        operations = pool.submit(
-            ask,
-            "research.arithmetic",
-            typed_prompt(MODEL, TOOLS, context, Maths, effort="low"),
-            1100,
-        )
-        findings = {"fundamentals": fact.result(), "contrary": contrary.result()}
-        raw_ops = Maths.model_validate_json(operations.result()).calculations
+    def arithmetic():
+        return Maths.model_validate_json(
+            ask(
+                "research.arithmetic",
+                typed_prompt(MODEL, TOOLS, context, Maths, effort="low"),
+                1100,
+            )
+        ).calculations
+
+    if single:
+        findings = {}
+        raw_ops = arithmetic()
+    else:
+        with ThreadPoolExecutor(max_workers=3) as pool:
+            fact = pool.submit(worker, "fundamentals", ANALYST, LUNA, 1250)
+            contrary = pool.submit(worker, "contrary", ANALYST, LUNA, 1250)
+            operations = pool.submit(arithmetic)
+            findings = {"fundamentals": fact.result(), "contrary": contrary.result()}
+            raw_ops = operations.result()
     try:
         calculations = calculate(
             raw_ops, {i: SimpleNamespace(text=h["text"]) for i, h in passages.items()}
@@ -460,24 +518,32 @@ def research(question, cutoff, gateway, ask):
     except (CaseError, ArithmeticError):
         calculations = {}
     context = {**context, "findings": findings, "checked_calculations": calculations}
-    outlook = checked_findings(
-        ask(
-            "research.outlook",
-            typed_prompt(MODEL, FORECAST, context, Observations, effort="medium"),
-            1550,
-        ),
-        passages,
+    outlook = (
+        []
+        if single
+        else checked_findings(
+            ask(
+                "research.outlook",
+                typed_prompt(MODEL, FORECAST, context, Observations, effort="medium"),
+                1550,
+            ),
+            passages,
+        )
     )
     context["outlook"] = outlook
     raw = ask(
-        "lead.memo", typed_prompt(ASTRA, WRITE, context, Draft, effort="medium"), 3300
+        "lead.memo",
+        typed_prompt(ASTRA, writer, context, draft_type, effort="medium"),
+        3300,
     )
-    draft = Draft.model_validate_json(raw)
+    draft = draft_type.model_validate_json(raw)
+    choice = getattr(draft, "direction", None)
     good, blocked, missing = reviewed_draft(
         draft,
         base,
         ask,
         stage="review.initial",
+        independent=not single,
         passages=passages,
         calculations=calculations,
     )
@@ -493,13 +559,26 @@ def research(question, cutoff, gateway, ask):
             "missing": missing,
             "assignment": "Write only replacement or missing paragraphs. Preserve the existing approved findings.",
         }
-        prompt = typed_prompt(MODEL, WRITE, correction, Draft, effort="medium")
+        prompt = typed_prompt(MODEL, writer, correction, draft_type, effort="medium")
         # Optional refinement cannot consume the protected independent-review reserve.
-        fixed = ask("lead.revise", prompt, 2100, keep_usd=Decimal("0.06"))
+        fixed = ask(
+            "lead.revise",
+            prompt,
+            2100,
+            **({} if single else {"keep_usd": Decimal("0.06")}),
+        )
         if fixed:
-            assembled = assemble_revision(
-                draft, blocked, Draft.model_validate_json(fixed)
-            )
+            patch = draft_type.model_validate_json(fixed)
+            assembled = assemble_revision(draft, blocked, patch)
+            if rule:
+                choice = (
+                    patch.direction
+                    if any(p.section == "Outlook" for p in patch.paragraphs)
+                    else choice
+                )
+                assembled = ForecastDraft(
+                    paragraphs=assembled.paragraphs, direction=choice
+                )
             good, rem, missing = reviewed_draft(
                 assembled,
                 base,
@@ -507,6 +586,7 @@ def research(question, cutoff, gateway, ask):
                 stage="review.recheck",
                 passages=passages,
                 calculations=calculations,
+                independent=not single,
             )
             reviews.append({"blocked": rem, "missing": missing, "approved": len(good)})
     if not good:
@@ -522,6 +602,18 @@ def research(question, cutoff, gateway, ask):
         or not any(p["section"] == "Answer" for p in good)
     )
     memo = render(question, cutoff, good, passages, calculations, qualified)
+    if rule:
+        if not any(
+            p["section"] == "Outlook"
+            and re.search(r"\b" + re.escape(choice) + r"\b", p["text"], re.IGNORECASE)
+            for p in good
+        ):
+            choice = "undetermined"
+        memo = memo.replace(
+            b"\n\n**Research question**",
+            f"\n\nForecast direction: {choice}\n\n**Research question**".encode(),
+            1,
+        )
     return memo, {
         **trace,
         "release": "qualified" if qualified else "complete",
@@ -530,24 +622,102 @@ def research(question, cutoff, gateway, ask):
         "outlook": outlook,
         "calculations": calculations,
         "paragraphs": good,
+        **({"direction": choice} if rule else {}),
     }
 
 
-def run(question, cutoff, output, cache, limit, *, provider=None, gateway=None):
-    cutoff_day(cutoff)
-    if not 10 <= len(question.strip()) <= 6000:
+def configuration(question, cutoff, budget, gateway, profile, assignment):
+    if gateway is None:
+        cutoff_day(cutoff)
+    elif gateway.cutoff != cutoff:
+        raise CaseError("The selected archive is bound to another cutoff")
+    if not isinstance(question, str) or not 10 <= len(question.strip()) <= 6000:
         raise CaseError("Provide a substantive research question")
-    budget = Decimal(limit)
-    cfg = {
+    if profile not in ("mixed", "single_astra", "single_sol"):
+        raise CaseError("Unknown agent configuration")
+    selected = MODEL if profile == "single_sol" else ASTRA
+    return {
         "question": question,
         "cutoff": cutoff,
         "workflow": VERSION,
-        "archive_version": ArchiveGateway.VERSION,
-        "research_model": MODEL,
-        "worker_model": LUNA,
-        "author_model": ASTRA,
+        "research_profile": profile,
+        "archive_version": gateway.VERSION if gateway else ArchiveGateway.VERSION,
+        "research_model": MODEL if profile == "mixed" else selected,
+        "worker_model": LUNA if profile == "mixed" else None,
+        "author_model": selected,
         "budget_spec": str(budget),
+        "assignment": assignment,
     }
+
+
+def audit(output, gateway, *, record=None):
+    record = record or load(output / "run.json")
+    cfg = configuration(
+        record["question"],
+        record["cutoff"],
+        Decimal(record["budget_usd"]),
+        gateway,
+        record["research_profile"],
+        record["assignment"],
+    )
+    check_configuration(record, cfg)
+    settled, owed = verify_ledger(record)
+    if owed:
+        raise CaseError("Research charges are unsettled")
+    response = load(output / "result.json")
+    if fingerprint(json_bytes(response)) != record["result_sha256"]:
+        raise CaseError("Research result changed")
+    seen = set()
+    entries = {**record["calls"], **record.get("skipped_calls", {})}
+
+    def ask(stage, prompt, limit, *, keep_usd=None):
+        if stage not in entries or stage in seen:
+            raise CaseError("Missing or duplicate saved request")
+        seen.add(stage)
+        return recorded_output(entries[stage], stage, prompt, limit, keep_usd)
+
+    memo, trace = research(
+        record["question"],
+        record["cutoff"],
+        SavedSearches(gateway, output / "searches", offline=True),
+        ask,
+        profile=record["research_profile"],
+    )
+    if (
+        seen != set(entries)
+        or any(response.get(k) != v for k, v in trace.items())
+        or response["question"] != record["question"]
+        or response["cutoff"] != record["cutoff"]
+        or Decimal(response["model_cost_usd"]) != settled
+        or record["state"] != trace["release"]
+        or (fingerprint(memo) if memo else None) != response["memo_sha256"]
+        or (
+            (output / "memo.md").read_bytes() if (output / "memo.md").exists() else None
+        )
+        != memo
+    ):
+        raise CaseError(
+            "Verified research, evidence or released text differs from the saved report"
+        )
+    return response
+
+
+def run(
+    question,
+    cutoff,
+    output,
+    cache,
+    limit,
+    *,
+    provider=None,
+    gateway=None,
+    profile="mixed",
+    assignment=None,
+    queued=False,
+    pause=None,
+):
+    budget = Decimal(limit)
+    cfg = configuration(question, cutoff, budget, gateway, profile, assignment)
     output.parent.mkdir(parents=True, exist_ok=True)
     lock = output.parent / ("." + output.name + ".lock")
     lock.mkdir(mode=0o700, exist_ok=True)
@@ -556,25 +726,29 @@ def run(question, cutoff, output, cache, limit, *, provider=None, gateway=None):
             with tempfile.TemporaryDirectory(dir=output.parent) as tmp:
                 staged = Path(tmp) / output.name
                 record = new_record(cfg, staged, budget)
+                record["state"] = "queued" if queued else "running"
                 Meter(staged, record, provider)
                 staged.rename(output)
         record = load(output / "run.json")
         check_configuration(record, cfg)
-        if record.get("result_sha256"):
-            result = (output / "result.json").read_bytes()
-            if fingerprint(result) != record["result_sha256"]:
-                raise CaseError("Research result hash changed")
-            artifact = json.loads(result)
-            expected = artifact["memo_sha256"]
-            if expected and fingerprint((output / "memo.md").read_bytes()) != expected:
-                raise CaseError("Released memo changed")
-            verify_ledger(record)
-            return artifact
-        meter = Meter(output, record, provider, continuing=True)
-        meter.restore()
+        if queued:
+            return record
         gateway = gateway or ArchiveGateway(cutoff, cache)
+        if record.get("result_sha256"):
+            return audit(output, gateway, record=record)
+        meter = Meter(output, record, provider, continuing=True, pause=pause)
+        meter.restore()
+        record.update(state="running")
+        record.pop("failure", None)
+        meter.save()
         try:
-            memo, trace = research(question, cutoff, gateway, meter)
+            memo, trace = research(
+                question,
+                cutoff,
+                SavedSearches(gateway, output / "searches"),
+                meter,
+                profile=profile,
+            )
             settled, owed = verify_ledger(record)
             if owed or meter.seen != set(record["calls"]) | set(
                 record.get("skipped_calls", {})
@@ -595,6 +769,9 @@ def run(question, cutoff, output, cache, limit, *, provider=None, gateway=None):
             publish(output / "result.json", data)
             record.update(state=trace["release"], result_sha256=fingerprint(data))
             return result
+        except PauseRequested:
+            record["state"] = "paused"
+            raise
         except Exception as exc:
             record.update(
                 state="needs_reconciliation" if meter.pending else "failed",
@@ -602,6 +779,7 @@ def run(question, cutoff, output, cache, limit, *, provider=None, gateway=None):
             )
             raise
         finally:
+            record["finished_at"] = datetime.now(UTC).isoformat()
             meter.save()
 
 
