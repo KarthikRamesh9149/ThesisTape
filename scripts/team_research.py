@@ -61,9 +61,13 @@ class Case:
 
 
 def case_for(name: str) -> Case:
-    if name == "toyota-buybacks":
+    if name in ("toyota-buybacks", "toyota-buybacks-actual"):
         root = SAVED_CASE.parent / "toyota-buybacks-2023-05-11"
         data = json.loads(read_saved_file(root / "agent/question.json"))
+        if name == "toyota-buybacks-actual":
+            control = json.loads(read_saved_file(root / "agent/actual-purchase.json"))
+            data.update(case_id=control["case_id"], question=control["question"])
+            data["table"]["row_anchor"] = control["row_anchor"]
         return Case(data["case_id"], data["title"], data["question"], data["cutoff"],
                     reporting_currency="JPY", archive=root / "archive", archive_objects=ARCHIVE / "objects",
                     table=TableTarget(**data["table"]))

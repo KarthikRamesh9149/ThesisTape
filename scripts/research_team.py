@@ -19,7 +19,7 @@ from .team_research import VERSION, Case, case_for, research
 from .visual_reader import ROUTES as TABLE_ROUTES
 from .visual_reader import VERSION as VISUAL_VERSION
 
-CASES = ("disney", "tradeweb", "tradeweb-before", "toyota", "nvidia", "toyota-buybacks")
+CASES = ("disney", "tradeweb", "tradeweb-before", "toyota", "nvidia", "toyota-buybacks", "toyota-buybacks-actual")
 ROUTES = ("team", "single", "reviewed", "forecast", *TABLE_ROUTES)
 
 

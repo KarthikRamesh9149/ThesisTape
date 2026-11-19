@@ -1,0 +1,10 @@
+{
+  "purpose": "Separate live routing check on the intact neighboring row, frozen after the paired study. This result does not change either paired score.",
+  "cutoff": "2023-05-11",
+  "budget_usd": "0.06",
+  "value": "404.6",
+  "row_labels": ["Value of Shares Repurchased [actual purchase]", "Value of Shares Repurchased (billions of yen)[actual purchase]"],
+  "notes": [4],
+  "source": "PDF page 29, Value of Shares Repurchased [actual purchase], FY2022 12 months, billions of yen, Note 4. The complete exclusion is on PDF page 30.",
+  "criterion": "Use the first live conditional route on the intact row. Pass if it releases the correct cited value, coordinates, unit and complete Note 4, with no Terra generation or image sent to any model. Include the full cost in project spend regardless of the result."
+}

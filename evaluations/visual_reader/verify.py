@@ -90,37 +90,42 @@ def grade(record, memo, pages, rules):
         and column in (label(expected["column"]["label"]), "12 months 21 4 22 3"),
         "unit": label(cell["unit"]) in {label(s) for s in expected["unit"]["labels"]},
     }
-    for key in ("exclusions", "basis"):
-        n = expected[key]["note"]
+    note_rules = {k: v["note"] for k, v in expected.items() if "note" in v}
+    for key, n in note_rules.items():
         citation = f"[{pages.notes.locator}]({pages.notes.citation_url})"
         checks[key] = (
             n in note_ids and f"**Note {n}.** {pages.definitions[n]} {citation}" in body
         )
     passed = (
         all(checks.values())
-        and note_ids == {expected[k]["note"] for k in ("exclusions", "basis")}
+        and note_ids == set(note_rules.values())
         and "(" + pages.table.citation_url + ")" in body
     )
     return {"criteria": checks, "points": sum(checks.values()), "pass": passed}
+
+
+def replay_artifact(root, case, corpus, pages):
+    record = load(root / "run.json")
+    memo = replay(case, record, corpus=corpus)
+    if record.get("evidence") != pages.record():
+        raise CaseError("Report did not use the frozen dated passages")
+    path = root / "memo.md"
+    if (memo is None) != (not path.exists()) or (
+        memo is not None and read_saved_file(path) != memo
+    ):
+        raise CaseError("Released artifact differs from the replay")
+    return record, memo
 
 
 def compare(directory, case, corpus, rules, pages):
     arms = {}
     for arm in ("table-text", "visual"):
         root = directory / arm
-        record = load(root / "run.json")
+        record, memo = replay_artifact(root, case, corpus, pages)
         if record["route"] != arm or Decimal(record["budget_usd"]) != Decimal(
             rules["budget_usd_per_arm"]
         ):
             raise CaseError("Route or spending limit differs from the frozen pair")
-        memo = replay(case, record, corpus=corpus)
-        if record.get("evidence") != pages.record():
-            raise CaseError("The two arms must see the frozen dated passages")
-        path = root / "memo.md"
-        if (memo is None) != (not path.exists()) or (
-            memo is not None and read_saved_file(path) != memo
-        ):
-            raise CaseError("Released artifact differs from the replay")
         visual = record["visual_reader"]
         wanted = rules["page29_png_sha256"] if arm == "visual" else None
         if visual["image_sha256"] != wanted:
@@ -138,17 +143,56 @@ def compare(directory, case, corpus, rules, pages):
     control, visual = (
         Decimal(arms[arm]["estimated_usd"]) for arm in ("table-text", "visual")
     )
-    prior = Decimal(
-        load(HERE.parent / "forecast_specialist/usage.json")["project_recorded_usd"]
-    )
     return {
         "case_id": case.id,
         "budget_usd_per_arm": rules["budget_usd_per_arm"],
         "arms": arms,
         "incremental_visual_route_usd": str(visual - control),
-        "checkpoint_usd": str(control + visual),
+        "pair_usd": str(control + visual),
+    }
+
+
+def checkpoint(pair, routing_dir, corpus, rules, pages):
+    case = case_for("toyota-buybacks-actual")
+    control = load(case.archive.parent / "evaluator/clear-row.json")
+    record, memo = replay_artifact(routing_dir, case, corpus, pages)
+    if (
+        record["cutoff"] != control["cutoff"]
+        or record["route"] != "visual"
+        or Decimal(record["budget_usd"]) != Decimal(control["budget_usd"])
+    ):
+        raise CaseError("Routing check differs from its frozen case or budget")
+    expected = {k: v for k, v in rules["criteria"].items() if k != "basis"}
+    expected.update(
+        value={"expected": control["value"]},
+        row={"labels": control["row_labels"]},
+        exclusions={"note": control["notes"][0]},
+    )
+    result = grade(record, memo, pages, {"criteria": expected})
+    calls = record["calls"]
+    skipped = (
+        not record["visual_reader"]["requested"]
+        and record["visual_reader"]["image_sha256"] is None
+        and not any(k.startswith("visual.") for k in calls)
+    )
+    prior = Decimal(
+        load(HERE.parent / "forecast_specialist/usage.json")["project_recorded_usd"]
+    )
+    total = Decimal(pair["pair_usd"]) + Decimal(record["estimated_model_cost_usd"])
+    return {
+        "pair_usd": pair["pair_usd"],
+        "clear_row": {
+            **result,
+            "pass": result["pass"] and skipped,
+            "skipped_image": skipped,
+            "model_generations": len(calls),
+            "estimated_usd": record["estimated_model_cost_usd"],
+            "unreconciled_usd": record["unreconciled_reservation_usd"],
+            "elapsed_ms": record["elapsed_ms"],
+        },
+        "checkpoint_usd": str(total),
         "prior_project_usd": str(prior),
-        "project_recorded_usd": str(prior + control + visual),
+        "project_recorded_usd": str(prior + total),
         "project_cap_usd": "100",
     }
 
@@ -162,6 +206,9 @@ def main():
         help="Independently regenerate the registered PNG with Poppler",
     )
     parser.add_argument("--pair-dir", type=Path, default=HERE / "pair")
+    parser.add_argument(
+        "--routing-dir", type=Path, help="Also replay a separate clear-row control"
+    )
     args = parser.parse_args()
     case = case_for("toyota-buybacks")
     rules = load(case.archive.parent / "evaluator/protocol.json")
@@ -176,6 +223,16 @@ def main():
     saved = args.pair_dir / "results.json"
     if saved.exists() and load(saved) != results:
         raise CaseError("Published results differ from the recomputed scores or costs")
+    routing_dir = args.routing_dir or (
+        HERE / "clear-row" if args.pair_dir == HERE / "pair" else None
+    )
+    if routing_dir is not None:
+        usage = checkpoint(results, routing_dir, corpus, rules, pages)
+        if routing_dir == HERE / "clear-row" and load(HERE / "usage.json") != usage:
+            raise CaseError(
+                "Saved checkpoint costs or clear-row result differ from replay"
+            )
+        results = {"pair": results, "checkpoint": usage}
     print(json_bytes(results).decode(), end="")
 
 

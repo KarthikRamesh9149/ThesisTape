@@ -1,0 +1,51 @@
+{
+  "arms": {
+    "table-text": {
+      "criteria": {
+        "basis": true,
+        "column": true,
+        "exclusions": true,
+        "row": true,
+        "unit": true,
+        "value": true
+      },
+      "elapsed_ms": 10310,
+      "estimated_usd": "0.018746",
+      "model_generations": 2,
+      "pass": true,
+      "points": 6,
+      "stages_usd": {
+        "lead.memo": "0.008312",
+        "review.initial": "0.010434"
+      },
+      "state": "complete",
+      "unreconciled_usd": "0"
+    },
+    "visual": {
+      "criteria": {
+        "basis": true,
+        "column": true,
+        "exclusions": true,
+        "row": true,
+        "unit": true,
+        "value": true
+      },
+      "elapsed_ms": 13483,
+      "estimated_usd": "0.031088",
+      "model_generations": 3,
+      "pass": true,
+      "points": 6,
+      "stages_usd": {
+        "lead.memo": "0.008024",
+        "review.initial": "0.015802",
+        "visual.read": "0.007262"
+      },
+      "state": "complete",
+      "unreconciled_usd": "0"
+    }
+  },
+  "budget_usd_per_arm": "0.12",
+  "case_id": "toyota-buybacks-2023-05-11",
+  "incremental_visual_route_usd": "0.012342",
+  "pair_usd": "0.049834"
+}
