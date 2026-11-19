@@ -1,0 +1,1756 @@
+{
+  "registration_sha256": "5a13882ac64b393fd941e7c4920ada2e2a920369a82d312d6372cb5e2c8ef710",
+  "reports_sha256": "665cd5ae2717a429a1591bc3bb8cda40c8eb540a9150f6d4a4fbd17174ee3dd4",
+  "rows": [
+    {
+      "alias": "056e044de645a50f64b8fc981bee12124ef0bcacaf70f15d35670a60ae4166ff",
+      "answer_paragraph": "p1",
+      "answer_quote": "the carrying-value liquidation estimate is slightly below the reported book value of USD 82.31 per share.",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_02119",
+      "correct": false,
+      "grader_cost_usd": "0.03864",
+      "primary": false,
+      "reason": "The reference uses JPMorgan’s Q1 2021 tangible book value of $66.56 per common share as the payout estimate. The report instead uses ordinary book value of $82.31 as a benchmark and gives no specific payout estimate. P8 lists both metrics, but citing it does not supply the omitted $66.56 answer. The caveat that actual liquidation proceeds are uncertain does not resolve the metric mismatch.",
+      "settled_usd": "0.376466",
+      "source_witnesses": [],
+      "state": "qualified",
+      "supported": false,
+      "type": "novel-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "114eb3108a4e5428d4519ed87c69d49d217799c1723af097745072d60b0d11b4",
+      "answer_paragraph": "p1",
+      "answer_quote": "General Mills’ FY2019 cash conversion cycle was negative three point seven zero days.",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_04103",
+      "correct": true,
+      "grader_cost_usd": "0.05792",
+      "primary": true,
+      "reason": "Paragraph p1 directly answers the question and cites both statements. The inventory decrease of $82.9 million reduces the DPO denominator to $11,025.5 million. Using the two-year average balances, CCC = 365 × (1,600.75 / 11,108.4 + 1,681.95 / 16,865.2 − 2,800.15 / 11,025.5), which rounds to −3.70 days and matches the reference.",
+      "settled_usd": "0.204876",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P12",
+          "report_quote": "FY2019 consolidated net sales of USD 16,865.2 million as revenue and cost of sales of USD 11,108.4 million as COGS.",
+          "source_quote": "Net sales | $ | 16,865.2 | $ | 15,740.4 | $ | 15,619.8\nCost of sales | 11,108.4 | 10,304.8 | 10,052.0"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P9",
+          "report_quote": "inventory fell from 1,642.2 to 1,559.3 and receivables fell from 1,684.2 to 1,679.7",
+          "source_quote": "Receivables | 1,679.7 | 1,684.2\nInventories | 1,559.3 | 1,642.2"
+        },
+        {
+          "paragraph": "p3",
+          "passage": "P9",
+          "report_quote": "Accounts payable rose from USD 2,746.2 million to USD 2,854.1 million.",
+          "source_quote": "Accounts payable | $ | 2,854.1 | $ | 2,746.2"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "metrics-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "14d956a83caaffefd91df6ca1c528241f52a9e2658a392e6a8b1a71cc951226f",
+      "answer_paragraph": "p1",
+      "answer_quote": "Corning Incorporated’s reported GAAP effective income tax rate rose by two and seven-tenths of a percentage point, from 20.2% in FY2021 to 22.9% in FY2022.",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_01346",
+      "correct": true,
+      "grader_cost_usd": "0.045752",
+      "primary": true,
+      "reason": "Corning’s GAAP effective tax rate increased by 2.7 percentage points: 22.9% in FY2022 minus 20.2% in FY2021. Both rates are supported by the cited tax note and round to the reference’s 23% and 20%, respectively.",
+      "settled_usd": "0.274514",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P1",
+          "report_quote": "from 20.2% in FY2021 to 22.9% in FY2022",
+          "source_quote": "Effective tax rate | 22.9% | 20.2% | 17.5%"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P9",
+          "report_quote": "The operating summary rounds the rates to whole percentages",
+          "source_quote": "Effective tax rate | 23% | 20%"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P4",
+          "report_quote": "the more precise rates in the tax note are the reported GAAP rates",
+          "source_quote": "As reported - GAAP | $ | 14,189 | $ | 1,797 | $ | 1,316 | 22.9% | $ | 1.54"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P4",
+          "report_quote": "the more precise rates in the tax note are the reported GAAP rates",
+          "source_quote": "As reported - GAAP | $ | 14,082 | $ | 2,426 | $ | 1,906 | 20.2% | $ | 1.28"
+        },
+        {
+          "paragraph": "p3",
+          "passage": "P1",
+          "report_quote": "Audit settlements and reserve changes contributed more to the rate in the later year.",
+          "source_quote": "Audit settlements & change in reserve | 3.7 | 1.6 | 12.1"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "domain-relevant",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "1dfe48364198f95e041d0552b537c280b3e9b87c494665a700d02b0a7d089705",
+      "answer_paragraph": "p1",
+      "answer_quote": "No. Johnson & Johnson’s FY2022 results do not support a high-growth classification.",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_00956",
+      "correct": false,
+      "grader_cost_usd": "0.069272",
+      "primary": false,
+      "reason": "The report reaches the reference’s qualitative conclusion, and P5 supports its calculation from the displayed sales amounts. The numerical mismatch is narrow but outside the specified tolerance: 1.245535% rounds to 1.2% at one decimal place, whereas J&J explicitly reports 1.3% in P9. The report never states that reported rate.",
+      "settled_usd": "0.314476",
+      "source_witnesses": [
+        {
+          "paragraph": "p5",
+          "passage": "P5",
+          "report_quote": "Reported consolidated revenue growth (%) — (94,943 − 93,775) ÷ |93,775| × 100 ≈ 1.245535",
+          "source_quote": "Sales to customers | $ | 94,943 | 93,775 | 82,584"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P5",
+          "report_quote": "Net earnings fell from USD 20,878 million to USD 17,941 million",
+          "source_quote": "Net earnings | $ | 17,941 | 20,878 | 14,714"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P5",
+          "report_quote": "diluted earnings per share fell from USD 7.81 to USD 6.73",
+          "source_quote": "Diluted | $ | 6.73 | 7.81 | 5.51"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P5",
+          "report_quote": "pretax earnings fell, and a higher tax provision widened the decline in net earnings",
+          "source_quote": "Earnings before provision for taxes on income | 21,725 | 22,776 | 16,497\nProvision for taxes on income (Note 8) | 3,784 | 1,898 | 1,783"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P7",
+          "report_quote": "One-time vaccine manufacturing exit costs also weighed on profitability.",
+          "source_quote": "Cost of products sold increased as a percent to sales driven by:\n• | One-time COVID-19 vaccine manufacturing exit related costs"
+        },
+        {
+          "paragraph": "p3",
+          "passage": "P9",
+          "report_quote": "the five-year worldwide compound annual growth rate of 4.4%",
+          "source_quote": "The five-year compound annual growth rates for worldwide, U.S. and international sales were 4.4%, 4.0% and 4.9%, respectively."
+        },
+        {
+          "paragraph": "p4",
+          "passage": "P9",
+          "report_quote": "Worldwide operational sales growth (%) — 6.9 + (0.8) = 6.1",
+          "source_quote": "Volume | 6.9  % | 12.9 | %\nPrice | (0.8) | (0.7)"
+        }
+      ],
+      "state": "qualified",
+      "supported": true,
+      "type": "domain-relevant",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "1e732ca06112f172bf5ae54c665bb2663012517f24b296476fdf5a6087d25709",
+      "answer_paragraph": "p1",
+      "answer_quote": "the book-value estimate was USD 82.31 per JPM common share",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_02119",
+      "correct": false,
+      "grader_cost_usd": "0.051696",
+      "primary": false,
+      "reason": "The reference uses quarter-end tangible book value, $66.56 per common share. The report mentions that figure only as an alternative and directly answers with $82.31, the unadjusted book value. The citations support $82.31 under the report’s stated carrying-value assumptions, but it is not the reference metric.",
+      "settled_usd": "0.258680",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P9",
+          "report_quote": "USD 82.31 per JPM common share",
+          "source_quote": "Book value per share | 82.31 | 81.75 | 79.08 | 76.91 | 75.88"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P14",
+          "report_quote": "total stockholders’ equity of USD 280,714 million",
+          "source_quote": "Total stockholders’ equity | $ | 280,714 | $ | 261,262"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P14",
+          "report_quote": "preferred stock of USD 31,563 million",
+          "source_quote": "Redemption | — | (1,430)\nBalance at March 31 | 31,563 | 30,063"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P9",
+          "report_quote": "3,027.1 million common shares outstanding at quarter-end",
+          "source_quote": "Common shares at period-end | 3,027.1 | 3,049.4 | 3,048.2 | 3,047.6 | 3,047.0"
+        },
+        {
+          "paragraph": "p3",
+          "passage": "P13",
+          "report_quote": "tangible book value of USD 66.56 per share",
+          "source_quote": "Tangible book value per share | $ | 66.56 | $ | 66.11 | NA | NA"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "novel-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "2cb6f7cda82ca1fe0186f4da1b37c9e90cea8222dc75fbc4447bc92903bc2e00",
+      "answer_paragraph": null,
+      "answer_quote": null,
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_01912",
+      "correct": false,
+      "grader_cost_usd": "0.02584",
+      "primary": false,
+      "reason": "The report notes revenue growth for Las Vegas Strip Resorts and Regional Operations, but neither identifies MGM China as the worst-performing region nor states that its FY2022 net revenue fell 44%. P3’s 44% decline is quarterly. P5 contains the annual figures, but they cannot substitute for the missing direct answer.",
+      "settled_usd": "0.294326",
+      "source_witnesses": [],
+      "state": "qualified",
+      "supported": false,
+      "type": "novel-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "300ced8c6b5a9bc358f4e4a5b48a66768ccc9e1197c3e902c3955f2e346c8cfc",
+      "answer_paragraph": "p1",
+      "answer_quote": "Yes. CVS Health paid common shareholders a cash dividend of $0.55 per share during its fiscal second quarter, from the first day of April through June 30, 2022.",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_01244",
+      "correct": true,
+      "grader_cost_usd": "0.036184",
+      "primary": true,
+      "reason": "The answer directly matches the reference. CVS’s common-equity disclosure gives the 2022 quarterly rate of $0.55 per share and confirms that CVS paid cash dividends every quarter, including Q2. The conclusion therefore rests on payment evidence, not just a declaration.",
+      "settled_usd": "0.143318",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P2",
+          "report_quote": "a cash dividend of $0.55 per share",
+          "source_quote": "During 2022, 2021 and 2020, the quarterly cash dividend was $0.55, $0.50 and $0.50 per share, respectively."
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P2",
+          "report_quote": "CVS paid cash dividends every quarter",
+          "source_quote": "CVS Health Corporation has paid cash dividends every quarter since becoming a\npublic company."
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P5",
+          "report_quote": "through June 30, 2022",
+          "source_quote": "the fiscal quarter\nended June 30, 2022"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P12",
+          "report_quote": "CVS’s statement that it paid cash every quarter rules out a quarter with no payment.",
+          "source_quote": "CVS Health Corporation has paid cash dividends every quarter since becoming a\npublic company."
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "domain-relevant",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "304527ef925dd864074db9eecf1c7f88e0ee434cf7eb1e5c0a208f6da937062b",
+      "answer_paragraph": null,
+      "answer_quote": null,
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_02608",
+      "correct": false,
+      "grader_cost_usd": "0.030232",
+      "primary": false,
+      "reason": "The report gives the margin sum (8.442387%) and the year count (3), but never states the three-year average of 2.8%. The cited inputs support the calculation, but they do not substitute for the missing direct answer.",
+      "settled_usd": "0.237602",
+      "source_witnesses": [],
+      "state": "qualified",
+      "supported": false,
+      "type": "metrics-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "322c96b77868146214769ad90c4159d97478a3a8c6ef4986dba249838e647ed3",
+      "answer_paragraph": "p1",
+      "answer_quote": "At December 31, 2017, Netflix, Inc.’s total current liabilities were USD (5,466,312 ÷ one thousand) million.",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_03282",
+      "correct": false,
+      "grader_cost_usd": "0.037392",
+      "primary": false,
+      "reason": "The balance sheet supports the report’s calculation: $5,466,312 thousand equals $5,466.312 million. That rounds to $5,466.31 million at the reference’s displayed precision, not $5,466.00 million. The values agree only to the nearest whole million.",
+      "settled_usd": "0.122110",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P1",
+          "report_quote": "Netflix, Inc.’s total current liabilities were USD (5,466,312 ÷ one thousand) million.",
+          "source_quote": "Total current liabilities | 5,466,312 | 4,586,657"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P1",
+          "report_quote": "the numerator in thousands of dollars",
+          "source_quote": "(in thousands, except share and per share data)\nAs of December 31,\n2017 | 2016"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P2",
+          "report_quote": "That schedule includes commitments not yet recognized on the balance sheet",
+          "source_quote": "$10.2 billion of obligations that are not reflected on the Consolidated Balance Sheets"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P2",
+          "report_quote": "shows expected payment timing, not cash actually paid",
+          "source_quote": "The expected timing of payments for these streaming content obligations is as follows:"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "metrics-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "332dc7f5aca81ac6fe07de1d26daee176086b8f4360e0e43626c083157b0ffd0",
+      "answer_paragraph": "p1",
+      "answer_quote": "Pfizer’s consolidated net PP&E increased from USD 13,745 million at FY2020 year-end to USD 14,882 million at FY2021 year-end, a gain of USD 1,137 million.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_00302",
+      "correct": true,
+      "grader_cost_usd": "0.038472",
+      "primary": true,
+      "reason": "Pfizer’s consolidated net PP&E rose by USD 1,137 million from FY2020 to FY2021, matching the reference’s positive direction. The cited balance sheet supplies both year-end amounts, and the PP&E note confirms they are net of accumulated depreciation. The report correctly distinguishes growth in book value from growth in production capacity.",
+      "settled_usd": "0.210696",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P8",
+          "report_quote": "increased from USD 13,745 million at FY2020 year-end to USD 14,882 million at FY2021 year-end",
+          "source_quote": "Property, plant and equipment | 14,882 | 13,745"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P1",
+          "report_quote": "carrying value of PP&E after accumulated depreciation",
+          "source_quote": "Less: Accumulated depreciation | 15,074 | 14,661\nProperty, plant and equipment | $ | 14,882 | $ | 13,745"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P4",
+          "report_quote": "Pfizer classified those noncurrent assets under other noncurrent assets.",
+          "source_quote": "Noncurrent assets of discontinued operations––Other noncurrent assets | $ | — | $ | 319"
+        },
+        {
+          "paragraph": "p3",
+          "passage": "P8",
+          "report_quote": "14,882 − 13,745 = 1,137",
+          "source_quote": "Property, plant and equipment | 14,882 | 13,745"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "novel-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "3353c6ae5b6f4c81eac59ebc2c178fb37aabd28fa1600af73190c858784a9055",
+      "answer_paragraph": "p1",
+      "answer_quote": "PepsiCo’s FY2022 unadjusted EBITDA less capex was USD 9,068 million.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_03620",
+      "correct": true,
+      "grader_cost_usd": "0.039272",
+      "primary": true,
+      "reason": "The FY2022 figures give unadjusted EBITDA of 11,512 + 2,763 = 14,275 million. Subtracting gross capital spending of 5,207 million yields USD 9,068 million, matching the reference.",
+      "settled_usd": "0.334064",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P1",
+          "report_quote": "reported operating profit of USD 11,512 million",
+          "source_quote": "Operating Profit | 11,512 | 11,162 | 10,080"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P2",
+          "report_quote": "cash flow statement depreciation and amortization of USD 2,763 million",
+          "source_quote": "Depreciation and amortization | 2,763 | 2,710 | 2,548"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P2",
+          "report_quote": "capital spending outflow, reported as USD (5,207) million",
+          "source_quote": "Capital spending | (5,207) | (4,625) | (4,240)"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "metrics-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "355b7651e488bcdf5e7784c14048734b277c69088774e4b6881296d64c6be481",
+      "answer_paragraph": "p1",
+      "answer_quote": "Report zero.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_01319",
+      "correct": true,
+      "grader_cost_usd": "0.026112",
+      "primary": false,
+      "reason": "Zero matches the reference: AES’s FY2022 income statement has no separate restructuring-cost line. The cited passages do not establish that absence. P1 is an index, P11 shows net income and earnings per share rather than expense lines, and P2’s zero-cost disclosure applies only to the 2018 restructuring program.",
+      "settled_usd": "0.223072",
+      "source_witnesses": [],
+      "state": "complete",
+      "supported": false,
+      "type": "domain-relevant",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "35c8f7e7a911283dfbe7a70064226249b6af33419548112d101ea0823a3102f3",
+      "answer_paragraph": "p1",
+      "answer_quote": "She became its CEO on September 1, 2022, after serving as CEO of Ulta Beauty from July 2013 through June 2021. That gave her experience running a specialty retailer across stores and digital channels",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_00839",
+      "correct": true,
+      "grader_cost_usd": "0.039952",
+      "primary": false,
+      "reason": "The report correctly answers yes: Dillon led Ulta Beauty, whose store-and-digital retail model resembled Foot Locker’s despite the different merchandise. The citation gap is p1’s claim that Dillon was still Foot Locker’s CEO on December 4, 2024. Its cited passages establish her appointment effective September 1, 2022, but do not confirm her tenure on the later date.",
+      "settled_usd": "0.181024",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P2",
+          "report_quote": "after serving as CEO of Ulta Beauty from July 2013 through June 2021",
+          "source_quote": "Chief Executive Officer and a member of the Board of Directors of Ulta from July 2013 through June 2021."
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P3",
+          "report_quote": "experience running a specialty retailer across stores and digital channels",
+          "source_quote": "a successful omni-channel retailer with a best-in-class loyalty program."
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P4",
+          "report_quote": "approximately 2,800 stores alongside websites and mobile apps",
+          "source_quote": "With approximately 2,800 retail stores in 28 countries across North America, Europe, Asia,\nAustralia, and New Zealand as well as websites and mobile apps"
+        }
+      ],
+      "state": "complete",
+      "supported": false,
+      "type": "novel-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "362a88c8685b84c0eff29df52faa6dac2a8a71cc6cff51bb3d2f8e49dd332e4a",
+      "answer_paragraph": "p1",
+      "answer_quote": "Corning Incorporated’s consolidated GAAP effective tax rate rose from 20.2% in FY2021 to 22.9% in FY2022.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_01346",
+      "correct": true,
+      "grader_cost_usd": "0.036408",
+      "primary": true,
+      "reason": "The report gives both rates and the direction of change. The increase was 2.7 percentage points, and the precise rates round to the reference’s 20% for FY2021 and 23% for FY2022.",
+      "settled_usd": "0.210320",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P4",
+          "report_quote": "rose from 20.2% in FY2021 to 22.9% in FY2022",
+          "source_quote": "Effective tax rate | 22.9% | 20.2% | 17.5%"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P2",
+          "report_quote": "The operating summary shows 23% and 20%",
+          "source_quote": "Effective tax rate | 23% | 20%"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P4",
+          "report_quote": "The income-tax note reports both years to a decimal place",
+          "source_quote": "Effective tax rate | 22.9% | 20.2% | 17.5%"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "domain-relevant",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "3918387de3a3a02c85ce6ba807d0e87ccd8e723f6ab912382cf9a8163ea445e9",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_02608",
+      "correct": false,
+      "grader_cost_usd": "0",
+      "primary": false,
+      "reason": "No released memo",
+      "settled_usd": "0.343848",
+      "state": "failed",
+      "supported": false,
+      "type": "metrics-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "3e5092748738002d30b634529ca8a6697a45ba477abaea4a9df76d631e16113c",
+      "answer_paragraph": "p1",
+      "answer_quote": "Yes. Adobe’s free cash flow conversion rose from 142.7209% in FY2021 to 155.5088% in FY2022, a gain of 12.788 percentage points.",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_00591",
+      "correct": true,
+      "grader_cost_usd": "0.044064",
+      "primary": true,
+      "reason": "P1 supplies all three inputs. FY2021 conversion was (7,230 − 348) / 4,822 = 142.72%, versus (7,838 − 442) / 4,756 = 155.51% in FY2022. The increase was 12.79 percentage points, consistent with the reference’s rounded rise from 143% to 156%.",
+      "settled_usd": "0.309846",
+      "source_witnesses": [
+        {
+          "paragraph": "p2",
+          "passage": "P1",
+          "report_quote": "operating cash flow of USD 5,727 million, USD 7,230 million and USD 7,838 million",
+          "source_quote": "Net cash provided by operating activities | 7,838 | 7,230 | 5,727"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P1",
+          "report_quote": "reported outflows of USD (419) million, USD (348) million and USD (442) million",
+          "source_quote": "Purchases of property and equipment | (442) | (348) | (419)"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P1",
+          "report_quote": "GAAP net income was USD 5,260 million, USD 4,822 million and USD 4,756 million in the same years.",
+          "source_quote": "Net income | $ | 4,756 | $ | 4,822 | $ | 5,260"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "novel-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "4795a14124e52a8e24be1519f066c44c23dac41958f75c01d147d1697d439918",
+      "answer_paragraph": "p1",
+      "answer_quote": "In its FY2022 annual report, Boeing gave only the 787 a numerical FY2023 production target: a gradual increase from an unspecified low rate to 5 per month during the year. Boeing also expected 777X production to resume from a pause during the year, without specifying a monthly restart rate. For the 737, Boeing planned gradual increases from 31 per month, conditional on demand and supply-chain capacity, but gave neither a higher monthly target nor a deadline.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_00494",
+      "correct": true,
+      "grader_cost_usd": "0.04276",
+      "primary": true,
+      "reason": "The answer covers all three programs and accurately distinguishes their forecasts: 5 per month was the 787 target, the 777X was expected to restart without a stated rate, and 31 per month was the 737 starting rate rather than its target. P3 supports all three distinctions.",
+      "settled_usd": "0.227528",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P3",
+          "report_quote": "a gradual increase from an unspecified low rate to 5 per month during the year",
+          "source_quote": "The 787 program is currently producing at low rates and we expect to gradually increase to 5 per month in 2023."
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P3",
+          "report_quote": "777X production to resume from a pause during the year",
+          "source_quote": "Production of the 777X is currently paused and is expected to resume in 2023."
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P3",
+          "report_quote": "gradual increases from 31 per month, conditional on demand and supply-chain capacity",
+          "source_quote": "challenges stabilizing production at 31 per month. We plan to gradually increase 737 production rates based on market demand and supply\nchain capacity."
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "novel-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "5e80fced8368a71bfb71fb4cf957170eee0a8f4371ab4ab702fd661dfd04e9d2",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_01226",
+      "correct": false,
+      "grader_cost_usd": "0",
+      "primary": false,
+      "reason": "No released memo",
+      "settled_usd": "0.381370",
+      "state": "failed",
+      "supported": false,
+      "type": "domain-relevant",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "60acdc7899c8b91efe69b9d535ced13c889d901ebb04468bc643355fe35a8bfe",
+      "answer_paragraph": "p1",
+      "answer_quote": "cannot be determined from the supplied disclosures",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_00605",
+      "correct": false,
+      "grader_cost_usd": "0.025472",
+      "primary": false,
+      "reason": "The report correctly notes that Ulta calls the year ended January 28, 2023 fiscal 2022, but it never gives the percentage under the reference’s stated convention. P1 supplies both costs: $328.1 million divided by $900.0 million is 36.46%, or 36% to the nearest whole percent. Citing those amounts does not substitute for stating the requested percentage, so the absent direct answer fails both checks.",
+      "settled_usd": "0.227446",
+      "source_witnesses": [],
+      "state": "qualified",
+      "supported": false,
+      "type": "novel-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "6b193d046c3a49d31d3f144421e4fafd1232a21a51e86c850b40cb15b15069d8",
+      "answer_paragraph": "p1",
+      "answer_quote": "Boeing also expected the paused 777X to restart during the year and planned further 737 increases from 31 per month, but it gave neither a restart rate for the former nor a target rate or date for the latter.",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_00494",
+      "correct": true,
+      "grader_cost_usd": "0.042128",
+      "primary": true,
+      "reason": "The report directly covers all three programs. It correctly distinguishes the 787’s FY2023 target of 5 aircraft per month from the 777X production restart and the conditional 737 increase. The cited passages give neither a 777X restart rate nor a target rate or date for the 737 increase.",
+      "settled_usd": "0.200194",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P1",
+          "report_quote": "a gradual increase from an unspecified low rate to 5 per month during the year",
+          "source_quote": "The 787 program is currently producing at low rates and we expect to gradually increase to 5 per month in 2023."
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P1",
+          "report_quote": "expected the paused 777X to restart during the year",
+          "source_quote": "Production of the 777X is currently paused and is expected to resume in 2023."
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P6",
+          "report_quote": "planned further 737 increases from 31 per month",
+          "source_quote": "We increased the production rate to 31 per month in 2022, and expect to implement further gradual production rate increases based on market\ndemand  and  supply  chain  capacity."
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "novel-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "7a2095c261438fd85a07cc277dfd648f062fc1939513c40d55bcad1aa90fc6b4",
+      "answer_paragraph": "p1",
+      "answer_quote": "Amcor plc’s primary industry was packaging manufacturing.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_01148",
+      "correct": true,
+      "grader_cost_usd": "0.044152",
+      "primary": false,
+      "reason": "Packaging manufacturing directly answers the question and matches the reference. The citations establish that the two packaging segments generated all fiscal 2023 net sales. They do not establish the added claim that packaging remained Amcor’s primary industry on December 4, 2024.",
+      "settled_usd": "0.199616",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P2",
+          "report_quote": "approximately 76% came from Flexibles and 24% from Rigid Packaging",
+          "source_quote": "In fiscal year 2023, Flexibles accounted for approximately 76% of consolidated net sales."
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P14",
+          "report_quote": "accounted for all reported net sales in fiscal 2023",
+          "source_quote": "Flexibles | $ | 11,154 | $ | 11,151 | $ | 10,038\nRigid Packaging | 3,540 | 3,393 | 2,823\nOther | — | — | —\nNet sales | $ | 14,694 | $ | 14,544 | $ | 12,861"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P1",
+          "report_quote": "Amcor also sold rigid containers, preforms and closures",
+          "source_quote": "Containers, preforms, and closures | Rigid Packaging | 3,540"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P6",
+          "report_quote": "Food, beverage and healthcare were customer markets",
+          "source_quote": "food, beverage, pharmaceutical, medical device, home and\npersonal care, and other consumer goods end markets"
+        }
+      ],
+      "state": "complete",
+      "supported": false,
+      "type": "domain-relevant",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "80a5f42c2662695511ca9593a60874455315b4a5675e1f026c3b100799b43209",
+      "answer_paragraph": "p1",
+      "answer_quote": "Amcor plc’s primary industry was packaging manufacturing (containers and packaging).",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_01148",
+      "correct": true,
+      "grader_cost_usd": "0.033264",
+      "primary": true,
+      "reason": "Packaging manufacturing matches the reference. P10 identifies packaging as what Amcor produces and food, beverage, and healthcare as markets it serves. P6 confirms that flexible packaging was its largest segment, not its entire business. The evidence describes fiscal 2023 rather than a separate December 2024 sales mix.",
+      "settled_usd": "0.129232",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P10",
+          "report_quote": "Amcor made flexible packaging, rigid containers, specialty cartons and closures.",
+          "source_quote": "The Company develops and produces a broad range of packaging products including flexible packaging, rigid packaging containers, specialty cartons, and closures."
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P6",
+          "report_quote": "Flexibles accounted for approximately 76% of consolidated net sales",
+          "source_quote": "In fiscal year 2023, Flexibles accounted for approximately 76% of consolidated net sales."
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "domain-relevant",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "83e465f030f30e50b885c35af67ae20505bba1c83a607eda240789935ad036a6",
+      "answer_paragraph": "p1",
+      "answer_quote": "one and nine-tenths percent",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_07966",
+      "correct": true,
+      "grader_cost_usd": "0.036432",
+      "primary": true,
+      "reason": "Using capex outflow magnitudes, the equal-weight average for FY2017–FY2019 is (155/7,017 + 131/7,500 + 116/6,489) × 100/3 ≈ 1.914%, which rounds to the reported 1.9%.",
+      "settled_usd": "0.278188",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P3",
+          "report_quote": "capital expenditures",
+          "source_quote": "Capital expenditures | (116) | (131) | (155)"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P8",
+          "report_quote": "consolidated net revenue",
+          "source_quote": "Total net revenues | 6,489 | 7,500 | 7,017"
+        }
+      ],
+      "state": "qualified",
+      "supported": true,
+      "type": "metrics-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "85805bdcaeeb923b333c5997118261159f8aa184adf5be1047699675c2943cb6",
+      "answer_paragraph": "p1",
+      "answer_quote": "higher raw-material costs outweighed operating offsets, while a divestiture gain masked much of the litigation and exit expense.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_01226",
+      "correct": false,
+      "grader_cost_usd": "0.0702",
+      "primary": false,
+      "reason": "The report correctly calculates a 1.74-percentage-point decline in 3M’s FY2022 reported operating margin and explains why the metric is useful. Its raw-material explanation is supported for adjusted margin. But for reported margin, the report describes cost pressure without explicitly identifying the gross-margin decline, and its generic reference to litigation and exit expense does not identify the Combat Arms Earplugs charge, PFAS manufacturing exit impairment, Russia exit costs or divestiture-related restructuring. Those details appear in the evidence but not in the answer.",
+      "settled_usd": "0.402808",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P5",
+          "report_quote": "net sales of USD 35,355 million",
+          "source_quote": "(Millions, except per share amounts) | 2022 | 2021 | 2020\nNet sales | $ | 34,229 | $ | 35,355 | $ | 32,184"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P5",
+          "report_quote": "operating income was USD 7,369 million",
+          "source_quote": "Operating income | 6,539 | 7,369 | 7,161"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P1",
+          "report_quote": "a divestiture gain masked much of the litigation and exit expense",
+          "source_quote": "Net costs for significant litigation | (6.7) | (3.20) | (1.4) | (0.61)"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P6",
+          "report_quote": "a divestiture gain masked much of the litigation and exit expense",
+          "source_quote": "Gain on business divestitures | 8.0 | 4.73 | — | —\nDivestiture-related restructuring actions | (0.1) | (0.05) | — | —\nRussia exit charges | (0.3) | (0.20) | — | —\nPFAS manufacturing exit costs | (2.4) | (1.12) | — | —"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P1",
+          "report_quote": "non-GAAP operating margin fell from 22.2% to 20.8%",
+          "source_quote": "Current period, excluding special items | 20.8 | 10.10 | 22.2 | 10.73"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P1",
+          "report_quote": "the raw-material contribution was (2.4) points, against a positive 1.0 point from organic growth, productivity and other factors combined",
+          "source_quote": "Total organic growth/productivity and other | 1.0 | 0.56 | 0.7 | 1.07\nRaw material impact | (2.4) | (1.13) | (0.8) | (0.27)"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P12",
+          "report_quote": "higher logistics costs and disruptions to manufacturing in Belgium worked in the opposite direction",
+          "source_quote": "higher raw materials and logistics costs, manufacturing productivity headwinds which were further magnified by the shutdown of certain operations in Belgium"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P12",
+          "report_quote": "Higher selling prices partly offset cost pressure",
+          "source_quote": "On a percent of sales basis, these increases were partially offset by increases in selling prices."
+        }
+      ],
+      "state": "qualified",
+      "supported": true,
+      "type": "domain-relevant",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "86c5c48612a0f5fcc353fe5ee814d08fadc9ef9d008878a288f0c189aa89d4d7",
+      "answer_paragraph": "p1",
+      "answer_quote": "CVS Health paid a cash dividend of $0.55 per common share in fiscal Q2 2022, the quarter ended June 30, 2022.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_01244",
+      "correct": true,
+      "grader_cost_usd": "0.033168",
+      "primary": true,
+      "reason": "The report directly answers yes and gives the reference amount of $0.55 per common share. P2 establishes both the 2022 quarterly rate and actual payment every quarter, which includes Q2. P9 supports the quarter-end date, not the payment; P4 independently confirms the payment history.",
+      "settled_usd": "0.204744",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P2",
+          "report_quote": "a cash dividend of $0.55 per common share",
+          "source_quote": "During 2022, 2021 and 2020, the quarterly cash dividend was $0.55, $0.50 and $0.50 per share, respectively."
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P2",
+          "report_quote": "it paid cash dividends every quarter",
+          "source_quote": "CVS Health Corporation has paid cash dividends every quarter"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P9",
+          "report_quote": "the quarter ended June 30, 2022",
+          "source_quote": "the fiscal quarter\nended June 30, 2022"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P4",
+          "report_quote": "payment within the quarter through CVS’s explicit every-quarter statement",
+          "source_quote": "CVS Health Corporation has paid cash dividends every quarter"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "domain-relevant",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "8c006bc43c7e1f06dcf3d5227d02b31ea1a7e82f573067513ddb5169ca03b943",
+      "answer_paragraph": "p3",
+      "answer_quote": "Total net revenue growth rate (percent) — (9,497,578 − 4,713,500) ÷ |4,713,500| × 100 ≈ 101.497359",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_03838",
+      "correct": true,
+      "grader_cost_usd": "0.0384",
+      "primary": true,
+      "reason": "The report uses Square’s FY2019 total net revenue as the base and calculates the increase to FY2020 from the cited income statement. It displays extra decimal places, but its explicitly labeled percentage rounds to the reference answer of 101.5%.",
+      "settled_usd": "0.288336",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P6",
+          "report_quote": "from FY2019 to FY2020",
+          "source_quote": "Year Ended December 31,\n2020 | 2019 | 2018"
+        },
+        {
+          "paragraph": "p3",
+          "passage": "P6",
+          "report_quote": "(9,497,578 − 4,713,500) ÷ |4,713,500| × 100",
+          "source_quote": "Total net revenue | 9,497,578  | 4,713,500  | 3,298,177"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "metrics-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "9c27711c30d886e32116171d47ff788425425447fedeb5861ccfbb5a1a358390",
+      "answer_paragraph": "p1",
+      "answer_quote": "just under two percent",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_07966",
+      "correct": false,
+      "grader_cost_usd": "0.037488",
+      "primary": false,
+      "reason": "The report gives only a qualitative approximation, not the requested one-decimal answer. P4 and P14 supply the inputs: (155/7,017 + 131/7,500 + 116/6,489) × 100/3 rounds to 1.9%. The citations allow that calculation but do not substitute for stating the result.",
+      "settled_usd": "0.360120",
+      "source_witnesses": [],
+      "state": "qualified",
+      "supported": false,
+      "type": "metrics-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "9ec223aad27d7aa05884524ebd8be4f2048f8790516a18cfab382966045fdc55",
+      "answer_paragraph": "p1",
+      "answer_quote": "had already served as CEO of Ulta Beauty from July 2013 through June 2021. She succeeded Richard A. Johnson at Foot Locker effective September 1, 2022. Her experience was relevant because both companies are specialty retailers that sell through stores and digital channels.",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_00839",
+      "correct": true,
+      "grader_cost_usd": "0.040968",
+      "primary": true,
+      "reason": "The report directly answers yes, identifies Dillon’s prior CEO role at Ulta, and explains that the relevant similarity is the retail model rather than the merchandise. The cited passages support her tenure, appointment, and the channel comparison. The report limits its recency claim to the supplied records rather than claiming the 2022 filing rules out a later appointment.",
+      "settled_usd": "0.230846",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P2",
+          "report_quote": "had already served as CEO of Ulta Beauty from July 2013 through June 2021",
+          "source_quote": "Chief Executive Officer and a member of the Board of Directors of Ulta from July 2013 through June 2021."
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P1",
+          "report_quote": "She succeeded Richard A. Johnson at Foot Locker effective September 1, 2022.",
+          "source_quote": "RICHARD A. JOHNSON TO RETIRE AS CHAIRMAN AND CEO;\nMARY N. DILLON APPOINTED AS CEO, EFFECTIVE SEPTEMBER 1, 2022"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P3",
+          "report_quote": "both companies are specialty retailers that sell through stores and digital channels",
+          "source_quote": "the leading beauty destination in the U.S.\nand a successful omni-channel retailer"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P4",
+          "report_quote": "both companies are specialty retailers that sell through stores and digital channels",
+          "source_quote": "approximately 2,800 retail stores in 28 countries across North America, Europe, Asia,\nAustralia, and New Zealand as well as websites and mobile apps"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "novel-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "ab4a69e4ba02d05516642965f6b1c0ec6ec53131cf5104d86936f299b220fe8c",
+      "answer_paragraph": "p1",
+      "answer_quote": "Walmart’s unadjusted operating income margin rose by two-tenths of a percentage point, rounded to one decimal place.",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_04784",
+      "correct": true,
+      "grader_cost_usd": "0.0386",
+      "primary": true,
+      "reason": "The cited operating income and full-year revenue figures yield margins of 4.0846% in FY2018 and 4.2684% in FY2019. The increase of 0.1838 percentage points rounds to 0.2 percentage points, matching the reference.",
+      "settled_usd": "0.290194",
+      "source_witnesses": [
+        {
+          "paragraph": "p2",
+          "passage": "P9",
+          "report_quote": "the return-on-investment reconciliation gives operating income before adjustments",
+          "source_quote": "Operating income | $ | 21,957 | $ | 20,437"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P2",
+          "report_quote": "20,437 ÷ 500,343 for the earlier year",
+          "source_quote": "Total revenues | $ | 117,542 | $ | 123,355 | $ | 123,179 | $ | 136,267 | $ | 500,343"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P2",
+          "report_quote": "21,957 ÷ 514,405 for the later year",
+          "source_quote": "Total revenues | $ | 122,690 | $ | 128,028 | $ | 124,894 | $ | 138,793 | $ | 514,405"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "metrics-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "ab882b591abaa2b75815d41a7a06d6afdc4b909dae56c04c652372bc0252c69f",
+      "answer_paragraph": "p1",
+      "answer_quote": "Block’s consolidated total net revenue grew one hundred one point five percent from FY2019 to FY2020",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_03838",
+      "correct": true,
+      "grader_cost_usd": "0.031232",
+      "primary": true,
+      "reason": "P5 supplies both revenue figures. Dividing the increase by FY2019 revenue gives 101.4974% growth, which rounds to 101.5% and matches the reference.",
+      "settled_usd": "0.295392",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P5",
+          "report_quote": "from USD 4,713,500 thousand to USD 9,497,578 thousand",
+          "source_quote": "Year Ended December 31,\n2020 | 2019 | 2018 | 2017 | 2016\n(in thousands, except per share data)\nConsolidated Statement of Operations Data:\nTotal net revenue | 9,497,578  | 4,713,500"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P5",
+          "report_quote": "(9,497,578 − 4,713,500) ÷ |4,713,500| × 100 ≈ 101.497359",
+          "source_quote": "Total net revenue | 9,497,578  | 4,713,500"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "metrics-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "b18782629f3da9670b28c01c9ba0a9f31dccdf8abbf1402b2927dcf81dcda1e2",
+      "answer_paragraph": "p1",
+      "answer_quote": "acquired Xilinx product sales drove most of the Embedded increase, higher EPYC server processor sales drove most of the Data Center increase, and Client revenue fell.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_01198",
+      "correct": true,
+      "grader_cost_usd": "0.059216",
+      "primary": true,
+      "reason": "The report identifies all three FY22 revenue growth drivers: p1 names EPYC server processor sales and the inclusion of Xilinx Embedded sales, and p4 explains the Gaming increase through stronger semi-custom console chip demand. The cited passages support each driver, the partial Client offset, and the calculated consolidated increase.",
+      "settled_usd": "0.268000",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P8",
+          "report_quote": "a gain of USD 7,167 million, or 43.6108%",
+          "source_quote": "Total net revenue | $ | 23,601 | $ | 16,434 | $ | 9,763"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P2",
+          "report_quote": "acquired Xilinx product sales drove most of the Embedded increase",
+          "source_quote": "was primarily driven by the inclusion of Xilinx embedded product revenue as a result of the acquisition of Xilinx in February 2022."
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P3",
+          "report_quote": "higher EPYC server processor sales drove most of the Data Center increase",
+          "source_quote": "The increase was primarily driven by higher\nsales of our EPYC server processors."
+        },
+        {
+          "paragraph": "p4",
+          "passage": "P2",
+          "report_quote": "stronger demand for semi-custom chips used in consoles outweighed weaker graphics sales",
+          "source_quote": "higher semi-custom product sales due to higher demand for gaming console SoCs, partially offset by lower gaming graphics sales"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P7",
+          "report_quote": "Client revenue fell",
+          "source_quote": "This growth was partially offset by a 10% decrease in Client segment revenue"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "domain-relevant",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "b87b584384ca2fcc58c144c4fbc6ca774bccb25300c575e5f2b8764724415149",
+      "answer_paragraph": "p1",
+      "answer_quote": "NIKE, Inc. reported total current assets of USD 16,525 million on its consolidated balance sheet at fiscal year-end, May 31, 2019.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_03531",
+      "correct": true,
+      "grader_cost_usd": "0.028184",
+      "primary": true,
+      "reason": "NIKE’s FY2019 balance sheet lists total current assets of USD 16,525 million, matching the reference. The Topic 606 note confirms that USD 16,525 million was the reported balance and USD 15,333 million was the balance without adoption.",
+      "settled_usd": "0.198040",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P11",
+          "report_quote": "total current assets of USD 16,525 million",
+          "source_quote": "Total current assets | 16,525 | 15,134"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P7",
+          "report_quote": "the reported balance, not the hypothetical balance without adoption of Topic 606",
+          "source_quote": "Total current assets | 16,525 | 1,192 | 15,333"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "metrics-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "ba2b6e784be15f719eb7fa1b1600368741ce6b159a4716647b494c140bdd6911",
+      "answer_paragraph": "p1",
+      "answer_quote": "No. Microsoft’s total balance-sheet borrowings fell from USD 49,781 million at June 30, 2022 to USD 47,237 million at June 30, 2023, a change of USD -2,544 million.",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_00552",
+      "correct": true,
+      "grader_cost_usd": "0.039272",
+      "primary": true,
+      "reason": "Adding current and noncurrent debt gives $49,781 million for FY2022 and $47,237 million for FY2023. The $2,544 million decrease rounds to the reference’s $2.5 billion decrease.",
+      "settled_usd": "0.174238",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P2",
+          "report_quote": "more of it was due within a year",
+          "source_quote": "Current portion of long-term debt | 5,247 | 2,749"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P2",
+          "report_quote": "The decline in noncurrent debt outweighed the rise in current maturities.",
+          "source_quote": "Long-term debt | 41,990 | 47,032"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "domain-relevant",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "c6e472d728abc4cade0ab62f419049bd3ae871ef48af04cecf6c0c89051550ba",
+      "answer_paragraph": "p1",
+      "answer_quote": "NIKE, Inc. reported total current assets of USD 16,525 million at its fiscal year-end on May 31, 2019.",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_03531",
+      "correct": true,
+      "grader_cost_usd": "0.028344",
+      "primary": true,
+      "reason": "The answer matches the reference. P9 lists USD 16,525 million in the May 31, 2019 column for total current assets, distinct from total assets of USD 23,717 million.",
+      "settled_usd": "0.109722",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P9",
+          "report_quote": "USD 16,525 million",
+          "source_quote": "Total current assets | 16,525 | 15,134"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P9",
+          "report_quote": "the 2019 column of its consolidated balance sheet",
+          "source_quote": "NIKE, INC.\nCONSOLIDATED BALANCE SHEETS\nMAY 31,\n(Dollars in millions) | 2019 | 2018"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "metrics-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "c704e6d9df7367e15d504209eaefe93f41f3999bb36a592611872ecbcd8c3c38",
+      "answer_paragraph": "p1",
+      "answer_quote": "Adobe’s free cash flow conversion rose from 142.7209% in FY2021 to 155.5088% in FY2022, an improvement of 12.788 percentage points.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_00591",
+      "correct": true,
+      "grader_cost_usd": "0.043",
+      "primary": true,
+      "reason": "The cited cash flow statement supplies all operands. For FY2021, (7,230 − 348) / 4,822 rounds to 142.72%; for FY2022, (7,838 − 442) / 4,756 rounds to 155.51%. The increase of 12.79 percentage points matches the reference’s rounded move from 143% to 156%.",
+      "settled_usd": "0.311176",
+      "source_witnesses": [
+        {
+          "paragraph": "p2",
+          "passage": "P1",
+          "report_quote": "operating cash flow of 7,838",
+          "source_quote": "Net cash provided by operating activities | 7,838 | 7,230 | 5,727"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P1",
+          "report_quote": "a property and equipment outflow of (348)",
+          "source_quote": "Purchases of property and equipment | (442) | (348) | (419)"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P1",
+          "report_quote": "against net income of 4,756",
+          "source_quote": "Net income | $ | 4,756 | $ | 4,822 | $ | 5,260"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "novel-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "d5ed9b198a56e7d94a91fd56394fb3577b917a4f48bc98a733f83e20976e8c06",
+      "answer_paragraph": "p1",
+      "answer_quote": "MGM China had MGM Resorts International’s weakest topline performance in FY2022, measured by the year-over-year percentage change in reported full-year net revenue.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_01912",
+      "correct": true,
+      "grader_cost_usd": "0.048576",
+      "primary": true,
+      "reason": "P7’s full-year net revenues show that MGM China declined 44.37% from FY2021 to FY2022, while Regional Operations grew 12.48% and Las Vegas Strip Resorts grew 77.29%. MGM China was therefore the only geographic region with a decline, matching the reference. The report correctly limits the Macau travel-restriction evidence to the fourth quarter.",
+      "settled_usd": "0.219768",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P7",
+          "report_quote": "Its net revenue fell from USD 1,210,761 thousand in FY2021 to USD 673,593 thousand in FY2022",
+          "source_quote": "MGM China | 174,720 | 314,717 | 673,593 | 1,210,761"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P7",
+          "report_quote": "Regional Operations grew by 12.4846",
+          "source_quote": "Regional Operations | 991,452 | 899,607 | 3,815,885 | 3,392,363"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P7",
+          "report_quote": "Las Vegas Strip Resorts grew by 77.2861",
+          "source_quote": "Las Vegas Strip Resorts | $ | 2,297,282 | $ | 1,806,686 | $ | 8,398,372 | $ | 4,737,185"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P7",
+          "report_quote": "The smaller “Management and other operations” line is not a geographic region.",
+          "source_quote": "Management and other operations | 128,762 | 35,882 | 239,635 | 339,831"
+        },
+        {
+          "paragraph": "p3",
+          "passage": "P11",
+          "report_quote": "The Cosmopolitan acquisition and a full year of Aria and Vdara affected the Las Vegas comparison.",
+          "source_quote": "the operating results of The\nCosmopolitan upon its acquisition in May 2022, a full year of Aria and Vdara"
+        },
+        {
+          "paragraph": "p3",
+          "passage": "P2",
+          "report_quote": "Macau travel restrictions as a fourth-quarter headwind for MGM China",
+          "source_quote": "more  significantly  impacted by  travel  and\nentry restrictions in Macau compared to the prior year quarter"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "novel-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "d9d27ffe95fdd7ccc2b7e9028b5ca138aa454b9c031c8dc3a3abf806eb21e6c2",
+      "answer_paragraph": "p1",
+      "answer_quote": "PepsiCo’s unadjusted EBITDA exceeded capital expenditures by USD 9,068 million for the full fiscal year ended December 31, 2022.",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_03620",
+      "correct": true,
+      "grader_cost_usd": "0.040752",
+      "primary": true,
+      "reason": "The cited FY2022 figures yield unadjusted EBITDA of 11,512 + 2,763 = 14,275 million. Subtracting gross capex of 5,207 million gives USD 9,068 million, matching the reference.",
+      "settled_usd": "0.292680",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P1",
+          "report_quote": "Reported operating profit of USD 11,512 million",
+          "source_quote": "Operating Profit | 11,512 | 11,162 | 10,080"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P2",
+          "report_quote": "cash-flow depreciation and amortization of USD 2,763 million",
+          "source_quote": "Depreciation and amortization | 2,763 | 2,710 | 2,548"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P2",
+          "report_quote": "capital spending of USD (5,207) million",
+          "source_quote": "Capital spending | (5,207) | (4,625) | (4,240)"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "metrics-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "da5f3a40324463e879dc5948f30dd1253ab104a62b16203ccff215f713463954",
+      "answer_paragraph": null,
+      "answer_quote": null,
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_01319",
+      "correct": false,
+      "grader_cost_usd": "0.018",
+      "primary": false,
+      "reason": "The report does not state 0 as the FY2022 income-statement answer or say that AES’s statement lacks a restructuring-cost line. Its claim of “no costs” is limited to the 2018 program. P8 supports that narrower claim but does not show how the income statement presents restructuring costs.",
+      "settled_usd": "0.235650",
+      "source_witnesses": [],
+      "state": "qualified",
+      "supported": false,
+      "type": "domain-relevant",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "dbd8b363e7b93f1a29ce88ca1c0660e0723ec8b05c76d643cff942c97dfe6712",
+      "answer_paragraph": "p1",
+      "answer_quote": "Netflix, Inc.’s consolidated total current liabilities at December 31, 2017 were USD (5,466,312 ÷ one thousand) million.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_03282",
+      "correct": false,
+      "grader_cost_usd": "0.03944",
+      "primary": false,
+      "reason": "The report correctly converts the FY2017 balance-sheet subtotal to $5,466.312 million. At the reference’s displayed precision, that rounds to $5,466.31 million, not $5,466.00 million. The answer is therefore supported by the filing but falls outside the specified reference tolerance.",
+      "settled_usd": "0.244160",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P6",
+          "report_quote": "USD (5,466,312 ÷ one thousand) million",
+          "source_quote": "Total current liabilities | 5,466,312 | 4,586,657"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P6",
+          "report_quote": "in thousands of dollars",
+          "source_quote": "(in thousands, except share and per share data)\nAs of December 31,\n2017 | 2016"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P6",
+          "report_quote": "current content liabilities, accounts payable, accrued expenses and deferred revenue",
+          "source_quote": "Current content liabilities | $ | 4,173,041 | $ | 3,632,711\nAccounts payable | 359,555 | 312,842\nAccrued expenses | 315,094 | 197,632\nDeferred revenue | 618,622 | 443,472"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P2",
+          "report_quote": "includes obligations not recognized on the balance sheet",
+          "source_quote": "$10.2 billion of obligations that are not reflected on the Consolidated Balance Sheets"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "metrics-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "dfd1b450395b1b6c7b05eb320766543f252cc5fd7d98c14b3435f11c62d5fb99",
+      "answer_paragraph": "p1",
+      "answer_quote": "The available excerpts do not establish which Verizon derivative had the highest outstanding notional at December 31, 2021",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_00859",
+      "correct": false,
+      "grader_cost_usd": "0.030592",
+      "primary": false,
+      "reason": "The reference table identifies cross currency swaps as the largest, with $32,502 million outstanding at December 31, 2021. The report gives neither the winner nor its notional amount. P1 omits the table balances, and P8 supports only the comparison between forward-starting swaps and Treasury rate locks, not the portfolio maximum.",
+      "settled_usd": "0.215872",
+      "source_witnesses": [],
+      "state": "complete",
+      "supported": false,
+      "type": "novel-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "e1529621651e0deb0903b2764ec010db6c1734ce52f7a4f225fcbf9c893a2e04",
+      "answer_paragraph": "p1",
+      "answer_quote": "Walmart’s unadjusted consolidated operating income margin increased by +0.1838 percentage points, from 4.0846% in FY2018 to 4.2684% in FY2019.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_04784",
+      "correct": true,
+      "grader_cost_usd": "0.03564",
+      "primary": true,
+      "reason": "P15 supplies operating income and total revenues for both years. Dividing operating income by total revenues gives margins of 4.0846% in FY2018 and 4.2684% in FY2019. The reported increase of 0.1838 percentage points rounds to 0.2 percentage points, matching the reference.",
+      "settled_usd": "0.239864",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P15",
+          "report_quote": "from 4.0846% in FY2018 to 4.2684% in FY2019",
+          "source_quote": "Operating\nincome | 21,957 | 20,437 | 22,764"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P15",
+          "report_quote": "from 4.0846% in FY2018 to 4.2684% in FY2019",
+          "source_quote": "Total revenues | 514,405 | 500,343 | 485,873"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "metrics-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "e284d69786c88ed29227d2963edfdde4312485008773791658f9a46c729d320d",
+      "answer_paragraph": "p1",
+      "answer_quote": "No. Johnson & Johnson’s consolidated GAAP results from FY2021 to FY2022 do not support a high-growth label.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_00956",
+      "correct": true,
+      "grader_cost_usd": "0.044624",
+      "primary": true,
+      "reason": "The report directly answers no and gives the decisive figure: Johnson & Johnson reported 1.3% worldwide sales growth in FY2022. It distinguishes that figure from both the 1.2455% calculated using the income statement and the 6.1% growth excluding currency effects. The cited declines in net earnings, diluted EPS and pretax margin reinforce the conclusion.",
+      "settled_usd": "0.354560",
+      "source_witnesses": [
+        {
+          "paragraph": "p2",
+          "passage": "P10",
+          "report_quote": "1.3% in management’s rounded breakdown, versus 13.6% the prior year",
+          "source_quote": "In 2022, worldwide sales increased 1.3% to $94.9 billion as compared to an increase of 13.6% in 2021."
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P11",
+          "report_quote": "Sales rose from USD 93,775 million to USD 94,943 million",
+          "source_quote": "Sales to customers | $ | 94,943 | 93,775 | 82,584"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P11",
+          "report_quote": "net earnings fell from USD 20,878 million to USD 17,941 million",
+          "source_quote": "Net earnings | $ | 17,941 | 20,878 | 14,714"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P11",
+          "report_quote": "Diluted EPS fell from USD 7.81 to USD 6.73",
+          "source_quote": "Diluted | $ | 6.73 | 7.81 | 5.51"
+        },
+        {
+          "paragraph": "p3",
+          "passage": "P4",
+          "report_quote": "the consolidated pretax margin fell from 24.3% to 22.9%",
+          "source_quote": "consolidated earnings before provision for taxes on income was 22.9% and 24.3%, in 2022 and 2021, respectively."
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "domain-relevant",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "e5bdcd65d62ebec68888bb8fc8326a9a0cceb1ccb0a7771ec8ed8cfb6603045b",
+      "answer_paragraph": "p1",
+      "answer_quote": "Verizon’s cross currency swaps had the highest outstanding notional amount at December 31, 2021: $32.5 billion",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_00859",
+      "correct": false,
+      "grader_cost_usd": "0.048472",
+      "primary": false,
+      "reason": "The report identifies the correct instrument and year-end metric. Its cited passages support the ranking and the rounded figure of $32.5 billion. However, that figure converts to $32,500 million, $2 million below the reference’s $32,502 million, outside the required nearest-million tolerance.",
+      "settled_usd": "0.136244",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P11",
+          "report_quote": "$32.5 billion",
+          "source_quote": "the total notional amount of the cross currency swaps was\n$32.5 billion and $26.3 billion, respectively."
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P11",
+          "report_quote": "fixed the dollar cost of foreign-currency payments",
+          "source_quote": "to fix our cash payments in U.S. dollars"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P10",
+          "report_quote": "$19.8 billion for interest rate swaps",
+          "source_quote": "$19.8 billion and $17.8 billion, respectively."
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P5",
+          "report_quote": "$1.0 billion for forward starting interest rate swaps",
+          "source_quote": "the total notional amount of the forward starting interest rate swaps was\n$1.0 billion and $2.0 billion, respectively."
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P11",
+          "report_quote": "$932 million for foreign exchange forwards",
+          "source_quote": "the total notional amount of the foreign exchange forwards\nwas $932 million and $1.4 billion, respectively."
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P5",
+          "report_quote": "none for treasury rate locks",
+          "source_quote": "There was no outstanding notional amount for treasury rate locks at December 31, 2021 or 2020."
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P2",
+          "report_quote": "Ranking contracts by the amount entered into during the year would answer a different question",
+          "source_quote": "Notional value entered into | $ | 6,050 $ | 10,168\nNotional value settled | 4,018 | 9,488"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "novel-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "e64a1455a9024fddb40346cfdb1efb3ce34cd9194c9780fef365b3f6ce0c8056",
+      "answer_paragraph": "p1",
+      "answer_quote": "Ulta Beauty’s fourth-quarter share of fiscal 2023 stock repurchase spending cannot be determined from the supplied disclosures.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_00605",
+      "correct": false,
+      "grader_cost_usd": "0.03068",
+      "primary": false,
+      "reason": "The reference uses FY2023 to mean the year ended January 28, 2023, which Ulta labels fiscal 2022. P1 supplies both amounts: $328.1 million in Q4 divided by $900.0 million for the year is 36% to the nearest whole percent. The report gives those amounts in p2 but never states the percentage. Its fiscal-label caveat is grounded, but it does not answer the question under the reference’s convention.",
+      "settled_usd": "0.213472",
+      "source_witnesses": [],
+      "state": "complete",
+      "supported": false,
+      "type": "novel-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "e68e3b5045342790f6f5a73e4ef9cdd909200ddb186207fd11af6ece770cb2ec",
+      "answer_paragraph": "p2",
+      "answer_quote": "Embedded rose from USD 246 million to USD 4,552 million, up USD 4,306 million, primarily because AMD began including Xilinx embedded sales. Data Center rose from USD 3,694 million to USD 6,043 million, up USD 2,349 million, primarily on higher EPYC server processor sales.",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_01198",
+      "correct": true,
+      "grader_cost_usd": "0.064376",
+      "primary": true,
+      "reason": "Paragraphs p2 and p3 identify all three FY22 growth drivers: higher EPYC server processor sales, higher sales of semi-custom console chips, and the inclusion of Xilinx embedded sales. They also identify Client as a partial offset. The cited totals support the acquisition comparison: $4,612 million of Xilinx revenue accounted for 64.35% of AMD’s $7,167 million increase.",
+      "settled_usd": "0.214370",
+      "source_witnesses": [
+        {
+          "paragraph": "p2",
+          "passage": "P6",
+          "report_quote": "primarily because AMD began including Xilinx embedded sales",
+          "source_quote": "primarily driven by the inclusion of Xilinx embedded product revenue"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P1",
+          "report_quote": "primarily on higher EPYC server processor sales",
+          "source_quote": "The increase was primarily driven by higher\nsales of our EPYC server processors."
+        },
+        {
+          "paragraph": "p3",
+          "passage": "P6",
+          "report_quote": "stronger console-chip demand outweighed weaker gaming graphics sales",
+          "source_quote": "higher semi-custom product sales due to higher demand for gaming console SoCs, partially offset by lower gaming graphics sales"
+        },
+        {
+          "paragraph": "p3",
+          "passage": "P12",
+          "report_quote": "Weak PC demand and inventory reductions across the supply chain cut unit shipments by 24%.",
+          "source_quote": "The  decrease  in  unit  shipments  was  due  to  challenging  PC  market  conditions  and\nsignificant inventory correction across the PC supply chain"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P1",
+          "report_quote": "an increase of USD 7,167 million (43.6108%)",
+          "source_quote": "Total net revenue | $ | 23,601 | $ | 16,434"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P7",
+          "report_quote": "AMD recognized USD 4,612 million of Xilinx revenue",
+          "source_quote": "The Consolidated Statements of Operations include the following revenue and operating income attributable to Xilinx in 2022:\n2022\n(In millions)\nNet revenue | $ | 4,612"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P2",
+          "report_quote": "AMD reported Xilinx in both segments",
+          "source_quote": "reported under the Embedded and Data Center segments"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "domain-relevant",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "ea33639c3054a5c6a2fdd37b60d8b6249f6ca7a3fb70a53194bc856109faede4",
+      "answer_paragraph": "p1",
+      "answer_quote": "No. Microsoft’s total balance-sheet debt fell from USD 49,781 million at fiscal year-end 2022 to USD 47,237 million at fiscal year-end 2023, a signed change of USD -2,544 million.",
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_00552",
+      "correct": true,
+      "grader_cost_usd": "0.04132",
+      "primary": true,
+      "reason": "The cited debt lines sum to $49,781 million in FY2022 and $47,237 million in FY2023. The $2,544 million decrease rounds to the reference’s $2.5 billion. Finance lease liabilities were reported separately and rose by $2,165 million, so including them would narrow the decline to $379 million without reversing it.",
+      "settled_usd": "0.210464",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P1",
+          "report_quote": "The current portion rose",
+          "source_quote": "Current portion of long-term debt | 5,247 | 2,749"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P1",
+          "report_quote": "the noncurrent balance fell by more",
+          "source_quote": "Long-term debt | 41,990 | 47,032"
+        },
+        {
+          "paragraph": "p2",
+          "passage": "P9",
+          "report_quote": "Finance lease liabilities rose from USD 14,902 million to USD 17,067 million",
+          "source_quote": "Other current liabilities | $ | 1,197 | $ | 1,060\nOther long-term liabilities | 15,870 | 13,842\nTotal finance lease liabilities | $ | 17,067 | $ | 14,902"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "domain-relevant",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "f96798bb8fd4bef73c135a486fa6519f10c20ab4b2f1530cfdc0d7161f5cfb9e",
+      "answer_paragraph": "p1",
+      "answer_quote": "Yes. Pfizer’s consolidated net PP&E rose from USD 13,745 million at FY2020 year-end to USD 14,882 million at FY2021 year-end, an increase of USD 1,137 million.",
+      "arm": "evidence_team_v4",
+      "case_id": "financebench_id_00302",
+      "correct": true,
+      "grader_cost_usd": "0.036704",
+      "primary": true,
+      "reason": "Pfizer’s reported year-end net PP&E increased by USD 1,137 million (14,882 − 13,745), matching the reference’s positive year-over-year direction. The FY2022 outlook does not contradict the historical comparison.",
+      "settled_usd": "0.118118",
+      "source_witnesses": [
+        {
+          "paragraph": "p1",
+          "passage": "P6",
+          "report_quote": "from USD 13,745 million at FY2020 year-end to USD 14,882 million at FY2021 year-end",
+          "source_quote": "As of December 31,\n(MILLIONS, EXCEPT PER COMMON SHARE DATA) | 2021 | 2020"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P6",
+          "report_quote": "an increase of USD 1,137 million",
+          "source_quote": "Property, plant and equipment | 14,882 | 13,745"
+        },
+        {
+          "paragraph": "p1",
+          "passage": "P1",
+          "report_quote": "after accumulated depreciation",
+          "source_quote": "Less: Accumulated depreciation | 15,074 | 14,661\nProperty, plant and equipment | $ | 14,882 | $ | 13,745"
+        }
+      ],
+      "state": "complete",
+      "supported": true,
+      "type": "novel-generated",
+      "unconfirmed_usd": "0"
+    },
+    {
+      "alias": "fba493dd90c1f6d02206b3cfa81c98e92d8cab2a3407126400f5c4e159c26606",
+      "answer_paragraph": null,
+      "answer_quote": null,
+      "arm": "quantitative_astra",
+      "case_id": "financebench_id_04103",
+      "correct": false,
+      "grader_cost_usd": "0.038392",
+      "primary": false,
+      "reason": "The report stops at intermediate ratios and never states General Mills’ FY2019 CCC of −3.70 days. The citations support the inputs, but there is no direct CCC answer to verify.",
+      "settled_usd": "0.384296",
+      "source_witnesses": [],
+      "state": "qualified",
+      "supported": false,
+      "type": "metrics-generated",
+      "unconfirmed_usd": "0"
+    }
+  ],
+  "summary": {
+    "arms": {
+      "evidence_team_v4": {
+        "both": 15,
+        "cases": 24,
+        "correct": 15,
+        "mean_settled_usd": "0.23297575",
+        "released": 23,
+        "supported": 18,
+        "unconfirmed_usd": "0"
+      },
+      "quantitative_astra": {
+        "both": 13,
+        "cases": 24,
+        "correct": 16,
+        "mean_settled_usd": "0.2626886666666666666666666667",
+        "released": 23,
+        "supported": 16,
+        "unconfirmed_usd": "0"
+      }
+    },
+    "bootstrap_draws": 20000,
+    "by_type": {
+      "domain-relevant": {
+        "evidence_team_v4": {
+          "both": 5,
+          "cases": 8,
+          "correct": 5,
+          "mean_settled_usd": "0.233396",
+          "released": 7,
+          "supported": 6,
+          "unconfirmed_usd": "0"
+        },
+        "quantitative_astra": {
+          "both": 5,
+          "cases": 8,
+          "correct": 7,
+          "mean_settled_usd": "0.259198",
+          "released": 8,
+          "supported": 6,
+          "unconfirmed_usd": "0"
+        }
+      },
+      "metrics-generated": {
+        "evidence_team_v4": {
+          "both": 6,
+          "cases": 8,
+          "correct": 6,
+          "mean_settled_usd": "0.2288455",
+          "released": 8,
+          "supported": 7,
+          "unconfirmed_usd": "0"
+        },
+        "quantitative_astra": {
+          "both": 4,
+          "cases": 8,
+          "correct": 4,
+          "mean_settled_usd": "0.299091",
+          "released": 7,
+          "supported": 5,
+          "unconfirmed_usd": "0"
+        }
+      },
+      "novel-generated": {
+        "evidence_team_v4": {
+          "both": 4,
+          "cases": 8,
+          "correct": 4,
+          "mean_settled_usd": "0.23668575",
+          "released": 8,
+          "supported": 5,
+          "unconfirmed_usd": "0"
+        },
+        "quantitative_astra": {
+          "both": 4,
+          "cases": 8,
+          "correct": 5,
+          "mean_settled_usd": "0.229777",
+          "released": 8,
+          "supported": 5,
+          "unconfirmed_usd": "0"
+        }
+      }
+    },
+    "difference": 0.08333333333333333,
+    "mcnemar_exact_two_sided_p": 0.6875,
+    "paired_90pct_interval": [
+      -0.08333333333333333,
+      0.25
+    ],
+    "seed": 6172400,
+    "single_only_correct_and_supported": 2,
+    "team_only_correct_and_supported": 4
+  }
+}
