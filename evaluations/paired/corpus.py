@@ -402,6 +402,14 @@ def numeric_anchor(value):
     return Decimal(text)
 
 
+def agent_fields(case):
+    prompt = {k: case[k] for k in ("case_id", "question", "cutoff")}
+    rule = case["forecast_rule"]
+    prompt["forecast_rule"] = {k: rule[k] for k in RULE_FIELDS} if rule else None
+    sources = [{k: source[k] for k in SOURCE_FIELDS} for source in case["sources"]]
+    return prompt, sources
+
+
 def export_development(case_id, output, root=ROOT):
     lock = read_json(root / "freeze.json")
     cases = json.loads(checked_file(root, lock, "development.json"))
@@ -409,10 +417,7 @@ def export_development(case_id, output, root=ROOT):
     require(len(selected) == 1, "Only a frozen development case can be exported")
     require(not output.exists(), "Choose a fresh output path")
     case = selected[0]
-    prompt = {k: case[k] for k in ("case_id", "question", "cutoff")}
-    rule = case["forecast_rule"]
-    prompt["forecast_rule"] = {k: rule[k] for k in RULE_FIELDS} if rule else None
-    sources = [{k: source[k] for k in SOURCE_FIELDS} for source in case["sources"]]
+    prompt, sources = agent_fields(case)
     with zipfile.ZipFile(io.BytesIO(checked_file(root, lock, "development-sources.zip"))) as archive:
         output.parent.mkdir(parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(dir=output.parent) as tmp:

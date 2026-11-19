@@ -19,6 +19,7 @@ from .sol_gateway import check_usage, request_record
 from .sol_provider import (
     MILLION,
     MODEL_RATES,
+    BudgetExhausted,
     OpenAIResponses,
     project_key,
     reservation_cost,
@@ -230,6 +231,8 @@ class Meter:
                 self.record["events"].append(["skip", stage])
                 self.save()
                 return None
+            if available <= 0:
+                raise BudgetExhausted("The assignment has no unreserved funds available")
             call = request_record(stage, payload, tokens, available)
             if keep_usd is not None:
                 call["protected_usd"] = str(keep_usd)

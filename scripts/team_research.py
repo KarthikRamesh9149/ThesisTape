@@ -370,6 +370,30 @@ def author(case, ask, opened, reports, action, *, decision=None, forecast=None):
             prompt = {**prompt, "input": json_bytes(data).decode()}
 
 
+def team_evidence(case, corpus, ask, *, fixed_plan=False):
+    decisions = []
+    if fixed_plan:
+        plan = dict(ROLE)
+    else:
+        instructions = """You are the lead financial analyst. Delegate two independent, short lookup assignments.
+The filings worker extracts the terms, dates and numbers. The contrary worker independently looks for
+corrections, exceptions, or unresolved evidence. Give each a neutral research question.
+Do not suggest any answers, figures, dates, filing IDs or specific source. Use words instead of digits."""
+        prompt = typed_prompt(MODEL, instructions, case.intake(), Assignments)
+        plan = Assignments.model_validate_json(ask("lead.plan", prompt, 768)).model_dump()
+        for task in plan.values():
+            assignment_text(task, case)
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        futures = [pool.submit(worker, case, corpus, ask, role, plan[role], role) for role in ROLES]
+        work = [future.result() for future in futures]
+    if fixed_plan:
+        opened, reports = combine(work)
+        action = "write" if opened else "qualify"
+    else:
+        opened, reports, action = lead_decision(case, corpus, ask, work, decisions)
+    return plan, work, opened, reports, action, decisions
+
+
 def research(case: Case, corpus: Corpus, ask, *, route: str, dispute_version=DISPUTE_VERSION):
     if route in TABLE_ROUTES:
         if case.table is None:
@@ -392,18 +416,7 @@ def research(case: Case, corpus: Corpus, ask, *, route: str, dispute_version=DIS
         work, reports = [], []
         action = "write" if opened else "qualify"
     elif route in ("team", "reviewed", "forecast", "dispute"):
-        instructions = """You are the lead financial analyst. Delegate two independent, short lookup assignments.
-The filings worker extracts the terms, dates and numbers. The contrary worker independently looks for
-corrections, exceptions, or unresolved evidence. Give each a neutral research question.
-Do not suggest any answers, figures, dates, filing IDs or specific source. Use words instead of digits."""
-        prompt = typed_prompt(MODEL, instructions, case.intake(), Assignments)
-        plan = Assignments.model_validate_json(ask("lead.plan", prompt, 768)).model_dump()
-        for task in plan.values():
-            assignment_text(task, case)
-        with ThreadPoolExecutor(max_workers=2) as pool:
-            futures = [pool.submit(worker, case, corpus, ask, role, plan[role], role) for role in ROLES]
-            work = [future.result() for future in futures]
-        opened, reports, action = lead_decision(case, corpus, ask, work, decisions)
+        plan, work, opened, reports, action, decisions = team_evidence(case, corpus, ask)
     elif route == "single":
         result = lookup(case, corpus, ask, "lead", case.question, "lead", MODEL)
         work, opened, reports = [result], result.opened, []

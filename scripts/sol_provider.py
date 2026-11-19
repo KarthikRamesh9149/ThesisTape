@@ -126,12 +126,16 @@ def reservation_cost(input_tokens: int, max_output_tokens: int, model: str) -> D
     return (tokens * Decimal(rates["cache_write_30m"]) + max_output_tokens * Decimal(rates["output"])) / MILLION
 
 
+class BudgetExhausted(CaseError):
+    """A dispatch would exceed the remaining assignment allowance."""
+
+
 def reserve(input_tokens: int, budget: Decimal, *, max_output_tokens: int = MAX_OUTPUT_TOKENS, model: str = MODEL) -> Decimal:
     upper = reservation_cost(input_tokens, max_output_tokens, model)
     if not budget.is_finite() or budget <= 0:
         raise CaseError("The USD budget must be a positive finite amount")
     if upper > budget:
-        raise CaseError(f"Required reservation USD {upper:f} exceeds budget USD {budget:f}")
+        raise BudgetExhausted(f"Required reservation USD {upper:f} exceeds budget USD {budget:f}")
     return upper
 
 

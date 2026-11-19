@@ -94,6 +94,18 @@ class Corpus:
             except Exception as error:
                 raise EditionError(f"Failed to verify {key}: {error}") from error
 
+    def page_bytes(self, source, page):
+        entry = source.get("page_images", {}).get(page)
+        if source["kind"] != "pdf" or not entry:
+            return None
+        if entry["pdf_sha256"] != source["sha256"]:
+            raise EditionError("Page image belongs to a different PDF edition")
+        object_bytes(self._objects, source["sha256"], ".pdf")
+        data = object_bytes(self._page_images, entry["sha256"], ".png")
+        if not data.startswith(b"\x89PNG\r\n\x1a\n"):
+            raise EditionError("Invalid registered PNG")
+        return data
+
     def verify(self):
         """Operator-only diagnostics. This output is never included in agent results."""
         counts = {}
@@ -298,17 +310,10 @@ class DatedSession:
                 self._finish("page_image", [])
                 return None
             source = self._eligible[passage.url][1]
-            entry = source.get("page_images", {}).get(page[1])
-            if source["kind"] != "pdf" or not entry:
+            data = self._corpus.page_bytes(source, page[1])
+            if data is None:
                 self._finish("page_image", [])
                 return None
-            if entry["pdf_sha256"] != passage.sha256:
-                raise EditionError("Page image belongs to a different PDF edition")
-            # A cached text read cannot vouch for an original or raster that has since changed.
-            object_bytes(self._corpus._objects, passage.sha256, ".pdf")
-            data = object_bytes(self._corpus._page_images, entry["sha256"], ".png")
-            if not data.startswith(b"\x89PNG\r\n\x1a\n"):
-                raise EditionError("Invalid registered PNG")
             self._finish("page_image", hits)
             return data
 

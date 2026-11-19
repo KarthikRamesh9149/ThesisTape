@@ -187,13 +187,19 @@ class UnfundedReview(CaseError):
     pass
 
 
-def revise_and_recheck(case, corpus, opened, action, original, first, advice, ask):
-    prompt = revision_prompt(case, opened, action, first, advice=advice)
+def revise_and_recheck(case, corpus, opened, action, original, first, advice, ask, *, revision=None):
+    if revision is None:
+        prompt = revision_prompt(case, opened, action, first, advice=advice)
+
+        def build(raw):
+            return render_candidate(case, opened, action, raw)
+    else:
+        prompt, build = revision(first, advice)
     raw = ask("lead.revise", prompt, 2560, keep_usd=RECHECK_ALLOWANCE)
     if raw is None:
         return original, None, "revision_unfunded"
     try:
-        revised = render_candidate(case, opened, action, raw)
+        revised = build(raw)
     except (CaseError, ValidationError):
         return original, None, "invalid_revision"
     if revised.version() == original.version():
@@ -229,7 +235,7 @@ def revise_and_recheck(case, corpus, opened, action, original, first, advice, as
 
 
 def review_dispute(
-    case, corpus, opened, action, candidate, ask, *, enabled, version=VERSION
+    case, corpus, opened, action, candidate, ask, *, enabled, version=VERSION, revision=None
 ):
     first = inspect(case, corpus, opened, action, candidate, ask, "review.initial")
     conflict = first["assessment"]["conflict"]
@@ -256,7 +262,7 @@ def review_dispute(
                 "verified_exhibit_dates": decision["verified_exhibit_dates"],
             }
         candidate, checked, decision["revision_status"] = revise_and_recheck(
-            case, corpus, opened, action, candidate, first, advice, ask
+            case, corpus, opened, action, candidate, first, advice, ask, revision=revision
         )
         if checked is not None:
             rounds.append(checked)
