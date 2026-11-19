@@ -5,7 +5,7 @@ import io
 import json
 import tempfile
 import zipfile
-from datetime import datetime
+from datetime import datetime, timedelta
 from decimal import Decimal
 from functools import partial
 from pathlib import Path
@@ -15,7 +15,7 @@ from scripts.paired_packet import PacketCorpus, packet_digest
 from scripts.paired_v2 import workflow
 from scripts.research_team import check_configuration, reproduce
 from scripts.retrieval_sources import instant
-from scripts.run_checkpoint import load, publish
+from scripts.run_checkpoint import load, own_run, publish
 from scripts.sol_baseline import fingerprint, json_bytes
 from scripts.team_meter import verify_ledger
 
@@ -24,7 +24,7 @@ from .event_audit import verify_private
 from .reconciliation import replay_lost, sidecar, verify_resolution
 from .registration import REPO, ROOT, git
 from .runner import TERMINAL, admission, config
-from .study import REVISION, VERSION, locked, run_schedule
+from .study import REVISION, VERSION, assignment, locked
 from .terminal_audit import verify_failure
 
 PROTOCOL = ROOT / "protocol.json"
@@ -202,12 +202,20 @@ def lock_reports(split):
             check_configuration(record, cfg)
             closed = sidecar(split, cid, arm)
             correction = json.loads(committed(closed)) if closed.is_file() else None
-            require_state = record["state"] in TERMINAL or correction is not None
+            interrupted = (
+                split == "blind"
+                and record["state"] == "needs_reconciliation"
+                and correction is None
+            )
+            require_state = (
+                record["state"] in TERMINAL or correction is not None or interrupted
+            )
             data.require(
                 require_state and record["budget_usd"] == cfg["per_case_arm_usd"],
                 "Incomplete or mismatched assignment",
             )
             spent, owed = verify_ledger(record, partial=True)
+            held = Decimal(0)
             start = datetime.fromisoformat(record["created_at"])
             if correction:
                 settlement = verify_resolution(record, correction)
@@ -219,13 +227,21 @@ def lock_reports(split):
                 entries[f"settlements/{correction['checkpoint_id']}.json"] = json_bytes(
                     correction
                 )
+            elif interrupted:
+                from .product_recovery import interrupted_receipts
+
+                spent, held = interrupted_receipts(
+                    loc / "run", record, identities, partial(workflow, corpus, actual)
+                )
+                end = start + timedelta(milliseconds=record["elapsed_ms"])
+                state = "provider_interrupted"
             else:
                 data.require(not owed, "Unreconciled assignment")
                 verify_private(loc / "run", record, identities)
                 end = datetime.fromisoformat(record["finished_at"])
                 state = record["state"]
             data.require(
-                spent <= Decimal(cfg["per_case_arm_usd"]), "Allowance exceeded"
+                spent + held <= Decimal(cfg["per_case_arm_usd"]), "Allowance exceeded"
             )
             data.require(
                 end >= start and (last is None or start >= last),
@@ -242,7 +258,7 @@ def lock_reports(split):
                 replay_lost(record, correction, corpus, actual)
             elif state in ("complete", "withheld"):
                 memo = reproduce(record, cfg, partial(workflow, corpus, actual))
-            else:
+            elif not interrupted:
                 incident = REVISION / "host-incidents" / split / cid / (arm + ".json")
                 incident_record = (
                     json.loads(committed(incident)) if incident.is_file() else None
@@ -275,7 +291,15 @@ def lock_reports(split):
                     "direction": record.get("direction"),
                     "state": state,
                     "qualified": record.get("coverage") == "qualify",
-                    "cost_usd": str(spent),
+                    "cost_usd": str(spent + held),
+                    **(
+                        {
+                            "confirmed_cost_usd": str(spent),
+                            "unreconciled_usd": str(held),
+                        }
+                        if held
+                        else {}
+                    ),
                     "elapsed_ms": round((end - start).total_seconds() * 1000),
                     "calls": len(record["calls"]),
                     "cutoff_violations": 0,
@@ -297,39 +321,57 @@ def lock_reports(split):
         "rows": len(rows),
         "released": sum(bool(x["memo_sha256"]) for x in rows),
         "calls": sum(x["calls"] for x in rows),
-        "settled_usd": str(sum(Decimal(x["cost_usd"]) for x in rows)),
+        "settled_usd": str(
+            sum(Decimal(x.get("confirmed_cost_usd", x["cost_usd"])) for x in rows)
+        ),
+        "unreconciled_usd": str(
+            sum(Decimal(x.get("unreconciled_usd", "0")) for x in rows)
+        ),
     }
 
 
-def run_blind():
+def run_blind(*, allow_new_team=True):
     manifest = split_manifest("blind")
-    # An inapplicable forecast role is exactly the mixed route; execute a new blind assignment once.
-    if any("mixed_no_forecast" in r["arms"] for r in manifest["schedule"]):
-        from scripts.run_checkpoint import own_run
-
-        from .study import assignment
-
-        cases = {c["case_id"]: c for c in registry("blind")}
-        root = REPO / "runs/paired-blind-v2"
-        root.mkdir(parents=True, exist_ok=True)
-        with own_run(root):
-            for row in manifest["schedule"]:
-                for arm in row["arms"]:
-                    ticket = admission(manifest, row, arm)
-                    actual = runtime_arm(arm, cases[row["case_id"]])
-                    if actual != arm:
-                        ticket = {**ticket, "arm": actual, "study_arm": arm}
-                    result = assignment(
-                        ticket, root / row["case_id"] / arm, export_blind, False
+    cases = {c["case_id"]: c for c in registry("blind")}
+    root = REPO / "runs/paired-blind-v2"
+    root.mkdir(parents=True, exist_ok=True)
+    with own_run(root):
+        for row in manifest["schedule"]:
+            for arm in row["arms"]:
+                ticket = admission(manifest, row, arm)
+                actual = runtime_arm(arm, cases[row["case_id"]])
+                if actual != arm:
+                    ticket = {**ticket, "arm": actual, "study_arm": arm}
+                directory = root / row["case_id"] / arm
+                path = directory / "run/run.json"
+                if path.is_file():
+                    rec = load(path)
+                    packet = PacketCorpus(directory / "input", row["packet_sha256"])
+                    check_configuration(
+                        rec, {**config(packet, ticket), "policy_version": VERSION}
                     )
-                    print(json.dumps(result), flush=True)
-                    data.require(
-                        result["state"] in TERMINAL
-                        and Decimal(result["unreconciled_reservation_usd"]) == 0,
-                        "Unsettled blind assignment",
-                    )
-    else:
-        run_schedule(manifest, "blind", export_blind)
+                    _, pending = verify_ledger(rec, partial=True)
+                    if (
+                        rec["state"] == "needs_reconciliation"
+                        and pending
+                        and rec.get("failure")
+                    ):
+                        continue
+                    if (
+                        rec["state"] in TERMINAL
+                        and not pending
+                        and rec.get("finished_at")
+                    ):
+                        continue
+                if not allow_new_team and not actual.startswith("single_"):
+                    return
+                result = assignment(ticket, directory, export_blind, False)
+                print(json.dumps(result), flush=True)
+                data.require(
+                    result["state"] in TERMINAL
+                    and Decimal(result["unreconciled_reservation_usd"]) == 0,
+                    "A provider response is unconfirmed. Preserve it before continuing the schedule.",
+                )
 
 
 def main():
@@ -337,9 +379,14 @@ def main():
     parser.add_argument(
         "command", choices=["lock-development", "run-blind", "lock-blind"]
     )
+    parser.add_argument(
+        "--hold-new-teams",
+        action="store_true",
+        help="Stop before the next new team assignment during a provider incident",
+    )
     args = parser.parse_args()
     if args.command == "run-blind":
-        run_blind()
+        run_blind(allow_new_team=not args.hold_new_teams)
     else:
         print(json.dumps(lock_reports(args.command.removeprefix("lock-")), indent=2))
 

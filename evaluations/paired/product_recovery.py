@@ -36,7 +36,7 @@ def ticket(reg, split, row, arm):
     }
 
 
-def continue_split(split):
+def continue_split(split, *, allow_new_team=True):
     reg = production.locked()
     root = REPO / "runs" / ("analyst-product-" + split)
     root.mkdir(exist_ok=True, parents=True)
@@ -74,6 +74,8 @@ def continue_split(split):
                         continue
                     if r["state"] in production.FINISHED and not unconfirmed:
                         continue
+                if not allow_new_team and not arm.startswith("single_"):
+                    return
                 result = subprocess.run(
                     [
                         sys.executable,
@@ -103,6 +105,19 @@ def continue_split(split):
 
 
 def inspect_interruption(folder, rec, gateway, identities):
+    def execute(ask):
+        return research(
+            rec["question"],
+            rec["cutoff"],
+            SavedSearches(gateway, folder / "searches", offline=True),
+            ask,
+            profile=rec["research_profile"],
+        )
+
+    return interrupted_receipts(folder, rec, identities, execute)
+
+
+def interrupted_receipts(folder, rec, identities, execute):
     spent, pending = verify_ledger(rec, partial=True)
     corpus.require(
         rec["state"] == "needs_reconciliation" and pending and rec.get("failure"),
@@ -173,13 +188,7 @@ def inspect_interruption(folder, rec, gateway, identities):
             )
 
     try:
-        research(
-            rec["question"],
-            rec["cutoff"],
-            SavedSearches(gateway, folder / "searches", offline=True),
-            ask,
-            profile=rec["research_profile"],
-        )
+        execute(ask)
     except Missing:
         pass
     else:
@@ -306,5 +315,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=["continue", "lock"])
     parser.add_argument("split", choices=["development", "blind"])
+    parser.add_argument("--hold-new-teams", action="store_true")
     args = parser.parse_args()
-    (continue_split if args.action == "continue" else lock_split)(args.split)
+    if args.action == "continue":
+        continue_split(args.split, allow_new_team=not args.hold_new_teams)
+    else:
+        lock_split(args.split)
