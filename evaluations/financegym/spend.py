@@ -55,6 +55,10 @@ def report():
     boj = REPO / "runs/open-research/boj-march2024/research/run.json"
     if boj.is_file():
         include("Public Bank of Japan source trial", boj)
+    for p in (REPO / "runs/quantitative-development").glob("*/run/run.json"):
+        include("Engineering trials for financial calculations", p)
+    for p in (REPO / "runs/quantitative-grading").glob("*/grade/run.json"):
+        include("Masked engineering-trial graders", p)
     for split in ("development", "blind"):
         for p in (REPO / "runs" / ("paired-" + split + "-v2")).glob("*/*/run/run.json"):
             include(
