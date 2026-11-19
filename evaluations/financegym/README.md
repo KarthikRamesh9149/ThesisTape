@@ -33,3 +33,14 @@ Each task has a durable research record. An interrupted run reuses confirmed gen
 ```
 
 Export verifies the original HTTP bytes, all model request fingerprints, the ledger, and the exact text of every released memo offline. It writes the submission only when all 400 questions have a cited report. The separate audit lists qualified reports, the total research cost and a report fingerprint for each task. FinanceGym asks for the JSONL plus contributor metadata and a public system or paper link. A leaderboard score comes from the maintainers after submission.
+
+## Prepare the methodology paper and local email
+
+Generate the public-facing paper from the verified 400-row export. The note reports the actual configuration and the independently measured results. The code repository can stay private. Once the paper has a public URL, use the submitter's email address, organization and submission date to generate a local email draft with the exact JSONL attached.
+
+```sh
+.venv/bin/python -B -m evaluations.financegym.submission paper runs/benchmark_400_public.jsonl runs/financegym-submission
+.venv/bin/python -B -m evaluations.financegym.submission draft runs/benchmark_400_public.jsonl runs/financegym-submission \
+  --contact "$SUBMITTER_EMAIL" --org "$SUBMITTER_ORGANIZATION" \
+  --published-paper "$PUBLIC_PAPER_URL" --submission-date "$SUBMISSION_DATE"
+```

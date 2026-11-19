@@ -14,6 +14,8 @@ The team alone succeeded on four companies and the single analyst alone succeede
 
 The research workers saw the original question and a complete issuer PDF, with the same source search and calculator. The 48 reports were committed before the evaluator opened the authors' answers and annotated evidence. A fresh Astra grading context examined each released report independently with the configuration and costs hidden. Quoted witnesses were checked against the report and its cited passages. Grading cost USD 1.847056. The public dataset could have appeared in model training. FinanceGym evaluates forward-looking research separately. [Study protocol](protocol.md) · [48 locked reports](reports.json) · [FinanceBench source](https://github.com/patronus-ai/financebench/tree/cc39aeb4afdf33909ee1412188bf89035950c2eb)
 
+The private receipt audit reconciled 272 research generations totaling USD 11.895946. All 185 searches used the registered cutoff and issuer document. Replaying the two failed assignments reproduced an incomplete provider response and a repair that exceeded its remaining funds. [Audit](audit.json)
+
 Recreate the packet inputs from the pinned dataset and reproduce the publicly shareable scores from the saved grades. The first command downloads the original financial statements. The second uses the local corpus and saved responses.
 
 ```sh

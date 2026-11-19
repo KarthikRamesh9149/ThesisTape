@@ -133,6 +133,16 @@ def register(path, cap, public_proof):
     )
     pilot = load(REPO / "evaluations/open_research/ecb/browser.json")
     financial = grading.grade(live=False)
+    financial_audit_bytes = committed(grading.FOLDER / "audit.json")
+    financial_audit = json.loads(financial_audit_bytes)
+    corpus.require(
+        financial_audit["archive_sha256"]
+        == fingerprint(committed(grading.FOLDER / "reports.zip"))
+        and financial_audit["assignments"] == 48
+        and financial_audit["cutoff_violations"] == 0
+        and Decimal(financial_audit["unconfirmed_usd"]) == 0,
+        "The financial comparison has unresolved document or provider evidence",
+    )
     policy = choose(decision, financial)
     profile = policy["general"]
     counts = Counter(profile_for(row["question"], policy) for row in cases)
@@ -194,6 +204,7 @@ def register(path, cap, public_proof):
             "financial_comparison_sha256": fingerprint(
                 committed(grading.FOLDER / "results.json")
             ),
+            "financial_audit_sha256": fingerprint(financial_audit_bytes),
             "source_audit": cutoff_checks,
             "browser_pilot_cost_usd": pilot["spent"],
             "blind_mean_cost_usd": decision["metrics"][profile]["mean_cost_usd"],
