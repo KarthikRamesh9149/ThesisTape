@@ -10,6 +10,26 @@ from scripts.sol_baseline import fingerprint
 
 
 class MaintainerPackage(unittest.TestCase):
+    def test_model_list_includes_the_recovery_investigator_when_editing_finishes_the_report(
+        self,
+    ):
+        cfg = {"models": [submission.ASTRA]}
+        audit = {
+            "tasks_audited": [
+                {
+                    "profile": "source_completion",
+                    "attempts": [
+                        {"profile": "single_astra"},
+                        {"profile": "evidence_team_v4"},
+                    ],
+                }
+            ]
+        }
+        self.assertEqual(
+            submission.model_names(cfg, audit),
+            sorted([submission.ASTRA, submission.MODEL]),
+        )
+
     def test_local_email_round_trip_preserves_the_complete_file_and_is_repeatable(self):
         raw = b'{"question":"Currency amounts in different units?","report":"A cited report."}\n'
         with tempfile.TemporaryDirectory() as temp:

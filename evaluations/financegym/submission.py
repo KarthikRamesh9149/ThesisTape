@@ -177,6 +177,17 @@ def verify_export(questions, directory):
     return manifest, audits
 
 
+def model_names(cfg, audit):
+    models = set(cfg["models"])
+    if any(
+        attempt["profile"] == "evidence_team_v4"
+        for row in audit.get("tasks_audited", ())
+        for attempt in row.get("attempts", (row,))
+    ):
+        models.update((ASTRA, MODEL))
+    return sorted(models)
+
+
 def paper(questions, directory):
     cfg, audit = verify_export(questions, directory)
     primary = json.loads(committed(PRIMARY / "blind/decision.json"))
@@ -217,6 +228,8 @@ ThesisTape produces a research memorandum for a question, an information cutoff 
 
 ## Research configuration
 
+The API model identifiers used on the benchmark were {", ".join(f"`{name}`" for name in model_names(cfg, audit))}.
+
 {methods}
 
 The researcher plans dated searches and receives passages only after the archive verifies their availability. Web evidence comes from dated captures, immutable encyclopedia revisions or accession-specific SEC records. For an admitted archived page or filing, the gateway can reopen the original bytes, match their hash and retrieve a section relevant to a specific part of the question. Every search uses the exact cutoff of its assigned question. Discovery titles and live snippets stay outside the model context. Numeric and citation checks run before the text is released. The local analyst application exposes cited passages, checked calculations and the cost of each run.
@@ -252,12 +265,6 @@ The source archive is independent of the retrieval corpus used by the benchmark 
 
 def draft(questions, directory, contact, org, published_paper, submission_date):
     cfg, audit = paper(questions, directory)
-    models = set(cfg["models"])
-    if any(
-        r.get("profile") in {"evidence_team_v4", editorial.engine.PROFILE}
-        for r in audit.get("tasks_audited", [])
-    ):
-        models.update((ASTRA, MODEL))
     address = Address(addr_spec=contact)
     link = urlsplit(published_paper)
     if (
@@ -286,7 +293,7 @@ Please evaluate the attached 400 ThesisTape research reports. We used the origin
 agent: ThesisTape
 org: {org}
 repo: {published_paper}
-base_model: {", ".join(sorted(models))}
+base_model: {", ".join(model_names(cfg, audit))}
 date: {submission_date}
 contact: {contact}
 notes: Full 400-task run. Exact max_date on every search. Archived passage and provider usage audit completed. {audit["qualified"]} qualified reports included.
