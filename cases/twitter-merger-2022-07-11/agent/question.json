@@ -1,0 +1,11 @@
+{
+  "case_id": "twitter-merger-2022-07-11",
+  "title": "Twitter merger status",
+  "cutoff": "2022-07-11T21:00:00Z",
+  "question": "As of 11 July 2022, could a deal analyst treat the Musk buyer group’s termination notice as ending the Twitter acquisition? Give each side’s position, the per-share price and remedy at issue, and what could be concluded about closing.",
+  "source_urls": [
+    "https://www.sec.gov/Archives/edgar/data/1418091/000110465922078413/tm2220599d1_ex99-p.htm",
+    "https://www.sec.gov/Archives/edgar/data/1418091/000119312522191300/d370677dex991.htm",
+    "https://www.sec.gov/Archives/edgar/data/1418091/000119312522191300/d370677dex992.htm"
+  ]
+}

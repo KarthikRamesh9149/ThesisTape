@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "cutoff": "2022-07-11T21:00:00Z",
+  "arm_budget_usd": "0.20",
+  "routing_control_budget_usd": "0.08",
+  "grading_budget_usd_per_report": "0.05",
+  "design": "Compare the first reviewed Sol and conditional Astra reports on the same assigned deal file. Both arms receive the identical question, four dated passages from three SEC exhibits, source order, Sol author and independent Sol review instructions, release rules and maximum spend. The specialist may be called once only after a reviewer identifies a material incompatibility between two distinct originals and both witnesses reopen at the cutoff. Log a skip when the specialist plus the allowance retained for Sol does not fit. Grade the released memo from each arm in isolation, without its route, specialist advice, timings or cost. Preserve withheld reports, retries and costs. Score a withheld report zero. No result-dependent retries.",
+  "criteria": {
+    "notice": {"test": "Attributes the notice to Musk or his buyer group and identifies it as a purported exercise of a termination right.", "any_source": ["bidder-notice"], "locator": "Formal notice or Grounds asserted in the notice"},
+    "grounds": {"test": "Gives a concrete ground alleged by the buyer, such as Twitter's alleged failure to provide requested information on spam accounts. Marks it as an allegation.", "any_source": ["bidder-notice"], "locator": "Grounds asserted in the notice"},
+    "response": {"test": "Attributes to Twitter its rejection of the purported termination as invalid or wrongful and its denial of the alleged breach or its position that the agreement remained binding.", "any_source": ["twitter-response"], "locator": "Response and reservation of rights"},
+    "price": {"test": "States USD 54.20 per share as the agreed transaction terms sought by the board. Distinguishes proposed deal consideration from a realized return.", "any_source": ["twitter-board"], "locator": "Board statement"},
+    "remedy": {"test": "Attributes to Twitter its intention to pursue legal enforcement of the agreed closing or its retained right to specific performance. Distinguishes intended enforcement from a court ruling.", "any_source": ["twitter-board", "twitter-response"], "locator": "Board statement or Response and reservation of rights"},
+    "closing": {"test": "Explains that the notice did not establish an uncontested termination and that enforceability or ultimate closing remained unresolved at the cutoff.", "any_source": ["bidder-notice", "twitter-response", "twitter-board"], "locator": "Formal notice, Board statement and Response and reservation of rights read together"}
+  },
+  "pass_rule": "All six criteria, source support in the cited report paragraphs, and no material error. Count a party's allegation stated as adjudicated fact, an asserted final termination or guaranteed closing, a subsequent event asserted as known, or an unsupported fee or payment as a material error. Freeze the rubric before any paid call. The Sol grader is a development evaluator.",
+  "routing_control": "Run the conditional route once on the price-only question with exactly the same three admitted exhibits. Pass only if the released report cites the board's USD 54.20 per-share price, the specialist is skipped, and the exact report passes independent review. This checks whether the disagreement changes the answer to the actual question.",
+  "cutoff_control": "At 2022-07-11T20:38:35Z only the bidder exhibit is admitted in this archive. Neither seller exhibit, title, URL nor contents may enter a prompt or trigger a specialist call. This is an archive-availability check.",
+  "scope": "Located primary-source dispute with a live no-escalation control. The trial measures disposition, report quality and incremental usage on this deal."
+}

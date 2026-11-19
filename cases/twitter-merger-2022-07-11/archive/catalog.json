@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "bidder-notice",
+      "family": "bidder-notice",
+      "title": "Letter from counsel for Elon Musk and X Holdings I",
+      "kind": "edgar",
+      "edition": "0001104659-22-078413",
+      "url": "https://www.sec.gov/Archives/edgar/data/1418091/000110465922078413/tm2220599d1_ex99-p.htm",
+      "proof_url": "https://www.sec.gov/Archives/edgar/data/1418091/000110465922078413/0001104659-22-078413-index.htm",
+      "published": "2022-07-08T17:14:38-04:00",
+      "version_at": "2022-07-08T17:14:38-04:00",
+      "sha256": "f8c6a9f980cf2b552e3f68148e88c3641b38b19104b514ecb3fd3028a71f4ed4",
+      "selection": {
+        "index_sha256": "f2f94f25ae4b3f522f39198def283a95f259ad026582cf1b52b930b2e1b813be",
+        "exhibit": "EX-99.P",
+        "sequence": 2,
+        "sections": [
+          {
+            "name": "Grounds asserted in the notice",
+            "start": "We refer to (i)",
+            "end": "While Section 6.4"
+          },
+          {
+            "name": "Formal notice",
+            "start": "Accordingly, for all of these reasons"
+          }
+        ]
+      }
+    },
+    {
+      "id": "twitter-board",
+      "family": "twitter-board",
+      "title": "Statement of the Twitter board",
+      "kind": "edgar",
+      "edition": "0001193125-22-191300",
+      "url": "https://www.sec.gov/Archives/edgar/data/1418091/000119312522191300/d370677dex991.htm",
+      "proof_url": "https://www.sec.gov/Archives/edgar/data/1418091/000119312522191300/0001193125-22-191300-index.htm",
+      "published": "2022-07-11T16:38:36-04:00",
+      "version_at": "2022-07-11T16:38:36-04:00",
+      "sha256": "f739512ca27cc70b59b9fde93ea33693cd4aa6c00d8a211bac6b6e0dc9f5cc1b",
+      "selection": {
+        "index_sha256": "1b933d5e04f4b498b196cbd19408aaf5cba82261e6cb06a458bef9748a072ee4",
+        "exhibit": "EX-99.1",
+        "sequence": 2,
+        "sections": [
+          {
+            "name": "Board statement",
+            "start": "Twitter Board Confident",
+            "end": "We are committed to closing"
+          }
+        ]
+      }
+    },
+    {
+      "id": "twitter-response",
+      "family": "twitter-response",
+      "title": "Letter from counsel for Twitter",
+      "kind": "edgar",
+      "edition": "0001193125-22-191300",
+      "url": "https://www.sec.gov/Archives/edgar/data/1418091/000119312522191300/d370677dex992.htm",
+      "proof_url": "https://www.sec.gov/Archives/edgar/data/1418091/000119312522191300/0001193125-22-191300-index.htm",
+      "published": "2022-07-11T16:38:36-04:00",
+      "version_at": "2022-07-11T16:38:36-04:00",
+      "sha256": "e4c56dfbb2ed7e80ce28da1a9392782c6b593667e3c23e783802635c4ffeb485",
+      "selection": {
+        "index_sha256": "1b933d5e04f4b498b196cbd19408aaf5cba82261e6cb06a458bef9748a072ee4",
+        "exhibit": "EX-99.2",
+        "sequence": 3,
+        "sections": [
+          {
+            "name": "Response and reservation of rights",
+            "start": "Mr. Musk’s and the other Musk Parties’ purported termination",
+            "end": "Twitter reserves all contractual"
+          }
+        ]
+      }
+    }
+  ],
+  "redirects": []
+}
