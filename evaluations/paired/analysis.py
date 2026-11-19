@@ -32,7 +32,7 @@ def metrics(rows):
     times = [r["elapsed_ms"] / 1000 for r in rows]
     claims = sum(r["material_claims"] for r in rows)
     supported = sum(r["supported_claims"] for r in rows)
-    return {
+    result = {
         "cases": n,
         "forward_cases": len(forward),
         "F": float(factual),
@@ -53,6 +53,15 @@ def metrics(rows):
         "material_claims": claims,
         "citation_support": supported / claims if claims else None,
     }
+
+    if any(Decimal(r.get("unreconciled_usd", "0")) for r in rows):
+        settled = [Decimal(r.get("confirmed_cost_usd", r["cost_usd"])) for r in rows]
+        result.update(
+            mean_confirmed_cost_usd=float(sum(settled) / n),
+            mean_cost_upper_bound_usd=result["mean_cost_usd"],
+            unreconciled_usd=str(sum(cost) - sum(settled)),
+        )
+    return result
 
 
 def select(rows, mixed_arms=("mixed", "mixed_fixed_plan", "mixed_no_forecast")):
@@ -77,7 +86,7 @@ def select(rows, mixed_arms=("mixed", "mixed_fixed_plan", "mixed_no_forecast")):
             if stats[a]["cutoff_violations"] == 0 and stats[a]["Q"] is not None
         ]
         require(eligible, "No eligible finalist in this class")
-        return min(
+        chosen = min(
             eligible,
             key=lambda a: (
                 -stats[a]["Q"],
@@ -86,6 +95,24 @@ def select(rows, mixed_arms=("mixed", "mixed_fixed_plan", "mixed_no_forecast")):
                 a,
             ),
         )
+
+        # Any dollar-based tie-break must select the same arm under every still-possible bill.
+        upper = stats[chosen]["mean_cost_usd"]
+        for other in eligible:
+            if other == chosen or stats[chosen]["Q"] != stats[other]["Q"]:
+                continue
+            if (
+                "unreconciled_usd" in stats[chosen]
+                or "unreconciled_usd" in stats[other]
+            ):
+                lower = stats[other].get(
+                    "mean_confirmed_cost_usd", stats[other]["mean_cost_usd"]
+                )
+                require(
+                    upper < lower,
+                    "A finalist cost tie-break requires a confirmed charge",
+                )
+        return chosen
 
     return (
         stats,
@@ -116,12 +143,24 @@ def differences(pairs):
     d_f = sum(a["F"] - b["F"] for a, b in pairs) / (3 * total)
     d_r = sum(a["R"] - b["R"] for a, b in pairs) / (2 * total)
     d_o = sum(a["O"] - b["O"] for a, b in forward) / len(forward) if forward else None
+    upper = (
+        sum(
+            Decimal(a["cost_usd"]) - Decimal(b.get("confirmed_cost_usd", b["cost_usd"]))
+            for a, b in pairs
+        )
+        / total
+    )
+    lower = (
+        sum(
+            Decimal(a.get("confirmed_cost_usd", a["cost_usd"])) - Decimal(b["cost_usd"])
+            for a, b in pairs
+        )
+        / total
+    )
     return {
+        **({"cost_range": [float(lower), float(upper)]} if lower != upper else {}),
         "quality": d_f / 2 + d_r / 4 + d_o / 4 if d_o is not None else None,
-        "cost": float(
-            sum(Decimal(a["cost_usd"]) - Decimal(b["cost_usd"]) for a, b in pairs)
-            / total
-        ),
+        "cost": float(upper),
     }
 
 
@@ -150,15 +189,16 @@ def blind_stats(rows, mixed, single, proto):
         "Unexpected blind strata",
     )
     rng = random.Random(proto["bootstrap_seed"])
-    q, c = [], []
+    q, c, cost_lower = [], [], []
     buckets = [strata[k] for k in sorted(strata)]
     for _ in range(proto["bootstrap_draws"]):
         sample = [pair for bucket in buckets for pair in rng.choices(bucket, k=4)]
         delta = differences(sample)
         q.append(delta["quality"])
         c.append(delta["cost"])
+        cost_lower.append(delta.get("cost_range", [delta["cost"]])[0])
     q_low, q_hi, c_low, c_hi = [
-        nearest(l, p) for l, p in ((q, 0.05), (q, 0.95), (c, 0.05), (c, 0.95))
+        nearest(l, p) for l, p in ((q, 0.05), (q, 0.95), (cost_lower, 0.05), (c, 0.95))
     ]
     leak = sum(r["cutoff_violations"] for r in rows)
     repeated = {

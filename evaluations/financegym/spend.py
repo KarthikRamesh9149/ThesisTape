@@ -52,6 +52,9 @@ def report():
             held = {"settled": Decimal(resolved["outstanding_usd"])}
         add(group, spent, sum(held.values(), Decimal(0)), 1)
 
+    boj = REPO / "runs/open-research/boj-march2024/research/run.json"
+    if boj.is_file():
+        include("Public Bank of Japan source trial", boj)
     for split in ("development", "blind"):
         for p in (REPO / "runs" / ("paired-" + split + "-v2")).glob("*/*/run/run.json"):
             include(

@@ -61,6 +61,24 @@ class EvaluatorTests(unittest.TestCase):
             with self.subTest(field=field), self.assertRaises(ValueError):
                 grading.validate(json.dumps(changed), payload)
 
+    def test_outstanding_provider_charge_cannot_manufacture_cost_savings(self):
+        common = {"F": 3, "R": 2, "O": 1}
+        mixed = {
+            **common,
+            "cost_usd": "0.20",
+            "confirmed_cost_usd": "0.14",
+            "unreconciled_usd": "0.06",
+        }
+        single = {
+            **common,
+            "cost_usd": "0.21",
+            "confirmed_cost_usd": "0.12",
+            "unreconciled_usd": "0.09",
+        }
+        result = analysis.differences([(mixed, single)])
+        self.assertEqual(result["cost_range"], [-0.07, 0.08])
+        self.assertEqual(result["cost"], 0.08)
+
     def test_bootstrap_zero_quality_loss_and_cost_strictness(self):
         rows = []
         for i in range(24):
