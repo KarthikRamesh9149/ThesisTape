@@ -280,7 +280,7 @@ def key_file(split, member, revision=REVISION):
         return json.loads(z.read(member))
 
 
-def grade_asof(split, revision=REVISION):
+def grade_asof(split, revision=REVISION, *, grader=grade_one):
     index, bundle = locked_inputs(split, revision)
     keys = key_file(split, "asof.json", revision)["cases"]
 
@@ -326,7 +326,7 @@ def grade_asof(split, revision=REVISION):
                     "0",
                 )
             else:
-                assessment, price = grade_one(
+                assessment, price = grader(
                     payload,
                     REPO
                     / "runs/study-grading-v2"

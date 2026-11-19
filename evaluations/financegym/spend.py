@@ -86,6 +86,8 @@ def report():
             include("Analyst product " + split, p)
     for p in (REPO / "runs/study-grading-v2").glob("*/*/*/grade/run.json"):
         include("Masked study graders", p)
+    for p in (REPO / "runs/study-grading-v2").glob("*/*/*/grade-overflow/run.json"):
+        include("Continuation of truncated masked assessments", p)
     for p in (REPO / "runs/financegym").glob("*/research/run.json"):
         include("Official research", p)
     for p in (REPO / "runs/financegym-recovery").glob("*/research/run.json"):
