@@ -1,0 +1,26 @@
+{
+  "purpose": "Two previously used development cases; numerical verification engineering trials.",
+  "report_set_sha256": "bc86d1241c9185e1f3557d22bc8bd50a62c0c04dfb29a13828122382090aeac7",
+  "rows": [
+    {
+      "amount_usd": "0.351676",
+      "cap_usd": "0.45",
+      "case_id": "nintendo-fy2021-guidance",
+      "direction": "higher",
+      "memo_sha256": "9d9e33aed977a50b157d6ab9eaab3c454798f0b30f5879ba86fdc045a321f743",
+      "new_searches": 2,
+      "original_generation_receipts": 8,
+      "state": "complete"
+    },
+    {
+      "amount_usd": "0.296268",
+      "cap_usd": "0.45",
+      "case_id": "canon-fy2022-interim-outlook",
+      "direction": "within",
+      "memo_sha256": "729b239e05d0551a82da1fcbbc4f3e9d26caae281c96d1b9930d407f99d043ff",
+      "new_searches": 0,
+      "original_generation_receipts": 8,
+      "state": "complete"
+    }
+  ]
+}

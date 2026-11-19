@@ -1,0 +1,385 @@
+[
+  {
+    "assessment": {
+      "claims": [
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p1",
+            "report_quote": "Nintendo’s Switch software plan leaves room for upside, but the headline unit comparison exaggerates the planned decline.",
+            "source_id": "P1",
+            "source_quote": "3 | Actual software sales units include the quantity bundled with hardware.\n4 | Forecasted software sales units do not include the quantity bundled with hardware."
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p1",
+            "report_quote": "In units of ten thousand, Nintendo forecast 14,000 against 16,872 sold in the reported year.",
+            "source_id": "P1",
+            "source_quote": "Total | 11,855 16,872 35,624 14,000"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p1",
+            "report_quote": "Actual sales included games bundled with hardware; forecast sales excluded them.",
+            "source_id": "P1",
+            "source_quote": "3 | Actual software sales units include the quantity bundled with hardware.\n4 | Forecasted software sales units do not include the quantity bundled with hardware."
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p1",
+            "report_quote": "Without the bundled volume or the incremental profit per game, these figures cannot establish how much additional software demand would take parent-attributable profit above the band.",
+            "source_id": "P1",
+            "source_quote": "Sales Units in Ten Thousands"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p2",
+            "report_quote": "Multiplying JPY 200,000 million by unity minus and unity plus the question’s percentage tolerance (±2%) gives an inclusive band of JPY 196,000 to 204,000 million.",
+            "source_id": "P3",
+            "source_quote": "Year ending Mar. 2021 | 1,200,000 | (8.3) | 300,000 | (14.9) | 290,000 | 200,000(19.5)(22.7) | 1,678.93"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p2",
+            "report_quote": "I expect profit above the upper bound chiefly because existing Switch owners can keep buying games without buying another console.",
+            "source_id": "P2",
+            "source_quote": "sales also continued to grow steadily for popular titles released in previous fiscal years"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p2",
+            "report_quote": "Animal Crossing: New Horizons sold 11.77 million units in its March launch month",
+            "source_id": "P2",
+            "source_quote": "Animal Crossing: New Horizons, released in March, sold 11.77 million units"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p2",
+            "report_quote": "older titles were still selling well",
+            "source_id": "P2",
+            "source_quote": "sales also continued to grow steadily for popular titles released in previous fiscal years"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p2",
+            "report_quote": "The launch sales belong to the reported year; the forecast depends on demand persisting into the new year.",
+            "source_id": "P2",
+            "source_quote": "Operating results for the fiscal year ended March 31, 2020"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p3",
+            "report_quote": "The strongest alternative is below the band if component shortages prevent Nintendo from making up lost Switch shipments by fiscal year-end.",
+            "source_id": "P4",
+            "source_quote": "However, we may be affected if there continue to be\nissues involving the procurement of necessary components."
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p3",
+            "report_quote": "Production and shipping delays were easing",
+            "source_id": "P4",
+            "source_quote": "It appears that delays in production and shipping are gradually recovering."
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p3",
+            "report_quote": "guidance already assumed supply would meet full-year demand, so temporary stockouts alone would not change the call.",
+            "source_id": "P5",
+            "source_quote": "production and sales\nvolumes may decrease for a certain period of time, but we anticipate that production and sales will be able to meet demand for the full year"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p3",
+            "report_quote": "I would switch to lower if Nintendo cut its full-year Switch hardware plan because it could not procure parts in time",
+            "source_id": "P4",
+            "source_quote": "issues involving the procurement of necessary components. In addition, if the impact of COVID-19 is prolonged or worsens\nfurther, it may disrupt the product supply."
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p3",
+            "report_quote": "fewer consoles built and shipped would cost hardware sales and leave fewer new owners buying software.",
+            "source_id": "P5",
+            "source_quote": "production and sales\nvolumes may decrease for a certain period of time"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p4",
+            "report_quote": "200,000 − |200,000| × 2% (question tolerance) = 196,000.00",
+            "source_id": "P3",
+            "source_quote": "Year ending Mar. 2021 | 1,200,000 | (8.3) | 300,000 | (14.9) | 290,000 | 200,000(19.5)(22.7) | 1,678.93"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p5",
+            "report_quote": "200,000 + |200,000| × 2% (question tolerance) = 204,000.00",
+            "source_id": "P3",
+            "source_quote": "Year ending Mar. 2021 | 1,200,000 | (8.3) | 300,000 | (14.9) | 290,000 | 200,000(19.5)(22.7) | 1,678.93"
+          }
+        }
+      ],
+      "points": [
+        {
+          "award": true,
+          "criterion": "F1",
+          "reason": "The report uses the correct ¥200,000 million guide as the base for the FY2021 parent-profit forecast.",
+          "witness": {
+            "paragraph": "p2",
+            "report_quote": "Multiplying JPY 200,000 million",
+            "source_id": "P3",
+            "source_quote": "Year ending Mar. 2021 | 1,200,000 | (8.3) | 300,000 | (14.9) | 290,000 | 200,000(19.5)(22.7) | 1,678.93"
+          }
+        },
+        {
+          "award": false,
+          "criterion": "F2",
+          "reason": "The report compares software volumes but never gives the just-reported parent-attributable profit of ¥258,641 million.",
+          "witness": null
+        },
+        {
+          "award": true,
+          "criterion": "F3",
+          "reason": "The shipment downside identifies the component-procurement mechanism in management’s COVID-19 supply warning.",
+          "witness": {
+            "paragraph": "p3",
+            "report_quote": "component shortages prevent Nintendo from making up lost Switch shipments by fiscal year-end",
+            "source_id": "P4",
+            "source_quote": "issues involving the procurement of necessary components. In addition, if the impact of COVID-19 is prolonged or worsens\nfurther, it may disrupt the product supply."
+          }
+        },
+        {
+          "award": true,
+          "criterion": "R1",
+          "reason": "Continuing sales of older games support a specific upside mechanism: existing owners can sustain software sales without another console purchase.",
+          "witness": {
+            "paragraph": "p2",
+            "report_quote": "I expect profit above the upper bound chiefly because existing Switch owners can keep buying games without buying another console.",
+            "source_id": "P2",
+            "source_quote": "sales also continued to grow steadily for popular titles released in previous fiscal years"
+          }
+        },
+        {
+          "award": true,
+          "criterion": "R2",
+          "reason": "A parts-driven full-year hardware plan cut would challenge management’s catch-up assumption, unlike a temporary stockout.",
+          "witness": {
+            "paragraph": "p3",
+            "report_quote": "I would switch to lower if Nintendo cut its full-year Switch hardware plan because it could not procure parts in time",
+            "source_id": "P5",
+            "source_quote": "we anticipate that production and sales will be able to meet demand for the full year"
+          }
+        }
+      ]
+    },
+    "case_id": "nintendo-fy2021-guidance",
+    "grader_usd": "0.119992",
+    "memo_sha256": "ce0640ac005b2a3f9db5dacb701650e56f134fd753dbdfb8e23de4fdb217199c"
+  },
+  {
+    "assessment": {
+      "claims": [
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p1",
+            "report_quote": "Canon needed to earn JPY (252,000 − 45,975) million over the remaining three quarters to meet its December year-end projection. The first input is full-year guidance",
+            "source_id": "P1",
+            "source_quote": "Net income attributable\nto Canon Inc. | ¥ | 45,975 | ¥ | 44,454 | + | 3.4 | $ | 376,844 | ¥ | 252,000 | + | 17.4"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p1",
+            "report_quote": "the second is net income attributable to Canon Inc. for the quarter ended March 31, 2022.",
+            "source_id": "P5",
+            "source_quote": "Net income attributable to Canon Inc. | 45,975 | 44,454 | + | 3.4"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p1",
+            "report_quote": "That quarterly figure already excludes income attributable to noncontrolling interests.",
+            "source_id": "P5",
+            "source_quote": "Consolidated net income | 49,793 | 48,566\nLess: Net income attributable to noncontrolling interests | 3,818 | 4,112\nNet income attributable to Canon Inc. | 45,975"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p2",
+            "report_quote": "Base case as of 2022-04-27T12:00:00Z: within.",
+            "source_id": "P3",
+            "source_quote": "increasing product supply by switching to different parts and developing business with new component suppliers,\nCanon revised the forecast upward"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p2",
+            "report_quote": "Apply the question’s ±2% tolerance to full-year guidance of JPY 252,000 million, not to the amount remaining: subtract the tolerance amount from guidance for the lower bound and add it for the upper bound, including both endpoints.",
+            "source_id": "P3",
+            "source_quote": "net income attributable to Canon Inc. of | ¥252.0 billion"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p2",
+            "report_quote": "The main driver is Canon’s ability to turn firm demand into shipments.",
+            "source_id": "P2",
+            "source_quote": "production  delays | due  to  the  resurgence  of  COVID-19 | infections | and  supply  chain  disruptions,  demand\nremained firm."
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p2",
+            "report_quote": "Substitute parts and new suppliers were already supporting production in the first quarter.",
+            "source_id": "P2",
+            "source_quote": "Canon prioritized product supply by maximizing production, which was achieved by switching to\ndifferent parts and developing business with new component suppliers."
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p2",
+            "report_quote": "exchange rates of ¥120 per US dollar and ¥130 per euro",
+            "source_id": "P3",
+            "source_quote": "exchange rates of ¥120 to the U.S. dollar and ¥130 to the euro"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p2",
+            "report_quote": "Canon incorporated further supply gains and exchange rates of ¥120 per US dollar and ¥130 per euro into its raised forecast. Those assumptions support meeting guidance, not exceeding it.",
+            "source_id": "P3",
+            "source_quote": "the aforementioned currency exchange rates and\nincreasing product supply by switching to different parts and developing business with new component suppliers,\nCanon revised the forecast upward"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p3",
+            "report_quote": "The strongest alternative is lower. First-quarter attributable income grew 3.4% year over year against 17.4% projected for the year, so meeting guidance required faster growth after March.",
+            "source_id": "P1",
+            "source_quote": "Net income attributable\nto Canon Inc. | ¥ | 45,975 | ¥ | 44,454 | + | 3.4 | $ | 376,844 | ¥ | 252,000 | + | 17.4"
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p3",
+            "report_quote": "Rising parts and freight costs had already cut gross margin by 0.7 percentage points to 44.9%.",
+            "source_id": "P2",
+            "source_quote": "Gross profit\nas a percentage of net sales decreased by 0.7 points to 44.9% due to the rising | costs of parts and logistics."
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p3",
+            "report_quote": "I would switch to lower if Canon’s next earnings update said chip and logistics constraints would persist through the second half without the expected easing: firm orders would not protect earnings if Canon could not ship the products.",
+            "source_id": "P9",
+            "source_quote": "despite the continued impact of the shortage of semiconductor chips\nand the disruption in logistics due to high demand in the first half of the year, the impact is expected to improve\nmoderately in the second half of the year."
+          }
+        },
+        {
+          "verdict": "supported",
+          "witness": {
+            "paragraph": "p3",
+            "report_quote": "The release establishes that management expected relief, not that relief occurred or that the eventual annual result fell within the band.",
+            "source_id": "P9",
+            "source_quote": "the impact is expected to improve\nmoderately in the second half of the year."
+          }
+        }
+      ],
+      "points": [
+        {
+          "award": true,
+          "criterion": "F1",
+          "reason": "The report correctly identifies ¥252,000 million as the December year-end projection for attributable net income.",
+          "witness": {
+            "paragraph": "p1",
+            "report_quote": "JPY (252,000 − 45,975) million over the remaining three quarters to meet its December year-end projection. The first input is full-year guidance",
+            "source_id": "P1",
+            "source_quote": "Net income attributable\nto Canon Inc. | ¥ | 45,975 | ¥ | 44,454 | + | 3.4 | $ | 376,844 | ¥ | 252,000 | + | 17.4"
+          }
+        },
+        {
+          "award": true,
+          "criterion": "F2",
+          "reason": "The second operand is the correct ¥45,975 million first-quarter actual, and the report identifies its metric and period.",
+          "witness": {
+            "paragraph": "p1",
+            "report_quote": "the second is net income attributable to Canon Inc. for the quarter ended March 31, 2022.",
+            "source_id": "P5",
+            "source_quote": "Net income attributable to Canon Inc. | 45,975 | 44,454 | + | 3.4"
+          }
+        },
+        {
+          "award": false,
+          "criterion": "F3",
+          "reason": "The subtraction is set up correctly, but the report does not state its result: ¥206,025 million for the remaining three quarters.",
+          "witness": null
+        },
+        {
+          "award": true,
+          "criterion": "R1",
+          "reason": "Actual sourcing changes supported production, and Canon embedded further supply gains in guidance. That explains why shipment recovery favors within rather than higher.",
+          "witness": {
+            "paragraph": "p2",
+            "report_quote": "Canon incorporated further supply gains and exchange rates of ¥120 per US dollar and ¥130 per euro into its raised forecast. Those assumptions support meeting guidance, not exceeding it.",
+            "source_id": "P3",
+            "source_quote": "Upon taking into consideration the current economic forecast, the aforementioned currency exchange rates and\nincreasing product supply by switching to different parts and developing business with new component suppliers,\nCanon revised the forecast upward"
+          }
+        },
+        {
+          "award": true,
+          "criterion": "R2",
+          "reason": "The downside case identifies an observable revision signal: a new management outlook withdrawing the expected second-half relief while attributable income growth needs to accelerate.",
+          "witness": {
+            "paragraph": "p3",
+            "report_quote": "I would switch to lower if Canon’s next earnings update said chip and logistics constraints would persist through the second half without the expected easing",
+            "source_id": "P9",
+            "source_quote": "the impact is expected to improve\nmoderately in the second half of the year."
+          }
+        }
+      ]
+    },
+    "case_id": "canon-fy2022-interim-outlook",
+    "grader_usd": "0.121656",
+    "memo_sha256": "14d1c4fc028a213484a406aa0c45c4d63122de60da9defe819c588b575b4e957"
+  }
+]
