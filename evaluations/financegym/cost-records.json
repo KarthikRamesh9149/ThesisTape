@@ -1,8 +1,18 @@
 {
   "assignments": {
+    "00f8f29706d00c6313d5fb31e28645995141eb980efe54dfebb6039bf3fcacb9": {
+      "group": "Official research",
+      "paid_usd": "0.146184",
+      "reserved_usd": "0"
+    },
     "01448a2e066221eef2d2580107b4cad08eac84fd713de36e85a2fabc4af32f8b": {
       "group": "FinanceBench masked grading",
       "paid_usd": "0.028184",
+      "reserved_usd": "0"
+    },
+    "016cc3567c49f578ebc3fb68716fd531b885b8c94471e5abb13cdac6fee041f8": {
+      "group": "Official research",
+      "paid_usd": "0.215352",
       "reserved_usd": "0"
     },
     "016ff1cd69f564cd515579405c0ccdb715bafd53e4a1c325a7f7905ad6ff7f77": {
@@ -40,6 +50,11 @@
       "paid_usd": "0.1248832",
       "reserved_usd": "0"
     },
+    "036236c9008f4b025cce130131a5c7e19cb93bc838c3a2a71c50caaf4c85e335": {
+      "group": "Official research",
+      "paid_usd": "0.140232",
+      "reserved_usd": "0"
+    },
     "0373849589eaed576e8f9578a63044aa46caac28d9053c92059bb0fc4c5418f6": {
       "group": "Masked study graders",
       "paid_usd": "0.12092",
@@ -53,6 +68,11 @@
     "046f86a5504108a54d9353eb5b60260877f37c46e7cd317b24c94d70f5b203e1": {
       "group": "FinanceBench masked grading",
       "paid_usd": "0.030592",
+      "reserved_usd": "0"
+    },
+    "047e136ee867d89d8fd4577c1a6fca4614583dbe6e6922d484c6cb61f18bbc78": {
+      "group": "Official research",
+      "paid_usd": "0.165688",
       "reserved_usd": "0"
     },
     "05238a6511d123f04e87bd69da3e38aaf99e86fa9c876721ae21cfceb7d8ec7c": {
@@ -85,19 +105,39 @@
       "paid_usd": "0.034614",
       "reserved_usd": "0"
     },
+    "086f12ae93a1b106b9eac2bae0230050be399636e8926a39326384451f1d7964": {
+      "group": "Independent review of otherwise unanswered primary drafts",
+      "paid_usd": "0.01242",
+      "reserved_usd": "0"
+    },
     "088201472b0100b0f1d5c4c6ee070f177fc7fe981cbf240f56ef083dbb4771b7": {
       "group": "Incumbent blind",
       "paid_usd": "0",
       "reserved_usd": "0.00060575"
+    },
+    "0899a02ae0e1fc900707bc1867da03e69022c04a65b5c5d8297cedf3f0ec6386": {
+      "group": "Independent review of otherwise unanswered primary drafts",
+      "paid_usd": "0.010666",
+      "reserved_usd": "0"
     },
     "0972b4be98494fa0a63e94e8751941544df911ff7e288f6141eff8de8b1a6d2b": {
       "group": "Official research",
       "paid_usd": "0.139624",
       "reserved_usd": "0"
     },
+    "099fa62f6c65431fc79b44fb6db5de81d2b25b45fc7901620395ddece7f14584": {
+      "group": "Independent review of otherwise unanswered primary drafts",
+      "paid_usd": "0.017234",
+      "reserved_usd": "0"
+    },
     "09ae088aacf02672a1420e8e7aa4ddc59204c45ff539f25582b3f96bd8e1b594": {
       "group": "Analyst product development",
       "paid_usd": "0.1997425",
+      "reserved_usd": "0"
+    },
+    "0a0b5e37a4a2125db908cb5c2675e5ae7b899e92207992ba0ce1aed9846b89c5": {
+      "group": "Official research",
+      "paid_usd": "0.231088",
       "reserved_usd": "0"
     },
     "0a0d52aa9d32885e5578512154a01bb8d28c5d346076070ae7377e16d1e9213c": {
@@ -125,6 +165,11 @@
       "paid_usd": "0.383772",
       "reserved_usd": "0"
     },
+    "0b9539a24c3456fc45c27738cbc33c60ca7b5c66b512ff365a9b1a6101c16628": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.2371616",
+      "reserved_usd": "0"
+    },
     "0c15ff5d4ba377dea7e2fe2e4bf9d9ac9c61bb72cbf8ac241c4608a3c79d019f": {
       "group": "Official research",
       "paid_usd": "0.190088",
@@ -145,6 +190,11 @@
       "paid_usd": "0.116288",
       "reserved_usd": "0"
     },
+    "0d5c16294c2213c262a46cf48b7e5017f4b278eed5f4373b8586b9f4656827be": {
+      "group": "Official research",
+      "paid_usd": "0.216016",
+      "reserved_usd": "0"
+    },
     "0dceba4fc1ef77b63b2e6900fb7338007a3ee4a60a3a4057aca94690364ed23b": {
       "group": "Incumbent development",
       "paid_usd": "0.109016",
@@ -158,6 +208,11 @@
     "0ec6abb21362a91864723220401548b136db3ec5d380f5349ff18074b8be1e30": {
       "group": "Official research",
       "paid_usd": "0.214392",
+      "reserved_usd": "0"
+    },
+    "0f759024c767ebca6a3c1e81c6e1fe43f4c44c8b1229bf85e9bc06ef8fcfcab3": {
+      "group": "Funded editing of otherwise unanswered official tasks",
+      "paid_usd": "0.134886",
       "reserved_usd": "0"
     },
     "0fef5a6748cfdc9b04379030ea04d8d1cfc602764b6b56783e4de215139d7e74": {
@@ -190,9 +245,19 @@
       "paid_usd": "0.244960",
       "reserved_usd": "0"
     },
+    "1119d9b1e8448ba50d0ae7ea27cb33f0c53151aac177f60e1c2049bbc502f31d": {
+      "group": "Official research",
+      "paid_usd": "0.187336",
+      "reserved_usd": "0"
+    },
     "114dd34fb12e6310d8ccc43257b49de386c3c565cf531a9b1361c0f8460c5f3b": {
       "group": "Incumbent development",
       "paid_usd": "0.046770",
+      "reserved_usd": "0"
+    },
+    "115f9e750d3429df8f4e6f7d04054af64c16997186be221c53a2723b57ef0fe4": {
+      "group": "Official research",
+      "paid_usd": "0.142680",
       "reserved_usd": "0"
     },
     "11650cc97a7289cfaaa14aade8bc842eb042310f9c614465390909022fba91cb": {
@@ -255,6 +320,11 @@
       "paid_usd": "0.231400",
       "reserved_usd": "0"
     },
+    "169f0d9d4f13be9257929f5bcab299daa3c68df31a67cb6cde694b024007d959": {
+      "group": "Official research",
+      "paid_usd": "0.272808",
+      "reserved_usd": "0"
+    },
     "16bc32412780a9351f58ed8f493181368bf6d1c858e4e2045159c1e9c848198c": {
       "group": "Official research",
       "paid_usd": "0.154704",
@@ -273,6 +343,11 @@
     "1762fbb95a3c7431c5619adb94151e213e950906de56083cec0229419fa8e828": {
       "group": "Official research",
       "paid_usd": "0.131904",
+      "reserved_usd": "0"
+    },
+    "17815951b6c9cae9da7a7ef576523dafe4d6e829454ba7c5e8ac3d85134e524f": {
+      "group": "Official research",
+      "paid_usd": "0.154112",
       "reserved_usd": "0"
     },
     "17dae7d6e460c6c7fe4f8a99590aab768df1675ca5ca9a56663bd7253281e644": {
@@ -315,6 +390,11 @@
       "paid_usd": "0.249440",
       "reserved_usd": "0"
     },
+    "1979f0810d28cba83b72d5efab62ab926554ad05d5ff87b85240258a8f97eba2": {
+      "group": "Official research",
+      "paid_usd": "0.014488",
+      "reserved_usd": "0"
+    },
     "19dfa96696eb0e2f150fd441340d12f56dd43ecef7384f33709078fe22349b9b": {
       "group": "Official research",
       "paid_usd": "0.222296",
@@ -328,6 +408,21 @@
     "1a94d8b9b94bfcbc0ba88d0ca32b9d7e78abe52b0a58c07d1727b8e714f04356": {
       "group": "Analyst product blind",
       "paid_usd": "0.1378783",
+      "reserved_usd": "0"
+    },
+    "1a977224dc82c5bf2864b6bca2751ee33e7cf4e2819e142d839dd0662593b81b": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.2445877",
+      "reserved_usd": "0"
+    },
+    "1aa56237d2528e76ad1f2f3e296317e6853b185d7ff509693d3a5c1839edb408": {
+      "group": "Official research",
+      "paid_usd": "0.147528",
+      "reserved_usd": "0"
+    },
+    "1ac2f9d484789ad75e4d675cff6e4f6e32c81544de05c078ef2f3327486bb702": {
+      "group": "Official research",
+      "paid_usd": "0.157784",
       "reserved_usd": "0"
     },
     "1ad3f868bbecf5b2b57727155b8eff89440636e885ba058a40d456da2e77d1eb": {
@@ -365,6 +460,11 @@
       "paid_usd": "0.244688",
       "reserved_usd": "0"
     },
+    "1c60740946426ba311e5353b9f273a3f614556a6017e943a9d2f6c20ee47a84c": {
+      "group": "Official research",
+      "paid_usd": "0.177368",
+      "reserved_usd": "0"
+    },
     "1cb359b50b2b27a310fc3f9ddeadb26761af28061cbb3f2db1ccd03fb611b0fa": {
       "group": "Masked study graders",
       "paid_usd": "0.119552",
@@ -388,6 +488,11 @@
     "1ed2e629da6f77d8db28d8fd6064bb5554566971523bedb4ebb45e38fae60bc6": {
       "group": "Analyst product blind",
       "paid_usd": "0.111328",
+      "reserved_usd": "0"
+    },
+    "1ee372517b31b153e6a6d8b1419af276ec127772a61d41b80bb21c0afa5cdbaf": {
+      "group": "Official research",
+      "paid_usd": "0.166520",
       "reserved_usd": "0"
     },
     "1f107b4785c5e04f7fb2d3999879eea3758c834d171903afd20842943b4f3c99": {
@@ -433,6 +538,11 @@
     "2276fda7a55e99b29f002627923d9a1eb11e342bd88bcff922ba6c7a738e47a9": {
       "group": "Official research",
       "paid_usd": "0.130808",
+      "reserved_usd": "0"
+    },
+    "236a35eae651e862810347027b114090219f2449080fac103c0e41d0e4a64069": {
+      "group": "Official research",
+      "paid_usd": "0.219920",
       "reserved_usd": "0"
     },
     "23d9b99c3ee1329a7ceed311fdad05b180ed3dfbe4ee43a3981ac304e62c6f47": {
@@ -485,6 +595,11 @@
       "paid_usd": "0.250304",
       "reserved_usd": "0"
     },
+    "2735fd8a7013e8adadce5ed1b8d53eb299f6607b853a9660a0e0527e048af430": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.1825118",
+      "reserved_usd": "0"
+    },
     "273ced15427ffe3114dd51f0a2a37199b8ca568a835f3f4f4bd99bd44c094567": {
       "group": "Official research",
       "paid_usd": "0.184264",
@@ -498,6 +613,11 @@
     "2756d8f73406aea3831079d0525296bd438d077ade77aa743f9e232a0d24d150": {
       "group": "Official research",
       "paid_usd": "0.193336",
+      "reserved_usd": "0"
+    },
+    "27c421a358b9bf1a8941a9a2be16410ffac50b4c021382ed6399f1a762a7a64a": {
+      "group": "Independent review of otherwise unanswered primary drafts",
+      "paid_usd": "0.013562",
       "reserved_usd": "0"
     },
     "27c81b4078ee2f6f50a7b05a76bb4a46d925daf998aca08259a8f489fd9bbc37": {
@@ -570,6 +690,11 @@
       "paid_usd": "0.1687668",
       "reserved_usd": "0"
     },
+    "2cbff707498ae7ab03f8ff145359aade317d91665901755b19c48381435b2a72": {
+      "group": "Official research",
+      "paid_usd": "0.238408",
+      "reserved_usd": "0"
+    },
     "2ce09ad9e11240201ae26846ace32ef955f374963c976c9251b4028506669bd2": {
       "group": "Official research",
       "paid_usd": "0.181048",
@@ -620,6 +745,16 @@
       "paid_usd": "0.236648",
       "reserved_usd": "0"
     },
+    "3097fc03cf15f05d63e35521bf35a2720a5186d290421f3d8ed0290fde032efd": {
+      "group": "Official research",
+      "paid_usd": "0.184872",
+      "reserved_usd": "0"
+    },
+    "30fd4d39c16e86168901f08061f8280606cf880328c9b115b7f5a4cbfe67cb1b": {
+      "group": "Official research",
+      "paid_usd": "0.172968",
+      "reserved_usd": "0"
+    },
     "3127402ec510c2c40a3081e0e08b832d91ec66821d026cbe132ea04c0b7384b2": {
       "group": "Official research",
       "paid_usd": "0.210144",
@@ -648,6 +783,16 @@
     "32627b73f2e8addca9b8e0ccb1bded415854fa1bc0a2b11001ccc67d61b8973f": {
       "group": "Official research",
       "paid_usd": "0.01536",
+      "reserved_usd": "0"
+    },
+    "32775ef424a68a8c7a2e4e42499385c969e293ed0427385e1be55c7ca9ba04e1": {
+      "group": "Official research",
+      "paid_usd": "0.240224",
+      "reserved_usd": "0"
+    },
+    "32c6d83b41a8065409177820a9c5a344a65715cdc83bb511d94a4c2b234395c3": {
+      "group": "Official research",
+      "paid_usd": "0.116480",
       "reserved_usd": "0"
     },
     "336b81bfa48f5602a6b428169647f05ef10f639314b1c7d09e956a2eedcf26e4": {
@@ -680,6 +825,11 @@
       "paid_usd": "0.091986",
       "reserved_usd": "0"
     },
+    "35f407f7aa4029e19acce9d9af5b5298407d0059182e7c68dca0163094ce4ef9": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.2379107",
+      "reserved_usd": "0"
+    },
     "3600c197d5c0c14f633af4ebfdd67838440eaa2d8093f00538a84f6b28971519": {
       "group": "FinanceBench independent research",
       "paid_usd": "0.223072",
@@ -705,6 +855,11 @@
       "paid_usd": "0.054424",
       "reserved_usd": "0"
     },
+    "37384f88998065e9f3369df9e700022bffd195165fbde99562cd93d01da98409": {
+      "group": "Official research",
+      "paid_usd": "0.152656",
+      "reserved_usd": "0"
+    },
     "37646310c572c1ea51e8fc58a5dde9716ac19251a8a640562b68140466c2104c": {
       "group": "Masked study graders",
       "paid_usd": "0.123104",
@@ -715,9 +870,19 @@
       "paid_usd": "0.13584",
       "reserved_usd": "0"
     },
+    "37d2cea0f5b9dd9ad4d855080a0536cd0bf91858f02d1822d6f2dc054b3a22e1": {
+      "group": "Official research",
+      "paid_usd": "0.172096",
+      "reserved_usd": "0"
+    },
     "384216b860a6a08d755ad7fdd833216ba4d8b05645f42fcfec92fc33946da7d1": {
       "group": "Official research",
       "paid_usd": "0.208312",
+      "reserved_usd": "0"
+    },
+    "38e9fc73a2055a931fa6d6dede64d78c3009360abcd2f5e6fa4be9fa17caba8c": {
+      "group": "Official research",
+      "paid_usd": "0.188088",
       "reserved_usd": "0"
     },
     "38eac1046ab7dd2f8479b418cd275f860510a24a626d8779b6e4fec0e12790d0": {
@@ -775,6 +940,11 @@
       "paid_usd": "0.0380765",
       "reserved_usd": "0"
     },
+    "3a77e68fcbbf58591f187b8f18d25da7fae93cdbbbbd15b57cec631facb7cb36": {
+      "group": "Independent review of otherwise unanswered primary drafts",
+      "paid_usd": "0.014294",
+      "reserved_usd": "0"
+    },
     "3a79e5800cd9b9be73b123d8ae08da04dbb6894e742b6e493ad2bf94a2b229d3": {
       "group": "FinanceBench independent research",
       "paid_usd": "0.244160",
@@ -820,6 +990,11 @@
       "paid_usd": "0.381370",
       "reserved_usd": "0"
     },
+    "3d543584d504a9bff8b122ae1b59ede890ad0d74e5e422aa8140e02791985c41": {
+      "group": "Official research",
+      "paid_usd": "0.218992",
+      "reserved_usd": "0"
+    },
     "3d7571c7eef3a874863444083e3fb0c64d4286dfa4cab89e90b9a149c31b1428": {
       "group": "Official research",
       "paid_usd": "0.154936",
@@ -840,9 +1015,19 @@
       "paid_usd": "0.044170",
       "reserved_usd": "0"
     },
+    "3f7171f89b69c6f4ba69de40e056f07bd26870b13aaa7f0913b7fdf4997d6621": {
+      "group": "Official research",
+      "paid_usd": "0.212168",
+      "reserved_usd": "0"
+    },
     "3f7eac555b5a065fd67bfd9a676ffc7abfa78c22d2174eb013996e3372946853": {
       "group": "Official research",
       "paid_usd": "0.161408",
+      "reserved_usd": "0"
+    },
+    "3f92a7dd89aaa2f401294f326a1ac79f090b44488bcc2dc178e881fd6cabf5a7": {
+      "group": "Independent review of otherwise unanswered primary drafts",
+      "paid_usd": "0.014934",
       "reserved_usd": "0"
     },
     "3fd34c0055f9da86a8c6cc24974d2c196601d140b8ffe0955fbfd2e76a3d9ef8": {
@@ -870,6 +1055,11 @@
       "paid_usd": "0.133320",
       "reserved_usd": "0"
     },
+    "417d9d0f138491564d5305e213c305a40c1c42c910486d282c94c454f43eb648": {
+      "group": "Official research",
+      "paid_usd": "0.165176",
+      "reserved_usd": "0"
+    },
     "4194105fa4f03e0a1bc956d48d70948ed89b89f597e1831a003be9d3a850184f": {
       "group": "Official research",
       "paid_usd": "0.269480",
@@ -878,6 +1068,11 @@
     "42019655720a5a9917fbe4ceaa1a9d0c037c2c77933dcaf3628acb44301442ea": {
       "group": "Official research",
       "paid_usd": "0.206480",
+      "reserved_usd": "0"
+    },
+    "4300b8ff8deb0478fb71c4c1eae63fe4dfd7090eee4a6d093726482aeefb7d3d": {
+      "group": "Official research",
+      "paid_usd": "0.228552",
       "reserved_usd": "0"
     },
     "4316baf92e47ab6977622214c14f8db1a2b2ed5b3ef86154be645b7b3ff2f83f": {
@@ -920,6 +1115,21 @@
       "paid_usd": "0.149928",
       "reserved_usd": "0"
     },
+    "477d9148dbd7b44b508586422c06190a257e0eb1e077e46760c527e7ce736870": {
+      "group": "Official research",
+      "paid_usd": "0.131136",
+      "reserved_usd": "0"
+    },
+    "47b5bacb0b0c3e82f4e9b19425155ebff3b43f793b1ecb31ef10766d6f82a6ce": {
+      "group": "Official research",
+      "paid_usd": "0.193272",
+      "reserved_usd": "0"
+    },
+    "484932d6d4958794e8dbb9057c2137cb5ba38a6724b7a3d86bab93e2eeb1ce5b": {
+      "group": "Official research",
+      "paid_usd": "0.253608",
+      "reserved_usd": "0"
+    },
     "4870e233d0df95351e3f868747d55e9388a3c4bb0261548900f498a9925d2c48": {
       "group": "Official research",
       "paid_usd": "0.236112",
@@ -948,6 +1158,16 @@
     "49697f6f4213fbdde8e9291f8b2db1b8c1674140e99ec4d130ddbb2d23a6d96b": {
       "group": "FinanceBench independent research",
       "paid_usd": "0.204876",
+      "reserved_usd": "0"
+    },
+    "4a153d59e6692eeea61b5cc87ed5a86c09617216f3c2c89554d03d30be12be68": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.381836",
+      "reserved_usd": "0"
+    },
+    "4a4549db5afe5695d40c339b9f25900a3eb72c48f36bf8dd3ea530ef8550150b": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.2029207",
       "reserved_usd": "0"
     },
     "4a712a730e46096c69a7d80b22af7b8c977edc6b83a3915d3add06afc5368b3a": {
@@ -980,6 +1200,11 @@
       "paid_usd": "0.144248",
       "reserved_usd": "0"
     },
+    "4c6e1f69afffd0ff7408b9dea1f118dfeb967c3859a7be1fd8a6b682e1db99d6": {
+      "group": "Independent review of otherwise unanswered primary drafts",
+      "paid_usd": "0.018258",
+      "reserved_usd": "0"
+    },
     "4d92c89fb4523ab0ea1392f50e317c8aeaf89ec46fc7b73f3d349e3915986a57": {
       "group": "Official research",
       "paid_usd": "0.122200",
@@ -988,6 +1213,11 @@
     "4dbe347c0313a8bd0cfa72fa537b22e0bab2512d3f80e1fe9cf167d60873f3d0": {
       "group": "Masked study graders",
       "paid_usd": "0.116968",
+      "reserved_usd": "0"
+    },
+    "4dd16e528cfac761e8c9a185b12a9bb4a75732ee58de1be72ab19bfb3f14bc42": {
+      "group": "Official research",
+      "paid_usd": "0.182992",
       "reserved_usd": "0"
     },
     "4e01d8ce25bb07770355df2fd50c72789c37bec9ae0116dbac4b08856555f138": {
@@ -1100,9 +1330,29 @@
       "paid_usd": "0.199792",
       "reserved_usd": "0"
     },
+    "58a33c364de0e63fcc897f66b74efdaae7b0e0383828b56c78787092143dd6a7": {
+      "group": "Official research",
+      "paid_usd": "0.142000",
+      "reserved_usd": "0"
+    },
+    "58a82335422d2acfc05223f99816fedfc5ed82be22486923c25ecc96537659d4": {
+      "group": "Official research",
+      "paid_usd": "0.241288",
+      "reserved_usd": "0"
+    },
     "58c593f6806dbfa70ccb67998db0d5bafc150d18df533adf910734d329ae3590": {
       "group": "Official research",
       "paid_usd": "0.245408",
+      "reserved_usd": "0"
+    },
+    "58ec15b4d347ded32b8a68462da9b47523003e541520b858edefd9b96e08b30a": {
+      "group": "Official research",
+      "paid_usd": "0.186872",
+      "reserved_usd": "0"
+    },
+    "59076a68c8ec9eb1001d5c368d8b514c1938e0293f71a7d309ca79939a6bb075": {
+      "group": "Official research",
+      "paid_usd": "0.195296",
       "reserved_usd": "0"
     },
     "5919a87dcae0ceede924c345c1efaa54b2851724c6817a609d1d0f69aeea8213": {
@@ -1118,6 +1368,11 @@
     "59451c5612085e5b943ccc70789c6590bd0162b9ede11709ef295fd7c7a65b55": {
       "group": "Masked study graders",
       "paid_usd": "0.154136",
+      "reserved_usd": "0"
+    },
+    "59ad00e5eb30e5eae085a3a634c40068b2cf0d66882e0664cb21b38791b2502a": {
+      "group": "Official research",
+      "paid_usd": "0.260264",
       "reserved_usd": "0"
     },
     "5a440b70e18c3f1c7d15685e97f61c52ca78db25de880e982539ebfd07af488d": {
@@ -1138,6 +1393,11 @@
     "5afc05bd247e2ba53c1560e574a84f38c663941d7adc93faaa43ab2ca397b4fd": {
       "group": "Official research",
       "paid_usd": "0.142480",
+      "reserved_usd": "0"
+    },
+    "5b2d01aa8a48b9fb09c9813698763c467027453fa972e7191045bd4b0d062c00": {
+      "group": "Official research",
+      "paid_usd": "0.169872",
       "reserved_usd": "0"
     },
     "5b318947c131e6c9cfdda39df552a6d3301e0a341370a132fa647b3369be415d": {
@@ -1185,9 +1445,19 @@
       "paid_usd": "0.1598295",
       "reserved_usd": "0"
     },
+    "5bc77c57df20f416ec4309510d69f7379fabc3238c519cb7cb30aacb0d34bd96": {
+      "group": "Official research",
+      "paid_usd": "0.130440",
+      "reserved_usd": "0"
+    },
     "5d04051eff2342faca17c882cd9638775ec570bc87ff6ec035dafe52848baea4": {
       "group": "Official research",
       "paid_usd": "0.232480",
+      "reserved_usd": "0"
+    },
+    "5d72ac011e6a95f79c570e7c3f59912699325868c21ee85493930f9a7420fac4": {
+      "group": "Official research",
+      "paid_usd": "0.184456",
       "reserved_usd": "0"
     },
     "5e4df5e39f939f5cd23e0849e1b47f3fc1d7ca9baf35354b9de2cea49dd35241": {
@@ -1263,6 +1533,11 @@
     "63344cbf74295094049d84797d426c2a7428426d9dddc1aec05dc86d1e5685d5": {
       "group": "Masked study graders",
       "paid_usd": "0.172376",
+      "reserved_usd": "0"
+    },
+    "63449c409516e3b6c0a81a3cb1b16db40bd95eae5b8459b44876883717a63f03": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.2060608",
       "reserved_usd": "0"
     },
     "6406fab3fad69c9306824c61bf81a45194b91d4dfd9b47298ea558cfacec88d6": {
@@ -1365,6 +1640,16 @@
       "paid_usd": "0.0009085",
       "reserved_usd": "0"
     },
+    "68f8771f27fa762a208e804271a876306fe1649bde7b86857d250ccccb241231": {
+      "group": "Official research",
+      "paid_usd": "0.188184",
+      "reserved_usd": "0"
+    },
+    "69f45575418499226325ba25d138d103266dbe18d432a3e90a139fe0e50d318e": {
+      "group": "Official research",
+      "paid_usd": "0.185280",
+      "reserved_usd": "0"
+    },
     "6a042c7c9f45906c937c88b76391b3ff68649a37277dd84ac55fd2e640ed7423": {
       "group": "FinanceBench independent research",
       "paid_usd": "0.295392",
@@ -1405,6 +1690,11 @@
       "paid_usd": "0.0124951",
       "reserved_usd": "0"
     },
+    "6bf482803d94212bf1f1f800d4f420631f7fcd50699cb7184a16979f47778acd": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.2642426",
+      "reserved_usd": "0"
+    },
     "6cd7b2e049bd0af9f4b1985554fa5650f4d2dbb86b5ebfcb59e5bb37afe8c9fe": {
       "group": "Official research",
       "paid_usd": "0.184888",
@@ -1420,6 +1710,11 @@
       "paid_usd": "0.214384",
       "reserved_usd": "0"
     },
+    "6dc241e754b75af99f8580200d68f4c24d0ce3d6d92a8e192556a247bd3e6184": {
+      "group": "Official research",
+      "paid_usd": "0.158664",
+      "reserved_usd": "0"
+    },
     "6dfca1966c42dc49416c1fa21d7b1d3f75d0930704e663e519c144c371846bf6": {
       "group": "Official research",
       "paid_usd": "0.187144",
@@ -1430,9 +1725,19 @@
       "paid_usd": "0.156112",
       "reserved_usd": "0"
     },
+    "6f58ab04fb8d369a40e7fe98a7e6e6239ca3e0d57db789078508bf1229782ebe": {
+      "group": "Official research",
+      "paid_usd": "0.252504",
+      "reserved_usd": "0"
+    },
     "6fb3b7596b3ee8d86ce7a4d73d91917fc9ecf2d1668ef9895c650c2f34145fbc": {
       "group": "FinanceBench independent research",
       "paid_usd": "0.239864",
+      "reserved_usd": "0"
+    },
+    "6fc9aa6ed7d16fbbe7c7a4ae30f8e28caaf8d013b747afa0d7621b1caa870518": {
+      "group": "Official research",
+      "paid_usd": "0.230656",
       "reserved_usd": "0"
     },
     "6fd48cf878969d466a5a7a2e52565cbf49e8660da5150c3f0bac57581ce8f710": {
@@ -1485,9 +1790,19 @@
       "paid_usd": "0.115232",
       "reserved_usd": "0"
     },
+    "72f7e4dfd551463b30aafdbce4b84b08a6341f1f0119ee283a5533d13641396d": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.2646369",
+      "reserved_usd": "0"
+    },
     "733987225178f38282b29ca9b0945d02a5f0860d6bced9264a22c7b029eef2cc": {
       "group": "Analyst product blind",
       "paid_usd": "0.100664",
+      "reserved_usd": "0"
+    },
+    "735063c026000b295d2f02108019d6c57aa451c622343e083b374d4a4a4631e4": {
+      "group": "Official research",
+      "paid_usd": "0.200464",
       "reserved_usd": "0"
     },
     "736401ef4c7be2a90e46295bce02ed7170420c4930d121ee276bbccfc17eedf2": {
@@ -1528,6 +1843,11 @@
     "74a54b1d51fce26f6e7f6157c0cc3b4533f321dde4a69d2b261fa6685407684d": {
       "group": "Independent recovery of unanswered official tasks",
       "paid_usd": "0.383220",
+      "reserved_usd": "0"
+    },
+    "74d44315cc11b169a872c9f600846641e7e0235b6fe37ea19be29fb573802861": {
+      "group": "Official research",
+      "paid_usd": "0.208304",
       "reserved_usd": "0"
     },
     "74f3922333e252e614a3eafb4fc43a4207fc9f3b4e84339e9cbfe697526471b6": {
@@ -1630,6 +1950,11 @@
       "paid_usd": "0.0191487",
       "reserved_usd": "0"
     },
+    "7ae137713a8a6bf93f334122495e9e4d3ef2ad6dffecee36b177091822f7562b": {
+      "group": "Official research",
+      "paid_usd": "0.146216",
+      "reserved_usd": "0"
+    },
     "7b4cc66bad94ffdced961f8f64ac9fd5a95010686e56b74eba2dbb00ab2787f8": {
       "group": "Public March 2023 Federal Reserve validation",
       "paid_usd": "0.2181744",
@@ -1695,6 +2020,11 @@
       "paid_usd": "0.141816",
       "reserved_usd": "0"
     },
+    "7e9dd5b57063f0225b905da6d8a83a20e01766bb6ebf84f2573239cfb6d76382": {
+      "group": "Official research",
+      "paid_usd": "0.151480",
+      "reserved_usd": "0"
+    },
     "7ea1feec767e9362edc69c990854dc5fe5b33a698f05f30b26a6c061d5122315": {
       "group": "Official research",
       "paid_usd": "0.124080",
@@ -1720,6 +2050,11 @@
       "paid_usd": "0.264568",
       "reserved_usd": "0"
     },
+    "7f35e48d3c1381d773bee1b6cf7932e54a90714b38bb3081aeede5bd45dbca08": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.148444",
+      "reserved_usd": "0"
+    },
     "7f386a44a8cc30589bc8b6fff7f0bc8b835160984b4e15ed0e950f4285e69d22": {
       "group": "Analyst product development",
       "paid_usd": "0.039744",
@@ -1728,6 +2063,11 @@
     "7f6b74b679d6d7eaac2140ac644e97dc4e91de184b145af8881ac443b98b67da": {
       "group": "Incumbent blind",
       "paid_usd": "0.030184",
+      "reserved_usd": "0"
+    },
+    "7f73798fd376c8ad3dd2031feb18bfa36cd9a0594e84d0bc57e6acfd7ec0cb47": {
+      "group": "Official research",
+      "paid_usd": "0.264576",
       "reserved_usd": "0"
     },
     "7fb06c54a708e81c2accad1e35fe349414b1d61fd5a62977511ad8145e857665": {
@@ -1785,6 +2125,11 @@
       "paid_usd": "0.2050188",
       "reserved_usd": "0"
     },
+    "821c81f88d4743636d0864ec4940a8b2e9605f2dffc5c7767f1490431417b71f": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.1668099",
+      "reserved_usd": "0"
+    },
     "82c2472d2f1990afb591e6660fd79dc1b69926ad8c77f95c42bdad11875df268": {
       "group": "Official research",
       "paid_usd": "0.268360",
@@ -1803,6 +2148,11 @@
     "838cffa1678b2f393a7ba2fc640695bc1a99d015f103c388fca0d5eedf750501": {
       "group": "Official research",
       "paid_usd": "0.192176",
+      "reserved_usd": "0"
+    },
+    "838ece597cde867398b629193702e2b866e1d3b0c08a30485286788732a961c9": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.2163706",
       "reserved_usd": "0"
     },
     "83c82148aa72e50e7c510fe2ff34b037932ebd3d002053279c3528c82a5bd8f3": {
@@ -1828,6 +2178,11 @@
     "84dc7fb68646c48d7b7ce87a123a4de2ceb0198219405fbf09397dab9c6713f1": {
       "group": "FinanceBench independent research",
       "paid_usd": "0.294326",
+      "reserved_usd": "0"
+    },
+    "8555d59c58f4e0e2a478b544b1ba270053b2902f8c28fe7839170dbf7ef3e5bd": {
+      "group": "Official research",
+      "paid_usd": "0.159640",
       "reserved_usd": "0"
     },
     "85588396ef248a0241c259155eb851771ef651034079b36964e1c5ef392429b7": {
@@ -1880,6 +2235,11 @@
       "paid_usd": "0.052298",
       "reserved_usd": "0"
     },
+    "8874e6d5c840c3066e71c757fda0481ffeaec70e079a52b66a6c94d8c8f1363a": {
+      "group": "Official research",
+      "paid_usd": "0.191112",
+      "reserved_usd": "0"
+    },
     "88b83adf488d2c989bfdaee587a5bbccc0f2ce4e359758c133560fd8ac3d0d12": {
       "group": "Masked study graders",
       "paid_usd": "0.11896",
@@ -1888,6 +2248,11 @@
     "88bc5807f8308c1efe0da1741e2db39e418b1154a7113880a5f4808e32ed57a5": {
       "group": "Incumbent blind",
       "paid_usd": "0.0329930",
+      "reserved_usd": "0"
+    },
+    "890c47162acfc155d77cd538a32b19983ef313b843fddd18b57ef8c79bf3d4ca": {
+      "group": "Official research",
+      "paid_usd": "0.148200",
       "reserved_usd": "0"
     },
     "89297913f015f421c1d997191125bec0b01cf624debcd4ace64332a3fdcd98c7": {
@@ -1935,6 +2300,11 @@
       "paid_usd": "0.165920",
       "reserved_usd": "0"
     },
+    "8c30bb9309d46789ff8ac0838c4d36dd54df0c5688c5722f569c813721c7d761": {
+      "group": "Official research",
+      "paid_usd": "0.149536",
+      "reserved_usd": "0"
+    },
     "8c673a5c68f3061b6db183718147f321ebae0ad4990a02d1e5a0baa3551c3bbd": {
       "group": "FinanceBench independent research",
       "paid_usd": "0.198040",
@@ -1968,6 +2338,11 @@
     "8fc97939d5f600036c92de4d997fab2f2bfd03a0d0ebb7fb70e775dc7ae8c661": {
       "group": "Official research",
       "paid_usd": "0.147096",
+      "reserved_usd": "0"
+    },
+    "903a4d9b7265434f369fd77f706d09e2fab8a5094921e6fd10b0da930d5d8a2f": {
+      "group": "Official research",
+      "paid_usd": "0.217528",
       "reserved_usd": "0"
     },
     "9101bc24650820afca362a668352732e5ac7a1312dec9fd68a3bb6c9432db6ae": {
@@ -2005,6 +2380,11 @@
       "paid_usd": "0.016022",
       "reserved_usd": "0"
     },
+    "92c45068f9412bf8570c160a226c776edfe3f0e35ef0027410d22713a5cc01ce": {
+      "group": "Official research",
+      "paid_usd": "0.193544",
+      "reserved_usd": "0"
+    },
     "930bac3eed0911517bb7f5ba2b1a3cf859be85dcc4eb4929df82be4578d11059": {
       "group": "Official research",
       "paid_usd": "0.260648",
@@ -2040,6 +2420,11 @@
       "paid_usd": "0.154856",
       "reserved_usd": "0"
     },
+    "953816b7832232d64b7362c231e54d5391ad5e43a3bbe4570205fb9c06ba9838": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.2074098",
+      "reserved_usd": "0"
+    },
     "954cdbc2beeab0589c26daccbbbea4763704aa98a6ce2a8cd6302ed36a308801": {
       "group": "Official research",
       "paid_usd": "0.178792",
@@ -2063,6 +2448,16 @@
     "95e51b8d631d4d3097ea4186928cbb0ee9f839075241f5abc61556a4b4caceeb": {
       "group": "Official research",
       "paid_usd": "0.197672",
+      "reserved_usd": "0"
+    },
+    "96175827b260ec592ea8d436e41849b3ea68f7d88760d7798cbcdd33d7520207": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.2165439",
+      "reserved_usd": "0"
+    },
+    "972b4d813870d2022e9de2170d5bc29c5ae7b4a8384020b402c312813cb18749": {
+      "group": "Official research",
+      "paid_usd": "0.232456",
       "reserved_usd": "0"
     },
     "973e0ff518683a9d0c9208a1bba4c16f0a1c6274e4d89192597722afd3492e18": {
@@ -2105,6 +2500,11 @@
       "paid_usd": "0.292680",
       "reserved_usd": "0"
     },
+    "99dc711048a79b90570afac72536c6643979686166d2312c4180fb9ee8187a5c": {
+      "group": "Official research",
+      "paid_usd": "0.226184",
+      "reserved_usd": "0"
+    },
     "99f87bf846d985bec1b3aead288c4f8abc7dcca8470cb3ba75967a703b247d23": {
       "group": "FinanceBench independent research",
       "paid_usd": "0.268000",
@@ -2113,6 +2513,11 @@
     "9ac289cffd2a376812f69213a3555587e922189268449f345dcf0bcc0bc23910": {
       "group": "FinanceBench masked grading",
       "paid_usd": "0.02584",
+      "reserved_usd": "0"
+    },
+    "9b06b1963667d6f8314ac80c85d3224b7afa776deabd1161b41e86fdc55bd612": {
+      "group": "Official research",
+      "paid_usd": "0.177984",
       "reserved_usd": "0"
     },
     "9b588d4457ec0f49ffcd78603a82c14456b1e8c8750a3a92dc8363b8db8b5c33": {
@@ -2193,6 +2598,11 @@
     "9fbed353e4c16061b47e8d47e5fe0ca61f9d4851197ef5139a4772055f4a9112": {
       "group": "Incumbent blind",
       "paid_usd": "0.0272880",
+      "reserved_usd": "0"
+    },
+    "9fbef2981b9c54ae5190a8fc2317df194ab75a7a8295493b7abf5b5549dcae04": {
+      "group": "Independent review of otherwise unanswered primary drafts",
+      "paid_usd": "0.011284",
       "reserved_usd": "0"
     },
     "9fc148d6444d5ae429985c2fb6bb1bca1a36b2fe1426e652c58affef55c49586": {
@@ -2320,6 +2730,11 @@
       "paid_usd": "0.044152",
       "reserved_usd": "0"
     },
+    "a3ce4595cfa5dc138c75a1419f5d41e826f2dc6874b4aae1654d14fb9eecad23": {
+      "group": "Official research",
+      "paid_usd": "0.251384",
+      "reserved_usd": "0"
+    },
     "a439294eef88557a675029481f7ec28a1f24c281c028cb275573fac0e6fa8bca": {
       "group": "Official research",
       "paid_usd": "0.200824",
@@ -2353,6 +2768,11 @@
     "a5c4dbfc978d432503ad637383501316812cd3c2d1fae9fe2fd3d7963716a33c": {
       "group": "Official research",
       "paid_usd": "0.164840",
+      "reserved_usd": "0"
+    },
+    "a5cb177a2a4c864c5ef2ad8703a8894996e8cff6d84bb9f6c197ad7422761ea9": {
+      "group": "Official research",
+      "paid_usd": "0.252672",
       "reserved_usd": "0"
     },
     "a5dc1aa85cb30763037d569c1e556ecc615d6738c93c12b6c4e9dda9688cb632": {
@@ -2400,9 +2820,19 @@
       "paid_usd": "0.156240",
       "reserved_usd": "0"
     },
+    "a8bd44042726fbe47656a82c1ec2c738b3c48f614b3819c73dafa06254d0266c": {
+      "group": "Independent review of otherwise unanswered primary drafts",
+      "paid_usd": "0.013192",
+      "reserved_usd": "0"
+    },
     "a9b4ad751d105e5f0df46833f6ced9349a6d24d2c909fd4f63b02067d5990cde": {
       "group": "FinanceBench masked grading",
       "paid_usd": "0.039272",
+      "reserved_usd": "0"
+    },
+    "a9eebf4f5103ee91319b55fdf5f3a254c0353ce9131723912ae6c3b846b8ba0c": {
+      "group": "Independent review of otherwise unanswered primary drafts",
+      "paid_usd": "0.016826",
       "reserved_usd": "0"
     },
     "a9f0dddddcced96f028de6558bdd065dda948d94f1120cea71e37e80d4fa1667": {
@@ -2415,6 +2845,11 @@
       "paid_usd": "0.108128",
       "reserved_usd": "0"
     },
+    "aaf9071d4c6bb9f45771ffc940683c6125563d701d0de5f8778e34f94db8decc": {
+      "group": "Official research",
+      "paid_usd": "0.232728",
+      "reserved_usd": "0"
+    },
     "ab889811894b2200e8fed847d21e2de6badd53e2f8022e921c29f21272121651": {
       "group": "Official research",
       "paid_usd": "0.199608",
@@ -2423,6 +2858,16 @@
     "abd55b39d9b881d6015c3995dc767ab2066a10c74484765a46bccf5657be5764": {
       "group": "Masked study graders",
       "paid_usd": "0.1412",
+      "reserved_usd": "0"
+    },
+    "abf064913a65a52b0a9aaddca01ae8d9658acea80b9396ac04c81b0180f9e184": {
+      "group": "Official research",
+      "paid_usd": "0.121568",
+      "reserved_usd": "0"
+    },
+    "ac1806dbf3c913d5e0c89f71a886ef066e7f8b094fd760686171a76de3487f73": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.2317601",
       "reserved_usd": "0"
     },
     "ac4917891a39acf82edf5938d5db56f54337f3ea5ff5c5e72b93c5718fbce20a": {
@@ -2438,6 +2883,11 @@
     "ad1f7bd42ee04a5353f2fd81aba69fefddf997dbc14eedef957d746b1ebec694": {
       "group": "Official research",
       "paid_usd": "0.191224",
+      "reserved_usd": "0"
+    },
+    "ad32d5012aee712f913297d7ebfee7122f7279d215ef82357fd10ccc8e3a1fe1": {
+      "group": "Official research",
+      "paid_usd": "0.232960",
       "reserved_usd": "0"
     },
     "ad3f9b7a9c13ef9856f2208eadc290159b459cc853f1dddf04996797254bfe2d": {
@@ -2485,6 +2935,11 @@
       "paid_usd": "0.152752",
       "reserved_usd": "0"
     },
+    "afc5e0d719760e45afcd7dd14c59cfb1c45c0d9045a56142fc2dcc4a5eabf8e4": {
+      "group": "Official research",
+      "paid_usd": "0.244912",
+      "reserved_usd": "0"
+    },
     "b0024800d78eeb2ea5f1170195dd5afb3fe54a1226bb5a1499de154389a6a564": {
       "group": "Official research",
       "paid_usd": "0.235008",
@@ -2515,6 +2970,11 @@
       "paid_usd": "0.015344",
       "reserved_usd": "0"
     },
+    "b106f2a2d7aa49f0f7e7cd42fdf3047b4386e3c7abfadc661cd8e3e56d19db97": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.2382930",
+      "reserved_usd": "0"
+    },
     "b1aefbd746e67c4641a584d41ae4e800ee813baf749697b33c6366c844c7cdc3": {
       "group": "Analyst product blind",
       "paid_usd": "0.2068859",
@@ -2525,9 +2985,19 @@
       "paid_usd": "0.233528",
       "reserved_usd": "0"
     },
+    "b229584f46411f97963b5dd7e6be106bc43d4d68639cb41594f824ef46cb5556": {
+      "group": "Official research",
+      "paid_usd": "0.236976",
+      "reserved_usd": "0"
+    },
     "b2a9d3d9837e6d3209811cbc09296d6f30fa78484a44a00cb6f1df8e8423b77b": {
       "group": "Official research",
       "paid_usd": "0.225800",
+      "reserved_usd": "0"
+    },
+    "b2c84b4bafeb558c7fc2781254cad92ba1a0281fb41dce93da321d4b35884691": {
+      "group": "Official research",
+      "paid_usd": "0.226000",
       "reserved_usd": "0"
     },
     "b32da9477a80a93343b5e3afda5348ab8baab38f450e0c80fb9dfc335510f67b": {
@@ -2540,6 +3010,11 @@
       "paid_usd": "0.042466",
       "reserved_usd": "0"
     },
+    "b3fc568ee64c5923f246d15e4524d65198015050c9a30a246bd86630858a8b86": {
+      "group": "Official research",
+      "paid_usd": "0.264184",
+      "reserved_usd": "0"
+    },
     "b4577b06dabf42faa971218484335de591f05b7ca45a85f4c7d38556786f019f": {
       "group": "Independent review of otherwise unanswered primary drafts",
       "paid_usd": "0.012198",
@@ -2548,6 +3023,11 @@
     "b50d9283a3c3a7d47195c305ea012005c9c6ca2e68c7e15829b4bb2be4a950a1": {
       "group": "Official research",
       "paid_usd": "0.236464",
+      "reserved_usd": "0"
+    },
+    "b51ce30fe6954df4d3ee2893c1e04af4031ce81e47379fe6a940833abfbade96": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.2376997",
       "reserved_usd": "0"
     },
     "b5297e3e7edbd0b8e628fb5bb3e1ebf3ed10af87186d69c717a42fb92d020f14": {
@@ -2563,6 +3043,16 @@
     "b55cf887356b1abbd959cad7433b6045205226ab5d1215c19fe039d173c3190b": {
       "group": "Official research",
       "paid_usd": "0.181816",
+      "reserved_usd": "0"
+    },
+    "b583e220af9bfc642407709f47061b641f6b6296bded0b973ebd5b7b506cb05a": {
+      "group": "Official research",
+      "paid_usd": "0.272280",
+      "reserved_usd": "0"
+    },
+    "b5a4e2d427fe2cc25d801849a8c17a2579c6b17d719f4901e5f5bfd6b0765bc9": {
+      "group": "Official research",
+      "paid_usd": "0.180040",
       "reserved_usd": "0"
     },
     "b5c44f5d71a700a8ad22031a2c391c69e97677ec6ad544bdf48809e8f2e9b53a": {
@@ -2600,6 +3090,11 @@
       "paid_usd": "0.150688",
       "reserved_usd": "0"
     },
+    "b6bf01b01ed099df61b8e08de75bcf8ec38ac60bab358a1e69c78748a59c8f56": {
+      "group": "Official research",
+      "paid_usd": "0.238800",
+      "reserved_usd": "0"
+    },
     "b75648bfe52fbd8fe61b0ed72fb580b8dfdf6e237516bd01c4405526a0ab90f4": {
       "group": "FinanceBench masked grading",
       "paid_usd": "0.04276",
@@ -2615,9 +3110,19 @@
       "paid_usd": "0.160280",
       "reserved_usd": "0"
     },
+    "b8369ab055cd81467a71fd97512355be716bd75c03bc02175e43fd82c59613ae": {
+      "group": "Official research",
+      "paid_usd": "0.176224",
+      "reserved_usd": "0"
+    },
     "b8711d7aa4a3d8b8305631bd079ca8f69d17cd9ffb2dd029d07cffc7442d425c": {
       "group": "Incumbent development",
       "paid_usd": "0.031306",
+      "reserved_usd": "0"
+    },
+    "b878b1ede363aa407e062475dabc3cc891a74dc94f75b84f24beabc8fd2d3c62": {
+      "group": "Official research",
+      "paid_usd": "0.211904",
       "reserved_usd": "0"
     },
     "b8bd49a367e1cba5a30342b07167f02887e67365339d4d3bd65f01f87ed65a77": {
@@ -2700,9 +3205,19 @@
       "paid_usd": "0.133736",
       "reserved_usd": "0"
     },
+    "bc7cddae2b7ec2d2dd1e9ca9a6fc7f3c7994d938bf8c3f1cfbd2fce4fac4ff24": {
+      "group": "Official research",
+      "paid_usd": "0.138952",
+      "reserved_usd": "0"
+    },
     "bc8d4b8ed5a2ca04dbf2e1e1d231be9ffe96cda8895aad29b67c164c30c8bdb0": {
       "group": "FinanceBench masked grading",
       "paid_usd": "0.028344",
+      "reserved_usd": "0"
+    },
+    "bddc105653f76392d5adde3f47f988d3787c0c2ff52930a91540c53336c62f2e": {
+      "group": "Official research",
+      "paid_usd": "0.246224",
       "reserved_usd": "0"
     },
     "bde00ad0df6294a6afb4392ea7856545ae4caf82cba54eb6160cbade07491eae": {
@@ -2785,6 +3300,11 @@
       "paid_usd": "0.358024",
       "reserved_usd": "0"
     },
+    "c1d407ada1fed47ec66ec426364b8d1bd93366b07dd6cb17244fcc5cd8cabc07": {
+      "group": "Official research",
+      "paid_usd": "0.206328",
+      "reserved_usd": "0"
+    },
     "c1f2550a5a014b84ba4e14832d35d8be72fe516d511a986452aa63b8736a363a": {
       "group": "Analyst product development",
       "paid_usd": "0.147096",
@@ -2840,6 +3360,11 @@
       "paid_usd": "0.030232",
       "reserved_usd": "0"
     },
+    "c4e5c7b5cf2a34e1e278a204d567463b02423d84af4f8497fd3093231e74b917": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.2178011",
+      "reserved_usd": "0"
+    },
     "c5228db150d038415a93618f6047693c6b5cbe01a17ed1b19fbda54d306b82c4": {
       "group": "Official research",
       "paid_usd": "0.161344",
@@ -2868,6 +3393,11 @@
     "c6b159c87e70d04d0342716c434aac4880484e00f47d89d30b5471c0c249fdf8": {
       "group": "Incumbent blind",
       "paid_usd": "0.0400422",
+      "reserved_usd": "0"
+    },
+    "c6e9ae0bc4b7b5d8625c0375bc2df3e8c088991ee11bb19348d04f52eef68428": {
+      "group": "Official research",
+      "paid_usd": "0.264584",
       "reserved_usd": "0"
     },
     "c72b1631742af645a47969a84b111bfe84090c62a2682f93ad986729f51ffd73": {
@@ -2920,6 +3450,11 @@
       "paid_usd": "0.283312",
       "reserved_usd": "0"
     },
+    "c9d4c187d6334c141dcc4fea770694af064673ef9fb03bf79c6545b0d3446b0e": {
+      "group": "Official research",
+      "paid_usd": "0.016792",
+      "reserved_usd": "0"
+    },
     "ca1381ea92320123309c019a5f0575f2a3603f3bf8cdbf70879faf07cfc1b6ac": {
       "group": "FinanceBench masked grading",
       "paid_usd": "0.040752",
@@ -2930,14 +3465,29 @@
       "paid_usd": "0.021632",
       "reserved_usd": "0"
     },
+    "cb79560a4c257aa69d756fb5fbf8c4617f1d4e4a7f45deffab44f215ac5d7fb4": {
+      "group": "Official research",
+      "paid_usd": "0.153824",
+      "reserved_usd": "0"
+    },
     "cba19de3c738463c41721adb7c49a13cd00ab42f83c17a07d0e2efdfb68aacb7": {
       "group": "Incumbent development",
       "paid_usd": "0.0670768",
       "reserved_usd": "0"
     },
+    "cbb32657a3d9ea32259bc64a505495859d8cefcf45aff4fc99def7682eb49c63": {
+      "group": "Official research",
+      "paid_usd": "0.208560",
+      "reserved_usd": "0"
+    },
     "cbe0f718291270c660a3cccae8dfafc59c27a9ee21fd88ec8302762a966bb28a": {
       "group": "Analyst product development",
       "paid_usd": "0.039326",
+      "reserved_usd": "0"
+    },
+    "cc1f09f50cef938c8238c148624530a9204697e1097a81297f39714d8c1e113b": {
+      "group": "Official research",
+      "paid_usd": "0.153304",
       "reserved_usd": "0"
     },
     "cca13f40ff74ce9be31ddf00e75494ad4ad3eccb15399e75a732bd8646fa87ad": {
@@ -2995,9 +3545,19 @@
       "paid_usd": "0.305040",
       "reserved_usd": "0"
     },
+    "cf8fd7958e768dea628ceaa581e5def562b1de1a9970d91b840c185ac18060ee": {
+      "group": "Official research",
+      "paid_usd": "0.235632",
+      "reserved_usd": "0"
+    },
     "cfad69bdaf7923d85cb7ad1f39d850f48035f7a3cb681364f037f126eba9b116": {
       "group": "Analyst product development",
       "paid_usd": "0.102376",
+      "reserved_usd": "0"
+    },
+    "cfbabd22da4d2c082036bde414e914477e6f67a33bf2da450e3c8a13ae57151e": {
+      "group": "Official research",
+      "paid_usd": "0.194928",
       "reserved_usd": "0"
     },
     "cffa1b64ca194627f6c72f0190634be7fad68a1580c6a7a944345248bfa8dc84": {
@@ -3013,6 +3573,16 @@
     "d04862367045800350eeb7f6670e482a189b6c808ed6aad264d2c2ae40d7eb8d": {
       "group": "Analyst product blind",
       "paid_usd": "0.1240762",
+      "reserved_usd": "0"
+    },
+    "d05a294d7092b92bdcf52dac72b1ec95aef153b8840375e8b4cba2580289c64c": {
+      "group": "Official research",
+      "paid_usd": "0.231712",
+      "reserved_usd": "0"
+    },
+    "d05dd22db9bd5a8b380bdae295eb103839c99a9710b5e61f85bda87fa5083b87": {
+      "group": "Official research",
+      "paid_usd": "0.189152",
       "reserved_usd": "0"
     },
     "d0ee3378e210d99f7217a618dee5fbdff50a6428a88f2eb04809400d740188f7": {
@@ -3130,6 +3700,16 @@
       "paid_usd": "0.026156",
       "reserved_usd": "0"
     },
+    "d753b767fbd7eacc4ca5cef94b1bdcb1ab905ddc88c24bb3237adb48f30debed": {
+      "group": "Independent review of otherwise unanswered primary drafts",
+      "paid_usd": "0.015206",
+      "reserved_usd": "0"
+    },
+    "d7a3427574de35b57c2383e20781ead426a9d0ba8168f53569c5598e0567085a": {
+      "group": "Official research",
+      "paid_usd": "0.233288",
+      "reserved_usd": "0"
+    },
     "d7a4255c8714832eef808380ef129697b1628cc4e9661f1dbdbb3527bd4615da": {
       "group": "Independent recovery of unanswered official tasks",
       "paid_usd": "0.383210",
@@ -3220,6 +3800,11 @@
       "paid_usd": "0.186648",
       "reserved_usd": "0"
     },
+    "df8c9894ea9c858e5b877a821e00a9d03d9aacc5f239af0628e15a3ac7754dba": {
+      "group": "Official research",
+      "paid_usd": "0.198216",
+      "reserved_usd": "0"
+    },
     "dfa471000a7fa9d840c90a1e9b5cd88ce6895438b42b881cf3e4b17e6e72c2f6": {
       "group": "Official research",
       "paid_usd": "0.149744",
@@ -3260,6 +3845,11 @@
       "paid_usd": "0.221112",
       "reserved_usd": "0"
     },
+    "e15224893438bb40a512408782f694f67f9f47d168639c75cf01b92ccdd28928": {
+      "group": "Official research",
+      "paid_usd": "0.195056",
+      "reserved_usd": "0"
+    },
     "e158a9a3a191a42dc718ec516d4aaa5c114ca2a5d99a79dd904d23535bfa20b7": {
       "group": "Independent recovery of unanswered official tasks",
       "paid_usd": "0.382598",
@@ -3278,6 +3868,11 @@
     "e2538bc2bd848cf85da5e7fa6eab6cd86d950d5fed60cae107036c992702e7ef": {
       "group": "Masked study graders",
       "paid_usd": "0.123672",
+      "reserved_usd": "0"
+    },
+    "e28272198218c3adb5f2252750eddd7145bb12c3dbcf413ff5bdc8551ccdcf37": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.2349995",
       "reserved_usd": "0"
     },
     "e2e55598f982e8942108686fafb9f3eaa7fd715e6d19981539bceb0040f3327d": {
@@ -3305,6 +3900,11 @@
       "paid_usd": "0.100512",
       "reserved_usd": "0"
     },
+    "e4c3e6428763bd4126735b12c759a036e9d60d22837bb1fb27bfd5cd0b8843f4": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.2445719",
+      "reserved_usd": "0"
+    },
     "e4c3e877945e203dc22768a8d74cf44bbc9f6a29c6e8f763f3893636c8b7a933": {
       "group": "Incumbent development",
       "paid_usd": "0.0860857",
@@ -3325,6 +3925,11 @@
       "paid_usd": "0.159232",
       "reserved_usd": "0"
     },
+    "e5c15cc0194e1a864614f720c5e5f39a828436e9220990602d878b82a6db29c2": {
+      "group": "Official research",
+      "paid_usd": "0.196576",
+      "reserved_usd": "0"
+    },
     "e5f036d12a9f46be92dc0ef02e555dc37c479f0a1d23f9f56cf49957e88c4e96": {
       "group": "Official research",
       "paid_usd": "0.237384",
@@ -3340,6 +3945,11 @@
       "paid_usd": "0.108712",
       "reserved_usd": "0"
     },
+    "e73930542320d507cec6ee48d3fc7b088280e7fcd6455468797178a246781788": {
+      "group": "Official research",
+      "paid_usd": "0.209224",
+      "reserved_usd": "0"
+    },
     "e8479b83fbbc7925ac30ec90a3afbf187ff4c21cdb50e6a891867506f8a18954": {
       "group": "Official research",
       "paid_usd": "0.267808",
@@ -3348,6 +3958,21 @@
     "e8a183f27e7a8e419fa9c4591982938cd8ae6bc33dc0fdf7a01c83409fc1fb07": {
       "group": "Masked study graders",
       "paid_usd": "0.114984",
+      "reserved_usd": "0"
+    },
+    "ea08378f1aea37d3fdd90e78265f4fb372f0ed606c0148d67c1c36d242e5220e": {
+      "group": "Official research",
+      "paid_usd": "0.192392",
+      "reserved_usd": "0"
+    },
+    "ea68a9fc214724bf65bbd915261ec6037017b9ef3f5d6a92d61a247d083fb87f": {
+      "group": "Official research",
+      "paid_usd": "0.163816",
+      "reserved_usd": "0"
+    },
+    "ea9a4e9471b3be3bce08bf6dcd438ebfda858458a5b3b78c6c97799d5d90e0ac": {
+      "group": "Official research",
+      "paid_usd": "0.213096",
       "reserved_usd": "0"
     },
     "eab5f6243fd2113b951293e3ddb2d5da3cc5f3fdb687e4ddea9906e85d4f4245": {
@@ -3390,6 +4015,16 @@
       "paid_usd": "0.158352",
       "reserved_usd": "0"
     },
+    "ec5074e9c8466ffb3cebb263f3281d1d8e5f07e3b4fb90c1894526baff57a2c7": {
+      "group": "Official research",
+      "paid_usd": "0.248600",
+      "reserved_usd": "0"
+    },
+    "ecad5f59fce72f12df7da710bd029909d1be681123f1e07eb7cfa27548459307": {
+      "group": "Official research",
+      "paid_usd": "0.223088",
+      "reserved_usd": "0"
+    },
     "ed21a12c1d08b2d69bdb9c381784d2aa65277cdaaa29549b0dfa12125f107091": {
       "group": "Incumbent development",
       "paid_usd": "0.040486",
@@ -3415,6 +4050,16 @@
       "paid_usd": "0.229184",
       "reserved_usd": "0"
     },
+    "ee01d509621ff01acfdc55b5f52c9577638699a29684f0dc5a5c40e13b2d1540": {
+      "group": "Official research",
+      "paid_usd": "0.187128",
+      "reserved_usd": "0"
+    },
+    "ee30b3731c62da2dd6dab7b30ae8397472920d9c48b093763087ed8d22ad7020": {
+      "group": "Official research",
+      "paid_usd": "0.207320",
+      "reserved_usd": "0"
+    },
     "eec57515a0843f07d069dda1fffa66ff1e3984d834dad04b313e5250b84c228f": {
       "group": "Funded editing of otherwise unanswered official tasks",
       "paid_usd": "0.144886",
@@ -3430,9 +4075,24 @@
       "paid_usd": "0.201448",
       "reserved_usd": "0"
     },
+    "ef03e3c2fbe12b451561f6fe3a11b0158964391e104f467af24ab79f1b45b935": {
+      "group": "Official research",
+      "paid_usd": "0.201312",
+      "reserved_usd": "0"
+    },
+    "ef11dabfafb33c0622f67bbd39c33c563405993b0c2f26ce71e08550cfd6403c": {
+      "group": "Official research",
+      "paid_usd": "0.238680",
+      "reserved_usd": "0"
+    },
     "ef8b32f427e718fa280dc59be9c7ee0cceec2284e34574525d677399df755151": {
       "group": "Official research",
       "paid_usd": "0.161344",
+      "reserved_usd": "0"
+    },
+    "efdea039792754bbda6acf995672423f6fdc94539d52e38d79343ca898fdb374": {
+      "group": "Official research",
+      "paid_usd": "0.261384",
       "reserved_usd": "0"
     },
     "f005e437ee64e54631529a1470cce73e483f9b1cdf4f4b67d8be445b5fa02f94": {
@@ -3440,9 +4100,19 @@
       "paid_usd": "0.219568",
       "reserved_usd": "0"
     },
+    "f01bf8de248aaff6a832247b2f5c2fbfeaf82ae0dcf747fc948c9559a7b1be7e": {
+      "group": "Official research",
+      "paid_usd": "0.210696",
+      "reserved_usd": "0"
+    },
     "f06577655b9507f550341c91eed8cd4b76504473a3f207e25ce149c5702a660b": {
       "group": "FinanceBench masked grading",
       "paid_usd": "0.026112",
+      "reserved_usd": "0"
+    },
+    "f06e9efdac73bcf1abf3d3c27763d814835487ab5726c177da5dc3af9f2d16a8": {
+      "group": "Official research",
+      "paid_usd": "0.193704",
       "reserved_usd": "0"
     },
     "f0c2b2d8a5f6bff47ebbd2b7c574114a80a1ec7444918eab0e468566659c0c8d": {
@@ -3540,14 +4210,34 @@
       "paid_usd": "0.160840",
       "reserved_usd": "0"
     },
+    "f5547ddc1d358590d3c6e2f0905ceea971d522c75cb1e001876012d0688bc925": {
+      "group": "Official research",
+      "paid_usd": "0.203528",
+      "reserved_usd": "0"
+    },
+    "f55c08c818a33afc47f82e565de685dc4eacb60f55c2f4bd8a4f4a56addbaaea": {
+      "group": "Independent recovery of unanswered official tasks",
+      "paid_usd": "0.011582",
+      "reserved_usd": "0"
+    },
     "f5932fac9f2dc9b2316a366b8c44ae8757fc8be29ad1993fc892ba7afbaa1f58": {
       "group": "Official research",
       "paid_usd": "0.211896",
       "reserved_usd": "0"
     },
+    "f5957cf431f5be82a91101517146b057055a5c389a83ed247a24642528b640ba": {
+      "group": "Official research",
+      "paid_usd": "0.181656",
+      "reserved_usd": "0"
+    },
     "f61d98f2568743c02f411eb008b50338cbd34ada7fae88ed3b570782a9883200": {
       "group": "FinanceBench masked grading",
       "paid_usd": "0.03068",
+      "reserved_usd": "0"
+    },
+    "f63a12269675dfe813871969a36883f8894951c6b53461a116ad4e25a68f88e0": {
+      "group": "Official research",
+      "paid_usd": "0.208336",
       "reserved_usd": "0"
     },
     "f65d96f2ee8c6da7c30a5dbf22f0e1634903ddbb85286f79409c47c77f0ca1a1": {
@@ -3570,9 +4260,19 @@
       "paid_usd": "0.227528",
       "reserved_usd": "0"
     },
+    "f8477bf4bb666c3e96f0aff6f706bb9f4579c002f478737957dc4e1710e1628b": {
+      "group": "Official research",
+      "paid_usd": "0.141640",
+      "reserved_usd": "0"
+    },
     "f890317ef70764d546fd13d6cefd849a94fb86120f17a82b4f92e8c5cf8f5d7b": {
       "group": "Analyst product blind",
       "paid_usd": "0.1720658",
+      "reserved_usd": "0"
+    },
+    "f8f75937f024eba98f96e4e657ebb9c4c84f8974d3fc6f4e1b8f8ecba8b3f56d": {
+      "group": "Official research",
+      "paid_usd": "0.279112",
       "reserved_usd": "0"
     },
     "f92bd4cd0bea5d10a801589807718549c8bd065decadb6a8067e4fcae89e1ad1": {
@@ -3588,6 +4288,11 @@
     "f9e3c77f6510840ccb41fceffc6f616a82abaf71490a4511ea9b5f702a477ef8": {
       "group": "Independent recovery of unanswered official tasks",
       "paid_usd": "0.276088",
+      "reserved_usd": "0"
+    },
+    "f9ec4b729a3156546a6c049896f9d2d4b1a462da483ad5b7f83cdd7907da4ace": {
+      "group": "Official research",
+      "paid_usd": "0.161648",
       "reserved_usd": "0"
     },
     "fa05c12daa880ea9503469e58ec2ec2277cd8207ce2176e26a56e90e0121e252": {
@@ -3640,6 +4345,11 @@
       "paid_usd": "0.252424",
       "reserved_usd": "0"
     },
+    "fe63d8d2dca0bbd39675f9d0775f57b00647f177499c451f9d046b6644c2517a": {
+      "group": "Official research",
+      "paid_usd": "0.227432",
+      "reserved_usd": "0"
+    },
     "fe6f7ae9e80f9dc73fea6a6bbe6c227e5d6642f570d6315795b9d72f6486c724": {
       "group": "Official research",
       "paid_usd": "0.204376",
@@ -3686,6 +4396,6 @@
       "reserved_usd": "0"
     }
   },
-  "sha256": "6abd4ed3602d49b1daf34a598cdd7827f609cfeb067bd984e823b3b6b6a60b4f",
+  "sha256": "494908334427ba34e3608711535684bcdcac19f6df382e5d8fc6da67824381f8",
   "version": 1
 }

@@ -1,0 +1,29 @@
+{
+  "files": {
+    "answers.jsonl": "5daeb98a17509bda30fa5f394ab3fc5ed440a22ceb1a407dbe0ff70165ab1057",
+    "audit.json": "eb9a965faf5d9a7dd3a00d130f3af322fa7b632839f3d1e942893e0555cfac9b",
+    "recovery-allocation.json": "a26745fd5fdb9a9baeeb5df6d45896fe0e04a9ba5075d76c4a52a1a6a73328be",
+    "system-paper.md": "d5c465723f6f779caa60c776cd09f25c6d4d0857b80916860a0791fce5ea01bb"
+  },
+  "operator_checks": "Every original HTTP response and private provider identity was checked when the submission was exported. Portable replay uses the original admitted passages and recorded generations.",
+  "registration_sha256": "2a51039b25186a8e30262013c82be24898ab4ffbf9adb6c692312b30d694fd4d",
+  "shards": {
+    "receipts-01.zip": "41d2d332a57d37bb3b1727ba87a1829b4ce43e28716d60fe995172062fd93a3f",
+    "receipts-02.zip": "edfc23b4e22e0adc9ddbe58530d36429c47bdfb58fc94c66dc5e0455ba26530e",
+    "receipts-03.zip": "434a6356abb85f454edb363caabef830698cc1a038e70efc4fea6f89747a522f",
+    "receipts-04.zip": "f98caada7fb7f2097c508d10cb09311045c6a31bacd4913b6fd933418f081e2f",
+    "receipts-05.zip": "3e74f1a6b80607dc7a6a3075b3b4c0c5f5a58fc7b53e3a7525a94ae31cbc15b3",
+    "receipts-06.zip": "c247dedda50270f9f4919ab95cc70cba823817808101ab04688174aca69deddb",
+    "receipts-07.zip": "95bbf381605c787ac3e84b4be49e2570ba34f955ce3f37392296c21b03fbe563",
+    "receipts-08.zip": "0c6fd5b8040b94834b8f27c3aa470a86de6dea5237d434a1551b6a8028494bab",
+    "receipts-09.zip": "c51aefdeb4d42956ea2133593fbff7208f0067222d5bc3b22281340aa271c694",
+    "receipts-10.zip": "9161bde09cbe8b31fa0a39a5044675dd7604961aa12b2ced15d9aa941063f3e5",
+    "receipts-11.zip": "5222fd26cba1149a51c3d9c7e99e1604dc9eddf151378dc3380eb984679bca02",
+    "receipts-12.zip": "3fa6a49d2b7a49428463fea83a052d66289225627e8df88502b4933fdab09652",
+    "receipts-13.zip": "48cb503ddf8469a6a8bc1833af3293ce4b2566a6dd2d3aa5a348366c45d39f59",
+    "receipts-14.zip": "1f6cd9525e8cd238c32aed3775539be819c2841839fb1ff1cb8a5eb7ead5d936",
+    "receipts-15.zip": "3a699cbfb56e8540afed17afa6c95d3bbeb11182ac945f569910fd20fdfb46d9",
+    "receipts-16.zip": "9d064c97979afc3a131da3fa02956b30a9993a655af0ba56cf1ad504387906d9"
+  },
+  "tasks": 400
+}
