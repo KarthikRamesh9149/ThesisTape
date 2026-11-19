@@ -1,0 +1,12 @@
+{
+  "case_id": "toyota-buybacks-2023-05-11",
+  "title": "Toyota share repurchases",
+  "question": "As of 11 May 2023, what full-year FY2022 value did Toyota report for shares repurchased on its shareholder-return basis, in what unit, and how do the applicable notes define or qualify that measure?",
+  "cutoff": "2023-05-11",
+  "table": {
+    "url": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf",
+    "table_locator": "PDF p29 §1",
+    "notes_locator": "PDF p30 §2",
+    "row_anchor": "[shareholder return]"
+  }
+}

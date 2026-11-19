@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "cutoff": "2023-05-11",
+  "publisher_release": "https://global.toyota/en/ir/financial-results/archives/03.html",
+  "pdf_sha256": "35d198a5a14812731798e5bb917854d675ae6b2e74913c377301120b5a1de08c",
+  "page29_png_sha256": "5ea2d7a95c668ba5cc8c58aedd6182e55a8dc18ee4d37e55f3e5db3c17987169",
+  "budget_usd_per_arm": "0.12",
+  "design": "Give both arms the same question, cutoff, located table, complete native layout extraction of PDF page 29, and all numbered notes from page 30. Use the same Sol writer, fresh Sol reviewer, release rules and per-arm spending cap. The conditional arm may consult Terra on one original table page and show that same page to its independent reviewer when the target row is ambiguous. The control uses only the dated text. Neither arm sees this file. Grade the first released report per arm. Preserve every attempt, include repairs in costs and count a withheld report as zero. No model grader or repeat sampling.",
+  "criteria": {
+    "value": {"expected": "435.6", "source": "PDF page 29, Supplemental 2, second Value of Shares Repurchased row, FY2022 12 months"},
+    "row": {"labels": ["Value of Shares Repurchased [shareholder return]", "Value of Shares Repurchased (billions of yen)[shareholder return]"], "source": "PDF page 29, bottom of the table, shareholder return row below actual purchase"},
+    "column": {"group": "FY2022", "label": "12 months", "source": "PDF page 29, FY2022 group, 12 months, April 2021 through March 2022"},
+    "unit": {"labels": ["billions of yen", "billion yen", "JPY billion", "billion JPY"], "source": "PDF page 29, unit printed in the shareholder return row label"},
+    "exclusions": {"note": 4, "source": "PDF page 29, row marker 4; page 30, Note 4", "meaning": "Excludes both sub-unit shares purchased on request and repurchase commissions."},
+    "basis": {"note": 5, "source": "PDF page 29, row marker 5; page 30, Note 5, both lines", "meaning": "Shareholder return on net income for the period uses the maximum purchase price during the repurchase period or the actual price after completion."}
+  },
+  "grading": "One point per criterion. The renderer reproduces each chosen publisher note in full. Award a footnote point only when its marker and complete text appear with a page 30 citation. Six points, a verified table citation and exactly the two applicable notes are required to pass. Credit a correct text-only reconstruction equally. A qualified unknown earns no point for the missing field. A withheld or missing report earns zero.",
+  "negative_controls": ["404.6 is the adjacent actual-purchase row.", "299.9 is the FY2023 annual value.", "435.6149.9 is a text extraction collision.", "A quarterly column, millions of yen, a lone Note 4 or an unrelated dividend note must not pass."],
+  "interpretation": "This single located-page comparison tests table reading and incremental cost. It cannot establish performance for source discovery, FinanceGym or all financial tables."
+}

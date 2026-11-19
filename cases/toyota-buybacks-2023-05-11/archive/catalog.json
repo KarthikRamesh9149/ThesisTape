@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "toyota-fy2023",
+      "family": "toyota-fy2023",
+      "title": "Toyota Motor Corporation FY2023 consolidated financial results",
+      "edition": "FY2023 financial summary, English edition",
+      "url": "https://global.toyota/pages/global_toyota/ir/financial-results/2023_4q_summary_en.pdf",
+      "published": "2023-05-10",
+      "version_at": "2023-05-10",
+      "kind": "pdf",
+      "sha256": "35d198a5a14812731798e5bb917854d675ae6b2e74913c377301120b5a1de08c",
+      "proof_url": "https://global.toyota/en/ir/financial-results/archives/03.html",
+      "selection": {
+        "pages": [
+          2,
+          29,
+          30
+        ],
+        "dateline_page": 2,
+        "dateline": "May 10, 2023",
+        "headings": {
+          "29": [
+            "Supplemental Material for Financial Results"
+          ],
+          "30": [
+            "(Note 1) Shows the number of employees"
+          ]
+        }
+      },
+      "timezone": "Asia/Tokyo",
+      "page_images": {
+        "29": {
+          "pdf_sha256": "35d198a5a14812731798e5bb917854d675ae6b2e74913c377301120b5a1de08c",
+          "sha256": "5ea2d7a95c668ba5cc8c58aedd6182e55a8dc18ee4d37e55f3e5db3c17987169",
+          "renderer": "pdftoppm 26.05.0",
+          "long_edge_px": 2500
+        }
+      }
+    }
+  ],
+  "redirects": []
+}
