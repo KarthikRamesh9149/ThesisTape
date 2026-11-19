@@ -1,0 +1,33 @@
+{
+  "admitted_source_editions": 8,
+  "checked_searches": 3,
+  "first_memo_sha256": "ddd712923c3d7b45117a2ac9afb3a7ab22befdc0d27b3b0eb686452096e4e648",
+  "incremental_usd": "0.011384",
+  "matching_historical_generations": 8,
+  "memo_sha256": "ddd712923c3d7b45117a2ac9afb3a7ab22befdc0d27b3b0eb686452096e4e648",
+  "new_generations": 1,
+  "original_charge_usd": "0.2120480",
+  "original_code_revision": "204a4c3",
+  "policy": "archived-research-v2",
+  "release": "qualified",
+  "research_run_estimate_usd": "0.2169780",
+  "reviews": [
+    {
+      "approved": 2,
+      "blocked": {
+        "A3": "The expected timing and closing conditions are supported, but the sources do not rank an Airbus-related delay or failure as the strongest alternative or establish signing as the first observable sign of progress. Describe delay or failure as a possible outcome and signing as a formal milestone, not satisfaction of the sale condition.",
+        "A4": "The sources support integration risk, potentially higher costs, and uncertain synergies and quality gains, but do not establish greater production control as Boeing’s stated mechanism. Present that mechanism as a possible inference or omit it."
+      },
+      "missing": [
+        "Separate from unmet closing conditions, certain events or changes could give one or both parties the right to terminate the merger agreement."
+      ]
+    },
+    {
+      "approved": 4,
+      "blocked": {},
+      "missing": [
+        "The Airbus sale itself would require any necessary regulatory approvals and was conditioned on the Boeing merger closing substantially concurrently."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+import unittest
+
+from evaluations.open_research import boeing
+from scripts.research_desk_agent import Draft, Paragraph, assemble_revision
+
+
+class InvestmentMemoTests(unittest.TestCase):
+    def test_recheck_assembles_approved_and_revised_claims_once(self):
+        def paragraph(text):
+            return Paragraph(
+                section="Answer",
+                text=text,
+                citations=[{"passage": "P1", "quote": "Original release"}],
+            )
+
+        keep = paragraph("Accepted earlier conclusion.")
+        bad = paragraph("An inaccurate prior conclusion.")
+        replacement = paragraph("A supported new conclusion.")
+        before = Draft(paragraphs=[keep, bad])
+        after = assemble_revision(
+            before, {"A2": "wrong"}, Draft(paragraphs=[keep, replacement, replacement])
+        )
+        self.assertEqual(after.paragraphs, [keep, replacement])
+        self.assertEqual(before.paragraphs, [keep, bad])
+
+    def test_paid_boeing_report_and_whole_memo_review_replay_offline(self):
+        observed = boeing.compare(live=False)
+        self.assertEqual(observed["checked_searches"], 3)
+        self.assertEqual(observed["matching_historical_generations"], 8)
+        self.assertEqual(observed["reviews"][-1]["approved"], 4)

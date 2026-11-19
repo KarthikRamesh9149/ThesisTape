@@ -25,7 +25,7 @@ from .team_meter import Meter, verify_ledger
 from .team_report import typed_prompt
 from .temporal_web import ArchiveGateway, checked_doc, cutoff_day, rank_blocks
 
-VERSION = "archived-research-v1"
+VERSION = "archived-research-v2"
 ROOT = Path(__file__).resolve().parents[1]
 MARK = re.compile(r"\{\{(P[1-9]\d*|Q)\|([^{}\n]{1,160})\}\}|\{\{(C[1-9]\d*|DATE)\}\}")
 ID = re.compile(r"\bP[1-9]\d*\b")
@@ -340,6 +340,17 @@ def render(question, cutoff, paragraphs, passages, calculations, qualified):
     return ("\n".join(lines).rstrip() + "\n").encode()
 
 
+def assemble_revision(draft, blocked, patch):
+    retained = [p for i, p in enumerate(draft.paragraphs, 1) if f"A{i}" not in blocked]
+    seen = {clean(p.text).casefold() for p in retained}
+    for p in patch.paragraphs:
+        key = clean(p.text).casefold()
+        if key not in seen and len(retained) < 9:
+            retained.append(p)
+            seen.add(key)
+    return Draft(paragraphs=retained)
+
+
 def reviewed_draft(draft, context, ask, *, stage, passages, calculations):
     compiled = {}
     blocked = {}
@@ -486,18 +497,18 @@ def research(question, cutoff, gateway, ask):
         # Optional refinement cannot consume the protected independent-review reserve.
         fixed = ask("lead.revise", prompt, 2100, keep_usd=Decimal("0.06"))
         if fixed:
-            patch = Draft.model_validate_json(fixed)
-            extra, rem, missing = reviewed_draft(
-                patch,
+            assembled = assemble_revision(
+                draft, blocked, Draft.model_validate_json(fixed)
+            )
+            good, rem, missing = reviewed_draft(
+                assembled,
                 base,
                 ask,
                 stage="review.recheck",
                 passages=passages,
                 calculations=calculations,
             )
-            same = {clean(p["text"]).casefold() for p in good}
-            good.extend(p for p in extra if clean(p["text"]).casefold() not in same)
-            reviews.append({"blocked": rem, "missing": missing, "approved": len(extra)})
+            reviews.append({"blocked": rem, "missing": missing, "approved": len(good)})
     if not good:
         return None, {
             **trace,

@@ -1,0 +1,62 @@
+{
+  "budget_usd": "0.12",
+  "calls": {
+    "review.recheck": {
+      "confirmed_ms": 9767,
+      "dispatched_ms": 291,
+      "estimated_model_cost_usd": "0.011384",
+      "input_tokens_preflight": 3397,
+      "max_output_tokens": 2200,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"decisions\": [\n    {\n      \"paragraph\": \"A1\",\n      \"accept\": true,\n      \"reason\": \"The cited announcements support the pending all-stock agreement and distinguish the $37.25 reference price and approximately $4.7 billion equity value from the $8.3 billion transaction value including net debt.\"\n    },\n    {\n      \"paragraph\": \"A2\",\n      \"accept\": true,\n      \"reason\": \"P14 supports the VWAP measurement window, the exchange-ratio formula, and both collar thresholds. The paragraph correctly explains that a fixed share count does not guarantee a fixed dollar value.\"\n    },\n    {\n      \"paragraph\": \"A3\",\n      \"accept\": true,\n      \"reason\": \"The citations support the projected mid-2025 closing, the divestiture and approval conditions, and the possible termination rights. The paragraph correctly distinguishes signing a definitive Airbus agreement from completing the sale.\"\n    },\n    {\n      \"paragraph\": \"A4\",\n      \"accept\": true,\n      \"reason\": \"The cited risk disclosures support the possibility of higher integration costs and delayed or unrealized benefits. The proposed measures of success are framed as conditional indicators, not as promised or realized results.\"\n    }\n  ],\n  \"missing\": [\n    \"The Airbus sale itself would require any necessary regulatory approvals and was conditioned on the Boeing merger closing substantially concurrently.\"\n  ]\n}",
+      "provider": {
+        "elapsed_ms": 9467,
+        "ids_sha256": "6fabd443028c7b3b2792b6181e5e761b2bd28b40d19603f2666bdeda30309aa4",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 3397,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 459,
+          "output_tokens_details": {
+            "reasoning_tokens": 166
+          },
+          "total_tokens": 3856
+        }
+      },
+      "receipt_sha256": "e8568dfce55ec7306d12fd370117bd6780c7c8758656f3a67a4b3c6047c9f19f",
+      "request_sha256": "b8d715007773175a0056853ed1650f1d36c0b726464eedd6cc96ddac7a9ae69a",
+      "reservation_usd": "0.0304925",
+      "stage": "review.recheck"
+    }
+  },
+  "checkpoint_id": "a0925b1b7cb0407080da3d67bc3c6cb8",
+  "created_at": "2026-11-19T15:09:00.404931+00:00",
+  "elapsed_ms": 9800,
+  "estimated_model_cost_usd": "0.011384",
+  "events": [
+    [
+      "reserve",
+      "review.recheck"
+    ],
+    [
+      "settle",
+      "review.recheck"
+    ]
+  ],
+  "memo_sha256": "ddd712923c3d7b45117a2ac9afb3a7ab22befdc0d27b3b0eb686452096e4e648",
+  "role": "assembled memo review",
+  "run_id": "boeing-spirit-assembly",
+  "source_checkpoint": "05ad1915ac414d9caa448da9ccf9a69f",
+  "specification_sha256": "635a151be0f7c4fa2e1bf47063f4740f7bf5cab6f5a841050c1332ea4dec61ef",
+  "state": "complete",
+  "unreconciled_reservation_usd": "0"
+}
