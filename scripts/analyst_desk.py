@@ -14,13 +14,16 @@ from threading import Event, Lock, Thread
 from urllib.parse import urlsplit
 
 from . import open_desk_report as public
+from . import quantitative_engine
 from . import research_desk_agent as engine
+from .archive_receipts import RecordedHttp
 from .desk_report import inspect_record
 from .disney_hulu_case import CaseError, read_saved_file
 from .research_team import ROUTES, queue_research, resume, saved_case
 from .run_checkpoint import PauseRequested, load, own_run
 from .sol_baseline import PROJECT_ROOT, fingerprint, json_bytes
 from .team_research import COLLECTIONS, analyst_case
+from .temporal_web import ArchiveGateway
 
 ASSETS = PROJECT_ROOT / "desk"
 EXAMPLES = {
@@ -174,7 +177,19 @@ class Desk:
             try:
                 r = self.record(directory)
                 if public.is_public(r):
-                    engine.run(
+                    profile = r["research_profile"]
+                    quantitative = profile.startswith("evidence_team")
+                    implementation = quantitative_engine if quantitative else engine
+                    gateway = (
+                        ArchiveGateway(
+                            r["cutoff"],
+                            directory / ".archive",
+                            http=RecordedHttp(directory / ".operator-http"),
+                        )
+                        if quantitative
+                        else None
+                    )
+                    implementation.run(
                         r["question"],
                         r["cutoff"],
                         directory,
@@ -182,7 +197,8 @@ class Desk:
                         r["budget_usd"],
                         provider=self.provider,
                         pause=stop,
-                        profile=r["research_profile"],
+                        profile=profile,
+                        gateway=gateway,
                         assignment=r["assignment"],
                     )
                 else:
@@ -207,7 +223,13 @@ class Desk:
         thread.start()
 
     def submit(self, fields):
-        if set(fields) != {"request_id", "question", "cutoff", "collection", "budget"}:
+        if set(fields) - {"profile"} != {
+            "request_id",
+            "question",
+            "cutoff",
+            "collection",
+            "budget",
+        }:
             raise DeskError(
                 400,
                 "A question, cutoff, source collection, budget and request ID are required.",
@@ -218,6 +240,15 @@ class Desk:
         ):
             raise DeskError(400, "Invalid request ID.")
         web = fields["collection"] == public.COLLECTION
+        profile = fields.get("profile", "mixed")
+        if (
+            profile not in ("mixed", "evidence_team_v3")
+            or not web
+            and "profile" in fields
+        ):
+            raise DeskError(
+                400, "Select an available research method for this source collection."
+            )
         if web:
             question, cutoff = public.intake(fields["question"], fields["cutoff"])
         else:
@@ -232,13 +263,17 @@ class Desk:
                 raise DeskError(503, "The desk is shutting down.")
             if not directory.exists() and not directory.is_symlink():
                 if web:
-                    engine.run(
+                    implementation = (
+                        quantitative_engine if profile == "evidence_team_v3" else engine
+                    )
+                    implementation.run(
                         question,
                         cutoff,
                         directory,
                         directory / ".archive",
                         budget,
                         queued=True,
+                        profile=profile,
                     )
                 else:
                     queue_research(case, directory, budget)
@@ -246,7 +281,8 @@ class Desk:
             else:
                 r = self.record(self.directory(key))
                 same = public.is_public(r) == web and (
-                    (r["question"], r["cutoff"]) == (question, cutoff)
+                    (r["question"], r["cutoff"], r["research_profile"])
+                    == (question, cutoff, profile)
                     if web
                     else saved_case(r) == case
                 )

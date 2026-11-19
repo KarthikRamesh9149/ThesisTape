@@ -467,6 +467,7 @@ $("intake").onsubmit = async (e) => {
     cutoff:
       $("new-cutoff").value + (time ? "T" + (time.length === 5 ? time + ":00" : time) + "Z" : ""),
   };
+  if (fields.collection === "historical-web") fields.profile = $("research-method").value;
   const signature = JSON.stringify(fields);
   if (pending?.signature !== signature)
     pending = { signature, id: crypto.randomUUID().replaceAll("-", "") };
@@ -505,11 +506,18 @@ async function init() {
       $("collection").add(new Option(label, value));
     $("collection").onchange = () => {
       const byDay = $("collection").value === "historical-web";
+      $("method-field").hidden = !byDay;
       $("new-time").disabled = byDay;
       $("new-time").parentElement.hidden = byDay;
       $("cutoff-help").textContent = byDay
         ? "Public archives use the end of the selected UTC day."
         : "Leave the time blank to use the end of the UTC day.";
+    };
+    let suggestedBudget = $("new-budget").value;
+    $("research-method").onchange = () => {
+      const next = $("research-method").value === "evidence_team_v3" ? "0.45" : "0.30";
+      if ($("new-budget").value === suggestedBudget) $("new-budget").value = next;
+      suggestedBudget = next;
     };
     $("collection").value = "historical-web";
     $("collection").onchange();

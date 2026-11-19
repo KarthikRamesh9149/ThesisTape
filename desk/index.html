@@ -61,6 +61,13 @@
       <textarea id="research-question" maxlength="2000" rows="4" required placeholder="What changed in Tradeweb’s adjusted expense forecast?"></textarea>
       <label for="collection">Source collection</label>
       <select id="collection" required></select>
+      <div id="method-field">
+        <label for="research-method">Research method</label>
+        <select id="research-method">
+          <option value="mixed">Standard research team</option>
+          <option value="evidence_team_v3">Research team with additional checks on figures</option>
+        </select>
+      </div>
       <div class="date-fields">
         <div><label for="new-cutoff">Cutoff date (UTC)</label><input id="new-cutoff" type="date" required></div>
         <div><label for="new-time">Time in UTC <span>(optional)</span></label><input id="new-time" type="time" step="1" aria-describedby="cutoff-help"></div>
