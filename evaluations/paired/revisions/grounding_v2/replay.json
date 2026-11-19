@@ -1,0 +1,148 @@
+{
+  "arms": [
+    {
+      "arm": "single_sol",
+      "revised_exact_path": {
+        "matched_requests": 6,
+        "stage": "lead.memo_repair",
+        "status": "new_request_required"
+      },
+      "saved_stages": [
+        {
+          "accepted": false,
+          "output_sha256": "8a12d0ff48963a728d16edb57a97a4ae237a9c44b2beaa11d42d2e8070c76f52",
+          "reason": "fact_1: Unsupported financial figure in cited evidence or checked calculations: 0.227",
+          "request_sha256": "2427b9173b5ad2503039e2ecfdc5d15ce72c5163b00f6c8a282a041c7ac33bb6",
+          "stage": "lead.memo"
+        },
+        {
+          "accepted": true,
+          "output_sha256": "8c0b43ad58b1745f4ba68a525bf228918827059daa1690941ebcb9a389151b8c",
+          "request_sha256": "71f77af4d68b25bce5f3a3418354a7b0a5d0f4a4dfdca9c87d439517fce87687",
+          "stage": "lead.memo_repair"
+        }
+      ]
+    },
+    {
+      "arm": "sol_team",
+      "revised_exact_path": {
+        "matched_requests": 17,
+        "stage": "lead.memo",
+        "status": "new_request_required"
+      },
+      "saved_stages": [
+        {
+          "accepted": true,
+          "output_sha256": "8aa85780fcf11c08bca18edbec9234674af38ff07fc7bcaca002f348958831b7",
+          "request_sha256": "8129ce4bf5a83e636c3af943e177b24ed0e3b8f65eff868c7b0bc219f9fdd299",
+          "stage": "forecast.analyze"
+        },
+        {
+          "accepted": true,
+          "output_sha256": "52dc8fc8821bcecdc187c1184d49f9902a914fbc30420230e0c50c374b9ad2cd",
+          "request_sha256": "b4c188e4ff8f71c3fa123ab0a728ec63e562fc07169026e1fd4fb9f6b7d34b5f",
+          "stage": "forecast.repair"
+        }
+      ]
+    },
+    {
+      "arm": "mixed",
+      "revised_exact_path": {
+        "matched_requests": 16,
+        "stage": "lead.memo",
+        "status": "new_request_required"
+      },
+      "saved_stages": [
+        {
+          "accepted": true,
+          "output_sha256": "4fe2791accdbbfc6fd3f6314a872f153ad460a7d01d9e1a4c01fcc2af565428f",
+          "request_sha256": "0dc80ea24af2a911a2e9d9aefeed6ff643f693b8637192f021017665e1b3e548",
+          "stage": "forecast.analyze"
+        },
+        {
+          "accepted": true,
+          "output_sha256": "2da74a96009e9b9c84c3ca19ffd0f4d079022d536e416061e6dd9dc6b26d6f68",
+          "request_sha256": "63d50468e7112ea95616b4703ff294513c5318975145759c9931a247b54e12b8",
+          "stage": "forecast.repair"
+        }
+      ]
+    },
+    {
+      "arm": "single_astra",
+      "revised_exact_path": {
+        "checked_calculations": 2,
+        "matched_requests": 5,
+        "memo_sha256": "41ffc4cedafe39074c68cac93150ae28cb5ad9a71ff299f55ec51b0a4d9e8322",
+        "status": "memo_reproduced"
+      },
+      "saved_stages": [
+        {
+          "accepted": true,
+          "output_sha256": "898baf92cb89323e93c200c489b283c60ab9b2c22749dd716ea9e4dac76bf8ed",
+          "request_sha256": "e19b8b9e002c28b78bddfc8aa87467307f39a917a38196f767c40def5a3263de",
+          "stage": "lead.memo"
+        }
+      ]
+    },
+    {
+      "arm": "mixed_fixed_plan",
+      "revised_exact_path": {
+        "matched_requests": 9,
+        "stage": "lead.memo",
+        "status": "new_request_required"
+      },
+      "saved_stages": [
+        {
+          "accepted": true,
+          "output_sha256": "27fdd1948aafacddf5292b6c323a6627b812b4f97c63a8bacdd75a8b25905a1e",
+          "request_sha256": "9f44b93c1bd50080010d8baa7f8b1929db6c8e8ae5f92dd71f9b297bb8d56b7d",
+          "stage": "forecast.analyze"
+        },
+        {
+          "accepted": true,
+          "output_sha256": "0b309955088e5bd0cc1694d36e64f948b635e415d1eaefcf6e442194069fc160",
+          "request_sha256": "6bf4f3b55bd00d1d0047cf98243d435a5c2d763dda1127facee9d0048993459f",
+          "stage": "forecast.repair"
+        }
+      ]
+    },
+    {
+      "arm": "mixed_no_forecast",
+      "revised_exact_path": {
+        "matched_requests": 16,
+        "stage": "lead.memo_repair",
+        "status": "new_request_required"
+      },
+      "saved_stages": [
+        {
+          "accepted": false,
+          "output_sha256": "ddec6224e4dc39467a3557dcbe49910c0d13c03ea5ac5b91a7a5f53b46ee8b8c",
+          "reason": "analysis: Unsupported financial figure in cited evidence or checked calculations: 196000, 204000",
+          "request_sha256": "9da4f412753d0cc19a88fe3ea9f1ec688f6fc49fd36402030822e010c50f45c2",
+          "stage": "lead.memo"
+        },
+        {
+          "accepted": true,
+          "output_sha256": "760a7e33fa216f9390821470390d3448c22e328d66986f5aade649d75c0ea913",
+          "request_sha256": "e84eeaa35b41f503b3677638646a70dde00f471f55207bffff98d9ed0575348a",
+          "stage": "lead.memo_repair"
+        }
+      ]
+    }
+  ],
+  "case_id": "nintendo-fy2021-guidance",
+  "historical_generations": 74,
+  "new_generations": 0,
+  "original_results_sha256": "f155f93d0ffae1ddfe6687d5234b5fcc3cb6fe2225f4de13947944887a26e226",
+  "repair": {
+    "counted_input_tokens": 918,
+    "max_affordable_input_tokens": 2766,
+    "maximum_total_usd": "0.181516",
+    "new_request_sha256": "221be60a94eb7416559dfc521fdb1247e183604675ef1dbf86c9c3172c2af6be",
+    "original_settled_usd": "0.141616",
+    "output_token_limit": 768,
+    "remaining_usd": "0.058384",
+    "reserved_usd": "0.0399"
+  },
+  "version": "paired-grounding-v2"
+}

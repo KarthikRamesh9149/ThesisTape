@@ -113,10 +113,12 @@ Pin the code revision, dependency lock, model snapshots where available, returne
 
 ## Spending plan
 
-The project API ceiling is **USD 100** across development, verification and the official benchmark run. Track spend cumulatively. Every USD 0.10 of average cost per case corresponds to USD 40 for the 400 reports.
+The original project allocation was **USD 100**. The owner subsequently authorized additional API use for quality and submission. The revised study applies a common USD 0.30 ceiling per assignment and retains all charges. Track spend cumulatively. Every USD 0.10 of average cost per case corresponds to USD 40 for the 400 reports.
 
 At the checked Standard rates, the architecture’s example uses 12,000 input and 1,000 billed output tokens across Luna calls, and 24,000 input and 5,000 billed output tokens across all Sol calls, including any planning. That totals **USD 0.0997**. An additional Astra pass at 4,000 input and 1,000 output plus a Sol recheck at 2,000 input and 500 output adds **USD 0.0810**. [OpenAI Docs pricing](https://developers.openai.com/api/docs/pricing) · [Luna pricing](https://developers.openai.com/api/docs/models/gpt-6-luna)
 
 **Illustration for the final run.** If all 400 cases used the base allowance and 80 needed that additional pass, text-model usage would be **400 × USD 0.0997 + 80 × USD 0.0810 = USD 46.36**. Search, visual inputs, cache charges, storage, development comparisons and retries are separate. The first live cases establish the actual token distribution. Batch independent offline calls when turnaround permits and apply discounts only to eligible usage. [Batch pricing and turnaround](https://developers.openai.com/api/docs/guides/batch)
 
-**Next implementation checkpoint.** Use the saved requests offline to repair how the validators recognize the registered comparison band, cutoff and verified page citations. Test that altered tolerances, dates, locators and unsupported financial figures still fail. Check whether the Astra workflow can reserve enough for a usable repair under USD 0.20. Record the revised configuration separately from the six original outcomes before further paid comparisons.
+**Nintendo replay.** Nine of eleven saved specialist or writer outputs pass the revised checks. Single Astra's five exact responses produce a complete memo for the original USD 0.141616. The next prospective study uses USD 0.30 per assignment across every arm. [Reproduction, diagnostic count and limits](evaluations/paired/revisions/grounding_v2/evaluation.md)
+
+**Next implementation checkpoint.** Run the separately registered development comparison, grade masked outputs against the as-of evidence, then lock the two finalists before opening blind packets.

@@ -1,0 +1,8 @@
+{
+  "endpoint": "POST /v1/responses/input_tokens",
+  "input_tokens": 918,
+  "model": "gpt-6.2-astra",
+  "prompt_sha256": "221be60a94eb7416559dfc521fdb1247e183604675ef1dbf86c9c3172c2af6be",
+  "scope": "prospective single-paragraph repair of one deliberately altered value",
+  "stage": "lead.memo_repair"
+}
