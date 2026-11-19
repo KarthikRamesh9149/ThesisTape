@@ -1,0 +1,23 @@
+{
+  "archive_sha256": "7715ba9d442f75ad0ce80f155fac0d29e01f08be3076cf4caa79d379da3fa333",
+  "calls": 8,
+  "download_bytes": 6516,
+  "download_sha256": "b5d76e82add80d6df49d753987b5b494fcda4faca9d44513bd575ce8ef6801df",
+  "first_source": "https://web.archive.org/web/20240410192324/https://www.nist.gov/news-events/news/2024/04/biden-harris-administration-announces-preliminary-terms-tsmc-expanded#:~:text=Media%20Contact%3A%20Madeline%20Broas%2C%20madeline.broas%20%5Bat%5D%20chips.gov%20%28madeline%5Bdot%5Dbroas%5Bat%5Dchips%5Bdot%5Dgov%29%20Today%2C,the%20most%20advanced%20process%20technology%20to%20the%20United%20States.",
+  "http_manifest_sha256": "5421fb5ed226c7c05493681aeb6217875cc9990616f99ccdb56ed142f611e0af",
+  "page_errors": [],
+  "passages": 5,
+  "reserved": "0",
+  "retrieval_replayed": {
+    "eligible_passage_urls": 32,
+    "eligible_sources": 11,
+    "searches": 5,
+    "transport_requests": 60
+  },
+  "spent": "0.349358",
+  "state": "qualified",
+  "viewport_widths": [
+    1440,
+    390
+  ]
+}

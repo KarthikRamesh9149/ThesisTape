@@ -36,12 +36,12 @@ def saved_browser_run(folder):
         yield root, browser
 
 
-def verify():
-    with saved_browser_run(FOLDER) as (root, browser):
+def verify_browser(folder, expected_searches):
+    with saved_browser_run(folder) as (root, browser):
         info, report = inspect(root, load(root / "run.json"))
         result = load(root / "result.json")
         if (
-            len(result["searches"]) != 3
+            len(result["searches"]) != expected_searches
             or any(s["max_date"] != info["cutoff"] for s in result["searches"])
             or len(report.memo) != browser["download_bytes"]
             or fingerprint(report.memo) != browser["download_sha256"]
@@ -53,6 +53,10 @@ def verify():
         ):
             raise ValueError("The reproduced report differs from the browser's output")
     return browser
+
+
+def verify():
+    return verify_browser(FOLDER, 3)
 
 
 if __name__ == "__main__":

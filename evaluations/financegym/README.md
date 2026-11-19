@@ -8,18 +8,18 @@ Save the JSONL from the pinned dataset as `runs/benchmark_400_public.jsonl`. Run
 
 ```sh
 .venv/bin/python -B -m evaluations.financegym.runner preflight runs/benchmark_400_public.jsonl
-.venv/bin/python -B -m evaluations.financegym.archive_check runs/financegym-archive-proof --live
-.venv/bin/python -B -m evaluations.financegym.archive_check runs/financegym-archive-proof
+.venv/bin/python -B -m evaluations.financegym.archive_check runs/financegym-focused-source-proof --focused --live
+.venv/bin/python -B -m evaluations.financegym.archive_check runs/financegym-focused-source-proof --focused
 ```
 
-The live archive check on the ECB decision on 6 June 2024 admitted four historical sources to a 7 June search. Its 14 HTTP requests reproduced the same result offline. This check uses public sources and makes zero model calls. Discovery receipts stay in an operator-only directory. The agent receives the dated passages that pass the gateway.
+The live archive check on the ECB decision on 6 June 2024 admitted four historical source editions to a 7 June search. Its 14 HTTP requests reproduced five passage links offline. The gateway can reopen an admitted original and retrieve the surrounding paragraphs for each part of the question. It checks the original bytes against the edition hash. This check uses public sources and makes zero model calls. Discovery receipts stay in an operator-only directory.
 
 ## Run the registered candidate
 
-Registration reads the committed paired blind decision, checks the selected configuration against its frozen quality and cost rule, and binds the question-file hash, runtime, dependencies, model prices and per-case allowance. Set the case limit from reconciled measurements and commit the generated registration before generation. For example, the following registration command accepts a case limit supplied through the shell environment.
+Registration verifies the committed paired blind decision and reproduces the independent FinanceBench grades. Each official task receives a frozen research configuration and spending limit. The general route has a USD 0.30 limit. The quantitative route, when it qualifies, has a USD 0.45 limit. The registration records the expected cost separately from the sum of those limits. [Candidate selection](selection.md)
 
 ```sh
-.venv/bin/python -B -m evaluations.financegym.runner register runs/benchmark_400_public.jsonl --cap-usd "$FINANCEGYM_CASE_CAP_USD" --source-proof runs/financegym-archive-proof
+.venv/bin/python -B -m evaluations.financegym.runner register runs/benchmark_400_public.jsonl --cap-usd 0.30 --source-proof runs/financegym-focused-source-proof
 .venv/bin/python -B -m evaluations.financegym.runner run runs/benchmark_400_public.jsonl --workers 4
 ```
 

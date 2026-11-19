@@ -10,7 +10,7 @@ from scripts.run_checkpoint import load
 from scripts.sol_baseline import fingerprint
 from scripts.team_meter import recorded_output
 
-from .ecb import saved_browser_run
+from .ecb import saved_browser_run, verify_browser
 
 FOLDER = Path(__file__).with_suffix("")
 
@@ -81,5 +81,23 @@ def verify():
         return result
 
 
+def verify_focused():
+    folder = FOLDER / "original-passages"
+    browser = verify_browser(folder, 5)
+    if fingerprint((folder / "memo.md").read_bytes()) != browser["download_sha256"]:
+        raise ValueError("The published memo differs from the browser download")
+    if (
+        fingerprint((folder / "http-sha256.json").read_bytes())
+        != browser["http_manifest_sha256"]
+    ):
+        raise ValueError("The original HTTP receipt manifest changed")
+    return browser
+
+
 if __name__ == "__main__":
-    print(json.dumps(verify(), indent=2))
+    print(
+        json.dumps(
+            {"offline_repair": verify(), "fresh_browser_trial": verify_focused()},
+            indent=2,
+        )
+    )

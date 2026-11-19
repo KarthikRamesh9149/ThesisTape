@@ -8,15 +8,15 @@ from evaluations.financebench.study import ARMS
 # Any request for an outlook or prospective action stays with the broadly tested finalist.
 FORWARD = re.compile(
     r"\b(?:forecast\w*|predict\w*|outlook|future|expect\w*|will|would|could|might|scenario\w*|guidance|projected|prospect\w*|likely|implication\w*)\b",
-    re.I,
+    re.IGNORECASE,
 )
 STATEMENT = re.compile(
     r"\b(?:cash flows?|balance sheets?|income statements?|liabilit(?:y|ies)|receivables?|inventor(?:y|ies)|retained earnings|gross margin|operating margin|net income|net profit|operating (?:income|profit)|revenues?|shareholders?'? equity|earnings per share|free cash flow|capital expenditures?|depreciation|amorti[sz]ation|cost of (?:sales|revenue)|10-[KQ])\b",
-    re.I,
+    re.IGNORECASE,
 )
 QUANTIFIED = re.compile(
     r"\b(?:calculate|comput\w*|determine|compar\w*|how (?:much|many)|amount|ratio|percent\w*|rate|value|total|chang\w*|difference|increase\w*|decrease\w*|growth|amounted to|what (?:was|were|is|are))\b",
-    re.I,
+    re.IGNORECASE,
 )
 
 

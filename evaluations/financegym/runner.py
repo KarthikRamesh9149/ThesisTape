@@ -5,6 +5,7 @@ import json
 import math
 import re
 import tempfile
+from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from decimal import Decimal
@@ -16,15 +17,19 @@ from evaluations.paired.analysis import blind_stats
 from evaluations.paired.confirmation import committed, write_once
 from evaluations.paired.production import FOLDER
 from evaluations.paired.registration import REPO, ROOT, RUNTIME_FILES, git
+from scripts import quantitative_engine
 from scripts import research_desk_agent as engine
-from scripts.archive_receipts import RecordedHttp, check_retrieval
+from scripts.archive_receipts import RecordedHttp
 from scripts.disney_hulu_case import read_saved_file
+from scripts.focused_archive import FocusedArchive, verify_transport
 from scripts.open_desk_report import SavedArchive
 from scripts.run_checkpoint import load, own_run
 from scripts.sol_baseline import fingerprint, json_bytes
 from scripts.sol_provider import ASTRA, LUNA, MODEL, MODEL_RATES
 from scripts.team_meter import verify_ledger
-from scripts.temporal_web import ArchiveGateway, cutoff_day
+from scripts.temporal_web import cutoff_day
+
+from .selection import choose, profile_for
 
 PUBLIC = load(ROOT / "protocol.json")["official"]
 REGISTER = REPO / "evaluations/financegym/registration.json"
@@ -34,10 +39,17 @@ FILES = sorted(
     | {
         "scripts/research_desk_agent.py",
         "scripts/temporal_web.py",
+        "scripts/focused_archive.py",
         "scripts/packet_archive.py",
         "scripts/archive_receipts.py",
         "scripts/open_desk_report.py",
         "evaluations/financegym/runner.py",
+        "evaluations/financegym/selection.py",
+        "evaluations/financegym/selection.md",
+        "scripts/quantitative_engine.py",
+        "scripts/reviewed_research.py",
+        "scripts/research_terms.py",
+        "scripts/verified_arithmetic.py",
     }
 )
 FINAL = {"complete", "qualified", "withheld", "insufficient_evidence", "failed"}
@@ -77,10 +89,12 @@ def runtime():
 
 
 def register(path, cap, public_proof):
+    from evaluations.financebench import grading
+
     from .archive_check import check
 
     cases = tasks(path)
-    cutoff_checks = check(public_proof, False)
+    cutoff_checks = check(public_proof, False, focused=True)
     score_file = FOLDER / "blind/scores.json"
     finalists = json.loads(committed(FOLDER / "finalists.json"))
     scores = committed(score_file)
@@ -92,15 +106,33 @@ def register(path, cap, public_proof):
         load(ROOT / "protocol.json"),
     )
     corpus.require(
-        decision == {**calc, "scores_sha256": fingerprint(scores)}
-        and decision["advance"],
-        "The frozen independent comparison has not qualified the mixed candidate",
+        decision == {**calc, "scores_sha256": fingerprint(scores)},
+        "Independent paired results differ from their signed score records",
     )
-    corpus.require(cap.is_finite() and cap > 0, "Specify a finite, positive case limit")
-    pilot = load(REPO / "evaluations/open_research/ecb/browser.json")
-    profile = finalists["mixed"]
     corpus.require(
-        profile == "mixed", "No public research adapter for this configuration"
+        cap == Decimal("0.30"), "Use the tested USD 0.30 general-route limit"
+    )
+    pilot = load(REPO / "evaluations/open_research/ecb/browser.json")
+    financial = grading.grade(live=False)
+    policy = choose(decision, financial)
+    profile = policy["general"]
+    counts = Counter(profile_for(row["question"], policy) for row in cases)
+    limits = {profile: str(cap)}
+    mean = {profile: Decimal(str(decision["metrics"][profile]["mean_cost_usd"]))}
+    if policy["statement_analysis"]:
+        selected = policy["statement_analysis"]
+        limits[selected] = "0.45"
+        mean[selected] = (
+            Decimal(financial["arms"][selected]["mean_settled_usd"])
+            + Decimal(financial["arms"][selected]["unconfirmed_usd"]) / 24
+        )
+    models = {MODEL, ASTRA} if policy["statement_analysis"] else set()
+    models.update(
+        {
+            "mixed": (MODEL, LUNA, ASTRA),
+            "single_astra": (ASTRA,),
+            "single_sol": (MODEL,),
+        }[profile]
     )
     code = runtime()
     head = git("rev-parse", "HEAD").decode().strip()
@@ -115,14 +147,24 @@ def register(path, cap, public_proof):
         "runtime": code,
         "tasks": len(cases),
         "dataset": PUBLIC,
-        "profile": profile,
-        "cap_per_case_usd": str(cap),
-        "total_research_ceiling_usd": str(cap * len(cases)),
+        "selection": policy,
+        "archive_version": FocusedArchive.VERSION,
+        "profiles_by_task": {
+            r["task_id"]: profile_for(r["question"], policy) for r in cases
+        },
+        "case_limits_usd": limits,
+        "estimated_research_usd": str(sum(mean[p] * n for p, n in counts.items())),
+        "total_research_ceiling_usd": str(
+            sum(Decimal(limits[p]) * n for p, n in counts.items())
+        ),
         "conditions": "One original question and cutoff per assignment. All model-visible searches require its exact max_date. Preserve every attempt and exposure; never repeat an unconfirmed dispatch.",
         "archives": "Independent operator-only HTTP receipts, query snapshots, original-byte offline reconstruction and verified model request replay per report.",
-        "models": [MODEL, LUNA, ASTRA],
+        "models": sorted(models),
         "eligibility": {
             "comparison_sha256": fingerprint(committed(FOLDER / "blind/decision.json")),
+            "financial_comparison_sha256": fingerprint(
+                committed(grading.FOLDER / "results.json")
+            ),
             "source_audit": cutoff_checks,
             "browser_pilot_cost_usd": pilot["spent"],
             "blind_mean_cost_usd": decision["metrics"][profile]["mean_cost_usd"],
@@ -140,11 +182,27 @@ def locked():
         "Official candidate differs from its registration",
     )
     corpus.require(
-        Decimal(m["cap_per_case_usd"]) * 400
+        len(m["profiles_by_task"]) == 400
+        and sum(
+            Decimal(m["case_limits_usd"][p]) for p in m["profiles_by_task"].values()
+        )
         == Decimal(m["total_research_ceiling_usd"]),
         "Inconsistent run ceiling",
     )
     return m
+
+
+def route(row, manifest):
+    profile = profile_for(row["question"], manifest["selection"])
+    corpus.require(
+        profile == manifest["profiles_by_task"][row["task_id"]],
+        "Official route differs from its preregistered assignment",
+    )
+    return (
+        (quantitative_engine if profile == "evidence_team_v4" else engine),
+        profile,
+        manifest["case_limits_usd"][profile],
+    )
 
 
 def assignment(row, m):
@@ -161,10 +219,13 @@ def capture_one(root, row, m):
     http = loc / "operator-http"
     loc.mkdir(parents=True, exist_ok=True)
     ticket = assignment(row, m)
+    selected, profile, cap = route(row, m)
     if (directory / "run.json").exists():
         rec = load(directory / "run.json")
         corpus.require(
-            rec["assignment"] == ticket and rec["budget_usd"] == m["cap_per_case_usd"],
+            rec["assignment"] == ticket
+            and rec["budget_usd"] == cap
+            and rec["research_profile"] == profile,
             "Conflicting official run in the task directory",
         )
         if rec["state"] in FINAL or rec["state"] == "needs_reconciliation":
@@ -177,15 +238,20 @@ def capture_one(root, row, m):
                 )
             } | {"task_id": row["task_id"]}
     try:
-        archive = ArchiveGateway(row["cutoff"], loc / "cache", http=RecordedHttp(http))
-        engine.run(
+        archive = FocusedArchive(
+            row["cutoff"],
+            loc / "cache",
+            question=row["question"],
+            http=RecordedHttp(http),
+        )
+        selected.run(
             row["question"],
             row["cutoff"],
             directory,
             None,
-            m["cap_per_case_usd"],
+            cap,
             gateway=archive,
-            profile=m["profile"],
+            profile=profile,
             assignment=ticket,
         )
     except (OSError, ValueError, ArithmeticError):
@@ -194,7 +260,7 @@ def capture_one(root, row, m):
     rec = load(directory / "run.json")
     spent, pending = verify_ledger(rec, partial=True)
     corpus.require(
-        spent + sum(pending.values()) <= Decimal(m["cap_per_case_usd"]),
+        spent + sum(pending.values()) <= Decimal(cap),
         "Run overspent its registered maximum",
     )
     return {
@@ -252,7 +318,7 @@ def answer(row, saved, memo):
         "question": row["question"],
         "cutoff": row["cutoff"],
         "report": body,
-        "num_docs_retrieved": len(docs),
+        "num_docs_retrieved": len({u.split("#:~:text=")[0] for u in docs}),
         "elapsed_s": round(elapsed, 3),
     }
 
@@ -271,13 +337,17 @@ def export(path, root, dest):
                 folder = root / row["task_id"]
                 directory = folder / "research"
                 record = load(directory / "run.json")
+                selected, profile, cap = route(row, m)
                 corpus.require(
                     record["assignment"] == assignment(row, m)
-                    and record["research_profile"] == m["profile"],
+                    and record["research_profile"] == profile
+                    and record["budget_usd"] == cap,
                     "Task differs from the registered system",
                 )
-                saved = engine.audit(directory, SavedArchive(row["cutoff"]))
-                http = check_retrieval(directory, folder / "operator-http")
+                saved = selected.audit(
+                    directory, SavedArchive(row["cutoff"], m["archive_version"])
+                )
+                http = verify_transport(directory, folder / "operator-http")
                 item = answer(row, saved, read_saved_file(directory / "memo.md"))
                 file.write(
                     json.dumps(item, ensure_ascii=False, separators=(",", ":")).encode()
@@ -286,6 +356,7 @@ def export(path, root, dest):
                 audits.append(
                     {
                         "task_id": row["task_id"],
+                        "profile": profile,
                         "state": saved["release"],
                         "estimated_cost_usd": saved["model_cost_usd"],
                         "report_sha256": saved["memo_sha256"],

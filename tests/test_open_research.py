@@ -44,3 +44,29 @@ class InvestmentMemoTests(unittest.TestCase):
         self.assertIn("$6.6 billion", body)
         self.assertIn("$5 billion", body)
         self.assertIn("$65 billion", body)
+
+    def test_archived_terms_and_milestones_survive_the_browser_export(self):
+        proof = tsmc.verify_focused()
+        self.assertEqual(
+            proof["retrieval_replayed"],
+            {
+                "searches": 5,
+                "transport_requests": 60,
+                "eligible_sources": 11,
+                "eligible_passage_urls": 32,
+            },
+        )
+        answer = (
+            (tsmc.FOLDER / "original-passages/memo.md")
+            .read_text()
+            .split("## Sources")[0]
+        )
+        for term in (
+            "$6.6 billion",
+            "$5 billion",
+            "$65 billion",
+            "due diligence",
+            "milestones",
+            "25%",
+        ):
+            self.assertIn(term, answer)

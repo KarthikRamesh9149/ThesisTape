@@ -6,6 +6,8 @@ The original release omitted the main funding amounts. Its second draft containe
 
 The memo remains qualified. The excerpts supplied to the author did not establish all the financing conditions. The original government announcement describes due diligence, final negotiations and milestones. The archived sources and reviewers' original decisions remain available for inspection. [Contemporaneous government announcement](https://web.archive.org/web/20240410192324/https://www.nist.gov/news-events/news/2024/04/biden-harris-administration-announces-preliminary-terms-tsmc-expanded)
 
+**Fresh browser trial.** After the gateway could reopen the same dated originals for each part of a question, an independent run recovered Commerce's due diligence, definitive negotiations and milestone-based payments. Its memo distinguishes the grant, loans and tax credit from TSMC's own investment. The browser opened the exact source passage and downloaded the memo. Eight real generations cost USD 0.349358 under the USD 0.45 ceiling. All five searches reproduced offline from 60 recorded HTTP requests and 11 historical source editions. The report remained qualified after the reviewer rejected a scenario about a smaller award. [Browser-exported memo](original-passages/memo.md) · [Receipt and browser checks](original-passages/browser.json)
+
 Reproduce the browser report and both release decisions with the saved requests.
 
 ```sh

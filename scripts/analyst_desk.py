@@ -19,6 +19,7 @@ from . import research_desk_agent as engine
 from .archive_receipts import RecordedHttp
 from .desk_report import inspect_record
 from .disney_hulu_case import CaseError, read_saved_file
+from .focused_archive import FocusedArchive
 from .research_team import ROUTES, queue_research, resume, saved_case
 from .run_checkpoint import PauseRequested, load, own_run
 from .sol_baseline import PROJECT_ROOT, fingerprint, json_bytes
@@ -180,15 +181,20 @@ class Desk:
                     profile = r["research_profile"]
                     quantitative = profile.startswith("evidence_team")
                     implementation = quantitative_engine if quantitative else engine
-                    gateway = (
-                        ArchiveGateway(
+                    gateway = None
+                    if r["archive_version"] == FocusedArchive.VERSION:
+                        gateway = FocusedArchive(
+                            r["cutoff"],
+                            directory / ".archive",
+                            question=r["question"],
+                            http=RecordedHttp(directory / ".operator-http"),
+                        )
+                    elif quantitative:
+                        gateway = ArchiveGateway(
                             r["cutoff"],
                             directory / ".archive",
                             http=RecordedHttp(directory / ".operator-http"),
                         )
-                        if quantitative
-                        else None
-                    )
                     implementation.run(
                         r["question"],
                         r["cutoff"],
@@ -276,6 +282,9 @@ class Desk:
                         budget,
                         queued=True,
                         profile=profile,
+                        gateway=public.SavedArchive(cutoff, FocusedArchive.VERSION)
+                        if profile == "evidence_team_v4"
+                        else None,
                     )
                 else:
                     queue_research(case, directory, budget)

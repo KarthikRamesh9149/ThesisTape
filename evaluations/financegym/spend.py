@@ -43,6 +43,13 @@ def report():
         load(REPO / "evaluations/open_research/tsmc/browser.json")["spent"],
         count=1,
     )
+    add(
+        "Public TSMC desk trial with reopened originals",
+        load(REPO / "evaluations/open_research/tsmc/original-passages/browser.json")[
+            "spent"
+        ],
+        count=1,
+    )
     seen = set()
 
     def include(group, file, resolution=None):

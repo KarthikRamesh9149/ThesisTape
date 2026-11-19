@@ -3,6 +3,7 @@
 from decimal import Decimal
 from types import SimpleNamespace
 
+from . import focused_archive
 from . import research_desk_agent as engine
 from .desk_report import Release, activity
 from .disney_hulu_case import CaseError, read_saved_file
@@ -21,8 +22,16 @@ class SavedArchive:
     VERSION = ArchiveGateway.VERSION
     check_source = staticmethod(checked_doc)
 
-    def __init__(self, cutoff):
+    def __init__(self, cutoff, version=ArchiveGateway.VERSION):
         self.cutoff = cutoff
+        if version not in (ArchiveGateway.VERSION, focused_archive.VERSION):
+            raise CaseError("Unknown version of this public archive")
+        self.VERSION = version
+        self.check_source = (
+            focused_archive.check_source
+            if version == focused_archive.VERSION
+            else checked_doc
+        )
 
     def search(self, *args, **kwargs):
         raise CaseError("Viewing a saved memo requires its original search records")
@@ -40,10 +49,9 @@ def intake(question, cutoff):
 
 
 def is_public(record):
-    return (
-        record.get("workflow") == engine.VERSION
-        and record.get("archive_version") == ArchiveGateway.VERSION
-    )
+    return record.get("workflow") == engine.VERSION and record.get(
+        "archive_version"
+    ) in (ArchiveGateway.VERSION, focused_archive.VERSION)
 
 
 def release(directory, result):
@@ -102,7 +110,7 @@ def release(directory, result):
 
 
 def inspect(directory, record):
-    archive = SavedArchive(record["cutoff"])
+    archive = SavedArchive(record["cutoff"], record["archive_version"])
     selected = engine
     if record["research_profile"] in {
         "evidence_team",

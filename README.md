@@ -10,6 +10,8 @@ The analyst team released nine of 12 reports on the registered development set. 
 
 The desk also offers additional checks on financial figures. On Nintendo, the team recovered the prior-year profit from the original PDF, calculated the decline and the comparison band, and correctly forecast the direction. It spent USD 0.351676 against a USD 0.45 limit. On Canon it calculated the remaining profit needed to meet guidance and missed the forecast direction. [Nintendo memo](evaluations/paired/revisions/quantitative_trials_v3/nintendo.md) · [Canon memo](evaluations/paired/revisions/quantitative_trials_v3/canon.md) · [Scoring and costs](evaluations/paired/revisions/quantitative_trials_v3/evaluation.md)
 
+On a public-source question about TSMC Arizona, the analyst desk retrieved the grant, proposed loans and payment conditions from the archived government announcement. The browser-exported report cost USD 0.349358. The evaluation includes an earlier draft that omitted the financing amounts. [TSMC financing memo and evidence](evaluations/open_research/tsmc/evaluation.md)
+
 Replaying the same responses with revised evidence checks produced the single-Astra memo at its historical cost of USD 0.141616. The five other configurations need new responses to finish. New assignments use a common USD 0.30 ceiling. [Replay and cap decision](evaluations/paired/revisions/grounding_v2/evaluation.md)
 
 ![ThesisTape research workflow showing the lead orchestrator, evidence workers, independent review and final report.](ThesisTape-Architecture.png)
