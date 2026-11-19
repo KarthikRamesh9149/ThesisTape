@@ -1,0 +1,1300 @@
+{
+  "records_sha256": "026351d209b498ad2b246cccd27e7f86605a826127ef7985033b535bdf81db92",
+  "registration_sha256": "a8c2ae58cf4f06ace55bc89ff05dd5fb49c40364aec15953882a9bfb6dd4063b",
+  "rows": [
+    {
+      "alias": "e281695fe2b18283",
+      "arm": "single_sol",
+      "calls": 6,
+      "case_id": "nintendo-fy2021-guidance",
+      "cost_usd": "0.031306",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 28143,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.nintendo.co.jp"
+      ],
+      "qualified": false,
+      "record_sha256": "0f01a717afa77c4a0e34f3a2b5376f55ceaec2c237bbe0e847eb570877b8ccf7",
+      "state": "failed",
+      "stratum": "company-guidance"
+    },
+    {
+      "alias": "bdbe6a11cb8beed1",
+      "arm": "sol_team",
+      "calls": 17,
+      "case_id": "nintendo-fy2021-guidance",
+      "cost_usd": "0.091986",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 66825,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.nintendo.co.jp"
+      ],
+      "qualified": false,
+      "record_sha256": "ff43bd94de1986de36af8b8b9bd80e367d1c5d05e5947dc244e04d7c7d8520af",
+      "state": "failed",
+      "stratum": "company-guidance"
+    },
+    {
+      "alias": "1ba068f1e3af4abf",
+      "arm": "mixed",
+      "calls": 13,
+      "case_id": "nintendo-fy2021-guidance",
+      "cost_usd": "0.0547847",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 52896,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.nintendo.co.jp"
+      ],
+      "qualified": false,
+      "record_sha256": "999248d5a879144436f49310c2f7d0c4ce87f49a72948ddfca243495dc3d005c",
+      "state": "failed",
+      "stratum": "company-guidance"
+    },
+    {
+      "alias": "badc669557a75b22",
+      "arm": "single_astra",
+      "calls": 6,
+      "case_id": "nintendo-fy2021-guidance",
+      "cost_usd": "0.140664",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 798014,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.nintendo.co.jp"
+      ],
+      "qualified": false,
+      "record_sha256": "69ab64b8e1024ffab267362f23eef831958dc4f68de6865c60182ddbcf96f062",
+      "state": "failed",
+      "stratum": "company-guidance"
+    },
+    {
+      "alias": "e51cd2bb375821c0",
+      "arm": "mixed_fixed_plan",
+      "calls": 10,
+      "case_id": "nintendo-fy2021-guidance",
+      "cost_usd": "0.0345511",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 48158,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.nintendo.co.jp"
+      ],
+      "qualified": false,
+      "record_sha256": "d0db0a5728590a546b45c1d1f8b692fdcbe2a9c2305f5866a735b4f748b77f75",
+      "state": "failed",
+      "stratum": "company-guidance"
+    },
+    {
+      "alias": "5a29c4eb6036f886",
+      "arm": "mixed_no_forecast",
+      "calls": 16,
+      "case_id": "nintendo-fy2021-guidance",
+      "cost_usd": "0.0614863",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 60565,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.nintendo.co.jp"
+      ],
+      "qualified": false,
+      "record_sha256": "e9c9833a26f39d2d72ea7e9d2abce49cd5cdd5d4ce4ae6cb514a430d15725d65",
+      "state": "failed",
+      "stratum": "company-guidance"
+    },
+    {
+      "alias": "1cbaa7cc1e96489c",
+      "arm": "mixed_fixed_plan",
+      "calls": 10,
+      "case_id": "jd-footasylum-remittal-2021",
+      "cost_usd": "0.0380765",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 39342,
+      "forward": false,
+      "memo_sha256": "8188368850d340aa33f6c639633bba4353119c04b8758e8c752d9f24a97c3502",
+      "publishers": [
+        "assets.publishing.service.gov.uk"
+      ],
+      "qualified": false,
+      "record_sha256": "e5d03d5d877810db72f04651b8eb02c22a9daeaed4ffe0a8145cec1e062927a6",
+      "state": "complete",
+      "stratum": "corporate-actions"
+    },
+    {
+      "alias": "44ba0253bbca7b9c",
+      "arm": "mixed",
+      "calls": 15,
+      "case_id": "jd-footasylum-remittal-2021",
+      "cost_usd": "0.0633366",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 61818,
+      "forward": false,
+      "memo_sha256": "2de0c16456da65729448478f4e834bd80cdb393745accacd9cb345e32ba8cf0d",
+      "publishers": [
+        "assets.publishing.service.gov.uk"
+      ],
+      "qualified": true,
+      "record_sha256": "96117c3a4ced9870a1ddc640672ff7f3ab61c439c64be5ed69ee35e0e51052fc",
+      "state": "complete",
+      "stratum": "corporate-actions"
+    },
+    {
+      "alias": "ebf6be4002eb0324",
+      "arm": "single_sol",
+      "calls": 5,
+      "case_id": "jd-footasylum-remittal-2021",
+      "cost_usd": "0.046770",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 42550,
+      "forward": false,
+      "memo_sha256": "a8044830dd44ce3e172c1ff03b4e17aed44c91bc7e741514d346cdbb32c4b253",
+      "publishers": [
+        "assets.publishing.service.gov.uk"
+      ],
+      "qualified": false,
+      "record_sha256": "e684c4f0efd2e9687c15a7a649247abc28f3cf89c95fd8d1c2f5f15a8095a520",
+      "state": "complete",
+      "stratum": "corporate-actions"
+    },
+    {
+      "alias": "f327c83e8e99b6b3",
+      "arm": "sol_team",
+      "calls": 16,
+      "case_id": "jd-footasylum-remittal-2021",
+      "cost_usd": "0.128512",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 81188,
+      "forward": false,
+      "memo_sha256": null,
+      "publishers": [
+        "assets.publishing.service.gov.uk"
+      ],
+      "qualified": false,
+      "record_sha256": "f299fce48b31ba6f3875b9d78c3469671ad20239f7709c360224cbbd31cf600c",
+      "state": "failed",
+      "stratum": "corporate-actions"
+    },
+    {
+      "alias": "66168f1fa54d3fee",
+      "arm": "single_astra",
+      "calls": 4,
+      "case_id": "jd-footasylum-remittal-2021",
+      "cost_usd": "0.089608",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 28186,
+      "forward": false,
+      "memo_sha256": "e4ef11783e2c2ed63d9541ac7b551bf91a1b5e07615b9a080374afd0128a9891",
+      "publishers": [
+        "assets.publishing.service.gov.uk"
+      ],
+      "qualified": false,
+      "record_sha256": "7cc08730b15be24cc9e6ceb24933fb40125f1ad7354b66a390097bbe9af051d0",
+      "state": "complete",
+      "stratum": "corporate-actions"
+    },
+    {
+      "alias": "6d1f49fafec8c49f",
+      "arm": "single_astra",
+      "calls": 4,
+      "case_id": "alleghany-merger-2022",
+      "cost_usd": "0.057944",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 21285,
+      "forward": false,
+      "memo_sha256": null,
+      "publishers": [
+        "www.berkshirehathaway.com"
+      ],
+      "qualified": false,
+      "record_sha256": "1f0e29f80350f809d783ac904d6f35ab73a3aaca447d5b38e36aa67d2f7b4e8c",
+      "state": "failed",
+      "stratum": "corporate-actions"
+    },
+    {
+      "alias": "f074825fab3cb433",
+      "arm": "mixed_fixed_plan",
+      "calls": 10,
+      "case_id": "alleghany-merger-2022",
+      "cost_usd": "0.0237108",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 31762,
+      "forward": false,
+      "memo_sha256": null,
+      "publishers": [
+        "www.berkshirehathaway.com"
+      ],
+      "qualified": false,
+      "record_sha256": "87def7d48f44119fb321f50e54164422126faed15da6184b77e0751d9038ea29",
+      "state": "failed",
+      "stratum": "corporate-actions"
+    },
+    {
+      "alias": "d3b42e1256c83cd5",
+      "arm": "single_sol",
+      "calls": 4,
+      "case_id": "alleghany-merger-2022",
+      "cost_usd": "0.020490",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 19718,
+      "forward": false,
+      "memo_sha256": "54518c5f76040d0c310cf5be536716e9006dbbca61e40beecba56d610a06da6c",
+      "publishers": [
+        "www.berkshirehathaway.com"
+      ],
+      "qualified": false,
+      "record_sha256": "ee1193b7ccc44cb3ee832f50f81b6acd3e1be3318ecd4282bffd8988f165d191",
+      "state": "complete",
+      "stratum": "corporate-actions"
+    },
+    {
+      "alias": "f69e2309887f7368",
+      "arm": "sol_team",
+      "calls": 16,
+      "case_id": "alleghany-merger-2022",
+      "cost_usd": "0.069734",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 47196,
+      "forward": false,
+      "memo_sha256": null,
+      "publishers": [
+        "www.berkshirehathaway.com"
+      ],
+      "qualified": false,
+      "record_sha256": "a7c3064ac0cc77913762efad2d8a00129f974ca56ed6866d276560b9da2b1778",
+      "state": "failed",
+      "stratum": "corporate-actions"
+    },
+    {
+      "alias": "a988eaaccc95abdb",
+      "arm": "mixed",
+      "calls": 13,
+      "case_id": "alleghany-merger-2022",
+      "cost_usd": "0.0402535",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 49130,
+      "forward": false,
+      "memo_sha256": "1906c39f1ffeb88f3d5d3cc6a7a943d8aab1159c111b74a018a358a6a0054d6a",
+      "publishers": [
+        "www.berkshirehathaway.com"
+      ],
+      "qualified": false,
+      "record_sha256": "5ec4fbdec6bf77c82f720673bc451eee5fe1821d31a94ceaa6be44eb30b23b40",
+      "state": "complete",
+      "stratum": "corporate-actions"
+    },
+    {
+      "alias": "597de7c0eba209df",
+      "arm": "single_sol",
+      "calls": 5,
+      "case_id": "fomc-june-2019",
+      "cost_usd": "0.034614",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 36586,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.federalreserve.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "a36ae6100104a5dc1d25ccb24c901b75ee11b0ad2996c5122a2a8c2b4453ad54",
+      "state": "failed",
+      "stratum": "monetary-policy"
+    },
+    {
+      "alias": "f028a43a3b0e0463",
+      "arm": "sol_team",
+      "calls": 14,
+      "case_id": "fomc-june-2019",
+      "cost_usd": "0.092774",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 74418,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.federalreserve.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "9782463b0701b23bd0497ec80a494c905609ef56b530eb81904a8b88fd6ebeb6",
+      "state": "failed",
+      "stratum": "monetary-policy"
+    },
+    {
+      "alias": "0c774a959bef1006",
+      "arm": "mixed_no_forecast",
+      "calls": 11,
+      "case_id": "fomc-june-2019",
+      "cost_usd": "0.0295894",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 42372,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.federalreserve.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "9ebaa8c2c0bc77babeaceb0e07e13ae1ae40ea6dd4461ecb234b297aa732a0c4",
+      "state": "failed",
+      "stratum": "monetary-policy"
+    },
+    {
+      "alias": "980f6dc38c4d1987",
+      "arm": "single_astra",
+      "calls": 6,
+      "case_id": "fomc-june-2019",
+      "cost_usd": "0.100376",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 38199,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.federalreserve.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "d18951c460075c996d1caf3db0f39999e3a9fd049958052d29bdf35ae1a01f59",
+      "state": "failed",
+      "stratum": "monetary-policy"
+    },
+    {
+      "alias": "e87de14343e6eec1",
+      "arm": "mixed_fixed_plan",
+      "calls": 11,
+      "case_id": "fomc-june-2019",
+      "cost_usd": "0.0405528",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 49527,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.federalreserve.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "c88c7b5e5491ed50380181e1ab7bad13e2efebe26810cf005c798c7706e831f4",
+      "state": "failed",
+      "stratum": "monetary-policy"
+    },
+    {
+      "alias": "27c123245d86aaf0",
+      "arm": "mixed",
+      "calls": 12,
+      "case_id": "fomc-june-2019",
+      "cost_usd": "0.0303227",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 41775,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.federalreserve.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "62ff053beffec9cd3c3d5eba7e1a2f61018d13076c21be8099345e8584347974",
+      "state": "failed",
+      "stratum": "monetary-policy"
+    },
+    {
+      "alias": "643119f65a1ed37a",
+      "arm": "single_astra",
+      "calls": 4,
+      "case_id": "fomc-march-2022",
+      "cost_usd": "0.050464",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 14635,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.federalreserve.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "eda954c9a52f5ef0bdbf999c5713126ce925f72becc498eaf7d2bab8adc74117",
+      "state": "failed",
+      "stratum": "monetary-policy"
+    },
+    {
+      "alias": "4f621b1b5db05206",
+      "arm": "single_sol",
+      "calls": 5,
+      "case_id": "fomc-march-2022",
+      "cost_usd": "0.015344",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 13574,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.federalreserve.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "ee2aad88c91551a84c541d40cd56adc5a7e544c0df33d03d2e5f1249944a5ded",
+      "state": "failed",
+      "stratum": "monetary-policy"
+    },
+    {
+      "alias": "dc9b1778f471426f",
+      "arm": "mixed_fixed_plan",
+      "calls": 9,
+      "case_id": "fomc-march-2022",
+      "cost_usd": "0.0104399",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 26862,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.federalreserve.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "5153f3a8623d6a2b5b7b513010d3ffc6984cc4d13af23a99ce9dfdc58d03148c",
+      "state": "failed",
+      "stratum": "monetary-policy"
+    },
+    {
+      "alias": "71260ad0e1c8365a",
+      "arm": "mixed",
+      "calls": 11,
+      "case_id": "fomc-march-2022",
+      "cost_usd": "0.0191487",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 29972,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.federalreserve.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "8d1bf9c44b782326ec266788c39edbc2f599f885504627b16848ba6108fd9731",
+      "state": "failed",
+      "stratum": "monetary-policy"
+    },
+    {
+      "alias": "ca9f9440474568ae",
+      "arm": "sol_team",
+      "calls": 12,
+      "case_id": "fomc-march-2022",
+      "cost_usd": "0.052298",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 24792,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.federalreserve.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "3ef4c78245caf7644a0df27c96aa77b1d7ed9dc69afb2de79fdfdff4ba85c932",
+      "state": "failed",
+      "stratum": "monetary-policy"
+    },
+    {
+      "alias": "d83dbaae16c373bb",
+      "arm": "mixed_no_forecast",
+      "calls": 12,
+      "case_id": "fomc-march-2022",
+      "cost_usd": "0.0197814",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 30052,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.federalreserve.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "b06a6bcca9240dd73b51bd66819e77be33ff28d9cb51a5b055184cc6ce097a74",
+      "state": "failed",
+      "stratum": "monetary-policy"
+    },
+    {
+      "alias": "235280a5ad09a0d8",
+      "arm": "mixed",
+      "calls": 13,
+      "case_id": "treasury-9128286b1-2019-02-06",
+      "cost_usd": "0.0231496",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 35802,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.treasurydirect.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "465d9913ffa830980cf4a9db64fcbb814654acbef205e5d16784ce71fec31f4b",
+      "state": "failed",
+      "stratum": "treasury-auctions"
+    },
+    {
+      "alias": "704666d0e89b7ea2",
+      "arm": "mixed_no_forecast",
+      "calls": 13,
+      "case_id": "treasury-9128286b1-2019-02-06",
+      "cost_usd": "0.0227594",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 40546,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.treasurydirect.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "2195089e016d246aac6d8993bad55c7d31cdd4dc3bd5a373d9c4e93fb062a6fa",
+      "state": "failed",
+      "stratum": "treasury-auctions"
+    },
+    {
+      "alias": "c4be2151027190e3",
+      "arm": "sol_team",
+      "calls": 11,
+      "case_id": "treasury-9128286b1-2019-02-06",
+      "cost_usd": "0.040486",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 25045,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.treasurydirect.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "af17f046b30e8c0354571323dcb1a4dae6752077bfa83b169863aed15706ad2c",
+      "state": "failed",
+      "stratum": "treasury-auctions"
+    },
+    {
+      "alias": "8160063778b278ba",
+      "arm": "mixed_fixed_plan",
+      "calls": 10,
+      "case_id": "treasury-9128286b1-2019-02-06",
+      "cost_usd": "0.0121916",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 23204,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.treasurydirect.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "e00f5803f168abd9267babf3bf75f7d9c47652c894c0b99f218c1ba9bc499fd8",
+      "state": "failed",
+      "stratum": "treasury-auctions"
+    },
+    {
+      "alias": "3a69e8e94381eef8",
+      "arm": "single_astra",
+      "calls": 4,
+      "case_id": "treasury-9128286b1-2019-02-06",
+      "cost_usd": "0.063936",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 16849,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.treasurydirect.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "9f244720df826504481486c2cd8f1c275f15ca98e7e4e1911903d86565496006",
+      "state": "failed",
+      "stratum": "treasury-auctions"
+    },
+    {
+      "alias": "e722da8f74754f8d",
+      "arm": "single_sol",
+      "calls": 5,
+      "case_id": "treasury-9128286b1-2019-02-06",
+      "cost_usd": "0.016022",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 15020,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.treasurydirect.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "9ff98acd972f8b90f6978f8579eaf2a12af3931cb1e69d7c762af8dd2f1e4333",
+      "state": "failed",
+      "stratum": "treasury-auctions"
+    },
+    {
+      "alias": "2b6eaa36e569e3ba",
+      "arm": "single_astra",
+      "calls": 5,
+      "case_id": "berkshire-2018-q2-earnings",
+      "cost_usd": "0.156112",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 44924,
+      "forward": false,
+      "memo_sha256": null,
+      "publishers": [
+        "www.berkshirehathaway.com"
+      ],
+      "qualified": false,
+      "record_sha256": "0b27b0d9187f847c4a10e0b9a0e64daf7cd3b13dc8413ea382d6468c6bc058bb",
+      "state": "failed",
+      "stratum": "financial-statements"
+    },
+    {
+      "alias": "a79d1c390686be1c",
+      "arm": "mixed_fixed_plan",
+      "calls": 10,
+      "case_id": "berkshire-2018-q2-earnings",
+      "cost_usd": "0.0098035",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 19499,
+      "forward": false,
+      "memo_sha256": null,
+      "publishers": [
+        "www.berkshirehathaway.com"
+      ],
+      "qualified": false,
+      "record_sha256": "bd931ef40d1d5679ab400ebbf1fd28f64a827b30f844dd81156b683999db8d06",
+      "state": "failed",
+      "stratum": "financial-statements"
+    },
+    {
+      "alias": "2eabc17a6d99fddd",
+      "arm": "single_sol",
+      "calls": 4,
+      "case_id": "berkshire-2018-q2-earnings",
+      "cost_usd": "0.014902",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 11036,
+      "forward": false,
+      "memo_sha256": null,
+      "publishers": [
+        "www.berkshirehathaway.com"
+      ],
+      "qualified": false,
+      "record_sha256": "7888d5355d1bd4827906192348126152d67827772976cc6fe6d743859fa36d8f",
+      "state": "failed",
+      "stratum": "financial-statements"
+    },
+    {
+      "alias": "656de4fee3c3eadc",
+      "arm": "sol_team",
+      "calls": 11,
+      "case_id": "berkshire-2018-q2-earnings",
+      "cost_usd": "0.042466",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 22788,
+      "forward": false,
+      "memo_sha256": null,
+      "publishers": [
+        "www.berkshirehathaway.com"
+      ],
+      "qualified": false,
+      "record_sha256": "8f6940eb242f14b3c63290eed0e8bb7f315b90ae8a422899d5bd1793de866a8f",
+      "state": "failed",
+      "stratum": "financial-statements"
+    },
+    {
+      "alias": "30cbe55778a44cba",
+      "arm": "mixed",
+      "calls": 11,
+      "case_id": "berkshire-2018-q2-earnings",
+      "cost_usd": "0.0182931",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 29372,
+      "forward": false,
+      "memo_sha256": null,
+      "publishers": [
+        "www.berkshirehathaway.com"
+      ],
+      "qualified": false,
+      "record_sha256": "6d89f4aa99e377addb685c9f9eb0f1c34e462521de6a9182258ed19dd9f2132b",
+      "state": "failed",
+      "stratum": "financial-statements"
+    },
+    {
+      "alias": "0797312478561bd0",
+      "arm": "single_astra",
+      "calls": 5,
+      "case_id": "canon-fy2022-interim-outlook",
+      "cost_usd": "0.089424",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 25670,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "global.canon"
+      ],
+      "qualified": false,
+      "record_sha256": "f96b4ccf36a0d75260e856e65abcca6b13d865a51cab1d1da7021ea0d127f5df",
+      "state": "failed",
+      "stratum": "company-guidance"
+    },
+    {
+      "alias": "ace1e489c7a6a647",
+      "arm": "sol_team",
+      "calls": 11,
+      "case_id": "canon-fy2022-interim-outlook",
+      "cost_usd": "0.065360",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 44559,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "global.canon"
+      ],
+      "qualified": false,
+      "record_sha256": "e1dce8347df6aa25ec2d5c879b41bb0283e80aa5d7c8d6006a590c0678785f5a",
+      "state": "failed",
+      "stratum": "company-guidance"
+    },
+    {
+      "alias": "9096e8c143c4cb84",
+      "arm": "mixed_fixed_plan",
+      "calls": 9,
+      "case_id": "canon-fy2022-interim-outlook",
+      "cost_usd": "0.0291494",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 34717,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "global.canon"
+      ],
+      "qualified": false,
+      "record_sha256": "ff4f0122262fd46ea5382773135208797e5aba7b8ad88204966e217f1ae65e4c",
+      "state": "failed",
+      "stratum": "company-guidance"
+    },
+    {
+      "alias": "dea49d9a7f277a01",
+      "arm": "mixed",
+      "calls": 11,
+      "case_id": "canon-fy2022-interim-outlook",
+      "cost_usd": "0.0456227",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 50145,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "global.canon"
+      ],
+      "qualified": false,
+      "record_sha256": "305ca2581865889036d9fa17ce436eee55c090cd3fdf71c22c1546e400df1029",
+      "state": "failed",
+      "stratum": "company-guidance"
+    },
+    {
+      "alias": "49fd984d1d9c3c6d",
+      "arm": "mixed_no_forecast",
+      "calls": 11,
+      "case_id": "canon-fy2022-interim-outlook",
+      "cost_usd": "0.0422491",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 41113,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "global.canon"
+      ],
+      "qualified": false,
+      "record_sha256": "0846ece44c7b0742b0e781a03fa1390a25114e7f348574d706a245f638254048",
+      "state": "failed",
+      "stratum": "company-guidance"
+    },
+    {
+      "alias": "e215493b66fc0fcc",
+      "arm": "single_sol",
+      "calls": 5,
+      "case_id": "canon-fy2022-interim-outlook",
+      "cost_usd": "0.024174",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 23705,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "global.canon"
+      ],
+      "qualified": false,
+      "record_sha256": "bbce8d479976355fcc07204a2628efef6cd35aad715d3b9a3470934c05002232",
+      "state": "failed",
+      "stratum": "company-guidance"
+    },
+    {
+      "alias": "66a2f8f09af70872",
+      "arm": "sol_team",
+      "calls": 16,
+      "case_id": "bea-19q1-advance",
+      "cost_usd": "0.088554",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 64529,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.bea.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "146806addf72ed362b212cfb1212bc292ad21790ed17ea34c3aa4415e74c16c7",
+      "state": "failed",
+      "stratum": "macro-revisions"
+    },
+    {
+      "alias": "df64dfa3a182693c",
+      "arm": "mixed",
+      "calls": 20,
+      "case_id": "bea-19q1-advance",
+      "cost_usd": "0.0862764",
+      "cutoff_violations": 0,
+      "direction": "within",
+      "elapsed_ms": 90264,
+      "forward": true,
+      "memo_sha256": "d6f8f2bb22030dc6ce4f6fd9b4e01dfe74551df199f81eb906d2d93c5dcdb915",
+      "publishers": [
+        "www.bea.gov"
+      ],
+      "qualified": true,
+      "record_sha256": "97c022c2f8215c7d5802e6f33e764c09940635ca5813ccb926c2b69fec6ebae8",
+      "state": "complete",
+      "stratum": "macro-revisions"
+    },
+    {
+      "alias": "7a912c8a8226fd56",
+      "arm": "single_sol",
+      "calls": 4,
+      "case_id": "bea-19q1-advance",
+      "cost_usd": "0.009652",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 40944,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.bea.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "77965f80c6462fa7d7e43ad3a4b49c90b419874cc25d0b39612de10e7cab4701",
+      "state": "failed",
+      "stratum": "macro-revisions"
+    },
+    {
+      "alias": "e07593ba671c1202",
+      "arm": "mixed_no_forecast",
+      "calls": 15,
+      "case_id": "bea-19q1-advance",
+      "cost_usd": "0.0770435",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 72890,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.bea.gov"
+      ],
+      "qualified": true,
+      "record_sha256": "d2139b1cdc8cf5281aa51d7d0de08d76c7dc4f66b7f72137ed0e13b21ca8a894",
+      "state": "withheld",
+      "stratum": "macro-revisions"
+    },
+    {
+      "alias": "1ec0fe3c0368eedd",
+      "arm": "mixed_fixed_plan",
+      "calls": 10,
+      "case_id": "bea-19q1-advance",
+      "cost_usd": "0.0596069",
+      "cutoff_violations": 0,
+      "direction": "within",
+      "elapsed_ms": 61752,
+      "forward": true,
+      "memo_sha256": "fad780d7290ca3dfb711b1d893ba401faae0fff34f0c524df01a2174935928a6",
+      "publishers": [
+        "www.bea.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "80cdb238c0e8b9d6b46beeb1214cd09b8c54f64329145cf0bcd4f33455fdfde6",
+      "state": "complete",
+      "stratum": "macro-revisions"
+    },
+    {
+      "alias": "f11db0ed6377918b",
+      "arm": "single_astra",
+      "calls": 5,
+      "case_id": "bea-19q1-advance",
+      "cost_usd": "0.109016",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 32769,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.bea.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "404f63f4c244d6606131cb62d6912f0d1b9ec7fb91cdd274c2080dc0a2de3139",
+      "state": "failed",
+      "stratum": "macro-revisions"
+    },
+    {
+      "alias": "ac819d745d1122fa",
+      "arm": "mixed_fixed_plan",
+      "calls": 9,
+      "case_id": "berkshire-2020-q1-loss",
+      "cost_usd": "0.0388117",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 39275,
+      "forward": false,
+      "memo_sha256": null,
+      "publishers": [
+        "www.berkshirehathaway.com"
+      ],
+      "qualified": false,
+      "record_sha256": "f0efcc698ee7ed6568c8ba58dfa4fa2c1fcb24faec0d73e107203fa3d42e0fab",
+      "state": "failed",
+      "stratum": "financial-statements"
+    },
+    {
+      "alias": "5a17bb6b06fc52a5",
+      "arm": "single_sol",
+      "calls": 5,
+      "case_id": "berkshire-2020-q1-loss",
+      "cost_usd": "0.035864",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 35289,
+      "forward": false,
+      "memo_sha256": "e151eee4d97ed2ebb30b0e0fffac09f8ad4315a7be1a793579248e544daff979",
+      "publishers": [
+        "www.berkshirehathaway.com"
+      ],
+      "qualified": false,
+      "record_sha256": "a4e084295ed8c5f8118d7cd3535a6668d647e6441d2ad7406d577f25cbb78bd5",
+      "state": "complete",
+      "stratum": "financial-statements"
+    },
+    {
+      "alias": "bd69ee33d1843a1d",
+      "arm": "mixed",
+      "calls": 11,
+      "case_id": "berkshire-2020-q1-loss",
+      "cost_usd": "0.0513831",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 48799,
+      "forward": false,
+      "memo_sha256": null,
+      "publishers": [
+        "www.berkshirehathaway.com"
+      ],
+      "qualified": false,
+      "record_sha256": "751027f42272d1b265bf1acc09a8129e7d25af439b0945d237a309df2e89dd2e",
+      "state": "failed",
+      "stratum": "financial-statements"
+    },
+    {
+      "alias": "150451c69c3edfad",
+      "arm": "sol_team",
+      "calls": 12,
+      "case_id": "berkshire-2020-q1-loss",
+      "cost_usd": "0.060622",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 41004,
+      "forward": false,
+      "memo_sha256": null,
+      "publishers": [
+        "www.berkshirehathaway.com"
+      ],
+      "qualified": false,
+      "record_sha256": "62d415acb6d8ff560a38a1d53e3003414352d24f29b2b5cea8ef7c538208ae01",
+      "state": "failed",
+      "stratum": "financial-statements"
+    },
+    {
+      "alias": "b862a99366975ee5",
+      "arm": "single_astra",
+      "calls": 5,
+      "case_id": "berkshire-2020-q1-loss",
+      "cost_usd": "0.140288",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 41175,
+      "forward": false,
+      "memo_sha256": null,
+      "publishers": [
+        "www.berkshirehathaway.com"
+      ],
+      "qualified": false,
+      "record_sha256": "fd033db8af727cbdb1f5a16f38b563a0a04803144b12c6d5c34dd6b6f9aab047",
+      "state": "failed",
+      "stratum": "financial-statements"
+    },
+    {
+      "alias": "da2c90802e43e2fc",
+      "arm": "single_astra",
+      "calls": 4,
+      "case_id": "treasury-91282cfr7-2022-10-20",
+      "cost_usd": "0.054424",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 12977,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.treasurydirect.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "2f3b102caa7d26c4f59d2e196ce03e054b3d4d925fd36bb85d0d3f05664f58d4",
+      "state": "failed",
+      "stratum": "treasury-auctions"
+    },
+    {
+      "alias": "8b94be160512ed05",
+      "arm": "single_sol",
+      "calls": 5,
+      "case_id": "treasury-91282cfr7-2022-10-20",
+      "cost_usd": "0.018014",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 12180,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.treasurydirect.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "fbfe924766a0c035483b103271aa99e3840fccc8b136a49c97c691d106bf77a9",
+      "state": "failed",
+      "stratum": "treasury-auctions"
+    },
+    {
+      "alias": "ccc8a97e969e2205",
+      "arm": "mixed_fixed_plan",
+      "calls": 8,
+      "case_id": "treasury-91282cfr7-2022-10-20",
+      "cost_usd": "0.0105782",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 14109,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.treasurydirect.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "922c179239d3d8b1934090071144e030fbe393420f409bb4a330559444f9caef",
+      "state": "failed",
+      "stratum": "treasury-auctions"
+    },
+    {
+      "alias": "aebdcbfb91a39067",
+      "arm": "mixed_no_forecast",
+      "calls": 16,
+      "case_id": "treasury-91282cfr7-2022-10-20",
+      "cost_usd": "0.0664967",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 62096,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.treasurydirect.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "a753fd28429f6d8240f4b2e6d4e677a90b34f6a4e43f955eaec6714c0b5c31e0",
+      "state": "failed",
+      "stratum": "treasury-auctions"
+    },
+    {
+      "alias": "51b7f7c98c52294c",
+      "arm": "sol_team",
+      "calls": 17,
+      "case_id": "treasury-91282cfr7-2022-10-20",
+      "cost_usd": "0.081322",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 56530,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.treasurydirect.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "91013c167274060ecd5f322569dfc7718157b96500878584f95d049adedbf666",
+      "state": "failed",
+      "stratum": "treasury-auctions"
+    },
+    {
+      "alias": "0ab1c25cd0fe5e09",
+      "arm": "mixed",
+      "calls": 17,
+      "case_id": "treasury-91282cfr7-2022-10-20",
+      "cost_usd": "0.0494937",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 79829,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.treasurydirect.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "b1a55b18f481ad3c98119d212072244a70868bb39751fb77828c0883a61f2096",
+      "state": "failed",
+      "stratum": "treasury-auctions"
+    },
+    {
+      "alias": "0a40e20468e4b905",
+      "arm": "single_astra",
+      "calls": 4,
+      "case_id": "bea-20q4-advance",
+      "cost_usd": "0.075888",
+      "cutoff_violations": 0,
+      "direction": "within",
+      "elapsed_ms": 25936,
+      "forward": true,
+      "memo_sha256": "8013417e642ff5c561095be92fa5480c3d4691157c872212bc8fa645982bcf26",
+      "publishers": [
+        "www.bea.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "9de0af8015b10ec8134bc1573489df823552ff62276732e47d335be7d6a8faf3",
+      "state": "complete",
+      "stratum": "macro-revisions"
+    },
+    {
+      "alias": "c60c74417d1932d2",
+      "arm": "mixed_fixed_plan",
+      "calls": 12,
+      "case_id": "bea-20q4-advance",
+      "cost_usd": "0.0860857",
+      "cutoff_violations": 0,
+      "direction": "within",
+      "elapsed_ms": 78809,
+      "forward": true,
+      "memo_sha256": "56e67424de6290eddf3f3381e36cc2cafcd57a4e9b96e549c8506f552f53d91f",
+      "publishers": [
+        "www.bea.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "edbbca8a9c948464ec11d72fc1a2d00ab81ee78aa9e3c6bb8c78682c1f8431a2",
+      "state": "complete",
+      "stratum": "macro-revisions"
+    },
+    {
+      "alias": "5400003a02a0475c",
+      "arm": "mixed",
+      "calls": 16,
+      "case_id": "bea-20q4-advance",
+      "cost_usd": "0.0861527",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 77579,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.bea.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "9f326e14103be65badbd1d94d91efb72d2d29d08d658940a3560859d808bc049",
+      "state": "failed",
+      "stratum": "macro-revisions"
+    },
+    {
+      "alias": "52755d59512c8622",
+      "arm": "sol_team",
+      "calls": 19,
+      "case_id": "bea-20q4-advance",
+      "cost_usd": "0.150086",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 96338,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.bea.gov"
+      ],
+      "qualified": true,
+      "record_sha256": "593356839e592f046536e57f151bd405ab28930f917d6c6d2d82adc935cf2827",
+      "state": "withheld",
+      "stratum": "macro-revisions"
+    },
+    {
+      "alias": "d99546892f805092",
+      "arm": "mixed_no_forecast",
+      "calls": 18,
+      "case_id": "bea-20q4-advance",
+      "cost_usd": "0.0670768",
+      "cutoff_violations": 0,
+      "direction": null,
+      "elapsed_ms": 120664,
+      "forward": true,
+      "memo_sha256": null,
+      "publishers": [
+        "www.bea.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "ef1cb5993403a362e1c9770dc20cd39c5bee138a1a618f703cc59f85d8d8b021",
+      "state": "failed",
+      "stratum": "macro-revisions"
+    },
+    {
+      "alias": "1e1669f2dc1133ed",
+      "arm": "single_sol",
+      "calls": 4,
+      "case_id": "bea-20q4-advance",
+      "cost_usd": "0.024054",
+      "cutoff_violations": 0,
+      "direction": "within",
+      "elapsed_ms": 24724,
+      "forward": true,
+      "memo_sha256": "f2820b69584fff45c64a6ffe0390ed20ca32d3c9e07b0d7b566e5d23b4d6c7d6",
+      "publishers": [
+        "www.bea.gov"
+      ],
+      "qualified": false,
+      "record_sha256": "cf2e91c54cefab7a095965065b157c60eb50835353ea6b8c1469feb7ee83f996",
+      "state": "complete",
+      "stratum": "macro-revisions"
+    }
+  ],
+  "split": "development",
+  "study": "paired-grounding-v2"
+}
