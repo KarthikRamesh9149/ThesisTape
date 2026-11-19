@@ -1,0 +1,140 @@
+import json
+import tempfile
+import unittest
+import zipfile
+from pathlib import Path
+from unittest.mock import patch
+from urllib.parse import urlsplit
+
+from evaluations.financegym import runner
+from evaluations.open_research import ecb
+from scripts.archive_receipts import RecordedHttp, check_retrieval
+from scripts.packet_archive import SavedSearches
+from scripts.sol_baseline import fingerprint, json_bytes
+from scripts.temporal_web import ArchiveGateway
+
+
+class FinanceGymAdapterTests(unittest.TestCase):
+    def test_original_ecb_memo_retains_its_exact_request_citations_and_cutoff(self):
+        with zipfile.ZipFile(ecb.FOLDER / "run.zip") as z:
+            data, memo = json.loads(z.read("result.json")), z.read("memo.md")
+        row = {"cutoff": data["cutoff"], "question": data["question"]}
+        out = runner.answer(row, data, memo)
+        self.assertEqual(out["report"].encode(), memo)
+        self.assertGreater(out["num_docs_retrieved"], 0)
+        self.assertGreater(out["elapsed_s"], 0)
+        with self.assertRaises(ValueError):
+            runner.answer({**row, "question": row["question"] + " "}, data, memo)
+        with self.assertRaises(ValueError):
+            runner.answer(row, data, memo + b"Later fact")
+        with self.assertRaises(ValueError):
+            runner.answer(
+                row,
+                {
+                    **data,
+                    "searches": [
+                        {**s, "max_date": "2025-01-01"} for s in data["searches"]
+                    ],
+                },
+                memo,
+            )
+
+    def test_raw_date_bounded_discovery_replays_and_rejects_changed_bytes(self):
+        day = "2024-02-29"
+        original = "https://example.org/company-filing"
+
+        def transport(url, **kwargs):
+            host = urlsplit(url).hostname
+            if host == "lite.duckduckgo.com":
+                return f'<a class="result-link" href="{original}">Later live search title</a>'.encode()
+            if host == "archive.org":
+                return json_bytes(
+                    {
+                        "archived_snapshots": {
+                            "closest": {
+                                "timestamp": "20240229090000",
+                                "status": "200",
+                                "available": True,
+                                "url": "http://web.archive.org/web/20240229090000/"
+                                + original,
+                            }
+                        }
+                    }
+                )
+            if host == "web.archive.org":
+                return b"<html><title>Original filing</title><p>The issuer reported quarterly revenues before the cutoff date.</p></html>"
+            raise AssertionError("Unknown test endpoint")
+
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / "case/searches").mkdir(parents=True)
+            (root / "case/run.json").write_bytes(json_bytes({"cutoff": day}))
+            http = RecordedHttp(root / "http", transport=transport)
+            g = ArchiveGateway(day, root / "cache", http=http)
+            s = SavedSearches(g, root / "case/searches")
+            seen = s.search(
+                "quarterly issuer filing",
+                max_date=day,
+                titles=[],
+                filing_terms="",
+                limit=3,
+            )
+            self.assertNotIn("Later live search title", str(seen))
+            self.assertEqual(
+                check_retrieval(root / "case", root / "http"),
+                {"searches": 1, "transport_requests": 3, "eligible_sources": 1},
+            )
+            archive_receipt = next(
+                x
+                for x in (root / "http").glob("*.json")
+                if json.loads(x.read_bytes())["receipt"].get("byte_length")
+                and (
+                    root
+                    / "http"
+                    / (json.loads(x.read_bytes())["receipt"]["sha256"] + ".gz")
+                ).is_file()
+            )
+            archive_receipt.unlink()
+            with self.assertRaises(ValueError):
+                check_retrieval(root / "case", root / "http")
+
+    def test_full_export_refuses_missing_or_reworded_question(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            public = root / "questions.jsonl"
+            answers = root / "answers.jsonl"
+            rows = [
+                {
+                    "task_id": f"{i:024x}",
+                    "question": f"Example question {i}?",
+                    "cutoff": "2024-01-01",
+                }
+                for i in range(400)
+            ]
+
+            def save(path, records):
+                path.write_text("".join(json.dumps(x) + "\n" for x in records))
+
+            save(public, rows)
+            with patch.dict(
+                runner.PUBLIC, {"sha256": fingerprint(public.read_bytes())}
+            ):
+                submitted = [
+                    {
+                        **r,
+                        "report": "Check the [dated source](https://example.org/filing).",
+                    }
+                    for r in rows
+                ]
+                save(answers, submitted)
+                self.assertEqual(runner.validate_file(public, answers)["rows"], 400)
+                save(answers, submitted[:-1])
+                with self.assertRaises(ValueError):
+                    runner.validate_file(public, answers)
+                submitted[7]["question"] += " amended"
+                save(answers, submitted)
+                with self.assertRaises(ValueError):
+                    runner.validate_file(public, answers)
+                save(public, list(reversed(rows)))
+                with self.assertRaises(ValueError):
+                    runner.tasks(public)
