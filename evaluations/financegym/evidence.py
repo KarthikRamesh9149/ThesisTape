@@ -5,6 +5,9 @@ import json
 import re
 import tempfile
 import zipfile
+from collections import Counter
+from datetime import date, datetime
+from decimal import Decimal
 from itertools import batched
 from pathlib import Path
 
@@ -14,6 +17,7 @@ from evaluations.paired.registration import REPO
 from scripts.open_desk_report import SavedArchive
 from scripts.run_checkpoint import load
 from scripts.sol_baseline import fingerprint, json_bytes
+from scripts.team_meter import verify_ledger
 
 from . import recovery, runner, submission
 
@@ -91,6 +95,50 @@ def seal(questions, directory, dest):
     return verify(questions, dest)
 
 
+def attempt_metadata(run, record, evidence):
+    paid, held = verify_ledger(record, partial=True)
+    require(
+        paid == Decimal(evidence["estimated_cost_usd"])
+        and sum(held.values()) == Decimal(evidence.get("outstanding_usd", "0")),
+        "Published cost or unresolved reservation differs from the model ledger",
+    )
+    seconds = round(
+        (
+            datetime.fromisoformat(record["finished_at"])
+            - datetime.fromisoformat(record["created_at"])
+        ).total_seconds(),
+        3,
+    )
+    require(
+        seconds >= 0 and seconds == evidence.get("elapsed_s", seconds),
+        "Published duration differs from the investigation timestamps",
+    )
+    editions = set()
+    cutoff = date.fromisoformat(record["cutoff"])
+    for path in (run / "searches").glob("*.json"):
+        body = load(path)["body"]
+        require(
+            body["request"]["max_date"] == record["cutoff"]
+            and all(
+                date.fromisoformat(source["available"]) <= cutoff
+                for source in body["sources"]
+            ),
+            "A saved search or a retrieved edition exceeds the task cutoff",
+        )
+        editions.update(
+            source["url"].split("#:~:text=")[0] for source in body["sources"]
+        )
+    return editions, seconds
+
+
+def cited_kinds(visible):
+    return {
+        visible["evidence"][pid]["kind"]
+        for paragraph in visible["paragraphs"]
+        for pid in paragraph["pids"]
+    }
+
+
 def verify(questions, root):
     cfg, audit = submission.verify_export(questions, root)
     manifest = load(root / "manifest.json")
@@ -114,6 +162,7 @@ def verify(questions, root):
         json.loads(raw) for raw in (root / "answers.jsonl").read_bytes().splitlines()
     ]
     seen, attempts = set(), 0
+    kinds, encyclopedia_only, with_calculations = Counter(), 0, 0
     for number, group in enumerate(
         batched(zip(rows, reports, audit["tasks_audited"], strict=True), 25), 1
     ):
@@ -153,6 +202,7 @@ def verify(questions, root):
                 require(case not in seen, "A task was replayed twice")
                 seen.add(case)
                 chain = proof.get("attempts", [proof])
+                editions, seconds = set(), 0
                 for index, evidence in enumerate(chain):
                     mode = "recovery" if index else "primary"
                     run = Path(t) / case / mode
@@ -179,6 +229,9 @@ def verify(questions, root):
                         and rec["cutoff"] == row["cutoff"],
                         "The reproduced assignment differs",
                     )
+                    sources, duration = attempt_metadata(run, rec, evidence)
+                    editions.update(sources)
+                    seconds += duration
                     attempts += 1
                 engine = (
                     recovery.second_route(cfg, chain[0]["profile"])
@@ -188,16 +241,32 @@ def verify(questions, root):
                 saved = engine.audit(
                     run, SavedArchive(row["cutoff"], cfg["archive_version"]), record=rec
                 )
-                item = runner.answer(row, saved, (run / "memo.md").read_bytes())
+                item, visible = runner.reviewed_answer(
+                    row, saved, (run / "memo.md").read_bytes()
+                )
                 require(
                     item["report"] == report["report"],
                     "A reproduced report differs from the offered submission",
+                )
+                require(
+                    report["num_docs_retrieved"] == len(editions)
+                    and report["elapsed_s"] == round(seconds, 3),
+                    "A submitted document count or duration differs from the original investigations",
+                )
+                cited = cited_kinds(visible)
+                kinds.update(cited)
+                encyclopedia_only += cited == {"wikimedia_revision"}
+                with_calculations += any(
+                    p["calculation_ids"] for p in visible["paragraphs"]
                 )
     require(len(seen) == 400, "Research archive does not cover all 400 questions")
     return {
         "replayed_published_reports": len(seen),
         "retained_attempts": attempts,
         "answers_sha256": audit["answers_sha256"],
+        "reports_citing_each_source_kind": dict(sorted(kinds.items())),
+        "reports_citing_only_encyclopedia_revisions": encyclopedia_only,
+        "reports_with_a_checked_calculation_in_published_text": with_calculations,
     }
 
 

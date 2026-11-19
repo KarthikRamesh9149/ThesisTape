@@ -1,3 +1,4 @@
+import json
 import tempfile
 import unittest
 import zipfile
@@ -10,6 +11,40 @@ from scripts.sol_baseline import json_bytes
 
 
 class ConditionalRecoveryTests(unittest.TestCase):
+    def test_portable_costs_duration_and_editions_match_the_real_fed_trial(self):
+        with (
+            tempfile.TemporaryDirectory() as t,
+            zipfile.ZipFile(fomc.FOLDER / "runs.zip") as archive,
+        ):
+            for name in archive.namelist():
+                if name.startswith("single_astra/"):
+                    archive.extract(name, t)
+            root = Path(t) / "single_astra"
+            record = json.loads((root / "run.json").read_bytes())
+            audit = {"estimated_cost_usd": "0.201976", "elapsed_s": 64.025}
+            editions, seconds = evidence.attempt_metadata(root, record, audit)
+            self.assertEqual((len(editions), seconds), (9, 64.025))
+            for field, changed in (
+                ("estimated_cost_usd", "0.20"),
+                ("outstanding_usd", "0.001"),
+                ("elapsed_s", 0),
+            ):
+                with self.subTest(field=field), self.assertRaises(ValueError):
+                    evidence.attempt_metadata(root, record, {**audit, field: changed})
+            path = next((root / "searches").glob("*.json"))
+            search = json.loads(path.read_bytes())
+            search["body"]["sources"][0]["available"] = "2026-11-20"
+            path.write_bytes(json_bytes(search))
+            with self.assertRaisesRegex(ValueError, "cutoff"):
+                evidence.attempt_metadata(root, record, audit)
+
+    def test_origin_metrics_count_only_sources_cited_in_released_paragraphs(self):
+        visible = {
+            "paragraphs": [{"pids": ["a", "a"]}],
+            "evidence": {"a": {"kind": "wikimedia_revision"}, "b": {"kind": "wayback"}},
+        }
+        self.assertEqual(evidence.cited_kinds(visible), {"wikimedia_revision"})
+
     def test_portable_archive_includes_only_explicit_evidence_and_checks_private_ids(
         self,
     ):
