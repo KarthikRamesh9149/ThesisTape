@@ -42,6 +42,15 @@ class EvaluatorTests(unittest.TestCase):
         }
         result["points"][0].update(award=True, witness=w)
         self.assertEqual(grading.validate(json.dumps(result), payload), result)
+        publication = deepcopy(result)
+        for witness in [
+            publication["points"][0]["witness"],
+            publication["claims"][0]["witness"],
+        ]:
+            witness["source_id"] = "doc"
+        self.assertEqual(grading.validate(json.dumps(publication), payload), result)
+        with self.assertRaises(ValueError):
+            grading.validate(json.dumps(publication), payload, publication_ids=False)
         for field, value in (
             ("source_id", "P2"),
             ("report_quote", "it paid"),

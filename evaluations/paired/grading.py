@@ -16,7 +16,7 @@ from pydantic import Field, ValidationError
 from scripts.baseline_evidence import StrictOutput
 from scripts.research_team import check_configuration, new_record
 from scripts.run_checkpoint import load, own_run
-from scripts.sol_baseline import fingerprint, json_bytes
+from scripts.sol_baseline import fingerprint, generation_request, json_bytes
 from scripts.sol_provider import ASTRA
 from scripts.team_meter import Meter, verify_ledger
 from scripts.team_report import typed_prompt
@@ -116,7 +116,7 @@ def norm(s):
     return " ".join(s.split())
 
 
-def validate(raw, payload):
+def validate(raw, payload, *, publication_ids=True):
     grade = Assessment.model_validate_json(raw)
     corpus.require(
         {p.criterion for p in grade.points} == {"F1", "F2", "F3", "R1", "R2"},
@@ -135,14 +135,27 @@ def validate(raw, payload):
             "Report excerpt differs from its paragraph",
         )
         if w.source_id is not None or w.source_quote is not None or needed:
-            corpus.require(
-                w.source_id in para["cited"]
-                and w.source_quote
-                and len(norm(w.source_quote)) >= 3
-                and norm(w.source_quote)
-                in norm(payload["passages"][w.source_id]["text"]),
-                "Evidence excerpt differs from its cited original",
+            # Prompts expose a passage ID and the publisher's original source_id. Both must
+            # resolve to an exact quote in an original actually linked by this paragraph.
+            candidates = (
+                [w.source_id]
+                if w.source_id in para["cited"]
+                else [
+                    pid
+                    for pid in para["cited"]
+                    if publication_ids
+                    and payload["passages"][pid]["source_id"] == w.source_id
+                ]
             )
+            exact = [
+                pid
+                for pid in candidates
+                if w.source_quote
+                and len(norm(w.source_quote)) >= 3
+                and norm(w.source_quote) in norm(payload["passages"][pid]["text"])
+            ]
+            corpus.require(exact, "Evidence excerpt differs from its cited original")
+            w.source_id = exact[0]
 
     for point in grade.points:
         corpus.require(point.reason.strip(), "Missing criterion reason")
@@ -190,28 +203,51 @@ def grade_one(payload, path, provider=None):
         check_configuration(record, config)
         meter = Meter(path, record, provider, continuing=True)
         meter.restore()
-        first = None
-        for stage in ("grade.asof", "grade.correct"):
-            raw = meter(stage, prompt, 4096)
+        raw = meter("grade.asof", prompt, 4096)
+        prior = record["calls"].get("grade.correct")
+        messages = []
+        assessment = None
+        for publication_ids in (True, False) if prior else (True,):
             try:
-                assessment = validate(raw, payload)
-                break
+                judged = validate(raw, payload, publication_ids=publication_ids)
+                if publication_ids:
+                    assessment = judged
             except (ValueError, ValidationError) as exc:
-                if stage == "grade.correct":
-                    raise
-                first = raw
-                msg = (
+                message = (
                     "Return the exact structured schema"
                     if isinstance(exc, ValidationError)
                     else str(exc)
                 )
-                prompt = typed_prompt(
+                if message not in messages:
+                    messages.append(message)
+        if prior or assessment is None:
+            correction = None
+            for msg in messages:
+                candidate = typed_prompt(
                     ASTRA,
                     RUBRIC,
-                    {**payload, "grading_validation": msg, "previous_grading": first},
+                    {**payload, "grading_validation": msg, "previous_grading": raw},
                     Assessment,
                     effort="medium",
                 )
+                if (
+                    prior is None
+                    or fingerprint(
+                        json_bytes(
+                            generation_request(
+                                candidate, max_output_tokens=prior["max_output_tokens"]
+                            )
+                        )
+                    )
+                    == prior["request_sha256"]
+                ):
+                    correction = candidate
+                    break
+            corpus.require(
+                correction is not None,
+                "The previous grader correction cannot be reproduced",
+            )
+            assessment = validate(meter("grade.correct", correction, 4096), payload)
         total, pending = verify_ledger(record)
         corpus.require(
             not pending and meter.seen == set(record["calls"]),
