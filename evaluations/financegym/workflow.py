@@ -16,6 +16,7 @@ from . import (
     editorial,
     evidence,
     recovery,
+    report_index,
     runner,
     spend,
     titled_publication,
@@ -160,6 +161,7 @@ def finish(questions, destination, receipts):
         budget_routes.export(questions, destination, registration, allocation)
         verified = evidence.seal(questions, destination, receipts)
         spend.snapshot_charges()
+        report_index.write(questions, receipts, destination / "Report index.html")
     return {"verified": verified, "project_budget": guard.status()}
 
 

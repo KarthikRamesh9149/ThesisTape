@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>FinanceGym research reports · ThesisTape</title>
+<style>
+:root{--ink:#142926;--muted:#495e59;--teal:#075747;--line:#cad5d0;--tint:#ecf4ef;--sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--serif:"STIX Two Text",Georgia,serif;color:var(--ink);background:#fbfcfa;font:16px/1.5 var(--sans)}
+*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button{cursor:pointer}button:disabled{cursor:default;opacity:.5}h1,h2,h3,p{margin:0}a{color:var(--teal);text-underline-offset:.15em}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #2678a1;outline-offset:2px}[hidden]{display:none!important}
+.masthead{padding:12px clamp(16px,4vw,60px);border-bottom:1px solid var(--line);color:var(--teal);font-weight:750;letter-spacing:-.025em}
+main{max-width:1510px;margin:auto;padding:24px clamp(16px,4vw,60px) 60px}h1{font:600 clamp(1.7rem,3vw,2.55rem)/1.15 var(--serif);margin-bottom:24px}
+.layout{display:grid;grid-template-columns:minmax(245px,30%) minmax(0,1fr);gap:clamp(20px,4vw,70px);align-items:start}
+aside{padding-right:18px;border-right:1px solid var(--line)}label{display:block;color:var(--muted);font-size:.85rem;font-weight:650;margin-bottom:5px}input,select{display:block;width:100%;min-height:40px;border:1px solid #879d93;border-radius:4px;background:white;color:var(--ink);padding:6px 9px;margin-bottom:12px}
+.counter{font-size:.85rem;color:var(--muted);margin:14px 0 8px}.rows{display:grid}.pick{background:transparent;border:0;border-top:1px solid var(--line);border-left:3px solid transparent;padding:10px 8px;text-align:left;color:var(--ink)}
+.pick[aria-current=true]{border-left-color:var(--teal);background:var(--tint)}.pick:hover{background:#f1f5f1}.pick span{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;line-height:1.35;font-weight:560}.pick small{display:block;font-size:.77rem;color:var(--muted);margin-top:4px}
+.pager,.meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 13px}.pager{margin-top:12px}.action{border:1px solid #829990;border-radius:4px;color:var(--teal);padding:6px 10px;background:white;font-size:.83rem;font-weight:600}
+article{max-width:86ch;min-width:0;overflow-wrap:anywhere}article h2{font:600 clamp(1.35rem,2.1vw,2rem)/1.25 var(--serif)}.meta{color:var(--muted);font-size:.84rem;margin:14px 0 18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+article h3{font:600 1.19rem/1.4 var(--sans);margin:1.25em 0 .35em}#body p{font:1.05rem/1.65 var(--serif);white-space:pre-line;margin:.7em 0}.empty{color:var(--muted)}
+@media(max-width:720px){.layout{grid-template-columns:1fr}aside{border:0;padding:0}.rows{max-height:215px;overflow:auto}.pick{padding:7px}main{padding-top:16px}h1{margin-bottom:16px}.filters{display:grid;grid-template-columns:2fr 1fr;gap:12px}}
+@media print{.masthead,aside,h1,.action{display:none}main{padding:0}.layout{display:block}article{max-width:none}a{color:inherit}}
+</style>
+</head>
+<body>
+<header class="masthead">ThesisTape</header>
+<main>
+<h1>FinanceGym research reports</h1>
+<div class="layout">
+<aside aria-label="Find a report">
+<div class="filters">
+<div><label for="search">Search questions</label><input id="search" type="search" placeholder="Company, topic or date"></div>
+<div><label for="release">Release</label><select id="release"><option value="">All reports</option><option value="complete">Complete</option><option value="qualified">Qualified</option></select></div>
+</div>
+<p id="count" class="counter" aria-live="polite"></p>
+<div id="rows" class="rows"></div>
+<nav class="pager" aria-label="Report pages"><button class="action" type="button" id="prev">Previous</button><button class="action" type="button" id="next">Next</button></nav>
+<p class="counter">The release status records ThesisTape’s internal checks. FinanceGym assigns the official score.</p>
+</aside>
+<article id="memo" aria-labelledby="title">
+<h2 id="title" tabindex="-1"></h2>
+<div class="meta"><span id="when"></span><span id="state"></span><span id="sources"></span><span id="cost"></span><button id="download" class="action" type="button">Download memo</button></div>
+<div id="body"></div>
+</article>
+<p id="empty" hidden class="empty">No questions match these filters.</p>
+</div>
+</main>
+<script id="data" type="application/json"><!-- research-data --></script>
+<script>
+"use strict";
+const reports = JSON.parse(document.getElementById("data").textContent);
+const el = id => document.getElementById(id);
+const size = 10;
+let matching = reports, page = 0, current = null;
+const label = state => state === "qualified" ? "Qualified" : "Complete";
+function putLinks(node, value) {
+  const links = /\[([^\]\n]+)\]\((https?:\/\/[^\s]+)\)/g;
+  let i = 0;
+  for (const match of value.matchAll(links)) {
+    node.append(value.slice(i, match.index));
+    try {
+      const url = new URL(match[2]);
+      if (url.username || url.password) throw new Error();
+      const a = document.createElement("a");
+      a.href = url.href; a.textContent = match[1]; a.rel = "noopener noreferrer"; a.target = "_blank";
+      if (/^\d+$/.test(match[1])) { a.textContent = "[" + match[1] + "]"; a.setAttribute("aria-label", "Source " + match[1]); }
+      node.append(a);
+    } catch { node.append(match[0]); }
+    i = match.index + match[0].length;
+  }
+  node.append(value.slice(i));
+}
+function show(report) {
+  current = report; el("memo").hidden = !report; el("empty").hidden = !!report;
+  if (!report) return;
+  el("title").textContent = report.question;
+  el("when").textContent = "As of " + report.cutoff;
+  el("state").textContent = label(report.state);
+  el("sources").textContent = report.num_docs_retrieved + (report.num_docs_retrieved === 1 ? " document retrieved" : " documents retrieved");
+  el("cost").textContent = "Estimated $" + Number(report.cost).toFixed(4);
+  const body = el("body"); body.replaceChildren();
+  for (const block of report.report.trim().split(/\n\s*\n/)) {
+    if (block === "# Investment research memo" || block === "As of " + report.cutoff || block === "**Research question**\n" + report.question) continue;
+    const heading = /^(?:#{1,3}) (.+)$/.exec(block);
+    const p = document.createElement(heading ? "h3" : "p");
+    putLinks(p, heading ? heading[1] : block); body.append(p);
+  }
+}
+function draw() {
+  const start = page * size, visible = matching.slice(start, start + size);
+  el("count").textContent = matching.length > 1 ? (start + 1) + "–" + (start + visible.length) + " of " + matching.length + " reports" : matching.length + (matching.length ? " report" : " reports");
+  el("prev").disabled = page === 0;
+  el("next").disabled = start + size >= matching.length;
+  const list = el("rows"); list.replaceChildren();
+  for (const report of visible) {
+    const b = document.createElement("button"); b.className = "pick"; b.type = "button"; b.setAttribute("aria-current", String(report === current));
+    const q = document.createElement("span"), d = document.createElement("small");
+    q.textContent = report.question; d.textContent = report.cutoff + " · " + label(report.state);
+    b.append(q, d); b.addEventListener("click", () => { show(report); draw(); el("title").focus(); }); list.append(b);
+  }
+}
+function filter() {
+  const term = el("search").value.trim().toLocaleLowerCase(), release = el("release").value;
+  matching = reports.filter(r => (!release || r.state === release) && (r.question + " " + r.cutoff).toLocaleLowerCase().includes(term));
+  page = 0; show(matching[0]); draw();
+}
+function move(delta) { page += delta; show(matching[page * size]); draw(); }
+el("search").addEventListener("input", filter); el("release").addEventListener("change", filter);
+el("prev").addEventListener("click", () => move(-1)); el("next").addEventListener("click", () => move(1));
+el("download").addEventListener("click", () => {
+  const url = URL.createObjectURL(new Blob([current.report], {type:"text/markdown;charset=utf-8"}));
+  const a = document.createElement("a"); a.href = url; a.download = current.task_id + ".md"; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+filter();
+</script>
+</body>
+</html>

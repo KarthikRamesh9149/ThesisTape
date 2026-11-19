@@ -18,6 +18,12 @@ The final directory contains the submission JSONL, a per-question audit and a me
 
 ## Verify the inputs and retrieval
 
+The finish command also writes `Report index.html` in the submission folder. Open it locally to search the 400 questions, filter for complete or qualified reports, inspect citations and download an individual memo. The reader runs offline and uses the exact text submitted for each question. To rebuild it from the sealed evidence, run the following command.
+
+```sh
+.venv/bin/python -B -m evaluations.financegym.report_index runs/benchmark_400_public.jsonl evaluations/financegym/results 'runs/financegym-submission/Report index.html'
+```
+
 Save the JSONL from the pinned dataset as `runs/benchmark_400_public.jsonl`. Run from the repository root.
 
 ```sh
