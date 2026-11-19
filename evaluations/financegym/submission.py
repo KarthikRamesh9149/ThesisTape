@@ -16,7 +16,9 @@ from evaluations.paired.confirmation import committed, write_once
 from evaluations.paired.production import FOLDER as PRIMARY
 from scripts.run_checkpoint import load
 from scripts.sol_baseline import fingerprint, json_bytes
+from scripts.sol_provider import ASTRA, MODEL
 
+from . import recovery
 from .runner import locked, tasks, validate_file
 
 NAMES = {
@@ -28,6 +30,34 @@ NAMES = {
 RECIPIENT = "rujunh@google.com"
 
 
+def verified_selection(manifest, proof, extension):
+    profile = manifest["profiles_by_task"][proof["task_id"]]
+    if extension is None:
+        return proof["profile"] == profile and "attempts" not in proof
+    chain = proof["attempts"]
+    if (
+        len(chain) not in (1, 2)
+        or chain[0]["profile"] != profile
+        or chain[-1]["report_sha256"] != proof["report_sha256"]
+    ):
+        return False
+    if len(chain) == 2 and (
+        chain[0]["report_sha256"] is not None
+        or chain[0]["state"] in {"qualified", "complete"}
+        or chain[-1]["profile"] != recovery.second_route(manifest, profile)[1]
+    ):
+        return False
+    return (
+        proof["primary_profile"] == profile
+        and proof["profile"] == chain[-1]["profile"]
+        and proof["state"] == chain[-1]["state"]
+        and Decimal(proof["estimated_cost_usd"])
+        == sum(Decimal(a["estimated_cost_usd"]) for a in chain)
+        and Decimal(proof["outstanding_usd"])
+        == sum(Decimal(a["outstanding_usd"]) for a in chain)
+    )
+
+
 def verify_export(questions, directory):
     audits = load(directory / "audit.json")
     manifest = locked()
@@ -35,6 +65,25 @@ def verify_export(questions, directory):
     summary = validate_file(questions, directory / "answers.jsonl")
     inputs = tasks(questions)
     audits_rows = audits["tasks_audited"]
+    extension = audits.get("recovery_registration_sha256")
+    if extension is not None:
+        verified = recovery.register(manifest)
+        if json.loads(
+            committed(recovery.REGISTRATION)
+        ) != verified or extension != fingerprint(json_bytes(verified)):
+            raise ValueError(
+                "The recovery research differs from its registered procedure"
+            )
+        recovered = sum(len(a["attempts"]) == 2 for a in audits_rows)
+        if (audits["recovery_releases"], audits["primary_releases"]) != (
+            recovered,
+            400 - recovered,
+        ) or Decimal(audits["outstanding_usd"]) != sum(
+            Decimal(a["outstanding_usd"]) for a in audits_rows
+        ):
+            raise ValueError(
+                "Recovered release count or reserved exposure differs from the ledgers"
+            )
     if (
         summary["answers_sha256"] != audits["answers_sha256"]
         or audits["registration_sha256"] != fingerprint(json_bytes(manifest))
@@ -47,7 +96,7 @@ def verify_export(questions, directory):
         answer = json.loads(line)
         if (
             row["task_id"] != proof["task_id"]
-            or manifest["profiles_by_task"][row["task_id"]] != proof["profile"]
+            or not verified_selection(manifest, proof, extension)
             or proof["report_sha256"] != fingerprint(answer["report"].encode())
             or proof["state"] not in {"complete", "qualified"}
         ):
@@ -65,9 +114,16 @@ def paper(questions, directory):
     finance = json.loads(committed(FINANCEBENCH / "results.json"))["summary"]
     counts = Counter(cfg["profiles_by_task"].values())
     methods = "\n".join(
-        f"- {NAMES[p]} handled {n} tasks under a USD {cfg['case_limits_usd'][p]} per-task ceiling."
+        f"- {NAMES[p]} received {n} original tasks under a USD {cfg['case_limits_usd'][p]} per-task ceiling."
         for p, n in sorted(counts.items())
     )
+    if audit.get("recovery_releases"):
+        original_cost = sum(
+            Decimal(a["attempts"][0]["estimated_cost_usd"])
+            for a in audit["tasks_audited"]
+        )
+        supplemental_cost = Decimal(audit["total_research_cost_usd"]) - original_cost
+        methods += f"\n\nThe primary researcher released {audit['primary_releases']} reports using an estimated USD {original_cost:.2f}. An independent recovery researcher supplied the remaining {audit['recovery_releases']} using an additional USD {supplemental_cost:.2f}. Each new investigation required an unanswered original question and retained the first attempt's costs. Unresolved provider reservations across both attempts total USD {audit['outstanding_usd']}."
     metrics = primary["metrics"]
     rows = "\n".join(
         f"| {NAMES[k]} | {v['cases']} | {v['F']:.1%} | {v['R']:.1%} | {v['O']:.1%} | {v['Q']:.1%} | {v['released']} |"
@@ -119,6 +175,11 @@ The source archive is independent of the retrieval corpus used by the benchmark 
 
 def draft(questions, directory, contact, org, published_paper, submission_date):
     cfg, audit = paper(questions, directory)
+    models = set(cfg["models"])
+    if any(
+        r.get("profile") == "evidence_team_v4" for r in audit.get("tasks_audited", [])
+    ):
+        models.update((ASTRA, MODEL))
     address = Address(addr_spec=contact)
     link = urlsplit(published_paper)
     if (
@@ -147,7 +208,7 @@ Please evaluate the attached 400 ThesisTape research reports. We used the origin
 agent: ThesisTape
 org: {org}
 repo: {published_paper}
-base_model: {", ".join(cfg["models"])}
+base_model: {", ".join(sorted(models))}
 date: {submission_date}
 contact: {contact}
 notes: Full 400-task run. Exact max_date on every search. Archived passage and provider usage audit completed. {audit["qualified"]} qualified reports included.

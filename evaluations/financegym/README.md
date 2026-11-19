@@ -34,6 +34,16 @@ Each task has a durable research record. An interrupted run reuses confirmed gen
 
 Export verifies the original HTTP bytes, all model request fingerprints, the ledger, and the exact text of every released memo offline. It writes the submission only when all 400 questions have a cited report. The separate audit lists qualified reports, the total research cost and a report fingerprint for each task. FinanceGym asks for the JSONL plus contributor metadata and a public system or paper link. A leaderboard score comes from the maintainers after submission.
 
+If any task ends without a publishable answer, register the independent recovery implementation and commit its generated manifest before dispatch. This route preserves both attempts and their charges. It skips every accepted primary answer. [Recovery eligibility and spending rules](recovery-policy.md)
+
+```sh
+.venv/bin/python -B -m evaluations.financegym.recovery register
+git add evaluations/financegym/recovery-registration.json
+git commit -m "Register independent recovery of unanswered FinanceGym questions" -- evaluations/financegym/recovery-registration.json
+.venv/bin/python -B -m evaluations.financegym.recovery run runs/benchmark_400_public.jsonl --workers 4
+.venv/bin/python -B -m evaluations.financegym.recovery export runs/benchmark_400_public.jsonl runs/financegym-submission
+```
+
 ## Prepare the methodology paper and local email
 
 Generate the public-facing paper from the verified 400-row export. The note reports the actual configuration and the independently measured results. The code repository can stay private. Once the paper has a public URL, use the submitter's email address, organization and submission date to generate a local email draft with the exact JSONL attached.
