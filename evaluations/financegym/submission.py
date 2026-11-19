@@ -21,7 +21,7 @@ from scripts.run_checkpoint import load
 from scripts.sol_baseline import fingerprint, json_bytes
 from scripts.sol_provider import ASTRA, MODEL
 
-from . import editorial, recovery, reviewed_release
+from . import editorial, recovery, reviewed_release, titled_publication
 from .runner import locked, tasks, validate_file
 
 NAMES = {
@@ -33,19 +33,38 @@ NAMES = {
 RECIPIENT = "rujunh@google.com"
 
 
-def verified_selection(manifest, proof, extension, publication=None, funding=None):
+def verified_selection(
+    manifest, proof, extension, publication=None, funding=None, title_registration=None
+):
     profile = manifest["profiles_by_task"][proof["task_id"]]
     derived = proof.get("reviewed_publication")
     edit = proof.get("editorial")
+    lookup = proof.get("title_lookup")
     if extension is None:
         return (
             proof["profile"] == profile
             and "attempts" not in proof
             and derived is None
             and edit is None
+            and lookup is None
         )
     chain = proof["attempts"]
     if len(chain) not in (1, 2) or chain[0]["profile"] != profile:
+        return False
+    if lookup is not None and not (
+        title_registration
+        and funding
+        and edit is not None
+        and len(chain) == 2
+        and all(a["eligible_sources"] == 0 for a in chain)
+        and lookup["registration_sha256"] == title_registration
+        and lookup["model_generations"] == 0
+        and Decimal(lookup["model_cost_usd"]) == 0
+        and lookup["elapsed_s"] >= 0
+        and lookup["searches"] > 0
+        and lookup["transport_requests"] > 0
+        and lookup["eligible_sources"] > 0
+    ):
         return False
     if len(chain) == 2 and (
         chain[0]["report_sha256"] is not None
@@ -115,6 +134,7 @@ def verify_export(questions, directory):
     extension = audits.get("recovery_registration_sha256")
     publication = audits.get("reviewed_release_registration_sha256")
     funding = audits.get("editorial_registration_sha256")
+    title_registration = audits.get("title_registration_sha256")
     if extension is not None:
         verified = recovery.register(manifest)
         if json.loads(
@@ -128,6 +148,14 @@ def verify_export(questions, directory):
         editors = [a["editorial"] for a in audits_rows if "editorial" in a]
         if funding is not None:
             funded = editorial.locked(manifest, verified)
+            if title_registration is not None and (
+                title_registration != titled_publication.locked(funded)
+                or sum("title_lookup" in a for a in audits_rows)
+                != audits["title_lookup_releases"]
+            ):
+                raise ValueError(
+                    "Source-restored report count or specification differs"
+                )
             if (
                 publication != funded["reviewed_release_sha256"]
                 or funding != fingerprint(json_bytes(funded))
@@ -170,7 +198,9 @@ def verify_export(questions, directory):
         answer = json.loads(line)
         if (
             row["task_id"] != proof["task_id"]
-            or not verified_selection(manifest, proof, extension, publication, funding)
+            or not verified_selection(
+                manifest, proof, extension, publication, funding, title_registration
+            )
             or proof["report_sha256"] != fingerprint(answer["report"].encode())
             or proof["state"] not in {"complete", "qualified"}
         ):
@@ -238,7 +268,9 @@ def paper(questions, directory):
         if audit.get("reviewed_first_draft_releases"):
             methods += f"\n\nAfter the first case in which an optional rewrite failed following a completed independent review, we added an offline publication rule. It produced {audit['reviewed_first_draft_releases']} further qualified reports by retaining only previously approved paragraphs. The originally registered system left these questions unanswered. Both original attempts and expenses are included. The additional publications used zero new searches or generations."
         if audit.get("editorial_releases"):
-            methods += f"\n\nA second addition addressed questions with neither a released memo nor independently approved paragraphs. Sol checked proposed calculations, an Astra author wrote a short answer from the two original source sets, and a fresh Sol context reviewed it. This stage generated {audit['editorial_releases']} qualified reports for an additional USD {Decimal(audit['editorial_cost_usd']):.2f} across those questions, under an extra USD 0.55 ceiling per eligible case. It did not repeat either investigation or fetch new documents."
+            methods += f"\n\nA second addition addressed questions with neither a released memo nor independently approved paragraphs. Sol checked proposed calculations, an Astra author wrote a short answer and a fresh Sol context reviewed it. Editing generated {audit['editorial_releases']} qualified reports for an additional USD {Decimal(audit['editorial_cost_usd']):.2f}, under a USD 0.55 ceiling per eligible case. The editor worked from verified dated passages."
+        if audit.get("title_lookup_releases"):
+            methods += f"\n\nFor {audit['title_lookup_releases']} of those edited reports, both investigators had retrieved zero passages. A later retrieval rule retried their original queries with capitalization variants of entity titles present in the question. It kept the cutoff, original query terms and result limits. The editor received the resulting historical passages. All earlier failures and the time spent on the retry were retained."
     metrics = primary["metrics"]
     rows = "\n".join(
         f"| {NAMES[k]} | {v['cases']} | {v['F']:.1%} | {v['R']:.1%} | {v['O']:.1%} | {v['Q']:.1%} | {v['released']} |"

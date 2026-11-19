@@ -71,6 +71,13 @@ If neither investigator produced a releasable memo or an independently approved 
 .venv/bin/python -B -m evaluations.financegym.editorial export runs/benchmark_400_public.jsonl runs/financegym-submission
 ```
 
+One issuer search exposed case-sensitive title matching after both original investigations returned zero sources. A separately recorded procedure can retry the original queries using different capitalization of entity titles in the question. It keeps the cutoff fixed and verifies the raw retrieval offline. The existing editor can then use any dated evidence it recovers. These qualified reports are counted separately and use the same shared spending check. [Historical title procedure](title-policy.md)
+
+```sh
+.venv/bin/python -B -m evaluations.financegym.titled_publication run runs/benchmark_400_public.jsonl --task-id "$UNANSWERED_TASK_ID"
+.venv/bin/python -B -m evaluations.financegym.titled_publication export runs/benchmark_400_public.jsonl runs/financegym-submission
+```
+
 ## Prepare the methodology paper and local email
 
 Generate the public-facing paper from the verified 400-row export. The note reports the actual configuration and the independently measured results. The code repository can stay private. Once the paper has a public URL, use the submitter's email address, organization and submission date to generate a local email draft with the exact JSONL attached.

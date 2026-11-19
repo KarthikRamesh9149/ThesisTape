@@ -19,13 +19,21 @@ from scripts.run_checkpoint import load
 from scripts.sol_baseline import fingerprint, json_bytes
 from scripts.team_meter import verify_ledger
 
-from . import editorial, recovery, reviewed_release, runner, submission
+from . import (
+    editorial,
+    recovery,
+    reviewed_release,
+    runner,
+    submission,
+    title_lookup,
+    titled_publication,
+)
 
 FOLDER = REPO / "evaluations/financegym/results"
 PORTABLE = re.compile(
     r"(?:run\.json|result\.json|memo\.md|(?:searches|counts)/[0-9a-f]{64}\.json)"
 )
-ENTRY = re.compile(r"([a-z0-9]{24})/(primary|recovery|editorial)/(.+)")
+ENTRY = re.compile(r"([a-z0-9]{24})/(primary|recovery|editorial|title_lookup)/(.+)")
 
 
 def attempt_modes(proof):
@@ -35,6 +43,10 @@ def attempt_modes(proof):
     if "editorial" in proof:
         modes.append("editorial")
     return modes
+
+
+def artifact_modes(proof):
+    return attempt_modes(proof) + (["title_lookup"] if "title_lookup" in proof else [])
 
 
 def portable(run):
@@ -82,8 +94,9 @@ def seal(questions, directory, dest):
                 "primary": runner.RESEARCH,
                 "recovery": recovery.OUTPUT,
                 "editorial": editorial.ROOT,
+                "title_lookup": title_lookup.ROOT,
             }
-            for kind in attempt_modes(rec):
+            for kind in artifact_modes(rec):
                 run = roots[kind] / case / "research"
                 for name, raw in portable(run).items():
                     entries[f"{case}/{kind}/{name}"] = raw
@@ -151,23 +164,49 @@ def cited_kinds(visible):
     }
 
 
+def check_receipt_index(run, expected):
+    receipt_index = load(run / "http-receipt-hashes.json")
+    require(
+        len(receipt_index) == expected
+        and all(
+            re.fullmatch("[0-9a-f]{64}", k) and re.fullmatch("[0-9a-f]{64}", v)
+            for k, v in receipt_index.items()
+        ),
+        "Transport evidence inventory changed",
+    )
+
+
 def replay_case(
     row, report, proof, folder, cfg, extension, editor_spec, *, provider_receipts=None
 ):
     chain = proof.get("attempts", [proof])
     editions, seconds = set(), 0
+    originals = [folder / name for name in ("primary", "recovery")]
+    lookup = proof.get("title_lookup")
+    if lookup is not None:
+        recovered = folder / "title_lookup"
+        reg = titled_publication.locked(editor_spec)
+        restored, duration = title_lookup.validate(row, originals, recovered, reg)
+        snapshots = [load(p)["body"] for p in (recovered / "searches").glob("*.json")]
+        urls = {s["url"] for body in snapshots for s in body["sources"]}
+        require(
+            lookup["snapshot_sha256"]
+            == fingerprint((recovered / "run.json").read_bytes())
+            and lookup["registration_sha256"] == reg
+            and bool(restored)
+            and lookup["eligible_sources"] == len(restored)
+            and lookup["eligible_passage_urls"] == len(urls)
+            and lookup["searches"] == len(snapshots)
+            and lookup["elapsed_s"] == duration,
+            "Recovered source editions, timing or provenance changed",
+        )
+        check_receipt_index(recovered, lookup["transport_requests"])
+        editions.update(restored)
+        seconds += duration
     billing = [*chain, proof["editorial"]] if "editorial" in proof else chain
     for mode, evidence in zip(attempt_modes(proof), billing, strict=True):
         run = folder / mode
-        receipt_index = load(run / "http-receipt-hashes.json")
-        require(
-            len(receipt_index) == evidence["transport_requests"]
-            and all(
-                re.fullmatch("[0-9a-f]{64}", k) and re.fullmatch("[0-9a-f]{64}", v)
-                for k, v in receipt_index.items()
-            ),
-            "Transport evidence inventory changed",
-        )
+        check_receipt_index(run, evidence["transport_requests"])
         rec = load(run / "run.json")
         if provider_receipts is not None:
             for call in rec["calls"].values():
@@ -200,7 +239,9 @@ def replay_case(
             )
         else:
             planned, cap = (
-                editorial.ticket(row, editor_spec, chain),
+                titled_publication.ticket(row, editor_spec, chain, lookup)
+                if lookup is not None
+                else editorial.ticket(row, editor_spec, chain),
                 editorial.engine.CAP,
             )
             require(
@@ -220,7 +261,6 @@ def replay_case(
         else runner.route(row, cfg)
     )[0]
     if "editorial" in proof:
-        originals = [folder / name for name in ("primary", "recovery")]
         require(
             reviewed_release.approved_draft(
                 row,
@@ -231,12 +271,14 @@ def replay_case(
             is None,
             "A paid edit replaced an already approved draft",
         )
+        if lookup is not None:
+            originals.append(folder / "title_lookup")
         saved, memo = editorial.engine.audit(
             row,
             cfg["archive_version"],
             originals,
             run,
-            editorial.ticket(row, editor_spec, chain),
+            planned,
         )
         item, visible = runner.reviewed_answer(row, saved, memo)
     elif "reviewed_publication" in proof:
@@ -315,7 +357,7 @@ def verify(questions, root):
             allowed = {
                 (row["task_id"], mode)
                 for row, _, proof in group
-                for mode in attempt_modes(proof)
+                for mode in artifact_modes(proof)
             }
             require(
                 len(set(z.namelist())) == len(z.namelist()),
@@ -362,6 +404,7 @@ def verify(questions, root):
         "replayed_published_reports": len(seen),
         "retained_attempts": attempts,
         "confirmed_provider_generations": len(provider_receipts),
+        "reports_with_restored_source_editions": audit.get("title_lookup_releases", 0),
         "answers_sha256": audit["answers_sha256"],
         "reports_citing_each_source_kind": dict(sorted(kinds.items())),
         "reports_citing_only_encyclopedia_revisions": encyclopedia_only,
