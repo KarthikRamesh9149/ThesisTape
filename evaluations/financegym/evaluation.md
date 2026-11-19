@@ -1,6 +1,6 @@
 # FinanceGym results and submission package
 
-ThesisTape produced a cited research report for each of the 400 original FinanceGym questions. Offline replay reproduced all 400 with their original wording, order and cutoff dates. The full project used an estimated USD 138.93 of its USD 140 API budget. The external score and ranking are pending maintainer grading. [400 reports](results/answers.jsonl) · [Methodology paper](methodology.pdf) · [Open the searchable offline reader](README.md) · [FinanceGym submission rules](https://financegym.github.io/#submit)
+ThesisTape produced a cited research report for each of the 400 original FinanceGym questions. Offline replay reproduced all 400 with their original wording, order and cutoff dates. The full project used an estimated USD 138.93 of its USD 140 API budget. The external score and ranking are pending maintainer grading. [400 reports](results/answers.jsonl) · [Methodology paper](methodology.pdf) · [Offline reader instructions](README.md) · [FinanceGym submission rules](https://financegym.github.io/#submit)
 
 ## Where the reports came from
 
@@ -14,11 +14,13 @@ ThesisTape produced a cited research report for each of the 400 original Finance
 | Historical title lookup followed by additional author and independent review | 1 | USD 0.0536 |
 | Independent review of an existing primary draft under the project ceiling | 6 | USD 0.2003 |
 
-The first two rows account for 361/400 releases under the original research and recovery rules. The other procedures were added during the run. The remaining budget assigned 18 fresh investigations to the previously tested mixed team. [Case assignments and balance](results/recovery-allocation.json) All original failures and their costs are retained. For 1 questions, the historical source lookup changed only the capitalization of entity titles already present in the original question. After the owner set a USD 140 project limit, an independent reviewer could check a previously written answer before funding a new investigation. It accepted 6 such reports. The file includes 127 complete and 273 qualified reports. A qualification records a gap in what the dated evidence supports. [Publication rules](reviewed-release.md) · [Funded editing](editorial-policy.md) · [Historical title lookup](title-policy.md) · [Primary draft review](budget-review-policy.md)
+The originally registered researchers released 361 reports. Procedures added during the run supplied the remaining 39. We assigned 18 questions to the mixed team based on its measured cost and the available balance. The audit includes every unsuccessful attempt and its cost. [Case assignments and balance](results/recovery-allocation.json)
+
+The historical title lookup recovered evidence for 1 question by varying the capitalization of company names already in the question. An independent reviewer also accepted 6 existing drafts for publication. Of the 400 reports, 127 met the internal criteria for a complete answer and 273 identify a gap in the dated evidence. [Publication rules](reviewed-release.md) · [Funded editing](editorial-policy.md) · [Historical title lookup](title-policy.md) · [Primary draft review](budget-review-policy.md)
 
 ## Sources and usage
 
-Across the 400 reports, 351 cited dated web captures, 298 cited immutable encyclopedia revisions. A report may cite several types. 49 relied solely on encyclopedia revisions. 37 included a calculation checked against its inputs. These are source coverage measures. Only FinanceGym's withheld rubric determines the official accuracy and forecast scores.
+Across the 400 reports, 351 cited dated web captures and 298 cited immutable encyclopedia revisions. A report may cite both. Of the 400, 49 relied solely on encyclopedia revisions and 37 included a calculation checked against its inputs. FinanceGym's withheld rubric determines the official accuracy and forecast scores.
 
 The full run used 1,729 confirmed model generations and an estimated USD 90.3790. Cost per original question averaged USD 0.2259, with a median of USD 0.1967, a 95th percentile of USD 0.5249 and a maximum of USD 0.6567. The maximum unresolved reservation on this run was USD 0 at final reconciliation. Estimated usage for the entire project, including development and grading, was USD 138.9301. The project-wide unresolved maximum was USD 0.008229375. Amounts are based on provider usage receipts and the model rates recorded in the repository.
 
