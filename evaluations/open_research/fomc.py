@@ -80,6 +80,11 @@ def capture(local):
 
 def verify():
     proof = load(FOLDER / "evidence.json")
+    browser = load(FOLDER / "browser.json")
+    if browser["page_errors"] or browser["paid_requests"]:
+        raise ValueError(
+            "Unexpected errors or paid research in the recorded browser check"
+        )
     bundle = FOLDER / "runs.zip"
     if fingerprint(bundle.read_bytes()) != proof["runs_sha256"]:
         raise ValueError("Original research snapshot changed")
@@ -99,6 +104,15 @@ def verify():
             if state != expected or raw != (FOLDER / (profile + ".md")).read_bytes():
                 raise ValueError(
                     "Published historical case differs from its verified research"
+                )
+            if browser["profiles"][profile] != {
+                "library_state": state["publication_state"],
+                "first_citation_opened": True,
+                "download_bytes": len(raw),
+                "sha256": state["published_sha256"],
+            }:
+                raise ValueError(
+                    "The recorded browser download differs from the verified release"
                 )
     return proof
 

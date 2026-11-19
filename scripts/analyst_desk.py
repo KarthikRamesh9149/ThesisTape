@@ -20,6 +20,7 @@ from .archive_receipts import RecordedHttp
 from .desk_report import inspect_record
 from .disney_hulu_case import CaseError, read_saved_file
 from .focused_archive import FocusedArchive
+from .question_attribution import publish as confirm_question
 from .research_team import ROUTES, queue_research, resume, saved_case
 from .run_checkpoint import PauseRequested, load, own_run
 from .sol_baseline import PROJECT_ROOT, fingerprint, json_bytes
@@ -121,8 +122,17 @@ class Desk:
         ]:
             try:
                 r = self.record(folder)
+                state = r["state"]
                 if public.is_public(r):
                     title, question, cutoff = public.TITLE, r["question"], r["cutoff"]
+                    if state in {"complete", "qualified"}:
+                        saved = read_saved_file(folder / "result.json")
+                        if fingerprint(saved) != r["result_sha256"]:
+                            raise CaseError("The research result changed")
+                        visible, _ = confirm_question(
+                            json.loads(saved), read_saved_file(folder / "memo.md")
+                        )
+                        state = visible["release"]
                 else:
                     case = saved_case(r)
                     title, question, cutoff = case.title, case.question, case.cutoff
@@ -132,7 +142,7 @@ class Desk:
                         "title": title,
                         "question": question,
                         "cutoff": cutoff,
-                        "state": r["state"],
+                        "state": state,
                         "created": r["created_at"],
                         "example": key in EXAMPLES,
                     }

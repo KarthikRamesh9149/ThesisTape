@@ -4,6 +4,7 @@ import zipfile
 from pathlib import Path
 
 from evaluations.open_research import fomc
+from scripts.analyst_desk import Desk
 from scripts.disney_hulu_case import CaseError
 from scripts.question_attribution import publish, supplied, words
 from scripts.run_checkpoint import load
@@ -68,3 +69,19 @@ class QuestionAttributionTests(unittest.TestCase):
                 result["attribution_review"]["source_memo_sha256"],
                 original["memo_sha256"],
             )
+
+    def test_library_uses_the_same_release_status_as_the_verified_download(self):
+        with (
+            tempfile.TemporaryDirectory() as t,
+            zipfile.ZipFile(fomc.FOLDER / "runs.zip") as z,
+        ):
+            root = Path(t)
+            z.extractall(root)
+            desk = Desk(root)
+            entries = [r for r in desk.library() if not r["example"]]
+            self.assertEqual(len(entries), 2)
+            for row in entries:
+                detail, memo = desk.inspect(row["id"])
+                self.assertEqual(row["state"], "qualified")
+                self.assertEqual(row["state"], detail["state"])
+                self.assertIsNotNone(memo)

@@ -1,0 +1,18 @@
+{
+  "profiles": {
+    "single_astra": {
+      "library_state": "qualified",
+      "first_citation_opened": true,
+      "download_bytes": 4385,
+      "sha256": "823ea2b86ea0193b9675a72d824748d66ab620ffee4080ca3838303bbd656e56"
+    },
+    "mixed": {
+      "library_state": "qualified",
+      "first_citation_opened": true,
+      "download_bytes": 6542,
+      "sha256": "35a9c6a51656d98afb8e2f648906d64f8e69de3250adc16f8103701a24760bd4"
+    }
+  },
+  "page_errors": [],
+  "paid_requests": 0
+}
