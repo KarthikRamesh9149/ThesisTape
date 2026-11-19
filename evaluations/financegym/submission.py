@@ -234,6 +234,8 @@ The API model identifiers used on the benchmark were {", ".join(f"`{name}`" for 
 
 The researcher plans dated searches and receives passages only after the archive verifies their availability. Web evidence comes from dated captures, immutable encyclopedia revisions or accession-specific SEC records. For an admitted archived page or filing, the gateway can reopen the original bytes, match their hash and retrieve a section relevant to a specific part of the question. Every search uses the exact cutoff of its assigned question. Discovery titles and live snippets stay outside the model context. Numeric and citation checks run before the text is released. The local analyst application exposes cited passages, checked calculations and the cost of each run.
 
+We ran the first six questions with up to three concurrent investigations, then used up to eight. When the public archive began rate-limiting requests, we let the active investigations finish and reduced concurrency after 218 questions. Subsequent primary investigations ran in groups of up to three, with pauses when the archive returned HTTP 429. The original results and expenses of all completed investigations were retained.
+
 ## Independent comparisons
 
 Before publication, ThesisTape checks whether a statement attributed to the analyst's question appears in the original wording. When the check removes a passage, it retains the original and published hashes and qualifies the report. The same check applies to all configurations and incurs no model charge.

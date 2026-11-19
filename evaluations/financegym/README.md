@@ -25,6 +25,12 @@ Registration verifies the committed paired blind decision and reproduces the ind
 
 Each task has a durable research record. An interrupted run reuses confirmed generations. Any uncertain charge stays reserved for reconciliation. Completed, withheld and failed attempts keep their original records.
 
+The first six questions used up to three concurrent investigations. After concurrency increased to eight, the archive began returning HTTP 429. At the time we paused scheduling, 218 primary investigations had finished. The last 30 of those recorded 196 rate-limit responses among 1,077 HTTP requests. The first six had recorded zero among 281. The remaining questions use smaller groups and a 20- or 60-second pause when the archive reports throttling. This changes when questions start. Each question still uses its registered researcher, sources, cutoff and spending limit. Resuming skips every terminal investigation.
+
+```sh
+.venv/bin/python -B -m evaluations.financegym.pacing runs/benchmark_400_public.jsonl --workers 3
+```
+
 ## Export for grading
 
 ```sh
