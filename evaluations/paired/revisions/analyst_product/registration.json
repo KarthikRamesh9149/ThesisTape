@@ -1,0 +1,138 @@
+{
+  "arms": [
+    "mixed",
+    "single_sol",
+    "single_astra"
+  ],
+  "blind_ceiling_usd": "14.40",
+  "blind_policy": "Two finalists, same fixed question, one attempt per case and arm. Freeze this production and the earlier comparison before blind outcomes. The production comparison is primary for the public application. The earlier study remains a separate control experiment.",
+  "code_revision": "1b9cf2905ab2b1ef23f426c2b23317b453684992",
+  "code_sha256": {
+    "evaluations/paired/product_audit.py": "d4b6daf3ea9d4a4df3cbf4caa1256ef4c8d41572270a5757bf2bc125f32f33cc",
+    "evaluations/paired/production.py": "53d10466b324cc3551f6aea5b0d270b94aa079a41138e6499d1e9de3ceb5f1b2",
+    "scripts/packet_archive.py": "bc4cca5a26ab302f7abf79b0f786f93d75e41e0863b37c0fb05a2b1c7c052136",
+    "scripts/research_desk_agent.py": "75fa5e48377fd6f773cc45ed18ed2eca9d836b55e4d06738462bd61d3051762a",
+    "scripts/temporal_web.py": "83da51e2303552ebe97d067f62f8daebc288e33a32cd8e2fdbe7d5230b7ecefa"
+  },
+  "common_cap_usd": "0.30",
+  "development_ceiling_usd": "10.80",
+  "grader": "fresh masked Astra, as-of evidence and verified excerpts; lock before outcome",
+  "parent_manifest_sha256": "18c5914a855cd31d3ddaa19f85d503acac29590683ebb91fa1284da592c3cfa7",
+  "policy": "All three arms use the same compiler, search interface, originals and arithmetic tools. Mixed uses Sol planning, two Luna researchers, Sol outlook, Astra authorship and fresh Sol review. Each single uses its named model for planning, arithmetic and authorship including one correction. A report can retain supported paragraphs after review.",
+  "reference_evaluator_sha256": {
+    "evaluations/paired/analysis.py": "a36ffb26d91ac4b23268db18da29cb376227d9b3b9ddba89f4455c0958dfc81e",
+    "evaluations/paired/confirmation.py": "f49ac791d4c712091ee22455017aa1ba32c9e2dec049bda289a3be74f8260069",
+    "evaluations/paired/grading.py": "6908f87419bab9b8759cb808aa0e5b62089fbd95425b787a66451595f921af62"
+  },
+  "schedule": [
+    {
+      "arms": [
+        "single_sol",
+        "mixed",
+        "single_astra"
+      ],
+      "case_id": "nintendo-fy2021-guidance",
+      "packet_sha256": "b6d9dad17a9dad79ad5a5a0a4209db3e986467a1f2bdace2cb18b6343c10796b"
+    },
+    {
+      "arms": [
+        "mixed",
+        "single_sol",
+        "single_astra"
+      ],
+      "case_id": "jd-footasylum-remittal-2021",
+      "packet_sha256": "c258dbe526f361dc1c594dd5f51704b3c55dad3c8e15ac2e42020084893e501a"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "single_sol",
+        "mixed"
+      ],
+      "case_id": "alleghany-merger-2022",
+      "packet_sha256": "162f1f6ac67007969c7575a4f8cccb72a8ad5bfcd2d75b474010a4a94875d847"
+    },
+    {
+      "arms": [
+        "single_sol",
+        "single_astra",
+        "mixed"
+      ],
+      "case_id": "fomc-june-2019",
+      "packet_sha256": "7cb8668d965098f9d50168c6fa4efff8c359955f32508313dfbac4ad2baef5a7"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "single_sol",
+        "mixed"
+      ],
+      "case_id": "fomc-march-2022",
+      "packet_sha256": "a5e9aa8e26f3c17c7e6364c4a88c533d6b8734ff881b53c9879f5aa3f830159c"
+    },
+    {
+      "arms": [
+        "mixed",
+        "single_astra",
+        "single_sol"
+      ],
+      "case_id": "treasury-9128286b1-2019-02-06",
+      "packet_sha256": "08c3e86c60afb5cf651d2f88b4279559b74b1c8e67ed85004472e33110cf01d5"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "single_sol",
+        "mixed"
+      ],
+      "case_id": "berkshire-2018-q2-earnings",
+      "packet_sha256": "91be326bd3e77595720606c5f3b981431dbecc71b566c8e14db76298f27b8ad7"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "mixed",
+        "single_sol"
+      ],
+      "case_id": "canon-fy2022-interim-outlook",
+      "packet_sha256": "1c62d1d8fef56a6093c776ae4f9b2b75fea77a10749f6965e55bfd8d3e83dfe0"
+    },
+    {
+      "arms": [
+        "mixed",
+        "single_sol",
+        "single_astra"
+      ],
+      "case_id": "bea-19q1-advance",
+      "packet_sha256": "8174416e3fed88b8916ae28e896687b412c19665bde4c057af39702644b89e95"
+    },
+    {
+      "arms": [
+        "single_sol",
+        "mixed",
+        "single_astra"
+      ],
+      "case_id": "berkshire-2020-q1-loss",
+      "packet_sha256": "8ccae3ea275803e5e6356cf65f20d93f2caf50a8e0efa305d24ee3285e5b1324"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "single_sol",
+        "mixed"
+      ],
+      "case_id": "treasury-91282cfr7-2022-10-20",
+      "packet_sha256": "e883e4fd4b8fc49f7616c57c62fa307de28f5d290b65ed34052bb5250aaf4b52"
+    },
+    {
+      "arms": [
+        "single_astra",
+        "mixed",
+        "single_sol"
+      ],
+      "case_id": "bea-20q4-advance",
+      "packet_sha256": "e35387d585264d46ef42dff31cf13bc063aedea8494349820fdb59772c9ca4b8"
+    }
+  ],
+  "version": "analyst-product-1"
+}
