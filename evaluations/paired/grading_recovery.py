@@ -1,12 +1,15 @@
 """Continue the same masked assessment when the provider attests that its original output limit was exhausted."""
 
 import json
+import subprocess
+import sys
 import tempfile
 from decimal import Decimal
 from pathlib import Path
 
 from pydantic import ValidationError
 
+from scripts import sol_provider
 from scripts.disney_hulu_case import CaseError
 from scripts.research_team import check_configuration, new_record
 from scripts.run_checkpoint import load, own_run
@@ -44,6 +47,46 @@ def grade_one(payload, path, provider=None):
         except CaseError:
             if not original.exists() or not exhausted(load(original)):
                 raise
+    require(
+        provider is None,
+        "The isolated live grader uses the project's registered provider",
+    )
+    response = subprocess.run(
+        [
+            sys.executable,
+            "-B",
+            "-m",
+            "evaluations.paired.grading_recovery",
+            "continue",
+            str(path),
+        ],
+        input=json_bytes(payload),
+        stdout=subprocess.PIPE,
+        check=True,
+    )
+    return json.loads(response.stdout)
+
+
+def verify_extended_ledger(record, *, partial=False):
+    response = subprocess.run(
+        [
+            sys.executable,
+            "-B",
+            "-m",
+            "evaluations.paired.grading_recovery",
+            "account",
+            "partial" if partial else "complete",
+        ],
+        input=json_bytes(record),
+        stdout=subprocess.PIPE,
+        check=True,
+    )
+    amount, held = json.loads(response.stdout)
+    return Decimal(amount), {s: Decimal(v) for s, v in held.items()}
+
+
+def continue_grade(payload, path):
+    original = path / "run.json"
     with own_run(path.parent):
         old = load(original)
         prompt = typed_prompt(
@@ -110,7 +153,7 @@ def grade_one(payload, path, provider=None):
             with tempfile.TemporaryDirectory(dir=path.parent) as t:
                 staged = Path(t) / "new"
                 record = new_record(continuation, staged, budget)
-                Meter(staged, record, provider)
+                Meter(staged, record, None)
                 staged.rename(directory)
         record = load(directory / "run.json")
         check_configuration(record, continuation)
@@ -118,7 +161,7 @@ def grade_one(payload, path, provider=None):
             Decimal(record["budget_usd"]) == budget,
             "Cumulative grading ceiling changed",
         )
-        meter = Meter(directory, record, provider, continuing=True)
+        meter = Meter(directory, record, None, continuing=True)
         meter.restore()
         raw = meter("grade.continue", request, OUTPUT_LIMIT)
         try:
@@ -155,5 +198,25 @@ def grade_one(payload, path, provider=None):
 
 
 if __name__ == "__main__":
-    grading.grade_asof("blind", FOLDER, grader=grade_one)
-    print(json.dumps({"split": "blind", "graded": 48}))
+    if len(sys.argv) == 1:
+        grading.grade_asof("blind", FOLDER, grader=grade_one)
+        print(json.dumps({"split": "blind", "graded": 48}))
+    else:
+        role, value = sys.argv[1:]
+        require(role in {"account", "continue"}, "Unknown isolated grading operation")
+        # Only this short-lived evaluator process uses the extended output ceiling.
+        # Every research process retains the frozen 4,096-token limit and original tariffs.
+        sol_provider.MAX_OUTPUT_TOKENS = OUTPUT_LIMIT
+        material = json.load(sys.stdin)
+        if role == "account":
+            require(
+                material["grading_model"] == ASTRA
+                and material["output_limit"] == OUTPUT_LIMIT
+                and "earlier_grade_sha256" in material
+                and Decimal(material["budget_usd"]) <= TOTAL_LIMIT,
+                "Expected a registered extended grading ledger",
+            )
+            paid, held = verify_ledger(material, partial=value == "partial")
+            print(json.dumps([str(paid), {k: str(v) for k, v in held.items()}]))
+        else:
+            print(json.dumps(continue_grade(material, Path(value))))

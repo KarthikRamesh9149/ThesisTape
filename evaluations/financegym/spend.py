@@ -3,6 +3,7 @@
 import json
 from decimal import Decimal
 
+from evaluations.paired.grading_recovery import verify_extended_ledger
 from evaluations.paired.reconciliation import sidecar, verify_resolution
 from evaluations.paired.registration import REPO, ROOT
 from scripts.run_checkpoint import load
@@ -52,12 +53,12 @@ def report():
     )
     seen = set()
 
-    def include(group, file, resolution=None):
+    def include(group, file, resolution=None, *, ledger=verify_ledger):
         rec = load(file)
         if rec["checkpoint_id"] in seen:
             raise ValueError("Run identity appears twice in the project account")
         seen.add(rec["checkpoint_id"])
-        spent, held = verify_ledger(rec, partial=True)
+        spent, held = ledger(rec, partial=True)
         if resolution and resolution.is_file():
             resolved = verify_resolution(rec, load(resolution))
             spent = Decimal(resolved["settled_total_usd"])
@@ -87,7 +88,11 @@ def report():
     for p in (REPO / "runs/study-grading-v2").glob("*/*/*/grade/run.json"):
         include("Masked study graders", p)
     for p in (REPO / "runs/study-grading-v2").glob("*/*/*/grade-overflow/run.json"):
-        include("Continuation of truncated masked assessments", p)
+        include(
+            "Continuation of truncated masked assessments",
+            p,
+            ledger=verify_extended_ledger,
+        )
     for p in (REPO / "runs/financegym").glob("*/research/run.json"):
         include("Official research", p)
     for p in (REPO / "runs/financegym-recovery").glob("*/research/run.json"):
