@@ -16,6 +16,35 @@ from scripts.temporal_web import ArchiveGateway
 
 
 class FinanceGymAdapterTests(unittest.TestCase):
+    def test_recovery_cannot_send_a_duplicate_original_request(self):
+        from unittest.mock import Mock
+
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "counts").mkdir()
+            prompt = {"model": "example", "input": "unchanged"}
+            payload = {**prompt, "max_output_tokens": 64}
+            (root / "counts" / (fingerprint(json_bytes(prompt)) + ".json")).touch()
+            (root / "run.json").write_bytes(
+                json_bytes(
+                    {
+                        "calls": {
+                            "lead": {"request_sha256": fingerprint(json_bytes(payload))}
+                        }
+                    }
+                )
+            )
+            service = Mock()
+            guarded = runner.DistinctProvider(service, root)
+            with self.assertRaisesRegex(ValueError, "duplicate an original prompt"):
+                guarded.count(prompt)
+            with self.assertRaisesRegex(ValueError, "duplicate an original generation"):
+                guarded.generate(payload)
+            service.count.assert_not_called()
+            service.generate.assert_not_called()
+            guarded.count({**prompt, "input": "independent investigation"})
+            service.count.assert_called_once()
+
     def test_an_unconfirmed_provider_call_stops_new_dispatches_and_a_resume_skips_it(
         self,
     ):

@@ -22,7 +22,7 @@ from evaluations.paired.registration import REPO, ROOT, RUNTIME_FILES, git
 from scripts import quantitative_engine
 from scripts import research_desk_agent as engine
 from scripts.archive_receipts import RecordedHttp
-from scripts.disney_hulu_case import read_saved_file
+from scripts.disney_hulu_case import CaseError, read_saved_file
 from scripts.focused_archive import FocusedArchive, verify_transport
 from scripts.open_desk_report import SavedArchive
 from scripts.question_attribution import publish as verify_attribution
@@ -57,6 +57,7 @@ FILES = sorted(
         "evaluations/financegym/runner.py",
         "evaluations/financegym/selection.py",
         "evaluations/financegym/selection.md",
+        "evaluations/financegym/recovery-policy.md",
         "scripts/quantitative_engine.py",
         "scripts/reviewed_research.py",
         "scripts/research_terms.py",
@@ -189,6 +190,14 @@ def register(path, cap, public_proof):
             r["task_id"]: profile_for(r["question"], policy) for r in cases
         },
         "case_limits_usd": limits,
+        "unanswered_recovery": {
+            "policy_sha256": code["sources"][
+                "evaluations/financegym/recovery-policy.md"
+            ],
+            "profile": "evidence_team_v4",
+            "cap_usd": "0.45",
+            "trigger": "Only after the original investigation has no publishable report.",
+        },
         "estimated_research_usd": str(expected_cost),
         "recorded_prior_project_usd": previous["settled_estimate_usd"],
         "outstanding_prior_reservations_usd": previous["outstanding_usd"],
@@ -257,17 +266,21 @@ def assignment(row, m):
 
 def capture_one(root, row, m):
     loc = root / row["task_id"]
+    return research_once(loc, row, assignment(row, m), *route(row, m))
+
+
+def research_once(loc, row, ticket, selected, profile, cap, *, distinct_from=None):
     directory = loc / "research"
     http = loc / "operator-http"
     loc.mkdir(parents=True, exist_ok=True)
-    ticket = assignment(row, m)
-    selected, profile, cap = route(row, m)
     if (directory / "run.json").exists():
         rec = load(directory / "run.json")
         corpus.require(
             rec["assignment"] == ticket
             and rec["budget_usd"] == cap
-            and rec["research_profile"] == profile,
+            and rec["research_profile"] == profile
+            and rec["question"] == row["question"]
+            and rec["cutoff"] == row["cutoff"],
             "Conflicting official run in the task directory",
         )
         if rec["state"] in FINAL or rec["state"] == "needs_reconciliation":
@@ -286,6 +299,9 @@ def capture_one(root, row, m):
             question=row["question"],
             http=RecordedHttp(http),
         )
+        provider = OpenAIResponses(project_key(REPO / ".env.local"))
+        if distinct_from is not None:
+            provider = DistinctProvider(provider, distinct_from)
         selected.run(
             row["question"],
             row["cutoff"],
@@ -293,9 +309,7 @@ def capture_one(root, row, m):
             None,
             cap,
             gateway=archive,
-            provider=CountJournal(
-                directory / "counts", OpenAIResponses(project_key(REPO / ".env.local"))
-            ),
+            provider=CountJournal(directory / "counts", provider),
             profile=profile,
             assignment=ticket,
         )
@@ -317,6 +331,29 @@ def capture_one(root, row, m):
         if str(rec.get("failure", "")).startswith("OpenAI ")
         else None,
     }
+
+
+class DistinctProvider:
+    def __init__(self, provider, earlier):
+        self.provider = provider
+        self.earlier_prompts = {p.stem for p in (earlier / "counts").glob("*.json")}
+        self.earlier_requests = {
+            c["request_sha256"] for c in load(earlier / "run.json")["calls"].values()
+        }
+
+    def count(self, prompt):
+        if fingerprint(json_bytes(prompt)) in self.earlier_prompts:
+            raise CaseError(
+                "The independent investigation would duplicate an original prompt"
+            )
+        return self.provider.count(prompt)
+
+    def generate(self, payload):
+        if fingerprint(json_bytes(payload)) in self.earlier_requests:
+            raise CaseError(
+                "The independent investigation would duplicate an original generation"
+            )
+        return self.provider.generate(payload)
 
 
 def run(path, root, workers, limit):

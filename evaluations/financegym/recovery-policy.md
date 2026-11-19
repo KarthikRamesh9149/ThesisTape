@@ -1,0 +1,9 @@
+# Recovery for an unanswered FinanceGym assignment
+
+Every original assignment keeps its registered researcher, question, information cutoff, receipts and spending limit. A complete or qualified report that survives the publication check is the submitted answer. Its score, wording, length and outlook cannot trigger a replacement. We report how many of the 400 questions this primary route answered.
+
+If an original assignment ends without a publishable report, a second researcher can investigate the untouched question. Before dispatch, verify the original checkpoint, original spending and any unresolved reservation. Preserve the failure reason and the fingerprint of its complete run record. The recovery investigator receives only the original public question and cutoff. The first researcher's draft, planned answer, evaluator material and later information are excluded.
+
+Use the quantitative team with coverage searches, source-bound calculations and independent review, under its tested USD 0.45 ceiling. If the primary assignment already used that exact team, use the registered general analyst under its own ceiling. The recovery process must refuse an identical model request previously considered in the original run and preserve each accepted or unconfirmed provider receipt. Each question permits one such independent investigation. An active provider incident pauses new dispatches.
+
+Verify the visible report, dated original editions, unique receipts and model-request replay before export. Count the cost and disclosed outstanding maximum of both attempts. Publish the original release rate, recovery release rate and total charges separately. An unanswered assignment still counts in the 400. A report requires retrievable evidence at its cutoff. The private leaderboard rubric plays no part in the trigger or selection.
