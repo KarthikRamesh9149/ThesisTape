@@ -1,0 +1,46 @@
+{
+  "checkpoint_id": "ea64f8388c804b9cb53a31dffdb9cfce",
+  "csv_sha256": "8c31191b03bd3f624f7edae076163f066f21e2c200066d06547256ca644290ce",
+  "original_record_sha256": "69ab64b8e1024ffab267362f23eef831958dc4f68de6865c60182ddbcf96f062",
+  "previous_minute": {
+    "account_scope_sha256": "55325ea70b1bb63d49d6d0f89dc668e0857915c8e35a26246952c878b3b4ec1e",
+    "batch": "False",
+    "end_time": 1795099020,
+    "input_cache_write_12h_tokens": 0,
+    "input_cache_write_30m_tokens": 0,
+    "input_cached_tokens": 0,
+    "input_tokens": 11003,
+    "model": "gpt-6.2-astra",
+    "num_model_requests": 5,
+    "output_tokens": 1065,
+    "service_tier": "default",
+    "start_time": 1795098960
+  },
+  "resolved_at": "2026-11-19T14:49:46.148864+00:00",
+  "settlement": {
+    "held_usd": "0.03787",
+    "outstanding_usd": "0",
+    "reason": "Provider billed the call; the research process received no recoverable output.",
+    "request_sha256": "12399c417f4c9546bbb63a0cfdc1d6e4c7a49b55ece82dedece716b2b16408c0",
+    "research_state": "failed",
+    "settled_total_usd": "0.140664",
+    "stage": "lead.memo_repair",
+    "usage_usd": "0.01004"
+  },
+  "source": "OpenAI project Analytics CSV, Responses and Chat Completions, minute buckets",
+  "target_minute": {
+    "account_scope_sha256": "55325ea70b1bb63d49d6d0f89dc668e0857915c8e35a26246952c878b3b4ec1e",
+    "batch": "False",
+    "end_time": 1795099080,
+    "input_cache_write_12h_tokens": 0,
+    "input_cache_write_30m_tokens": 0,
+    "input_cached_tokens": 0,
+    "input_tokens": 715,
+    "model": "gpt-6.2-astra",
+    "num_model_requests": 1,
+    "output_tokens": 108,
+    "service_tier": "default",
+    "start_time": 1795099020
+  },
+  "version": 1
+}
