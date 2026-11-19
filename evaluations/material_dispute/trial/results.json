@@ -1,0 +1,54 @@
+{
+  "arms": {
+    "dispute": {
+      "disposition": "unresolved",
+      "elapsed_ms": 22760,
+      "estimated_usd": "0.045420",
+      "gate": "adjudicated",
+      "generations": 3,
+      "grading": {
+        "elapsed_ms": 8064,
+        "estimated_usd": "0.010852",
+        "generations": 1,
+        "unreconciled_usd": "0"
+      },
+      "pass": true,
+      "points": 6,
+      "review_rounds": 1,
+      "state": "complete",
+      "unreconciled_usd": "0"
+    },
+    "reviewed": {
+      "disposition": null,
+      "elapsed_ms": 17780,
+      "estimated_usd": "0.019956",
+      "gate": "control",
+      "generations": 2,
+      "grading": {
+        "elapsed_ms": 8864,
+        "estimated_usd": "0.010992",
+        "generations": 1,
+        "unreconciled_usd": "0"
+      },
+      "pass": true,
+      "points": 6,
+      "review_rounds": 1,
+      "state": "complete",
+      "unreconciled_usd": "0"
+    }
+  },
+  "checkpoint_usd": "0.098920",
+  "grading_usd": "0.021844",
+  "incremental_workflow_usd": "0.025464",
+  "pair_usd": "0.065376",
+  "price_only": {
+    "elapsed_ms": 7356,
+    "estimated_usd": "0.011700",
+    "generations": 2,
+    "passed_bypass": true,
+    "unreconciled_usd": "0"
+  },
+  "prior_project_usd": "0.3865639",
+  "project_cap_usd": "100",
+  "project_recorded_usd": "0.4854839"
+}

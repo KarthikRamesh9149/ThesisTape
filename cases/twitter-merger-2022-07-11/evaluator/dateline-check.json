@@ -1,0 +1,7 @@
+{
+  "purpose": "Post-trial regression for the original advisory note's reference to Twitter's July 11 response. Preserve both original reports and both original grades.",
+  "budget_usd": "0.20",
+  "test": "Run the production dispute route once on the same case with verified exhibit datelines. Reopen the original letters and index at cutoff. Require a live Astra assessment grounded in both positions, a reviewed qualified report, and separate printed and SEC acceptance dates. If the note names a document date it must distinguish the letter date from the filing date.",
+  "printed_heading_dates": {"bidder-notice":"2022-07-08","twitter-board":"2022-07-08","twitter-response":"2022-07-10"},
+  "edgar_acceptance_dates": {"bidder-notice":"2022-07-08","twitter-board":"2022-07-11","twitter-response":"2022-07-11"}
+}

@@ -1,0 +1,145 @@
+{
+  "budget_usd": "0.05",
+  "calls": {
+    "grader.score": {
+      "confirmed_ms": 8861,
+      "dispatched_ms": 466,
+      "estimated_model_cost_usd": "0.010992",
+      "input_tokens_preflight": 3236,
+      "max_output_tokens": 2304,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"marks\": [\n    {\n      \"criterion\": \"notice\",\n      \"awarded\": true,\n      \"report_paragraphs\": [\"S1\"],\n      \"source_ids\": [\"P2\"],\n      \"reason\": \"Attributes the formal notice to the Musk buyer group and describes it as an exercise of a claimed termination right, not as proof that the agreement ended.\"\n    },\n    {\n      \"criterion\": \"grounds\",\n      \"awarded\": true,\n      \"report_paragraphs\": [\"S1\"],\n      \"source_ids\": [\"P1\"],\n      \"reason\": \"Identifies the alleged failure to provide requested fake- or spam-account data and attributes that allegation to Musk’s counsel.\"\n    },\n    {\n      \"criterion\": \"response\",\n      \"awarded\": true,\n      \"report_paragraphs\": [\"S2\"],\n      \"source_ids\": [\"P4\"],\n      \"reason\": \"Correctly attributes to Twitter its rejection of the notice as invalid, denial of breach, and position that the agreement remained in force.\"\n    },\n    {\n      \"criterion\": \"price\",\n      \"awarded\": true,\n      \"report_paragraphs\": [\"S2\"],\n      \"source_ids\": [\"P3\"],\n      \"reason\": \"Identifies USD 54.20 per share as the agreed price at which the board intended to close, not as a realized return.\"\n    },\n    {\n      \"criterion\": \"remedy\",\n      \"awarded\": true,\n      \"report_paragraphs\": [\"S2\"],\n      \"source_ids\": [\"P4\"],\n      \"reason\": \"Correctly describes specific performance as a remedy Twitter reserved the right to seek, not as relief a court had granted.\"\n    },\n    {\n      \"criterion\": \"closing\",\n      \"awarded\": true,\n      \"report_paragraphs\": [\"S1\", \"S2\"],\n      \"source_ids\": [\"P2\", \"P3\", \"P4\"],\n      \"reason\": \"Distinguishes the buyer’s notice from an uncontested termination and the board’s intent from a guaranteed closing. Both outcomes remained unresolved at the cutoff.\"\n    }\n  ],\n  \"material_error\": null\n}",
+      "provider": {
+        "elapsed_ms": 8394,
+        "ids_sha256": "3de61b408234d6d49702200627ad885457c1be302d7364d1228261609fff282b",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 3236,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 452,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 3688
+        }
+      },
+      "request_sha256": "b2cdb5ac30a41376e10a2f42935d4567d5ba2717a54e65b5cb3f21185370da63",
+      "reservation_usd": "0.03113",
+      "stage": "grader.score"
+    }
+  },
+  "case_id": "twitter-merger-2022-07-11",
+  "corpus_sha256": "515c952137e0587aa953eacc6f71cc0f0d544d5bd590490b70c7590bfc1c65a5",
+  "created_at": "2026-11-19T11:30:35.038982+00:00",
+  "elapsed_ms": 8864,
+  "estimated_model_cost_usd": "0.010992",
+  "events": [
+    [
+      "reserve",
+      "grader.score"
+    ],
+    [
+      "settle",
+      "grader.score"
+    ]
+  ],
+  "grade": {
+    "marks": [
+      {
+        "awarded": true,
+        "criterion": "notice",
+        "reason": "Attributes the formal notice to the Musk buyer group and describes it as an exercise of a claimed termination right, not as proof that the agreement ended.",
+        "report_paragraphs": [
+          "S1"
+        ],
+        "source_ids": [
+          "P2"
+        ]
+      },
+      {
+        "awarded": true,
+        "criterion": "grounds",
+        "reason": "Identifies the alleged failure to provide requested fake- or spam-account data and attributes that allegation to Musk’s counsel.",
+        "report_paragraphs": [
+          "S1"
+        ],
+        "source_ids": [
+          "P1"
+        ]
+      },
+      {
+        "awarded": true,
+        "criterion": "response",
+        "reason": "Correctly attributes to Twitter its rejection of the notice as invalid, denial of breach, and position that the agreement remained in force.",
+        "report_paragraphs": [
+          "S2"
+        ],
+        "source_ids": [
+          "P4"
+        ]
+      },
+      {
+        "awarded": true,
+        "criterion": "price",
+        "reason": "Identifies USD 54.20 per share as the agreed price at which the board intended to close, not as a realized return.",
+        "report_paragraphs": [
+          "S2"
+        ],
+        "source_ids": [
+          "P3"
+        ]
+      },
+      {
+        "awarded": true,
+        "criterion": "remedy",
+        "reason": "Correctly describes specific performance as a remedy Twitter reserved the right to seek, not as relief a court had granted.",
+        "report_paragraphs": [
+          "S2"
+        ],
+        "source_ids": [
+          "P4"
+        ]
+      },
+      {
+        "awarded": true,
+        "criterion": "closing",
+        "reason": "Distinguishes the buyer’s notice from an uncontested termination and the board’s intent from a guaranteed closing. Both outcomes remained unresolved at the cutoff.",
+        "report_paragraphs": [
+          "S1",
+          "S2"
+        ],
+        "source_ids": [
+          "P2",
+          "P3",
+          "P4"
+        ]
+      }
+    ],
+    "material_error": null,
+    "pass": true,
+    "points": 6
+  },
+  "memo_sha256": "cd7343854d9e6803572f0d0da5b2eb7ad0c144d316f1fd932f9d68f03093f11b",
+  "protocol_sha256": "295d4ec092390e7477696027f22db70de5e80f8df33b1262aa1a755ce66957db",
+  "rates": {
+    "cache_write_30m": "2.50",
+    "cached_input": "0.10",
+    "ordinary_input": "2.00",
+    "output": "10.00"
+  },
+  "report_sha256": "3a3a1a313bf5446f9d92df767fd9681c9b84f0be88f569339b363e276c39fd14",
+  "route": "blind-dispute-grade",
+  "run_id": "grade-reviewed",
+  "state": "complete",
+  "unreconciled_reservation_usd": "0",
+  "version": 1
+}
