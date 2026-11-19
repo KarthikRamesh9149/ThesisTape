@@ -151,6 +151,114 @@ def cited_kinds(visible):
     }
 
 
+def replay_case(row, report, proof, folder, cfg, extension, editor_spec):
+    chain = proof.get("attempts", [proof])
+    editions, seconds = set(), 0
+    billing = [*chain, proof["editorial"]] if "editorial" in proof else chain
+    for mode, evidence in zip(attempt_modes(proof), billing, strict=True):
+        run = folder / mode
+        receipt_index = load(run / "http-receipt-hashes.json")
+        require(
+            len(receipt_index) == evidence["transport_requests"]
+            and all(
+                re.fullmatch("[0-9a-f]{64}", k) and re.fullmatch("[0-9a-f]{64}", v)
+                for k, v in receipt_index.items()
+            ),
+            "Transport evidence inventory changed",
+        )
+        rec = load(run / "run.json")
+        if "original_run_sha256" in evidence:
+            require(
+                fingerprint((run / "run.json").read_bytes())
+                == evidence["original_run_sha256"],
+                "A retained attempt changed",
+            )
+        require(
+            rec["research_profile"] == evidence["profile"]
+            and rec["question"] == row["question"]
+            and rec["cutoff"] == row["cutoff"],
+            "The reproduced assignment differs",
+        )
+        primary_route = runner.route(row, cfg)
+        if mode == "primary":
+            planned, cap = runner.assignment(row, cfg), primary_route[2]
+        elif mode == "recovery":
+            planned, cap = (
+                recovery.ticket(row, cfg, extension, folder / "primary"),
+                recovery.second_route(cfg, primary_route[1])[2],
+            )
+        else:
+            planned, cap = (
+                editorial.ticket(row, editor_spec, chain),
+                editorial.engine.CAP,
+            )
+            require(
+                evidence["provider_generations"] == len(rec["calls"]),
+                "Published editing call count differs",
+            )
+        require(
+            rec["assignment"] == planned and Decimal(rec["budget_usd"]) == Decimal(cap),
+            "A research assignment or approved spending ceiling differs from its registration",
+        )
+        sources, duration = attempt_metadata(run, rec, evidence)
+        editions.update(sources)
+        seconds += duration
+    engine = (
+        recovery.second_route(cfg, chain[0]["profile"])
+        if len(chain) == 2
+        else runner.route(row, cfg)
+    )[0]
+    if "editorial" in proof:
+        originals = [folder / name for name in ("primary", "recovery")]
+        require(
+            reviewed_release.approved_draft(
+                row,
+                originals[-1],
+                load(originals[-1] / "run.json"),
+                cfg["archive_version"],
+            )
+            is None,
+            "A paid edit replaced an already approved draft",
+        )
+        saved, memo = editorial.engine.audit(
+            row,
+            cfg["archive_version"],
+            originals,
+            run,
+            editorial.ticket(row, editor_spec, chain),
+        )
+        item, visible = runner.reviewed_answer(row, saved, memo)
+    elif "reviewed_publication" in proof:
+        publication = reviewed_release.approved_draft(
+            row, run, rec, cfg["archive_version"]
+        )
+        require(
+            publication and publication[2] == proof["reviewed_publication"],
+            "Original independent paragraph approval differs",
+        )
+        item, visible, _ = publication
+    else:
+        saved = engine.audit(
+            run,
+            SavedArchive(row["cutoff"], cfg["archive_version"]),
+            record=rec,
+        )
+        item, visible = runner.reviewed_answer(
+            row, saved, (run / "memo.md").read_bytes()
+        )
+    require(
+        item["report"] == report["report"],
+        "A reproduced report differs from the offered submission",
+    )
+    require(
+        report["num_docs_retrieved"] == len(editions)
+        and report["elapsed_s"]
+        == (round(seconds, 3) if "attempts" in proof else item["elapsed_s"]),
+        "A submitted document count or duration differs from the original investigations",
+    )
+    return visible, len(billing)
+
+
 def verify(questions, root):
     cfg, audit = submission.verify_export(questions, root)
     manifest = load(root / "manifest.json")
@@ -170,8 +278,11 @@ def verify(questions, root):
             "Published artifact changed",
         )
     rows = runner.tasks(questions)
+    extension = (
+        recovery.register(cfg) if "recovery_registration_sha256" in audit else None
+    )
     editor_spec = (
-        editorial.locked(cfg, recovery.register(cfg))
+        editorial.locked(cfg, extension)
         if "editorial_registration_sha256" in audit
         else None
     )
@@ -214,97 +325,10 @@ def verify(questions, root):
                 case = row["task_id"]
                 require(case not in seen, "A task was replayed twice")
                 seen.add(case)
-                chain = proof.get("attempts", [proof])
-                editions, seconds = set(), 0
-                billing = (
-                    [*chain, proof["editorial"]] if "editorial" in proof else chain
+                visible, count = replay_case(
+                    row, report, proof, Path(t) / case, cfg, extension, editor_spec
                 )
-                for mode, evidence in zip(attempt_modes(proof), billing, strict=True):
-                    run = Path(t) / case / mode
-                    receipt_index = load(run / "http-receipt-hashes.json")
-                    require(
-                        len(receipt_index) == evidence["transport_requests"]
-                        and all(
-                            re.fullmatch("[0-9a-f]{64}", k)
-                            and re.fullmatch("[0-9a-f]{64}", v)
-                            for k, v in receipt_index.items()
-                        ),
-                        "Transport evidence inventory changed",
-                    )
-                    rec = load(run / "run.json")
-                    if "original_run_sha256" in evidence:
-                        require(
-                            fingerprint((run / "run.json").read_bytes())
-                            == evidence["original_run_sha256"],
-                            "A retained attempt changed",
-                        )
-                    require(
-                        rec["research_profile"] == evidence["profile"]
-                        and rec["question"] == row["question"]
-                        and rec["cutoff"] == row["cutoff"],
-                        "The reproduced assignment differs",
-                    )
-                    sources, duration = attempt_metadata(run, rec, evidence)
-                    editions.update(sources)
-                    seconds += duration
-                    attempts += 1
-                engine = (
-                    recovery.second_route(cfg, chain[0]["profile"])
-                    if len(chain) == 2
-                    else runner.route(row, cfg)
-                )[0]
-                if "editorial" in proof:
-                    originals = [
-                        Path(t) / case / name for name in ("primary", "recovery")
-                    ]
-                    require(
-                        reviewed_release.approved_draft(
-                            row,
-                            originals[-1],
-                            load(originals[-1] / "run.json"),
-                            cfg["archive_version"],
-                        )
-                        is None,
-                        "A paid edit replaced an already approved draft",
-                    )
-                    saved, memo = editorial.engine.audit(
-                        row,
-                        cfg["archive_version"],
-                        originals,
-                        run,
-                        editorial.ticket(row, editor_spec, chain),
-                    )
-                    item, visible = runner.reviewed_answer(row, saved, memo)
-                elif "reviewed_publication" in proof:
-                    publication = reviewed_release.approved_draft(
-                        row, run, rec, cfg["archive_version"]
-                    )
-                    require(
-                        publication and publication[2] == proof["reviewed_publication"],
-                        "Original independent paragraph approval differs",
-                    )
-                    item, visible, _ = publication
-                else:
-                    saved = engine.audit(
-                        run,
-                        SavedArchive(row["cutoff"], cfg["archive_version"]),
-                        record=rec,
-                    )
-                    item, visible = runner.reviewed_answer(
-                        row, saved, (run / "memo.md").read_bytes()
-                    )
-                require(
-                    item["report"] == report["report"],
-                    "A reproduced report differs from the offered submission",
-                )
-                require(
-                    report["num_docs_retrieved"] == len(editions)
-                    and report["elapsed_s"]
-                    == (
-                        round(seconds, 3) if "attempts" in proof else item["elapsed_s"]
-                    ),
-                    "A submitted document count or duration differs from the original investigations",
-                )
+                attempts += count
                 cited = cited_kinds(visible)
                 kinds.update(cited)
                 encyclopedia_only += cited == {"wikimedia_revision"}
