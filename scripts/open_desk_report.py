@@ -104,7 +104,11 @@ def release(directory, result):
 def inspect(directory, record):
     archive = SavedArchive(record["cutoff"])
     selected = engine
-    if record["research_profile"] in {"evidence_team", "evidence_team_v2"}:
+    if record["research_profile"] in {
+        "evidence_team",
+        "evidence_team_v2",
+        "evidence_team_v3",
+    }:
         from . import quantitative_engine as selected
     cfg = selected.configuration(
         record["question"],
@@ -143,6 +147,7 @@ def inspect(directory, record):
             "mixed": "research team",
             "evidence_team": "research team with quantitative review",
             "evidence_team_v2": "research team with quantitative review",
+            "evidence_team_v3": "research team with quantitative review",
             "single_astra": "single Astra",
             "single_sol": "single Sol",
         }[record["research_profile"]],

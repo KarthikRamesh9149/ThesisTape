@@ -60,6 +60,10 @@ class Plan(core.Plan):
     requirements: list[str] = Field(min_length=1, max_length=8)
 
 
+class CalculationReview(core.Review):
+    decisions: list[core.Decision] = Field(max_length=17)
+
+
 class Gaps(StrictOutput):
     searches: list[core.Search] = Field(max_length=2)
 
@@ -197,6 +201,8 @@ def review(draft, context, passages, calculations, ask, stage, *, revision=1):
             )
         except CaseError as exc:
             rejected[key] = str(exc)
+    if revision >= 3:
+        compiled.update(math.residual_rows(compiled, calculations, passages))
     if not compiled:
         return [], rejected, ["No publishable evidence paragraph."]
     used = {pid for p in compiled.values() for pid in p["pids"]}
@@ -222,10 +228,13 @@ def review(draft, context, passages, calculations, ask, stage, *, revision=1):
         reviewer += " Evaluate completeness against the user's original question. A planner's research tactics are optional. If the question asks for issuer figures, one controlling issuer document can support them. An independent source is required only when explicitly requested or when the cited document cannot support a material assertion. Interpret the supplied comparison tolerance as a rule defined by the user, not an issuer forecast. Distinguish a missing requested fact from a suggested extra."
     if hasattr(draft, "direction"):
         material["direction"] = draft.direction
-    verdict = core.Review.model_validate_json(
+    schema = CalculationReview if revision >= 3 else core.Review
+    if revision >= 3:
+        reviewer += " K entries are calculator-derived passages. Decide each against the source rows and requested metric, actor, units and periods. Reject an irrelevant calculation or wrong metric. Read the verified formula and its operands as part of the memo."
+    verdict = schema.model_validate_json(
         ask(
             stage,
-            typed_prompt(MODEL, reviewer, material, core.Review, effort="medium"),
+            typed_prompt(MODEL, reviewer, material, schema, effort="medium"),
             2000,
         )
     )
@@ -347,7 +356,9 @@ rate. Explicitly distinguish the forecast from what the sources show. You are as
     with ThreadPoolExecutor(max_workers=2) as pool:
         m, o = pool.submit(maths), pool.submit(outlook)
         operations, scenario = m.result().operations, o.result()
-    calculations, errors = math.compile_plan(operations, passages, rule)
+    calculations, errors = math.compile_plan(
+        operations, passages, rule, normalize_labels=revision >= 3
+    )
     writing = {
         **evidence,
         "checked_calculations": calculations,

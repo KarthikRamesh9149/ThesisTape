@@ -51,7 +51,7 @@ def display(value):
     return format(value.normalize(), "f") if value else "0"
 
 
-def compile_plan(operations, passages, rule):
+def compile_plan(operations, passages, rule, *, normalize_labels=False):
     """Reject only invalid operations. Preserve original C numbers and their dependency graph."""
     opened = {key: SimpleNamespace(text=p["text"]) for key, p in passages.items()}
     calculated, errors = {}, {}
@@ -60,6 +60,24 @@ def compile_plan(operations, passages, rule):
         for idx, op in enumerate(operations, 1):
             key = f"C{idx}"
             try:
+                if normalize_labels:
+                    # A period in the metric label is descriptive. The original operands prove the amount.
+                    metric = re.sub(
+                        r"\b(?:FY\s?(?:19|20)\d{2}|[QH][1-4])\b",
+                        "",
+                        op.metric,
+                        flags=re.IGNORECASE,
+                    )
+                    metric = " ".join(metric.split()).strip()
+                    if (
+                        not metric
+                        or re.search(r"\d", metric)
+                        or not re.fullmatch(r"[\w\s/%.$¥€£()–−-]+", metric)
+                    ):
+                        metric = op.operator.replace("_", " ").capitalize()
+                    elif metric.endswith((" after", " in", " for", " from")):
+                        metric = metric.rsplit(" ", 1)[0]
+                    op = op.model_copy(update={"metric": metric})
                 calculated[key] = checked_operation(op, opened, calculated, rule)
             except (ArithmeticError, CaseError, ValueError) as exc:
                 errors[key] = str(exc)
@@ -142,3 +160,50 @@ def formula(ident, result):
     value = Decimal(result["value"])
     formatted = f"≈ {value:,.6f}" if value.as_tuple().exponent < -6 else f"= {value:,f}"
     return f"{ident}. {result['label']} ({result['unit']}) — {result['expression']} {formatted}"
+
+
+def residual_rows(compiled, calculations, passages):
+    """Offer verified figures omitted from prose to the independent reviewer with their original operand rows."""
+    used = {i for p in compiled.values() for i in p["calculation_ids"]}
+    rows = {}
+    for ident, c in calculations.items():
+        if ident in used:
+            continue
+        inputs = []
+        pending = [ident]
+        while pending:
+            spec = pending.pop()
+            if spec in calculations:
+                pending.extend((calculations[spec]["right"], calculations[spec]["left"]))
+            elif not spec.startswith("task:"):
+                inputs.append(spec.split(":", 1))
+        citations = []
+        for pid, token in inputs:
+            text = passages[pid]["text"]
+            at = text.find(token)
+            if at < 0:
+                break
+            line = text.rfind("\n", 0, at) + 1
+            end = text.find("\n", at + len(token))
+            quote = text[
+                max(line, at - 85) : min(
+                    len(text) if end < 0 else end, at + len(token) + 85
+                )
+            ]
+            if len(quote.strip()) < 8:
+                quote = text[max(0, at - 30) : at + len(token) + 30]
+            if len(quote.strip()) < 8:
+                break
+            ref = {"passage": pid, "quote": quote}
+            if ref not in citations:
+                citations.append(ref)
+        else:
+            if citations:
+                rows["K" + ident[1:]] = {
+                    "section": "Evidence",
+                    "text": formula(ident, c),
+                    "pids": c["evidence_ids"],
+                    "citations": citations,
+                    "calculation_ids": [],
+                }
+    return rows

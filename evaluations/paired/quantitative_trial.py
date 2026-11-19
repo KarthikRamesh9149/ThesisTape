@@ -14,7 +14,7 @@ from . import corpus
 from .product_audit import CountJournal
 
 
-def trial(case_id, directory, cap, key_file, live, profile="evidence_team_v2"):
+def trial(case_id, directory, cap, key_file, live, profile="evidence_team_v3"):
     packet = directory / "input"
     if not packet.exists() and live:
         directory.mkdir(parents=True, exist_ok=True)
@@ -66,8 +66,8 @@ if __name__ == "__main__":
     parser.add_argument("--live", action="store_true")
     parser.add_argument(
         "--profile",
-        choices=("evidence_team", "evidence_team_v2"),
-        default="evidence_team_v2",
+        choices=("evidence_team", "evidence_team_v2", "evidence_team_v3"),
+        default="evidence_team_v3",
     )
     a = parser.parse_args()
     print(

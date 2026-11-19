@@ -18,7 +18,7 @@ from .temporal_web import ArchiveGateway
 
 
 def configuration(question, cutoff, budget, gateway, profile, assignment):
-    if profile not in ("evidence_team", "evidence_team_v2"):
+    if profile not in ("evidence_team", "evidence_team_v2", "evidence_team_v3"):
         raise CaseError("Unknown quantitative research profile")
     config = archive.configuration(
         question, cutoff, budget, gateway, "mixed", assignment
@@ -32,7 +32,9 @@ def research(question, cutoff, gateway, dispatch, *, profile):
         cutoff,
         gateway,
         dispatch,
-        revision=2 if profile == "evidence_team_v2" else 1,
+        revision={"evidence_team": 1, "evidence_team_v2": 2, "evidence_team_v3": 3}[
+            profile
+        ],
     )
 
 
@@ -97,7 +99,7 @@ def run(
     *,
     provider=None,
     gateway=None,
-    profile="evidence_team_v2",
+    profile="evidence_team_v3",
     assignment=None,
     queued=False,
     pause=None,

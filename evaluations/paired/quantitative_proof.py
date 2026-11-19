@@ -25,15 +25,15 @@ CASES = ("nintendo-fy2021-guidance", "canon-fy2022-interim-outlook")
 HERE = ROOT / "revisions/quantitative_trials"
 
 
-def pack(directory):
+def pack(directory, folder=HERE):
     entries = {}
     rows = []
     ids = {k: set() for k in ("response_id", "request_id")}
     for cid in CASES:
-        folder = directory / cid
-        run = folder / "run"
+        case_dir = directory / cid
+        run = case_dir / "run"
         record = load(run / "run.json")
-        packet = PacketCorpus(folder / "input", record["assignment"]["packet_sha256"])
+        packet = PacketCorpus(case_dir / "input", record["assignment"]["packet_sha256"])
         result = audit(run, PacketArchive(packet))
         verify_private(run, record, ids)
         for pattern in (
@@ -60,9 +60,9 @@ def pack(directory):
             }
         )
     data = zipped(entries)
-    write_once(HERE / "reports.zip", data)
+    write_once(folder / "reports.zip", data)
     write_once(
-        HERE / "reports.json",
+        folder / "reports.json",
         json_bytes(
             {
                 "purpose": "Two previously used development cases; numerical verification engineering trials.",
@@ -74,9 +74,9 @@ def pack(directory):
     return rows
 
 
-def replay():
-    raw = committed(HERE / "reports.zip")
-    index = json.loads(committed(HERE / "reports.json"))
+def replay(folder=HERE):
+    raw = committed(folder / "reports.zip")
+    index = json.loads(committed(folder / "reports.json"))
     require(fingerprint(raw) == index["report_set_sha256"], "Changed frozen reports")
     results = {}
     with (
@@ -130,8 +130,8 @@ def replay():
     return results
 
 
-def score_asof(grade_root, key_file):
-    reports = replay()
+def score_asof(grade_root, key_file, folder=HERE):
+    reports = replay(folder)
     facts = key_file_data("asof.json")
 
     def score(cid):
@@ -150,7 +150,7 @@ def score_asof(grade_root, key_file):
 
     with ThreadPoolExecutor(max_workers=2) as pool:
         rows = list(pool.map(score, CASES))
-    write_once(HERE / "asof.json", json_bytes(rows))
+    write_once(folder / "asof.json", json_bytes(rows))
     return [
         {
             "case": r["case_id"],
@@ -161,17 +161,17 @@ def score_asof(grade_root, key_file):
     ]
 
 
-def key_file_data(member):
+def key_file_data(member, folder=HERE):
     # These two original development cases already have their contemporaneous assessments committed.
     if member == "outcomes.json":
-        committed(HERE / "asof.json")
+        committed(folder / "asof.json")
     return key_file("development", member)
 
 
-def outcomes():
-    notes = json.loads(committed(HERE / "asof.json"))
-    reports = json.loads(committed(HERE / "reports.json"))["rows"]
-    observations = key_file_data("outcomes.json")
+def outcomes(folder=HERE):
+    notes = json.loads(committed(folder / "asof.json"))
+    reports = json.loads(committed(folder / "reports.json"))["rows"]
+    observations = key_file_data("outcomes.json", folder)
     summary = []
     for row, note in zip(reports, notes, strict=True):
         cid = row["case_id"]
@@ -204,7 +204,7 @@ def outcomes():
                 "grader_usd": note["grader_usd"],
             }
         )
-    write_once(HERE / "results.json", json_bytes(summary))
+    write_once(folder / "results.json", json_bytes(summary))
     return summary
 
 
@@ -213,16 +213,22 @@ if __name__ == "__main__":
     p.add_argument("command", choices=["pack", "verify", "asof", "outcomes"])
     p.add_argument("--runs", type=Path)
     p.add_argument("--key-file", type=Path)
+    p.add_argument("--revision", type=int, choices=(1, 2, 3), default=1)
     a = p.parse_args()
+    folder = (
+        HERE
+        if a.revision == 1
+        else HERE.with_name("quantitative_trials_v" + str(a.revision))
+    )
     if a.command == "pack":
-        value = pack(a.runs)
+        value = pack(a.runs, folder)
     elif a.command == "verify":
         value = {
             k: {"sha256": fingerprint(m), "state": r["release"]}
-            for k, (r, m) in replay().items()
+            for k, (r, m) in replay(folder).items()
         }
     elif a.command == "asof":
-        value = score_asof(a.runs, a.key_file)
+        value = score_asof(a.runs, a.key_file, folder)
     else:
-        value = outcomes()
+        value = outcomes(folder)
     print(json.dumps(value, indent=2))

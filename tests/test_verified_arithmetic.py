@@ -155,3 +155,37 @@ class TaskDates(unittest.TestCase):
         ):
             with self.subTest(template=template), self.assertRaises(CaseError):
                 attempt(template)
+
+
+class FinancialLabels(unittest.TestCase):
+    def test_periods_or_unverified_labels_cannot_discard_verified_operands_or_inject_a_number(
+        self,
+    ):
+        passages = {
+            "P1": {
+                "text": "Net profit attributable to owners: 258,641 million in the prior year, 200,000 million in the current guidance."
+            }
+        }
+        for metric in ("FY2020 change since Q1", "Pretend profit increased by 88"):
+            op = math.Calculation(
+                metric=metric,
+                unit="JPY million",
+                operator="subtract",
+                left="P1:200,000",
+                right="P1:258,641",
+            )
+            values, errors = math.compile_plan(
+                [op], passages, None, normalize_labels=True
+            )
+            self.assertFalse(errors)
+            self.assertEqual(Decimal(values["C1"]["value"]), -58641)
+            rows = math.residual_rows({}, values, passages)
+            self.assertIn("200,000 − 258,641", rows["K1"]["text"])
+            self.assertNotIn("88", rows["K1"]["text"])
+            for ref in rows["K1"]["citations"]:
+                self.assertIn(ref["quote"], passages[ref["passage"]]["text"])
+            self.assertFalse(
+                math.residual_rows(
+                    {"A1": {"calculation_ids": ["C1"]}}, values, passages
+                )
+            )
