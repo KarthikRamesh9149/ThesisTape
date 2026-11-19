@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "split_seed": "ThesisTape/step-6/event-split/v1",
+  "order_seed": 6172026,
+  "bootstrap_seed": 6172400,
+  "bootstrap_draws": 20000,
+  "official": {
+    "url": "https://huggingface.co/datasets/Rujun/FinanceGym/resolve/980a80810fdb41c90d8533baa228ddbe6557e9b1/benchmark_400_public.jsonl",
+    "revision": "980a80810fdb41c90d8533baa228ddbe6557e9b1",
+    "sha256": "1be781afd34abff47c3ebeb452ed9e46a23b94c087c69b9cfbd3a58d21193fac"
+  },
+  "development_runs": {
+    "single_sol": 12, "sol_team": 12, "mixed": 12, "single_astra": 12,
+    "mixed_fixed_plan": 12, "mixed_no_forecast": 8
+  },
+  "blind_runs": 48,
+  "weights": {"factual": "0.50", "reasoning": "0.25", "forecast": "0.25"},
+  "lower_cost_quality_loss_tolerance": "0.00",
+  "budget_usd": {
+    "project_cap": "100.00", "prior_project_estimate": "0.5785677", "per_case_arm": "0.20",
+    "comparison_ceiling": "23.20", "official_planning_reserve": "60.00"
+  }
+}

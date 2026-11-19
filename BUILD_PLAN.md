@@ -99,6 +99,8 @@ On the development cases compare **single Sol**, **the same workflow with Sol in
 
 **Gate for the official run.** Require a passed date and citation audit, paired results from the independent blind cases, and a cost projection based on measured usage. The projection must cover the full run and leave room for failures and retries within the remaining API credits.
 
+**Evaluation frozen on 20 November 2026 (Sydney).** The registry contains 12 development events and 24 blind events across six types of financial research. Verification reopened 49 as-of PDFs and 24 later PDFs, resolved 167 page citations, and reproduced the exclusion check against all 400 official questions. Development packets contain only the selected event’s question and dated evidence. The local quality score weights factual accuracy at 50%, reasoning at 25% and forecast accuracy at 25%. A lower-cost finalist must meet a zero-loss quality tolerance. The 116 planned assignments have an aggregate ceiling of USD 23.20. Preparing the freeze used USD 0 in model calls. [Evaluation protocol](evaluations/paired/protocol.md) · [Frozen artifact hashes](evaluations/paired/freeze.json) · [Official-question exclusion audit](evaluations/paired/exclusion-audit.json)
+
 ### 7. Freeze and run the official 400
 
 Pin the code revision, dependency lock, model snapshots where available, returned model IDs, prompts, retrieval configuration, source manifest and benchmark-file hash. Replace illustrative costs with the pilot’s measured spend and set an authorised run ceiling. Run only the selected candidate over the official set. Preserve the original question and cutoff exactly when resuming or exporting.
@@ -113,4 +115,4 @@ At the checked Standard rates, the architecture’s example uses 12,000 input an
 
 **Illustration for the final run.** If all 400 cases used the base allowance and 80 needed that additional pass, text-model usage would be **400 × USD 0.0997 + 80 × USD 0.0810 = USD 46.36**. Search, visual inputs, cache charges, storage, development comparisons and retries are separate. The first live cases establish the actual token distribution. Batch independent offline calls when turnaround permits and apply discounts only to eligible usage. [Batch pricing and turnaround](https://developers.openai.com/api/docs/guides/batch)
 
-**Next implementation checkpoint.** Start Step 6 by freezing the evaluation protocol and case split for 12 development cases and 24 blind cases outside the official 400. Define dated sources, evaluator-only scoring criteria, paired comparisons, budget and the quality tolerance before running the comparisons.
+**Next implementation checkpoint.** Connect the four development configurations and the two ablations to the case-scoped runner. Pin the model, prompt, retrieval and budget settings, then verify identical evidence access, isolated runs and cost accounting on a development event before starting the paid comparison.

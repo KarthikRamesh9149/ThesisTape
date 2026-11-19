@@ -1,0 +1,25 @@
+{
+  "counts": {
+    "blind": 24,
+    "blind_forward": 16,
+    "development": 12,
+    "development_forward": 8,
+    "factual_criteria": 108,
+    "input_pdfs": 49,
+    "markets": 4,
+    "outcome_pdfs": 24,
+    "page_citations": 167,
+    "publisher_listings": 6
+  },
+  "files": {
+    "development-sources.zip": "e28d2b9c0c4007ee21ead19e1962e620a8dc7f68fe7a39b685e637d349e7c02c",
+    "development.json": "42e5f7f32a39b320ea794b3d31cf04fd53b7cf5ddc658987de68c9fad169a2b5",
+    "evaluator/blind-grading.zip": "f3452218d591e529f239245eed6e04a4cecbd9d682fe0a875c337520212a37f7",
+    "evaluator/blind-inputs.zip": "bb63597a7f6999cf0bda064f758eb7fedd717d481e910a664cc32e6454470b4f",
+    "evaluator/development-grading.zip": "5b016cb494b9b6663acb71bf1cb001dbbe7cb6bcd7fef0ce9784af0b6c8944fc",
+    "exclusion-audit.json": "a6de845397c4dc099c636a5855cb2dd4c9171bbcfb9174f0e7bf9cc8e9278dbf",
+    "protocol.json": "25808e2bd8f638b89c0abee0d46be5e8f5f28756d93c1a0ef07b33f287c12827",
+    "protocol.md": "0f6245378921d180343f0ececeff5dd701b666e67ffd4a2843903390516d8cb7"
+  },
+  "schema_version": 1
+}

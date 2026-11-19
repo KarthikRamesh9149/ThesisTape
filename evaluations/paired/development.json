@@ -1,0 +1,310 @@
+[
+  {
+    "case_id": "alleghany-merger-2022",
+    "cutoff": "2022-03-22T12:00:00Z",
+    "event": "alleghany-merger-2022",
+    "forecast_rule": null,
+    "market": "US",
+    "question": "How should a holder read Berkshire’s cash offer for Alleghany, its premiums to the prior month and 52-week high and the possibility of another bid? Explain one implication and one limitation that could change an analyst’s interpretation. Cite PDF pages for material claims and show the inputs to derived figures.",
+    "sources": [
+      {
+        "id": "alleghany",
+        "published": "2022-03-21",
+        "sha256": "ffce878009a08c3914a517d10707574dcf5230e730692498fb09ffccf46bd392",
+        "timezone": "America/Chicago",
+        "title": "Berkshire Hathaway to acquire Alleghany",
+        "url": "https://www.berkshirehathaway.com/news/mar2122.pdf"
+      }
+    ],
+    "stratum": "corporate-actions"
+  },
+  {
+    "case_id": "bea-19q1-advance",
+    "cutoff": "2019-04-27T12:00:00Z",
+    "event": "bea-19q1-advance",
+    "forecast_rule": {
+      "metric": "gross domestic purchases price index growth",
+      "mode": "absolute",
+      "tolerance": "0",
+      "unit": "annualized percent"
+    },
+    "market": "US",
+    "question": "How did the first BEA estimate for Q1 2019 distinguish real GDP growth from the domestic purchases price index? Explain how personal consumption expenditures affected the growth reading. In the second estimate, will gross domestic purchases price index growth be revised lower, remain within, or go higher? Within means unchanged at the published one-decimal precision. State one base-case direction (lower, within, or higher), the main driver, an alternative and an observable signal that would change the call. Cite PDF pages for material claims and show the inputs to derived figures.",
+    "sources": [
+      {
+        "id": "g19q1a",
+        "published": "2019-04-26",
+        "sha256": "8e6b2dcda031dc5325cd9ac7e5c7c0b14aa6101c8fc4a949e0b2e2f871422134",
+        "timezone": "America/New_York",
+        "title": "BEA GDP advance estimate, Q1 2019",
+        "url": "https://www.bea.gov/sites/default/files/2019-04/gdp1q19_adv.pdf"
+      }
+    ],
+    "stratum": "macro-revisions"
+  },
+  {
+    "case_id": "bea-20q4-advance",
+    "cutoff": "2021-01-29T12:00:00Z",
+    "event": "bea-20q4-advance",
+    "forecast_rule": {
+      "metric": "real GDP growth",
+      "mode": "absolute",
+      "tolerance": "0",
+      "unit": "annualized percent"
+    },
+    "market": "US",
+    "question": "How did the first BEA estimate for Q4 2020 distinguish real GDP growth from the domestic purchases price index? Explain how goods exports affected the growth reading. In the second estimate, will real GDP growth be revised lower, remain within, or go higher? Within means unchanged at the published one-decimal precision. State one base-case direction (lower, within, or higher), the main driver, an alternative and an observable signal that would change the call. Cite PDF pages for material claims and show the inputs to derived figures.",
+    "sources": [
+      {
+        "id": "g20q4a",
+        "published": "2021-01-28",
+        "sha256": "a613bb0aa2c9db847b3cc5355df88d41a026156ae3f572a49ed253834032b995",
+        "timezone": "America/New_York",
+        "title": "BEA GDP advance estimate, Q4 2020",
+        "url": "https://www.bea.gov/sites/default/files/2021-01/gdp4q20_adv.pdf"
+      }
+    ],
+    "stratum": "macro-revisions"
+  },
+  {
+    "case_id": "berkshire-2018-q2-earnings",
+    "cutoff": "2018-08-05T12:00:00Z",
+    "event": "berkshire-2018-q2-earnings",
+    "forecast_rule": null,
+    "market": "US",
+    "question": "How much of Berkshire’s second-quarter 2018 net earnings came from operating earnings and how much from investment and derivatives gains? What changed in its accounting? Explain one implication and one limitation that could change an analyst’s interpretation. Cite PDF pages for material claims and show the inputs to derived figures.",
+    "sources": [
+      {
+        "id": "br18",
+        "published": "2018-08-04",
+        "sha256": "3ce97dbd25e5c60f51008f1a8221aec27e64ce3c666ce60bf3e0f9ae2959cd78",
+        "timezone": "America/Chicago",
+        "title": "Berkshire Hathaway second-quarter 2018 earnings",
+        "url": "https://www.berkshirehathaway.com/news/aug0418.pdf"
+      }
+    ],
+    "stratum": "financial-statements"
+  },
+  {
+    "case_id": "berkshire-2020-q1-loss",
+    "cutoff": "2020-05-03T12:00:00Z",
+    "event": "berkshire-2020-q1-loss",
+    "forecast_rule": null,
+    "market": "US",
+    "question": "Bridge Berkshire’s first-quarter 2020 operating earnings to its shareholder net loss. What makes it risky to read the net loss as a cash outflow? Explain one implication and one limitation that could change an analyst’s interpretation. Cite PDF pages for material claims and show the inputs to derived figures.",
+    "sources": [
+      {
+        "id": "br20",
+        "published": "2020-05-02",
+        "sha256": "fe3a0a7910c876c022905421247ea083ec0cad0f286871fb957a26ddcb4af05a",
+        "timezone": "America/Chicago",
+        "title": "Berkshire Hathaway first-quarter 2020 earnings",
+        "url": "https://www.berkshirehathaway.com/news/may0220.pdf"
+      }
+    ],
+    "stratum": "financial-statements"
+  },
+  {
+    "case_id": "canon-fy2022-interim-outlook",
+    "cutoff": "2022-04-27T12:00:00Z",
+    "event": "canon-fy2022-interim-outlook",
+    "forecast_rule": {
+      "metric": "net income attributable to Canon Inc.",
+      "mode": "relative",
+      "tolerance": "0.02",
+      "unit": "JPY million"
+    },
+    "market": "JP",
+    "question": "Using Canon’s first quarter FY2022 release, what consolidated net income attributable to Canon Inc. remained to be earned to meet its December year-end projection? Give your call on the reported annual result relative to the projection (within means ±2% of guidance, inclusive). State one base-case direction (lower, within, or higher), the main driver, an alternative and an observable signal that would change the call. Cite PDF pages for material claims and show the inputs to derived figures.",
+    "sources": [
+      {
+        "id": "cn22q1",
+        "published": "2022-04-26",
+        "sha256": "3da0fc5a618517cad658bb76f78671b83b982aa5a619958e93663ae3a1c8d45c",
+        "timezone": "Asia/Tokyo",
+        "title": "Canon consolidated results for the first quarter ended March 31, 2022",
+        "url": "https://global.canon/en/ir/results/2022/rslt2022q1e.pdf"
+      }
+    ],
+    "stratum": "company-guidance"
+  },
+  {
+    "case_id": "fomc-june-2019",
+    "cutoff": "2019-06-20T12:00:00Z",
+    "event": "fomc-june-2019",
+    "forecast_rule": {
+      "metric": "upper endpoint of the federal funds target range",
+      "mode": "absolute",
+      "tolerance": "0",
+      "unit": "percent"
+    },
+    "market": "US",
+    "question": "What did the Federal Reserve decide on 2019-06-19, what in the statement qualifies its policy stance, and where do you expect the upper endpoint of the federal funds target range at the 2019-07-31 scheduled decision relative to its 2019-06-19 level? Identify the direction and size of the dissent and the inflation evidence. Within means unchanged. State one base-case direction (lower, within, or higher), the main driver, an alternative and an observable signal that would change the call. Cite PDF pages for material claims and show the inputs to derived figures.",
+    "sources": [
+      {
+        "id": "fed20190501",
+        "published": "2019-05-01",
+        "sha256": "7ee47fab7c961682ca133aad29a111eb44877c4399b7cbda5b160d4bcd784c84",
+        "timezone": "America/New_York",
+        "title": "Federal Reserve FOMC statement of 2019-05-01",
+        "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20190501a1.pdf"
+      },
+      {
+        "id": "fed20190619",
+        "published": "2019-06-19",
+        "sha256": "3fbab280e6794b6dbd2acfeec3047e5c38dea13eb3ce0cf616d6b023c10fb86f",
+        "timezone": "America/New_York",
+        "title": "Federal Reserve FOMC statement of 2019-06-19",
+        "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20190619a1.pdf"
+      }
+    ],
+    "stratum": "monetary-policy"
+  },
+  {
+    "case_id": "fomc-march-2022",
+    "cutoff": "2022-03-17T12:00:00Z",
+    "event": "fomc-march-2022",
+    "forecast_rule": {
+      "metric": "upper endpoint of the federal funds target range",
+      "mode": "absolute",
+      "tolerance": "0",
+      "unit": "percent"
+    },
+    "market": "US",
+    "question": "What did the Federal Reserve decide on 2022-03-16, what in the statement qualifies its policy stance, and where do you expect the upper endpoint of the federal funds target range at the 2022-05-04 scheduled decision relative to its 2022-03-16 level? Compare to January. Within means unchanged. State one base-case direction (lower, within, or higher), the main driver, an alternative and an observable signal that would change the call. Cite PDF pages for material claims and show the inputs to derived figures.",
+    "sources": [
+      {
+        "id": "fed20220126",
+        "published": "2022-01-26",
+        "sha256": "81b6336f6325fb41d651aa93a8844a8890c40c65350da5ac82df1f5bdd6f492a",
+        "timezone": "America/New_York",
+        "title": "Federal Reserve FOMC statement of 2022-01-26",
+        "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20220126a1.pdf"
+      },
+      {
+        "id": "fed20220316",
+        "published": "2022-03-16",
+        "sha256": "f856240971b770727711519a87082a3e623f14102edd26cdc3a0fe2ea143556d",
+        "timezone": "America/New_York",
+        "title": "Federal Reserve FOMC statement of 2022-03-16",
+        "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20220316a1.pdf"
+      }
+    ],
+    "stratum": "monetary-policy"
+  },
+  {
+    "case_id": "jd-footasylum-remittal-2021",
+    "cutoff": "2021-11-05T12:00:00Z",
+    "event": "jd-footasylum-remittal-2021",
+    "forecast_rule": null,
+    "market": "UK",
+    "question": "After the tribunal remittal in JD Sports’ Footasylum acquisition, which markets and constraints did the CMA reconsider, and did its disposal requirement change? Explain one implication and one limitation that could change an analyst’s interpretation. Cite PDF pages for material claims and show the inputs to derived figures.",
+    "sources": [
+      {
+        "id": "sports-prev",
+        "published": "2020-05-06",
+        "sha256": "1c04166fc554924acffc854e6615c1f0cfab6138f257ff0868c42949a8f54865",
+        "timezone": "Europe/London",
+        "title": "CMA phase 2 final report summary on JD Sports and Footasylum",
+        "url": "https://assets.publishing.service.gov.uk/media/5eb185f0d3bf7f6534faf114/Summary_of_final_report.pdf"
+      },
+      {
+        "id": "sports",
+        "published": "2021-11-04",
+        "sha256": "acc74892fa4dfdc575186e0a241fbc3bb12a9ff763ed821597abee1405e1ae90",
+        "timezone": "Europe/London",
+        "title": "CMA remittal final report summary on JD Sports and Footasylum",
+        "url": "https://assets.publishing.service.gov.uk/media/6182ac988fa8f52978e14cc8/JD_Sports_Footasylum_Summary.pdf"
+      }
+    ],
+    "stratum": "corporate-actions"
+  },
+  {
+    "case_id": "nintendo-fy2021-guidance",
+    "cutoff": "2020-05-08T12:00:00Z",
+    "event": "nintendo-fy2021-guidance",
+    "forecast_rule": {
+      "metric": "profit attributable to owners of parent",
+      "mode": "relative",
+      "tolerance": "0.02",
+      "unit": "JPY million"
+    },
+    "market": "JP",
+    "question": "At Nintendo’s FY2020 results, what profit attributable to owners of parent did it guide for the year ending March 2021? Compare it with the just-reported year, discuss the risk to the supply of components, and forecast the full-year actual relative to guidance (within means ±2% of the guide, inclusive). State one base-case direction (lower, within, or higher), the main driver, an alternative and an observable signal that would change the call. Cite PDF pages for material claims and show the inputs to derived figures.",
+    "sources": [
+      {
+        "id": "nt20",
+        "published": "2020-05-07",
+        "sha256": "822e8e0883651834a1ef20f23b365317ce8e2a8a4f692b10ec22beecdf2f27b3",
+        "timezone": "Asia/Tokyo",
+        "title": "Nintendo consolidated financial statements for year ended March 2020",
+        "url": "https://www.nintendo.co.jp/ir/pdf/2020/200507e.pdf"
+      }
+    ],
+    "stratum": "company-guidance"
+  },
+  {
+    "case_id": "treasury-9128286b1-2019-02-06",
+    "cutoff": "2019-01-31T12:00:00Z",
+    "event": "treasury-9128286b1-2019-02-06",
+    "forecast_rule": {
+      "metric": "bid-to-cover ratio",
+      "mode": "absolute",
+      "tolerance": "0.05",
+      "unit": "ratio"
+    },
+    "market": "US",
+    "question": "Prepare an auction preview for the U.S. Treasury 10-year nominal note sale scheduled for 2019-02-06. Identify the offering and maturity, report the prior comparable auction’s bid-to-cover and clearing rate, and forecast the new bid-to-cover ratio relative to that auction (within means ±0.05 ratio points, inclusive). State one base-case direction (lower, within, or higher), the main driver, an alternative and an observable signal that would change the call. Cite PDF pages for material claims and show the inputs to derived figures.",
+    "sources": [
+      {
+        "id": "t10prev",
+        "published": "2019-01-09",
+        "sha256": "9c30ac50afffaa99c877f625744d150bf588421115605e0f598999ea9878e303",
+        "timezone": "America/New_York",
+        "title": "U.S. Treasury competitive auction results of 2019-01-09",
+        "url": "https://www.treasurydirect.gov/instit/annceresult/press/preanre/2019/R_20190109_1.pdf"
+      },
+      {
+        "id": "t10ann",
+        "published": "2019-01-30",
+        "sha256": "0d9275328d80f1147e8ce3c367e58727210a880c66788d0273609d3e723223f6",
+        "timezone": "America/New_York",
+        "title": "U.S. Treasury offering announcement of 2019-01-30",
+        "url": "https://www.treasurydirect.gov/instit/annceresult/press/preanre/2019/A_20190130_1.pdf"
+      }
+    ],
+    "stratum": "treasury-auctions"
+  },
+  {
+    "case_id": "treasury-91282cfr7-2022-10-20",
+    "cutoff": "2022-10-14T12:00:00Z",
+    "event": "treasury-91282cfr7-2022-10-20",
+    "forecast_rule": {
+      "metric": "high real yield",
+      "mode": "absolute",
+      "tolerance": "0.05",
+      "unit": "percent"
+    },
+    "market": "US",
+    "question": "Prepare an auction preview for the U.S. Treasury 5-year inflation-protected note (TIPS) sale scheduled for 2022-10-20. Identify the offering and maturity, report the prior comparable auction’s bid-to-cover and clearing rate, and forecast the new high real yield relative to that auction (within means ±5 basis points, inclusive). State one base-case direction (lower, within, or higher), the main driver, an alternative and an observable signal that would change the call. Cite PDF pages for material claims and show the inputs to derived figures.",
+    "sources": [
+      {
+        "id": "tipprev",
+        "published": "2022-06-23",
+        "sha256": "82b155feb169099baa6282bf532ca5581f0610c7a60aefa474ac9e211ef389bd",
+        "timezone": "America/New_York",
+        "title": "U.S. Treasury competitive auction results of 2022-06-23",
+        "url": "https://www.treasurydirect.gov/instit/annceresult/press/preanre/2022/R_20220623_3.pdf"
+      },
+      {
+        "id": "tipann",
+        "published": "2022-10-13",
+        "sha256": "99dc3fc48982610fb19dfc5b8213f5b393aacac274878b342ad1763a6f63e639",
+        "timezone": "America/New_York",
+        "title": "U.S. Treasury offering announcement of 2022-10-13",
+        "url": "https://www.treasurydirect.gov/instit/annceresult/press/preanre/2022/A_20221013_4.pdf"
+      }
+    ],
+    "stratum": "treasury-auctions"
+  }
+]

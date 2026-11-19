@@ -1,0 +1,14 @@
+{
+  "exact_duplicates": 0,
+  "first_official_cutoff": "2024-12-31",
+  "flagged_official_tasks": 37,
+  "flagged_pairs": 147,
+  "last_official_cutoff": "2025-11-10",
+  "latest_local_cutoff": "2023-04-28",
+  "max_token_trigram_jaccard": 0.022989,
+  "near_duplicate_threshold": 0.2,
+  "official_sha256": "1be781afd34abff47c3ebeb452ed9e46a23b94c087c69b9cfbd3a58d21193fac",
+  "official_tasks": 400,
+  "pairs_checked": 14400,
+  "unresolved_candidates": 0
+}
