@@ -2,9 +2,31 @@
 
 ThesisTape researches a financial question using the sources in its archive that were public by a chosen cutoff. An analyst can set a spending limit, watch the work, and open the original passage behind a claim in the released memo.
 
-GPT-6.2 Sol can research a filing alone or lead two GPT-6 Luna workers. The team and the single analyst each earned 3/3 on the Disney/Hulu and Tradeweb development cases. The single analyst was cheaper on both. Moving the Tradeweb cutoff to one second before its amendment led the team to request another search and qualify its answer. [Results and costs](evaluations/first-team/evaluation.md) · [Disney memo](evaluations/first-team/disney-team/memo.md) · [Tradeweb memo](evaluations/first-team/tradeweb-team/memo.md)
+## Open the analyst desk
+
+From the repository root, use Python 3.12 to install the research dependencies and start the desk.
+
+```sh
+python3.12 -m venv .venv
+.venv/bin/python -m pip install -r requirements-baseline.txt -r requirements-retrieval.txt
+.venv/bin/python -B -m scripts.analyst_desk --port 8765
+```
+
+Open the saved TSMC financing report to see the government announcement, the cited passages, the participating models and their recorded costs. Select a numbered citation to read the passage, **Open original** to see the source, or **Export .md** to download the report. Opening the saved example uses no API credits and requires no key. [Local analyst desk](http://127.0.0.1:8765/)
+
+## Ask a historical finance question
+
+Choose **New research → Public historical sources**. Enter a question, the last eligible UTC date and a USD spending limit. Live runs use `OPENAI_API_KEY` from the shell or the ignored project `.env.local`. A date without a time includes that entire UTC day. **Run activity** shows assignments, routing decisions, estimated charges from returned token usage and outstanding reservations. **Pause run** lets in-flight requests settle. **Resume run** continues under the original cutoff and cap.
+
+The public archive accepts open research questions. Three curated collections cover the dated research archive, Twitter merger filings and NVIDIA earnings filings. The desk issues a qualified memo when the available sources support only part of an answer.
+
+The desk binds to loopback and saves each intake to its own folder under `runs/desk/`. Use `--runs-dir DIRECTORY` to open a different parent folder of CLI runs. The CLI accepts the same free-form intake with `run --question "…" --cutoff 2023-10-27 --collection archive --budget-usd 0.10 --output-dir runs/desk/my-run`. Replay a completed run offline with `python -m scripts.research_team replay --run-dir DIRECTORY`. [Browser verification and measured costs](evaluations/analyst_desk/evaluation.md)
+
+## Research results
 
 [Build plan and validation milestones](BUILD_PLAN.md) · [Architecture and model costs (PDF)](ThesisTape-Architecture.pdf)
+
+GPT-6.2 Sol can research a filing alone or lead two GPT-6 Luna workers. The team and the single analyst each earned 3/3 on the Disney/Hulu and Tradeweb development cases. The single analyst was cheaper on both. Moving the Tradeweb cutoff to one second before its amendment led the team to request another search and qualify its answer. [Results and costs](evaluations/first-team/evaluation.md) · [Disney memo](evaluations/first-team/disney-team/memo.md) · [Tradeweb memo](evaluations/first-team/tradeweb-team/memo.md)
 
 On 24 held-out financial events, single Astra earned 79.7% local quality and released 24 reports. The research team earned 70.1% and released 22. Both forecast the correct direction in 7 of 16 prospective cases. The team cost an average USD 0.1378 per event and single Astra USD 0.1417. The preregistered rule selected single Astra for the primary FinanceGym investigation. [Held-out results and intervals](evaluations/paired/revisions/analyst_product/blind/evaluation.md) · [Evaluation protocol](evaluations/paired/protocol.md)
 
@@ -14,25 +36,11 @@ On a public-source question about TSMC Arizona, the analyst desk retrieved the g
 
 The independent FinanceBench comparison sampled 24 companies. The quantitative team produced 15 correct, source-supported answers and single Astra with the same tools produced 13. The 90% paired interval for the difference was −8.3 to +25.0 percentage points. The general analyst therefore remains the primary researcher on accounting questions in FinanceGym. [Company-level results](evaluations/financebench/evaluation.md) · [Original Nintendo pilot and repair](evaluations/paired/revisions/grounding_v2/evaluation.md)
 
-![ThesisTape research workflow showing the lead orchestrator, evidence workers, independent review and final report.](ThesisTape-Architecture.png)
-
-## Ask a historical finance question
-
-Install the [Python 3.12 research dependencies](#run-the-research-team), start the local analyst desk and choose **New research → Public historical sources**. Enter the question, the last eligible UTC date and a USD spending limit. The report links each cited claim to the dated passage. Run activity shows the participating models, settled cost and remaining reservations.
-
-```sh
-.venv/bin/python -B -m scripts.analyst_desk --port 8765
-```
-
 The live ECB trial cost USD 0.2052854 and its download reproduced offline. [ECB report and browser checks](evaluations/open_research/ecb/evaluation.md) · [Boeing acquisition report](evaluations/open_research/boeing/reviewed.md)
 
 For a public-source question, choose the standard team, the team with additional checks on figures, or a single Astra analyst. All three search the same dated archive and can reopen the surrounding text of the original source. On the March 2023 Fed decision, the team found the new target range and the single analyst supported the size of the hike. The browser downloads preserve each report’s remaining evidence gaps. [Compare the two Fed memos](evaluations/open_research/fomc/evaluation.md)
 
-Open [the local desk](http://127.0.0.1:8765/). A new installation opens the saved TSMC financing report. **Saved runs** includes its call history, cited government announcement and funding conditions. It requires no API key or model usage. Select a numbered citation to read its dated passage and locator. **Open original** opens the cited edition. **Export .md** downloads the verified report.
-
-**New research** takes a question, source collection, UTC cutoff and per-run USD limit. A date without a time includes that entire UTC day. Live runs use the project’s `OPENAI_API_KEY`. **Run activity** shows dispatched assignments, routing decisions, estimated charges from returned token usage and outstanding reservations. **Pause run** lets in-flight requests settle. **Resume run** continues under the original cutoff and cap. The public archive accepts open research questions. Three curated collections cover the dated research archive, Twitter merger filings and NVIDIA earnings filings. Questions outside their coverage can produce a qualified memo.
-
-The desk binds to loopback and saves each intake to its own folder under `runs/desk/`. Use `--runs-dir DIRECTORY` to open a different parent folder of CLI runs. The CLI accepts the same free-form intake with `run --question "…" --cutoff 2023-10-27 --collection archive --budget-usd 0.10 --output-dir runs/desk/my-run`. Replay a completed run offline with `python -m scripts.research_team replay --run-dir DIRECTORY`. [Browser verification and measured costs](evaluations/analyst_desk/evaluation.md)
+![ThesisTape research workflow showing the lead orchestrator, evidence workers, independent review and final report.](ThesisTape-Architecture.png)
 
 ## Reproduce the Disney/Hulu case
 
@@ -56,11 +64,9 @@ The stored Form 8-K documents are the original HTML payloads inside EDGAR’s co
 
 Sol assigns a filings search and an independent search for contrary evidence. The Luna workers run in parallel. Each uses its own cutoff-bound archive session, opens passages and selects exact source spans. Sol compares their findings and can request one targeted follow-up before writing. The controller verifies citations, runs the Disney calculation and reserves each call against the same run budget, including any calls still in flight.
 
-Install the dependencies from the repository root with Python 3.12. The saved team reports replay offline without an API key.
+After installing the dependencies for the analyst desk, reproduce the saved team report and run the test suite. The replay works offline without an API key.
 
 ```sh
-python3.12 -m venv .venv
-.venv/bin/python -m pip install -r requirements-baseline.txt -r requirements-retrieval.txt
 .venv/bin/python -B -m scripts.research_team replay --run-dir evaluations/first-team/disney-team > /tmp/thesistape-team.md
 cmp /tmp/thesistape-team.md evaluations/first-team/disney-team/memo.md
 .venv/bin/python -B -m unittest discover -s tests -v
