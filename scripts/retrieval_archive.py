@@ -11,6 +11,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from urllib.parse import urlsplit
 
+from .edgar_exhibits import submission_exhibit
 from .retrieval_gateway import ARCHIVE, Corpus
 from .retrieval_sources import edgar_blocks, wiki_blocks
 
@@ -93,6 +94,11 @@ def import_edition(source, objects):
         index = fetch(source["proof_url"])
         save(objects, source["selection"]["index_sha256"], ".htm", index)
         submission = fetch(url.rsplit("/", 1)[0] + "/" + source["edition"] + ".txt")
+        if "exhibit" in source["selection"]:
+            document = submission_exhibit(submission, urlsplit(url).path.rsplit("/", 1)[1])
+            save(objects, source["sha256"], ".htm", document)
+            check_html_passages(direct, edgar_blocks(source, document, objects))
+            return
         primary = submission.split(b"</DOCUMENT>", 1)[0]
         name = urlsplit(url).path.rsplit("/", 1)[1].encode()
         if b"<SEQUENCE>1\n" not in primary or b"<FILENAME>" + name + b"\n" not in primary:
@@ -124,7 +130,7 @@ def import_edition(source, objects):
         raise ValueError("Unsupported historical edition")
 
 
-def restore(destination):
+def restore(destination, catalog_dir=ARCHIVE):
     if destination.exists() or destination.is_symlink():
         raise ValueError("Supply a new directory for a publisher import")
     destination.parent.mkdir(parents=True, exist_ok=True)
@@ -132,7 +138,7 @@ def restore(destination):
         staged = Path(temporary) / "archive"
         objects = staged / "objects"
         objects.mkdir(parents=True)
-        catalog = (ARCHIVE / "catalog.json").read_bytes()
+        catalog = (catalog_dir / "catalog.json").read_bytes()
         (staged / "catalog.json").write_bytes(catalog)
         for source in json.loads(catalog)["sources"]:
             try:
@@ -147,9 +153,10 @@ def restore(destination):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--catalog-dir", type=Path, default=ARCHIVE, help="Trusted directory containing catalog.json")
     args = parser.parse_args()
     try:
-        counts = restore(args.output_dir)
+        counts = restore(args.output_dir, args.catalog_dir)
     except (OSError, ValueError) as error:
         parser.exit(1, f"Archive error: {error}\n")
     print(f"Verified {len(counts)} publisher editions and {sum(counts.values())} passages.")

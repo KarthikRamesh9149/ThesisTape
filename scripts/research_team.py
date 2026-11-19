@@ -10,21 +10,34 @@ from threading import Lock
 
 from .claim_review import VERSION as REVIEW_VERSION
 from .disney_hulu_case import CaseError, read_saved_file
+from .forecast_specialist import VERSION as FORECAST_VERSION
 from .retrieval_gateway import Corpus
 from .sol_baseline import PROJECT_ROOT, fingerprint, generation_request, json_bytes
 from .sol_provider import MODEL_RATES, OpenAIResponses, project_key
 from .team_meter import Meter, verify_ledger
 from .team_research import VERSION, Case, case_for, research
 
-CASES = ("disney", "tradeweb", "tradeweb-before", "toyota")
-ROUTES = ("team", "single", "reviewed")
+CASES = ("disney", "tradeweb", "tradeweb-before", "toyota", "nvidia")
+ROUTES = ("team", "single", "reviewed", "forecast")
 
 
 def configuration(case, corpus, route):
     return {
         "schema_version": 3,
         "prompt_version": VERSION,
-        **({"review_version": REVIEW_VERSION} if route == "reviewed" else {}),
+        **(
+            {"review_version": REVIEW_VERSION}
+            if route in ("reviewed", "forecast")
+            else {}
+        ),
+        **(
+            {
+                "forecast_version": FORECAST_VERSION,
+                "forecast_choices": list(case.forecast_choices),
+            }
+            if case.forecast_choices
+            else {}
+        ),
         "case_id": case.id,
         **case.intake(),
         "route": route,
@@ -46,7 +59,7 @@ def run(
 ):
     if route not in ROUTES:
         raise CaseError("Choose a supported research route")
-    corpus = corpus if corpus is not None else Corpus()
+    corpus = corpus if corpus is not None else Corpus(case.archive)
     return execute(
         configuration(case, corpus, route),
         directory,
@@ -94,7 +107,7 @@ def release_state(memo, trace, *, review_required):
     raise CaseError("No review decision authorizes this release")
 
 
-def execute(config, directory, budget, provider, workflow):
+def execute(config, directory, budget, provider, workflow, *, artifact_name="memo.md"):
     if not budget.is_finite() or budget <= 0:
         raise CaseError("Choose a positive finite USD budget")
     try:
@@ -120,7 +133,7 @@ def execute(config, directory, budget, provider, workflow):
             tmp = directory / ".memo.tmp"
             tmp.write_bytes(memo)
             meter.save()
-            tmp.replace(directory / "memo.md")
+            tmp.replace(directory / artifact_name)
     except Exception as error:
         record.update(
             state="failed",
@@ -136,7 +149,7 @@ def execute(config, directory, budget, provider, workflow):
 
 
 def replay(case: Case, record: dict, *, corpus=None):
-    corpus = corpus if corpus is not None else Corpus()
+    corpus = corpus if corpus is not None else Corpus(case.archive)
     route = record["route"]
     if route not in ROUTES:
         raise CaseError("Unknown research route")
@@ -145,6 +158,17 @@ def replay(case: Case, record: dict, *, corpus=None):
         configuration(case, corpus, route),
         lambda ask: research(case, corpus, ask, route=route),
     )
+
+
+def recorded_output(call, stage, prompt, limit):
+    payload = generation_request(prompt, max_output_tokens=call["max_output_tokens"])
+    if (
+        call["request_sha256"] != fingerprint(json_bytes(payload))
+        or call["model"] != prompt["model"]
+        or call.get("requested_output_tokens", call["max_output_tokens"]) != limit
+    ):
+        raise CaseError(f"Request fingerprint or route changed for {stage}")
+    return call["output"]
 
 
 def reproduce(record, config, workflow):
@@ -163,17 +187,7 @@ def reproduce(record, config, workflow):
             if stage not in record["calls"] or stage in seen:
                 raise CaseError("Missing or duplicate model call during replay")
             seen.add(stage)
-        call = record["calls"][stage]
-        payload = generation_request(
-            prompt, max_output_tokens=call["max_output_tokens"]
-        )
-        if (
-            call["request_sha256"] != fingerprint(json_bytes(payload))
-            or call["model"] != prompt["model"]
-            or call.get("requested_output_tokens", call["max_output_tokens"]) != limit
-        ):
-            raise CaseError(f"Request fingerprint or route changed for {stage}")
-        return call["output"]
+        return recorded_output(record["calls"][stage], stage, prompt, limit)
 
     memo, trace = workflow(ask)
     state, digest = release_state(

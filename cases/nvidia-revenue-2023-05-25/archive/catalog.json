@@ -1,0 +1,82 @@
+{
+  "redirects": [],
+  "schema_version": 1,
+  "sources": [
+    {
+      "edition": "0001045810-23-000087",
+      "family": "nvda-q1fy24pr",
+      "id": "nvda-q1fy24pr",
+      "kind": "edgar",
+      "proof_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/0001045810-23-000087-index.htm",
+      "published": "2023-05-24T16:22:18-04:00",
+      "selection": {
+        "exhibit": "EX-99.1",
+        "index_sha256": "46f208f7fc47449a82716dd4fcff885a6027ee65ee465ebafc968b02f9a6927f",
+        "sections": [
+          {
+            "name": "First-quarter revenue",
+            "start": "SANTA CLARA, Calif.-May 24"
+          },
+          {
+            "end": "“Our entire data center",
+            "name": "Demand and production",
+            "start": "“The computer industry"
+          },
+          {
+            "end": "•Revenue is expected",
+            "name": "Second-quarter revenue outlook",
+            "start": "NVIDIA’s outlook for the second quarter"
+          },
+          {
+            "end": "•First-quarter revenue was a record $4.28",
+            "name": "Data Center highlights",
+            "start": "Data Center"
+          }
+        ],
+        "sequence": 2
+      },
+      "sha256": "58170909689e27d334123667174bc3043ea4f3be9b63f95cbe2688d85d9d6dbc",
+      "title": "NVIDIA FY2024 Q1 earnings release",
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24pr.htm",
+      "version_at": "2023-05-24T16:22:18-04:00"
+    },
+    {
+      "edition": "0001045810-23-000087",
+      "family": "nvda-q1fy24cfocommentary",
+      "id": "nvda-q1fy24cfocommentary",
+      "kind": "edgar",
+      "proof_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/0001045810-23-000087-index.htm",
+      "published": "2023-05-24T16:22:18-04:00",
+      "selection": {
+        "exhibit": "EX-99.2",
+        "index_sha256": "46f208f7fc47449a82716dd4fcff885a6027ee65ee465ebafc968b02f9a6927f",
+        "sections": [
+          {
+            "end": "Data Center revenue was a record",
+            "name": "Revenue and Data Center demand",
+            "start": "Revenue was $7.19 billion"
+          },
+          {
+            "end": "Professional Visualization revenue was down",
+            "name": "Gaming and professional visualization",
+            "start": "Gaming revenue was down"
+          },
+          {
+            "name": "Inventory and supply commitments",
+            "start": "Inventory was $4.61"
+          },
+          {
+            "end": "•Revenue is expected",
+            "name": "Second-quarter guidance",
+            "start": "Second Quarter of Fiscal 2024 Outlook"
+          }
+        ],
+        "sequence": 3
+      },
+      "sha256": "660cd01125a1ad26dea9cfdf6f5aef42341be5160448e4b8883e1d64ecfe0b96",
+      "title": "NVIDIA FY2024 Q1 CFO commentary",
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000087/q1fy24cfocommentary.htm",
+      "version_at": "2023-05-24T16:22:18-04:00"
+    }
+  ]
+}

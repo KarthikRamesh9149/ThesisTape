@@ -1,0 +1,29 @@
+{
+  "redirects": [],
+  "schema_version": 1,
+  "sources": [
+    {
+      "edition": "0001045810-23-000171",
+      "family": "nvda-q2fy24pr",
+      "id": "nvda-q2fy24pr",
+      "kind": "edgar",
+      "proof_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000171/0001045810-23-000171-index.htm",
+      "published": "2023-08-23T16:21:42-04:00",
+      "selection": {
+        "exhibit": "EX-99.1",
+        "index_sha256": "8a0e2a3e31aac6553e22925a5c8ed54ff212dc54d4e853bbca565d4b460eb2f7",
+        "sections": [
+          {
+            "name": "Second-quarter reported revenue",
+            "start": "SANTA CLARA, Calif.—Aug. 23"
+          }
+        ],
+        "sequence": 2
+      },
+      "sha256": "59d9e891880299bb35bec2618b204503298e6a7e597c4bb8fcff73850e9b70b8",
+      "title": "NVIDIA FY2024 Q2 earnings release",
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000171/q2fy24pr.htm",
+      "version_at": "2023-08-23T16:21:42-04:00"
+    }
+  ]
+}

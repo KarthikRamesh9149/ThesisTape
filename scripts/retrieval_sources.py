@@ -13,6 +13,7 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from pypdf import PdfReader
 
 from .disney_hulu_case import CaseError, filing_blocks, read_saved_file, verify_index
+from .edgar_exhibits import sections as exhibit_sections
 
 DAY = re.compile(r"\d{4}-\d{2}-\d{2}")
 STAMP = re.compile(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)")
@@ -79,15 +80,7 @@ def edgar_blocks(source, original, objects):
         or source["proof_url"] != source["url"].rsplit("/", 1)[0] + "/" + accession + "-index.htm"
     ):
         raise ValueError("EDGAR edition has an inconsistent archive address")
-    source_info = {
-        "source_url": source["url"],
-        "accession": accession,
-        "file": parts[-1],
-        "filing_date": source["published"][:10],
-        "title": sel["document_title"],
-    }
     index = object_bytes(objects, sel["index_sha256"], ".htm")
-    verify_index(index, source_info, len(original), sel["form"])
     match = re.search(rb'Accepted</div>\s*<div class="info">([\d: -]+)</div>', index)
     if not match:
         raise ValueError("Missing EDGAR acceptance time")
@@ -96,6 +89,15 @@ def edgar_blocks(source, original, objects):
     )
     if accepted != instant(source["published"]) or accepted != instant(source["version_at"]):
         raise ValueError("EDGAR acceptance time differs from this edition")
+    if "exhibit" in sel:
+        for label, text in exhibit_sections(source, original, index):
+            yield prose(label, text)
+        return
+    source_info = {
+        "source_url": source["url"], "accession": accession, "file": parts[-1],
+        "filing_date": source["published"][:10], "title": sel["document_title"],
+    }
+    verify_index(index, source_info, len(original), sel["form"])
     for section in sel["sections"]:
         paragraphs = filter(None, filing_blocks(original, {**source_info, "section": section}))
         for i, text in enumerate(paragraphs, 1):

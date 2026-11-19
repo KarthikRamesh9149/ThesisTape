@@ -137,7 +137,7 @@ def citation_text(citation: Citation, passages: dict[str, str]) -> str:
     return passage
 
 
-def check_paragraph(paragraph: Paragraph, passages: dict[str, str], cutoff: date) -> str:
+def check_paragraph(paragraph: Paragraph, passages: dict[str, str], cutoff: date, *, forecast_periods=()) -> str:
     text = paragraph.text.strip()
     if not 1 <= len(text) <= 950 or UNSAFE_PROSE.search(text):
         raise CaseError("Memo paragraphs must contain plain text and no model-supplied links")
@@ -157,6 +157,8 @@ def check_paragraph(paragraph: Paragraph, passages: dict[str, str], cutoff: date
     # that day still needs independent support from the cited passage.
     framing = r"(?:as of|(?:not (?:yet )?known|unknown|undetermined|unresolved) on)"
     claims = re.sub(rf"\b{framing} (?:{as_of_date})(?![\w/-]|,?\s+\d{{4}}\b)", "", text, flags=re.IGNORECASE)
+    for period in forecast_periods:
+        claims = re.sub(rf"\b{re.escape(period)}\b", "", claims, flags=re.IGNORECASE)
 
     def numbers(value: str) -> set[Decimal]:
         return {Decimal(n.replace(",", "")) for n in NUMBER.findall(value)}

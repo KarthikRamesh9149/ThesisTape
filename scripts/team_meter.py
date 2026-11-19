@@ -20,7 +20,8 @@ from .sol_research import tool_decision
 
 
 def funded_limit(stage, model, input_tokens, available, desired):
-    if stage not in ("lead.memo", "lead.memo_repair", "lead.revise", "review.initial", "review.recheck"):
+    if stage not in ("lead.memo", "lead.memo_repair", "lead.revise", "review.initial", "review.recheck",
+                     "forecast.analyze", "forecast.repair"):
         return desired
     rates = MODEL_RATES[model]
     affordable = int(

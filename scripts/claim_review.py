@@ -60,7 +60,16 @@ def review_once(case, corpus, opened, candidate, ask, stage):
         "claims": claims,
         "passages": passage_context(originals),
     }
-    prompt = typed_prompt(MODEL, INSTRUCTIONS, context, Review, effort="medium")
+    instructions = INSTRUCTIONS
+    if case.forecast_choices:
+        instructions += (
+            "\nFor a forecast, verify each dated factual premise against the citations. Assess "
+            "clearly labeled future scenarios for a defensible inference from that evidence. "
+            "Check that the displayed base-case choice agrees with the prose, the alternative is "
+            "distinct, and the revision signal is observable before the release. A prediction "
+            "does not need proof that the event occurred. List every cited ID for supported claims."
+        )
+    prompt = typed_prompt(MODEL, instructions, context, Review, effort="medium")
     fields = prompt["text"]["format"]["schema"]["$defs"]["Finding"]["properties"]
     fields["claim_id"]["enum"] = list(claims)
     fields["evidence_ids"]["items"]["enum"] = list(originals)

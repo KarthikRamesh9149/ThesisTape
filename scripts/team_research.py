@@ -4,6 +4,7 @@ import json
 import re
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass
+from pathlib import Path
 from typing import Literal
 
 from pydantic import ValidationError
@@ -17,7 +18,8 @@ from .baseline_evidence import (
 )
 from .claim_review import review_candidate
 from .disney_hulu_case import SAVED_CASE, CaseError, read_saved_file
-from .retrieval_gateway import Corpus, Evidence
+from .forecast_specialist import analyze
+from .retrieval_gateway import ARCHIVE, Corpus, Evidence
 from .sol_baseline import fingerprint, json_bytes
 from .sol_provider import LUNA, MODEL
 from .sol_research import (
@@ -44,12 +46,19 @@ class Case:
     cutoff: str
     disney: ResearchCase | None = None
     reporting_currency: str = "USD"
+    forecast_choices: tuple[str, ...] = ()
+    archive: Path = ARCHIVE
 
     def intake(self):
         return {"question": self.question, "cutoff": self.cutoff}
 
 
 def case_for(name: str) -> Case:
+    if name == "nvidia":
+        root = SAVED_CASE.parent / "nvidia-revenue-2023-05-25"
+        data = json.loads(read_saved_file(root / "agent/question.json"))
+        return Case(data["case_id"], data["title"], data["question"], data["cutoff"],
+                    forecast_choices=tuple(data["forecast_choices"]), archive=root / "archive")
     if name == "disney":
         d = load_case(SAVED_CASE / "agent")
         return Case(d.id, "Disney and Hulu", d.question, d.cutoff.isoformat(), d)
@@ -275,10 +284,12 @@ def qualified_memo(case, work):
     return "\n".join(lines).encode()
 
 
-def author(case, ask, opened, reports, action, *, decision=None):
+def author(case, ask, opened, reports, action, *, decision=None, forecast=None):
     data = {**case.intake(), "passages": passage_context(opened)}
     if decision:
         data.update(worker_reports=reports, coverage=action, lead_direction=decision["instruction"])
+    if forecast is not None:
+        data["forecast_specialist"] = forecast
     prompt = report_prompt(case, action, data)
     for stage in ("lead.memo", "lead.memo_repair"):
         raw = ask(stage, prompt, 2560)
@@ -294,9 +305,11 @@ def author(case, ask, opened, reports, action, *, decision=None):
 
 
 def research(case: Case, corpus: Corpus, ask, *, route: str):
+    if route == "forecast" and not case.forecast_choices:
+        raise CaseError("The forecast specialist requires a forecast question with declared options")
     decisions = []
     plan = {}
-    if route in ("team", "reviewed"):
+    if route in ("team", "reviewed", "forecast"):
         instructions = """You are the lead financial analyst. Delegate two independent, short lookup assignments.
 The filings worker extracts the terms, dates and numbers. The contrary worker independently looks for
 corrections, exceptions, or unresolved evidence. Give each a neutral research question.
@@ -316,20 +329,24 @@ Do not suggest any answers, figures, dates, filing IDs or specific source. Use w
     else:
         raise CaseError("Unknown research route")
     review = {}
+    forecast = None
     if not opened:
         action = "qualify"
         memo, arithmetic = qualified_memo(case, work), None
     else:
+        if route == "forecast":
+            forecast = analyze(case, opened, ask)
         candidate = author(
-            case, ask, opened, reports, action, decision=decisions[-1] if decisions else None
+            case, ask, opened, reports, action, decision=decisions[-1] if decisions else None, forecast=forecast
         )
         memo, arithmetic = candidate.memo, candidate.calculation
-        if route == "reviewed":
+        if route in ("reviewed", "forecast"):
             memo, arithmetic, review = review_candidate(case, corpus, opened, action, candidate, ask)
-    if route == "reviewed" and not opened:
+    if route in ("reviewed", "forecast") and not opened:
         review = {"status": "no_financial_claims", "rounds": [], "released_memo_sha256": fingerprint(memo)}
     return memo, {
-        **({"review": review} if route == "reviewed" else {}),
+        **({"review": review} if route in ("reviewed", "forecast") else {}),
+        **({"forecast_specialist": forecast} if route == "forecast" else {}),
         "assignments": plan,
         "workers": [w.record() for w in work],
         "decisions": decisions,

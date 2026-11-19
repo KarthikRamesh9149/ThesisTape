@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "case_id": "nvidia-revenue-2023-05-25",
+  "case_cap_usd": "0.12",
+  "grading_cap_usd_per_report": "0.05",
+  "design": "One historical development case. Use the first completed investigation by the reviewed team. Reuse its exact plan, search, opened passages, worker findings and lead decision for both arms. The sole treatment is an extra Sol forecast specialist before the same author and independent reviewer. Both arms have the same total ceiling inclusive of common work. Count shared usage once towards project spend. Record every paid attempt and any protocol deviations.",
+  "sampling": "Use the first terminal result of each working route. Score a withheld or qualified report without a directional call as an abstention on the outcome. A withheld report earns zero released-report reasoning points. Distinguish technical failures from withheld decisions. Fix execution defects transparently, preserve costs and report any reruns. Do not retune on a disappointing grade.",
+  "grading": "One separate stateless Sol call per released memo. Send only the original question, cutoff, exact memo, the shared dated passages and these criteria. Hide arm, spend, specialist notes, other memo and outcome. Award one point per criterion on exact memo excerpts and identified sources. Inspect the grades against the cited passages. Report the two component totals and the outcome separately.",
+  "criteria": {
+    "guidance": "State NVIDIA’s published consolidated revenue midpoint of USD 11 billion and its plus-or-minus 2 percent tolerance as management guidance for Q2 FY2024. Keep management guidance distinct from the analyst call.",
+    "historical_evidence": "Use a specific cutoff-available prior-quarter observation with the correct period, measure, scope and direction to support the outlook. Repeating the guidance alone earns zero.",
+    "horizon_and_base": "Give one unambiguous base-case category relative to NVIDIA’s own range for total revenue in Q2 FY2024 and express it as a forecast.",
+    "causal_driver": "Explain how a dated demand or supply observation could translate into shipments and recognized revenue over the forecast quarter. Name a mechanism beyond repeating management’s target.",
+    "alternative": "Identify a genuinely different range outcome, its plausible assumption, and why it could change revenue during this same quarter.",
+    "revision_signal": "Name a specific observable before the results release, its direction, and how it would change the base case. The final reported revenue, a generic promise to monitor demand, or an unobservable condition earns zero."
+  },
+  "outcome": {
+    "guidance_source": "nvda-q1fy24pr",
+    "guidance_locator": "Second-quarter revenue outlook",
+    "actual_source": "nvda-q2fy24pr",
+    "actual_locator": "Second-quarter reported revenue",
+    "outcome_cutoff": "2023-08-24",
+    "metric": "Quarterly consolidated revenue in billions of US dollars. Use the as-reported headline on the first Q2 release. Compute the original inclusive guidance interval with decimal arithmetic. One point for the published base case in the correct bucket, zero for a miss or abstention."
+  },
+  "decision": "Report a case-level process improvement only for a higher reasoning total without a factual-score loss. Report an outcome improvement only when the treatment alone predicts the realized bucket. A tie at higher cost favors the control on this case. One retrospective pair cannot establish general performance or justify making the specialist the default."
+}

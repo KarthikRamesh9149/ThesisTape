@@ -1,0 +1,7 @@
+{
+  "case_id": "nvidia-revenue-2023-05-25",
+  "title": "NVIDIA’s second-quarter revenue outlook",
+  "question": "As of 25 May 2023, would NVIDIA’s total revenue for Q2 FY2024 finish below, within or above its own guidance range? Pick a base case, explain the driver, give a plausible alternative and identify an observable signal before the earnings release that would change your view.",
+  "cutoff": "2023-05-25",
+  "forecast_choices": ["below", "within", "above"]
+}
