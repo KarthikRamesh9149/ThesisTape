@@ -73,6 +73,10 @@ Reuse the Step 3 Sol analyst as the lead. Add the two Luna workers, the forecast
 
 **Forecast specialist verified on 19 November 2026.** On NVIDIA’s Q2 FY2024 revenue outlook, the specialist added a grounded prior-quarter comparison. The team with the specialist earned 6/6 against a blinded cutoff-only rubric and the control earned 5/6. Both predicted revenue within guidance. The actual result was above guidance, earning 0/1 for both. The specialist route added USD 0.012394 across the calls used for the graded reports. The routing decision remains opt-in. [Frozen comparison, costs and receipts](evaluations/forecast_specialist/evaluation.md)
 
+**Conditional Terra reader verified on 19 November 2026.** On Toyota’s FY2022 shareholder-return buybacks, Terra and the text-only control both recovered ¥435.6 billion and both applicable notes. Both reports earned 6/6. The visual route cost an additional USD 0.012342. An adjacent clear row completed with zero image calls. [Live reports, scoring and costs](evaluations/visual_reader/evaluation.md)
+
+**Conditional Astra adjudication verified on 19 November 2026.** On the disputed Twitter merger, reviewed Sol and conditional Astra each earned 6/6 under the same USD 0.20 cap. Both qualified the closing outcome. Escalation added USD 0.025464. A price-only control skipped Astra. A separate live check verified that Astra distinguished the exhibit’s printed date from its SEC filing date. Recorded project usage through Step 4 is USD 0.5344479. [Comparison and replay](evaluations/material_dispute/evaluation.md) · [Cumulative usage](evaluations/material_dispute/usage.json)
+
 ### 5. Make the workflow usable and resumable
 
 Provide an analyst screen with question, cutoff and spending limit. Show worker status, the lead’s routing decisions, spend and report. Selecting a material claim opens the original evidence and its locator. The CLI and screen read the same saved run.
@@ -105,6 +109,4 @@ At the checked Standard rates, the architecture’s example uses 12,000 input an
 
 **Illustration for the final run.** If all 400 cases used the base allowance and 80 needed that additional pass, text-model usage would be **400 × USD 0.0997 + 80 × USD 0.0810 = USD 46.36**. Search, visual inputs, cache charges, storage, development comparisons and retries are separate. The first live cases establish the actual token distribution. Batch independent offline calls when turnaround permits and apply discounts only to eligible usage. [Batch pricing and turnaround](https://developers.openai.com/api/docs/guides/batch)
 
-**Conditional Terra reader verified on 19 November 2026.** On Toyota’s FY2022 shareholder-return buybacks, Terra and the text-only control both recovered ¥435.6 billion and both applicable notes. Both reports earned 6/6. The visual route cost an additional USD 0.012342. An adjacent clear row completed with zero image calls. Recorded project spend reached USD 0.3865639. [Live reports, scoring and costs](evaluations/visual_reader/evaluation.md)
-
-**Next implementation checkpoint.** Continue Step 4 with Astra’s material-dispute route. Freeze a dated case with a consequential conflict. Compare the reviewed Sol route with conditional escalation under equal budgets. Reopen the conflicting evidence, send any material change through fresh review and withhold or qualify an unresolved finding. Record the result and incremental cost.
+**Next implementation checkpoint.** Start Step 5 by interrupting a CLI run and resuming from its saved state. Demonstrate that a completed provider call is reused, a pending charge is accounted for, and the resumed report and ledger agree without a duplicate call or charge. The analyst screen can then read that same run.

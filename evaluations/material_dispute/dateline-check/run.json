@@ -1,0 +1,484 @@
+{
+  "assignments": {},
+  "budget_usd": "0.20",
+  "calculation": null,
+  "calls": {
+    "dispute.adjudicate": {
+      "confirmed_ms": 23615,
+      "dispatched_ms": 16946,
+      "estimated_model_cost_usd": "0.029416",
+      "input_tokens_preflight": 2502,
+      "max_output_tokens": 1536,
+      "model": "gpt-6.2-astra",
+      "output": "{\n  \"disposition\": \"unresolved\",\n  \"recommendation\": \"retain\",\n  \"assessment\": \"No. The July 8 notice (P2) establishes that the buyer group invoked Section 8.1(d)(i), not that it had a valid right to terminate. P1 gives its asserted grounds: withheld spam-account data, apparent misrepresentations and a likely material adverse effect. Twitter’s July 8 board statement (P3) announced its intent to enforce the $54.20-per-share deal in Delaware Chancery. Its July 10 counsel letter (P4) denied breach and a material adverse effect, rejected the notice as invalid and reserved the right to specific performance. Neither party’s statement decides the dispute. A court ruling on the notice’s validity or a binding agreement resolving the dispute would settle it; neither was in the record by July 11. The analyst could conclude neither that the deal had ended nor that it would close.\",\n  \"evidence_ids\": [\"P1\", \"P2\", \"P3\", \"P4\"],\n  \"controlling_passage\": null\n}",
+      "protected_usd": "0.060",
+      "provider": {
+        "elapsed_ms": 6668,
+        "ids_sha256": "8d497df4b5fe36120ce37c24d640e2ed5dfe04cac348cab53880ca192ccd0dc5",
+        "model": "gpt-6.2-astra",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 2502,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 235,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 2737
+        }
+      },
+      "request_sha256": "a8bfadcead53a60bcc30ce211932c1d9030e0c26963dc1ed942605cce59dc251",
+      "reservation_usd": "0.08646",
+      "stage": "dispute.adjudicate"
+    },
+    "lead.memo": {
+      "confirmed_ms": 10201,
+      "dispatched_ms": 506,
+      "estimated_model_cost_usd": "0.009378",
+      "input_tokens_preflight": 1634,
+      "max_output_tokens": 2560,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"paragraphs\": [\n    {\n      \"text\": \"No. As of 11 July 2022, a deal analyst could treat the notice as a disputed attempt to terminate, not as proof that the acquisition had ended. The buyer group invoked Section 8.1(d)(i), alleging that Twitter materially breached the agreement by withholding requested data on fake or spam accounts. Musk’s counsel also alleged apparent misrepresentations and said Twitter was likely to suffer a Company Material Adverse Effect.\",\n      \"citations\": [\n        {\n          \"passage_id\": \"P1\",\n          \"quote\": \"appears to have made false and misleading representations upon which Mr. Musk relied when entering into the Merger Agreement, and is likely to suffer a Company Material Adverse Effect\"\n        },\n        {\n          \"passage_id\": \"P2\",\n          \"quote\": \"this letter constitutes formal notice of X Holding I, Inc.’s termination of the Merger Agreement pursuant to Section 8.1(d)(i) thereof.\"\n        }\n      ]\n    },\n    {\n      \"text\": \"Twitter denied any breach or material adverse effect, called the notice invalid, and maintained that the agreement remained in force. Its board said it intended to close at the agreed USD 54.20 per share and pursue enforcement in the Delaware Court of Chancery. The remedy at issue was specific performance: compelling the buyer group to perform its obligations. The record did not establish whether the notice was effective or whether the deal would close.\",\n      \"citations\": [\n        {\n          \"passage_id\": \"P3\",\n          \"quote\": \"Twitter Board Confident in Merger Agreement and Intends to Close Transaction at $54.20 Per Share Price\"\n        },\n        {\n          \"passage_id\": \"P4\",\n          \"quote\": \"Twitter reserves all contractual, legal, and other rights, including its right to specifically enforce the Musk Parties’ obligations under the Agreement.\"\n        }\n      ]\n    }\n  ],\n  \"filing_history\": null\n}",
+      "provider": {
+        "elapsed_ms": 9695,
+        "ids_sha256": "50a7035c4367ac049417ca47e2fd8aca442a4f60c29dba38d151dc70b7f58960",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 1634,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 611,
+          "output_tokens_details": {
+            "reasoning_tokens": 185
+          },
+          "total_tokens": 2245
+        }
+      },
+      "request_sha256": "2cc7e9f9f66295b5bef8b6985d89af55ab5846526679607ef943f6a06930bcf0",
+      "reservation_usd": "0.029685",
+      "stage": "lead.memo"
+    },
+    "review.initial": {
+      "confirmed_ms": 16718,
+      "dispatched_ms": 10436,
+      "estimated_model_cost_usd": "0.01017",
+      "input_tokens_preflight": 3080,
+      "max_output_tokens": 2048,
+      "model": "gpt-6.2-sol",
+      "output": "{\n  \"findings\": [\n    {\n      \"claim_id\": \"paragraph_1\",\n      \"verdict\": \"supported\",\n      \"reason\": \"P1 records counsel’s allegations of material breach over requested fake- or spam-account data, apparent misrepresentations, and a likely Company Material Adverse Effect. P2 invokes Section 8.1(d)(i) in the formal notice. The notice establishes the buyer group’s asserted termination, not its legal effect; P4 expressly disputes that effect.\",\n      \"evidence_ids\": [\"P1\", \"P2\", \"P4\"]\n    },\n    {\n      \"claim_id\": \"paragraph_2\",\n      \"verdict\": \"supported\",\n      \"reason\": \"P4 denies breach and any actual or likely Company Material Adverse Effect, asserts that the agreement remains in force, and reserves the right to compel performance. P3 gives the $54.20 per-share price and the board’s plan to seek enforcement in Delaware Chancery. Neither passage establishes that the notice was ineffective or that the deal would close.\",\n      \"evidence_ids\": [\"P3\", \"P4\"]\n    }\n  ],\n  \"addresses_question\": true,\n  \"coverage_reason\": \"The memo explains why the notice alone did not establish that the acquisition had ended, gives both sides’ positions, identifies the $54.20 per-share price and specific performance as the remedy at issue, and leaves the notice’s effectiveness and eventual closing unresolved as of the cutoff.\",\n  \"conflict\": {\n    \"kind\": \"material\",\n    \"treatment\": \"qualified\",\n    \"issue\": \"The buyer group asserted that it had terminated the merger agreement under Section 8.1(d)(i); Twitter asserted that the notice was invalid and the agreement remained in force.\",\n    \"witnesses\": [\"P2\", \"P4\"],\n    \"controlling_passage\": null\n  }\n}",
+      "provider": {
+        "elapsed_ms": 6281,
+        "ids_sha256": "5c5bab7592c9466b99bfc60041067fc6883974ec22b3016cb0a0778c3897337b",
+        "model": "gpt-6.2-sol",
+        "service_tier": "default",
+        "status": "completed",
+        "usage": {
+          "input_tokens": 3080,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cache_write_tokens_details": {
+              "ttl_12h_tokens": 0,
+              "ttl_30m_tokens": 0
+            },
+            "cached_tokens": 0
+          },
+          "output_tokens": 401,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 3481
+        }
+      },
+      "request_sha256": "0f8072f52c9204e5d5f36994e64506cd8039e8ea156eac0b507c98f81196f9b1",
+      "reservation_usd": "0.02818",
+      "stage": "review.initial"
+    }
+  },
+  "case_id": "twitter-merger-2022-07-11",
+  "corpus_sha256": "515c952137e0587aa953eacc6f71cc0f0d544d5bd590490b70c7590bfc1c65a5",
+  "coverage": "write",
+  "created_at": "2026-11-19T11:35:56.665304+00:00",
+  "cutoff": "2022-07-11T21:00:00Z",
+  "decisions": [],
+  "dispute": {
+    "advice": {
+      "assessment": "No. The July 8 notice (P2) establishes that the buyer group invoked Section 8.1(d)(i), not that it had a valid right to terminate. P1 gives its asserted grounds: withheld spam-account data, apparent misrepresentations and a likely material adverse effect. Twitter’s July 8 board statement (P3) announced its intent to enforce the $54.20-per-share deal in Delaware Chancery. Its July 10 counsel letter (P4) denied breach and a material adverse effect, rejected the notice as invalid and reserved the right to specific performance. Neither party’s statement decides the dispute. A court ruling on the notice’s validity or a binding agreement resolving the dispute would settle it; neither was in the record by July 11. The analyst could conclude neither that the deal had ended nor that it would close.",
+      "controlling_passage": null,
+      "disposition": "unresolved",
+      "evidence_ids": [
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ],
+      "recommendation": "retain"
+    },
+    "retrieval": [
+      {
+        "max_date": "2022-07-11T21:00:00Z",
+        "operation": "read",
+        "results": [
+          "bidder-notice/Grounds asserted in the notice"
+        ]
+      },
+      {
+        "max_date": "2022-07-11T21:00:00Z",
+        "operation": "read",
+        "results": [
+          "bidder-notice/Grounds asserted in the notice"
+        ]
+      },
+      {
+        "max_date": "2022-07-11T21:00:00Z",
+        "operation": "exhibit_dates",
+        "results": [
+          "bidder-notice/Grounds asserted in the notice"
+        ]
+      },
+      {
+        "max_date": "2022-07-11T21:00:00Z",
+        "operation": "read",
+        "results": [
+          "bidder-notice/Formal notice"
+        ]
+      },
+      {
+        "max_date": "2022-07-11T21:00:00Z",
+        "operation": "read",
+        "results": [
+          "twitter-board/Board statement"
+        ]
+      },
+      {
+        "max_date": "2022-07-11T21:00:00Z",
+        "operation": "read",
+        "results": [
+          "twitter-board/Board statement"
+        ]
+      },
+      {
+        "max_date": "2022-07-11T21:00:00Z",
+        "operation": "exhibit_dates",
+        "results": [
+          "twitter-board/Board statement"
+        ]
+      },
+      {
+        "max_date": "2022-07-11T21:00:00Z",
+        "operation": "read",
+        "results": [
+          "twitter-response/Response and reservation of rights"
+        ]
+      },
+      {
+        "max_date": "2022-07-11T21:00:00Z",
+        "operation": "read",
+        "results": [
+          "twitter-response/Response and reservation of rights"
+        ]
+      },
+      {
+        "max_date": "2022-07-11T21:00:00Z",
+        "operation": "exhibit_dates",
+        "results": [
+          "twitter-response/Response and reservation of rights"
+        ]
+      }
+    ],
+    "status": "adjudicated",
+    "verified_exhibit_dates": {
+      "P1": {
+        "edgar_accepted_at": "2022-07-08T17:14:38-04:00",
+        "printed_heading_date": "2022-07-08"
+      },
+      "P2": {
+        "edgar_accepted_at": "2022-07-08T17:14:38-04:00",
+        "printed_heading_date": "2022-07-08"
+      },
+      "P3": {
+        "edgar_accepted_at": "2022-07-11T16:38:36-04:00",
+        "printed_heading_date": "2022-07-08"
+      },
+      "P4": {
+        "edgar_accepted_at": "2022-07-11T16:38:36-04:00",
+        "printed_heading_date": "2022-07-10"
+      }
+    },
+    "witnesses": {
+      "P2": {
+        "citation": "https://www.sec.gov/Archives/edgar/data/1418091/000110465922078413/tm2220599d1_ex99-p.htm#:~:text=Accordingly%2C%20for%20all%20of%20these%20reasons%2C%20Mr.%20Musk%20hereby%20exercises%20X%20Holdings%20I%2C%20Inc.%E2%80%99s%20right",
+        "original_sha256": "f8c6a9f980cf2b552e3f68148e88c3641b38b19104b514ecb3fd3028a71f4ed4",
+        "passage_sha256": "9563584e5c0d362277907e6cf40882fc7c8795b65b292bd72d48f7cba8e59161"
+      },
+      "P4": {
+        "citation": "https://www.sec.gov/Archives/edgar/data/1418091/000119312522191300/d370677dex992.htm#:~:text=Mr.%20Musk%E2%80%99s%20and%20the%20other%20Musk%20Parties%E2%80%99%20purported%20termination%20is%20invalid%20and%20wrongful%2C%20and%20it",
+        "original_sha256": "e4c56dfbb2ed7e80ce28da1a9392782c6b593667e3c23e783802635c4ffeb485",
+        "passage_sha256": "29b13d775f285b9da73527c3644363b4662ade89272f6421962ecd5c670797b1"
+      }
+    }
+  },
+  "dispute_version": "material-dispute-v2",
+  "elapsed_ms": 23618,
+  "estimated_model_cost_usd": "0.048964",
+  "events": [
+    [
+      "reserve",
+      "lead.memo"
+    ],
+    [
+      "settle",
+      "lead.memo"
+    ],
+    [
+      "reserve",
+      "review.initial"
+    ],
+    [
+      "settle",
+      "review.initial"
+    ],
+    [
+      "reserve",
+      "dispute.adjudicate"
+    ],
+    [
+      "settle",
+      "dispute.adjudicate"
+    ]
+  ],
+  "evidence": {
+    "P1": {
+      "available_by_utc": "2022-07-08T21:14:38+00:00",
+      "citation_url": "https://www.sec.gov/Archives/edgar/data/1418091/000110465922078413/tm2220599d1_ex99-p.htm#:~:text=We%20refer%20to%20%28i%29%20the%20Agreement%20and%20Plan%20of%20Merger%20by%20and%20among%20X%20Holdings",
+      "edition": "0001104659-22-078413",
+      "locator": "Grounds asserted in the notice",
+      "published": "2022-07-08T17:14:38-04:00",
+      "sha256": "f8c6a9f980cf2b552e3f68148e88c3641b38b19104b514ecb3fd3028a71f4ed4",
+      "source_id": "bidder-notice",
+      "text": "We refer to (i) the Agreement and Plan of Merger by and among X Holdings I, Inc., X Holdings II, Inc. and Twitter, Inc. dated as of April 25, 2022 (the “Merger Agreement”) and (ii) our letter to you dated as of June 6, 2022 (the “June 6 Letter”). As further described below, Mr. Musk is terminating the Merger Agreement because Twitter is in material breach of multiple provisions of that Agreement, appears to have made false and misleading representations upon which Mr. Musk relied when entering into the Merger Agreement, and is likely to suffer a Company Material Adverse Effect (as that term is defined in the Merger Agreement). While Section 6.4 of the Merger Agreement requires Twitter to provide Mr. Musk and his advisors all data and information that Mr. Musk requests “for any reasonable business purpose related to the consummation of the transaction,” Twitter has not complied with its contractual obligations. For nearly two months, Mr. Musk has sought the data and information necessary to “make an independent assessment of the prevalence of fake or spam accounts on Twitter’s platform” (our letter to you dated May 25, 2022 (the “May 25 Letter”)). This information is fundamental to Twitter’s business and financial performance and is necessary to consummate the transactions contemplated by the Merger Agreement because it is needed to ensure Twitter’s satisfaction of the conditions to closing, to facilitate Mr. Musk’s financing and financial planning for the transaction, and to engage in transition planning for the business. Twitter has failed or refused to provide this information. Sometimes Twitter has ignored Mr. Musk’s requests, sometimes it has rejected them for reasons that appear to be unjustified, and sometimes it has claimed to comply while giving Mr. Musk incomplete or unusable information.",
+      "title": "Letter from counsel for Elon Musk and X Holdings I",
+      "url": "https://www.sec.gov/Archives/edgar/data/1418091/000110465922078413/tm2220599d1_ex99-p.htm",
+      "version_at": "2022-07-08T17:14:38-04:00"
+    },
+    "P2": {
+      "available_by_utc": "2022-07-08T21:14:38+00:00",
+      "citation_url": "https://www.sec.gov/Archives/edgar/data/1418091/000110465922078413/tm2220599d1_ex99-p.htm#:~:text=Accordingly%2C%20for%20all%20of%20these%20reasons%2C%20Mr.%20Musk%20hereby%20exercises%20X%20Holdings%20I%2C%20Inc.%E2%80%99s%20right",
+      "edition": "0001104659-22-078413",
+      "locator": "Formal notice",
+      "published": "2022-07-08T17:14:38-04:00",
+      "sha256": "f8c6a9f980cf2b552e3f68148e88c3641b38b19104b514ecb3fd3028a71f4ed4",
+      "source_id": "bidder-notice",
+      "text": "Accordingly, for all of these reasons, Mr. Musk hereby exercises X Holdings I, Inc.’s right to terminate the Merger Agreement and abandon the transaction contemplated thereby, and this letter constitutes formal notice of X Holding I, Inc.’s termination of the Merger Agreement pursuant to Section 8.1(d)(i) thereof.",
+      "title": "Letter from counsel for Elon Musk and X Holdings I",
+      "url": "https://www.sec.gov/Archives/edgar/data/1418091/000110465922078413/tm2220599d1_ex99-p.htm",
+      "version_at": "2022-07-08T17:14:38-04:00"
+    },
+    "P3": {
+      "available_by_utc": "2022-07-11T20:38:36+00:00",
+      "citation_url": "https://www.sec.gov/Archives/edgar/data/1418091/000119312522191300/d370677dex991.htm#:~:text=Twitter%20Board%20Confident%20in%20Merger%20Agreement%20and%20Intends%20to%20Close%20Transaction%20at%20%2454.20%20Per%20Share",
+      "edition": "0001193125-22-191300",
+      "locator": "Board statement",
+      "published": "2022-07-11T16:38:36-04:00",
+      "sha256": "f739512ca27cc70b59b9fde93ea33693cd4aa6c00d8a211bac6b6e0dc9f5cc1b",
+      "source_id": "twitter-board",
+      "text": "Twitter Board Confident in Merger Agreement and Intends to Close Transaction at $54.20 Per Share Price SAN FRANCISCO, July 8, 2022 /PRNewswire/ -- Twitter, Inc. (NYSE: TWTR) today received a notice of purported termination from Elon Musk and the Twitter Board issued the following statement in response: We are committed to closing the transaction on the price and terms agreed upon with Mr. Musk and plan to pursue legal action to enforce the merger agreement. We are confident we will prevail in the Delaware Court of Chancery.",
+      "title": "Statement of the Twitter board",
+      "url": "https://www.sec.gov/Archives/edgar/data/1418091/000119312522191300/d370677dex991.htm",
+      "version_at": "2022-07-11T16:38:36-04:00"
+    },
+    "P4": {
+      "available_by_utc": "2022-07-11T20:38:36+00:00",
+      "citation_url": "https://www.sec.gov/Archives/edgar/data/1418091/000119312522191300/d370677dex992.htm#:~:text=Mr.%20Musk%E2%80%99s%20and%20the%20other%20Musk%20Parties%E2%80%99%20purported%20termination%20is%20invalid%20and%20wrongful%2C%20and%20it",
+      "edition": "0001193125-22-191300",
+      "locator": "Response and reservation of rights",
+      "published": "2022-07-11T16:38:36-04:00",
+      "sha256": "e4c56dfbb2ed7e80ce28da1a9392782c6b593667e3c23e783802635c4ffeb485",
+      "source_id": "twitter-response",
+      "text": "Mr. Musk’s and the other Musk Parties’ purported termination is invalid and wrongful, and it constitutes a repudiation of their obligations under the Agreement. Contrary to the assertions in your letter, Twitter has breached none of its obligations under the Agreement, and Twitter has not suffered and is not likely to suffer a Company Material Adverse Effect. The purported termination is invalid for the independent reason that Mr. Musk and the other Musk Parties have knowingly, intentionally, willfully, and materially breached the Agreement, including but not limited to Sections 6.3, 6.8, and 6.10 thereof. The Agreement is not terminated, the Bank Debt Commitment Letter and the Equity Commitment Letter remain in effect, and Twitter demands that Mr. Musk and the other Musk Parties comply with their obligations under the Agreement, including their obligations to use their respective reasonable best efforts to consummate and make effective the transactions contemplated by the Agreement (including by taking all steps necessary to obtain a favorable outcome under the United Kingdom’s National Security and Investment Act 2021), the Bank Debt Commitment Letter, and the Equity Commitment Letter. As it has done, Twitter will continue to provide information reasonably requested by Mr. Musk under the Agreement and to diligently take all measures required to close the transaction. Twitter reserves all contractual, legal, and other rights, including its right to specifically enforce the Musk Parties’ obligations under the Agreement.",
+      "title": "Letter from counsel for Twitter",
+      "url": "https://www.sec.gov/Archives/edgar/data/1418091/000119312522191300/d370677dex992.htm",
+      "version_at": "2022-07-11T16:38:36-04:00"
+    }
+  },
+  "memo_sha256": "1d50f5bbc721f45983e9a7c809255024cf1a0e8ec01cbc271f8bd08cf7db1258",
+  "paid_tool_charges_usd": "0",
+  "pricing": {
+    "per_million_usd": {
+      "gpt-6.2-astra": {
+        "cache_write_30m": "10.00",
+        "cached_input": "0.40",
+        "ordinary_input": "8.00",
+        "output": "40.00"
+      },
+      "gpt-6.2-sol": {
+        "cache_write_30m": "2.50",
+        "cached_input": "0.10",
+        "ordinary_input": "2.00",
+        "output": "10.00"
+      }
+    },
+    "sources": [
+      "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+      "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
+    ],
+    "status": "estimate_from_usage"
+  },
+  "prompt_version": "sol-two-luna-v4",
+  "question": "As of 11 July 2022, could a deal analyst treat the Musk buyer group’s termination notice as ending the Twitter acquisition? Give each side’s position, the per-share price and remedy at issue, and what could be concluded about closing.",
+  "review": {
+    "released_memo_sha256": "1d50f5bbc721f45983e9a7c809255024cf1a0e8ec01cbc271f8bd08cf7db1258",
+    "rounds": [
+      {
+        "approved": true,
+        "assessment": {
+          "addresses_question": true,
+          "conflict": {
+            "controlling_passage": null,
+            "issue": "The buyer group asserted that it had terminated the merger agreement under Section 8.1(d)(i); Twitter asserted that the notice was invalid and the agreement remained in force.",
+            "kind": "material",
+            "treatment": "qualified",
+            "witnesses": [
+              "P2",
+              "P4"
+            ]
+          },
+          "coverage_reason": "The memo explains why the notice alone did not establish that the acquisition had ended, gives both sides’ positions, identifies the $54.20 per-share price and specific performance as the remedy at issue, and leaves the notice’s effectiveness and eventual closing unresolved as of the cutoff.",
+          "findings": [
+            {
+              "claim_id": "paragraph_1",
+              "evidence_ids": [
+                "P1",
+                "P2",
+                "P4"
+              ],
+              "reason": "P1 records counsel’s allegations of material breach over requested fake- or spam-account data, apparent misrepresentations, and a likely Company Material Adverse Effect. P2 invokes Section 8.1(d)(i) in the formal notice. The notice establishes the buyer group’s asserted termination, not its legal effect; P4 expressly disputes that effect.",
+              "verdict": "supported"
+            },
+            {
+              "claim_id": "paragraph_2",
+              "evidence_ids": [
+                "P3",
+                "P4"
+              ],
+              "reason": "P4 denies breach and any actual or likely Company Material Adverse Effect, asserts that the agreement remains in force, and reserves the right to compel performance. P3 gives the $54.20 per-share price and the board’s plan to seek enforcement in Delaware Chancery. Neither passage establishes that the notice was ineffective or that the deal would close.",
+              "verdict": "supported"
+            }
+          ]
+        },
+        "draft": {
+          "filing_history": null,
+          "paragraphs": [
+            {
+              "citations": [
+                {
+                  "passage_id": "P1",
+                  "quote": "appears to have made false and misleading representations upon which Mr. Musk relied when entering into the Merger Agreement, and is likely to suffer a Company Material Adverse Effect"
+                },
+                {
+                  "passage_id": "P2",
+                  "quote": "this letter constitutes formal notice of X Holding I, Inc.’s termination of the Merger Agreement pursuant to Section 8.1(d)(i) thereof."
+                }
+              ],
+              "text": "No. As of 11 July 2022, a deal analyst could treat the notice as a disputed attempt to terminate, not as proof that the acquisition had ended. The buyer group invoked Section 8.1(d)(i), alleging that Twitter materially breached the agreement by withholding requested data on fake or spam accounts. Musk’s counsel also alleged apparent misrepresentations and said Twitter was likely to suffer a Company Material Adverse Effect."
+            },
+            {
+              "citations": [
+                {
+                  "passage_id": "P3",
+                  "quote": "Twitter Board Confident in Merger Agreement and Intends to Close Transaction at $54.20 Per Share Price"
+                },
+                {
+                  "passage_id": "P4",
+                  "quote": "Twitter reserves all contractual, legal, and other rights, including its right to specifically enforce the Musk Parties’ obligations under the Agreement."
+                }
+              ],
+              "text": "Twitter denied any breach or material adverse effect, called the notice invalid, and maintained that the agreement remained in force. Its board said it intended to close at the agreed USD 54.20 per share and pursue enforcement in the Delaware Court of Chancery. The remedy at issue was specific performance: compelling the buyer group to perform its obligations. The record did not establish whether the notice was effective or whether the deal would close."
+            }
+          ]
+        },
+        "draft_sha256": "41df1d4e71a6403b003e14d5c9cafe8132af4b72dc92c64960a7de1d71cf6e1e",
+        "memo_sha256": "1d50f5bbc721f45983e9a7c809255024cf1a0e8ec01cbc271f8bd08cf7db1258",
+        "retrieval": [
+          {
+            "max_date": "2022-07-11T21:00:00Z",
+            "operation": "read",
+            "results": [
+              "bidder-notice/Grounds asserted in the notice"
+            ]
+          },
+          {
+            "max_date": "2022-07-11T21:00:00Z",
+            "operation": "read",
+            "results": [
+              "bidder-notice/Formal notice"
+            ]
+          },
+          {
+            "max_date": "2022-07-11T21:00:00Z",
+            "operation": "read",
+            "results": [
+              "twitter-board/Board statement"
+            ]
+          },
+          {
+            "max_date": "2022-07-11T21:00:00Z",
+            "operation": "read",
+            "results": [
+              "twitter-response/Response and reservation of rights"
+            ]
+          }
+        ]
+      }
+    ],
+    "status": "approved"
+  },
+  "review_version": "sol-citation-review-v1",
+  "route": "dispute",
+  "run_id": "twitter-dateline-check",
+  "schema_version": 3,
+  "source_file_sha256": "b7f8f35e19aee4c543eaf77b219f7f003643435b01e2ce04e7207dddfcb294ab",
+  "source_reads": [
+    {
+      "max_date": "2022-07-11T21:00:00Z",
+      "operation": "read",
+      "results": [
+        "bidder-notice/Grounds asserted in the notice",
+        "bidder-notice/Formal notice"
+      ]
+    },
+    {
+      "max_date": "2022-07-11T21:00:00Z",
+      "operation": "read",
+      "results": [
+        "twitter-board/Board statement"
+      ]
+    },
+    {
+      "max_date": "2022-07-11T21:00:00Z",
+      "operation": "read",
+      "results": [
+        "twitter-response/Response and reservation of rights"
+      ]
+    }
+  ],
+  "state": "complete",
+  "unreconciled_reservation_usd": "0",
+  "worker_reports": [],
+  "workers": []
+}

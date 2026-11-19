@@ -415,3 +415,34 @@ class DisputeTests(unittest.TestCase):
             with self.assertRaisesRegex(CaseError, "fingerprint"):
                 replay(self.case, tampered, corpus=self.corpus)
         self.assertEqual(scripted["dispute.adjudicate"][1], REVIEW_ALLOWANCE)
+
+    def test_archived_live_comparison_and_separate_date_check_replay(self):
+        trial = ev.HERE / "trial"
+        comparison = ev.check(trial)
+        self.assertEqual(comparison, ev.load(trial / "results.json"))
+        self.assertTrue(all(arm["pass"] for arm in comparison["arms"].values()))
+        self.assertTrue(comparison["price_only"]["passed_bypass"])
+
+        corrected = ev.HERE / "dateline-check"
+        usage = ev.check_datelines(corrected, comparison)
+        self.assertEqual(usage, ev.load(ev.HERE / "usage.json"))
+        self.assertTrue(usage["date_check"]["passed"])
+        actual_advice = ev.load(corrected / "run.json")["dispute"]["advice"]
+        self.assertIn("July 10 counsel letter (P4)", actual_advice["assessment"])
+
+    def test_archived_replay_detects_changed_witness_date_or_prompt_version(self):
+        original = ev.load(ev.HERE / "trial/dispute/run.json")
+        corrected = ev.load(ev.HERE / "dateline-check/run.json")
+        altered = deepcopy(original)
+        altered["dispute"]["witnesses"]["P4"]["original_sha256"] = "0" * 64
+        with self.assertRaisesRegex(CaseError, "Replayed evidence"):
+            replay(self.case, altered, corpus=self.corpus)
+        altered = deepcopy(corrected)
+        altered["dispute"]["verified_exhibit_dates"]["P4"]["printed_heading_date"] = (
+            "2022-07-11"
+        )
+        with self.assertRaisesRegex(CaseError, "Replayed evidence"):
+            replay(self.case, altered, corpus=self.corpus)
+        altered = {**corrected, "dispute_version": original["dispute_version"]}
+        with self.assertRaisesRegex(CaseError, "fingerprint"):
+            replay(self.case, altered, corpus=self.corpus)

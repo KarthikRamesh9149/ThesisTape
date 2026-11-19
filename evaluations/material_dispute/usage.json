@@ -1,0 +1,33 @@
+{
+  "checkpoint_usd": "0.147884",
+  "date_check": {
+    "assessment_sha256": "31e0754ad2bb80c33b87a088b397234992ffaf19a2a5b30b709baae2a1fb9dc3",
+    "elapsed_ms": 23618,
+    "estimated_usd": "0.048964",
+    "exhibit_dates": {
+      "P1": {
+        "edgar_accepted_at": "2022-07-08T17:14:38-04:00",
+        "printed_heading_date": "2022-07-08"
+      },
+      "P2": {
+        "edgar_accepted_at": "2022-07-08T17:14:38-04:00",
+        "printed_heading_date": "2022-07-08"
+      },
+      "P3": {
+        "edgar_accepted_at": "2022-07-11T16:38:36-04:00",
+        "printed_heading_date": "2022-07-08"
+      },
+      "P4": {
+        "edgar_accepted_at": "2022-07-11T16:38:36-04:00",
+        "printed_heading_date": "2022-07-10"
+      }
+    },
+    "generations": 3,
+    "passed": true,
+    "unreconciled_usd": "0"
+  },
+  "original_trial_usd": "0.098920",
+  "prior_project_usd": "0.3865639",
+  "project_cap_usd": "100",
+  "project_recorded_usd": "0.5344479"
+}

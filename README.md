@@ -84,6 +84,19 @@ On Toyota’s full-year buybacks, both routes scored 6/6. Visual confirmation ad
 .venv/bin/python -B -m scripts.research_team run --case toyota-buybacks --route visual --budget-usd 0.12 --output-dir runs/toyota-table-new
 ```
 
+### Review a material dispute
+
+Use `--route dispute` when opposing primary sources could change the answer. The independent Sol reviewer identifies the disputed claim and cites both sides. The controller reopens the originals at the cutoff and calls Astra once if enough budget remains for revision and review. A material change must pass fresh Sol review. The workflow can release a supported, qualified answer or withhold a conclusion it cannot support.
+
+On the July 2022 Twitter merger dispute, both the reviewed Sol report and the conditional Astra report earned 6/6. Both explained why closing was still unresolved. Escalation added USD 0.025464. A separate question about the board’s USD 54.20-per-share price completed without Astra. [Comparison, source dates and receipts](evaluations/material_dispute/evaluation.md)
+
+The first command reproduces the saved comparison offline. The second starts a new paid run.
+
+```sh
+.venv/bin/python -B -m evaluations.material_dispute.experiment check
+.venv/bin/python -B -m scripts.research_team run --case twitter-deal --route dispute --budget-usd 0.20 --output-dir runs/twitter-dispute-new
+```
+
 ## Run the single-Sol baseline
 
 Sol chooses its search terms, inspects dated result previews and selects passages to open. It has up to two searches. Only the selected full passages go into its writing request. The controller checks the quoted evidence, reconciles the amounts with decimal arithmetic and builds citations from the opened sources.
