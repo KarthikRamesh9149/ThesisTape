@@ -1,0 +1,277 @@
+{
+  "advance": false,
+  "bootstrap_draws": 20000,
+  "cost_usd_90pct_interval": [
+    -0.0077888625,
+    0.0031040270833333334
+  ],
+  "cutoff_violations": 0,
+  "leave_one_recurring_publisher_out": {
+    "assets.publishing.service.gov.uk": {
+      "cost": -0.001757159090909091,
+      "quality": 0.04166666666666667
+    },
+    "global.canon": {
+      "cost": -0.003060847727272727,
+      "cost_range": [
+        -0.003088381818181818,
+        -0.003060847727272727
+      ],
+      "quality": 0.04166666666666667
+    },
+    "www.apple.com": {
+      "cost": -0.0025829595238095237,
+      "cost_range": [
+        -0.002611804761904762,
+        -0.0025829595238095237
+      ],
+      "quality": 0.007936507936507936
+    },
+    "www.bankofcanada.ca": {
+      "cost": 0.0014721071428571428,
+      "cost_range": [
+        0.0014432619047619047,
+        0.0014721071428571428
+      ],
+      "quality": 0.04365079365079365
+    },
+    "www.bea.gov": {
+      "cost": -0.0044943025,
+      "cost_range": [
+        -0.00452459,
+        -0.0044943025
+      ],
+      "quality": 0.04583333333333334
+    },
+    "www.berkshirehathaway.com": {
+      "cost": -0.0033185309523809524,
+      "cost_range": [
+        -0.0033473761904761904,
+        -0.0033185309523809524
+      ],
+      "quality": 0.03571428571428571
+    },
+    "www.nintendo.co.jp": {
+      "cost": -0.001006843181818182,
+      "cost_range": [
+        -0.0010343772727272728,
+        -0.001006843181818182
+      ],
+      "quality": 0.04166666666666667
+    },
+    "www.treasurydirect.gov": {
+      "cost": -0.0022345275,
+      "cost_range": [
+        -0.002264815,
+        -0.0022345275
+      ],
+      "quality": 0.04583333333333334
+    }
+  },
+  "leave_one_stratum_out": {
+    "company-guidance": {
+      "cost": -0.0017407775,
+      "cost_range": [
+        -0.001771065,
+        -0.0017407775
+      ],
+      "quality": 0.04583333333333334
+    },
+    "corporate-actions": {
+      "cost": -0.002720485,
+      "quality": 0.037500000000000006
+    },
+    "financial-statements": {
+      "cost": -0.0026752725,
+      "cost_range": [
+        -0.00270556,
+        -0.0026752725
+      ],
+      "quality": 0.008333333333333333
+    },
+    "macro-revisions": {
+      "cost": -0.0044943025,
+      "cost_range": [
+        -0.00452459,
+        -0.0044943025
+      ],
+      "quality": 0.04583333333333334
+    },
+    "monetary-policy": {
+      "cost": 0.0001969525,
+      "cost_range": [
+        0.000166665,
+        0.0001969525
+      ],
+      "quality": 0.04583333333333334
+    },
+    "treasury-auctions": {
+      "cost": -0.0022345275,
+      "cost_range": [
+        -0.002264815,
+        -0.0022345275
+      ],
+      "quality": 0.04583333333333334
+    }
+  },
+  "metrics": {
+    "mixed_fixed_plan": {
+      "F": 0.16666666666666666,
+      "O": 0.0,
+      "Q": 0.125,
+      "R": 0.16666666666666666,
+      "cases": 24,
+      "citation_support": 1.0,
+      "cutoff_violations": 0,
+      "empty": 20,
+      "forward_cases": 16,
+      "material_claims": 57,
+      "mean_confirmed_cost_usd": 0.028407108333333334,
+      "mean_cost_upper_bound_usd": 0.028432347916666666,
+      "mean_cost_usd": 0.028432347916666666,
+      "mean_seconds": 37.16070833333333,
+      "p95_cost_usd": 0.0486072,
+      "p95_seconds": 75.792,
+      "qualified": 0,
+      "released": 4,
+      "supported_claims": 57,
+      "unreconciled_usd": "0.00060575"
+    },
+    "single_sol": {
+      "F": 0.1111111111111111,
+      "O": 0.0,
+      "Q": 0.08680555555555555,
+      "R": 0.125,
+      "cases": 24,
+      "citation_support": 1.0,
+      "cutoff_violations": 0,
+      "empty": 21,
+      "forward_cases": 16,
+      "material_claims": 47,
+      "mean_cost_usd": 0.030710416666666667,
+      "mean_seconds": 32.13183333333333,
+      "p95_cost_usd": 0.04647,
+      "p95_seconds": 67.142,
+      "qualified": 0,
+      "released": 3,
+      "supported_claims": 47
+    }
+  },
+  "mixed": "mixed_fixed_plan",
+  "paired_mixed_minus_single": {
+    "cost": -0.00227806875,
+    "cost_range": [
+      -0.002303308333333333,
+      -0.00227806875
+    ],
+    "quality": 0.03819444444444444
+  },
+  "per_event": {
+    "apple-fy2018-q4-iphone": {
+      "cost": -0.0061845,
+      "quality": null
+    },
+    "apple-fy2019-q2-services": {
+      "cost": -0.000754,
+      "quality": null
+    },
+    "apple-fy2020-nine-month-cash": {
+      "cost": 0.006507,
+      "quality": null
+    },
+    "bea-20q2-advance": {
+      "cost": -0.0051575,
+      "quality": 0.0
+    },
+    "bea-21q2-advance": {
+      "cost": 0.0060245,
+      "quality": 0.0
+    },
+    "bea-22q3-advance": {
+      "cost": 0.0252663,
+      "quality": 0.0
+    },
+    "bea-23q1-advance": {
+      "cost": 0.0090791,
+      "quality": 0.0
+    },
+    "berkshire-2022-q3-insurance": {
+      "cost": -0.0007367,
+      "quality": null
+    },
+    "boc-july-2017": {
+      "cost": -0.0199736,
+      "quality": 0.0
+    },
+    "boc-march-2020": {
+      "cost": -0.0438915,
+      "quality": 0.0
+    },
+    "boc-october-2018": {
+      "cost": -0.0217228,
+      "quality": 0.0
+    },
+    "canon-fy2016-interim-outlook": {
+      "cost": -0.0001392,
+      "quality": 0.0
+    },
+    "canon-fy2017-interim-outlook": {
+      "cost": 0.0128042,
+      "quality": 0.0
+    },
+    "fomc-liftoff-2015": {
+      "cost": 0.0269752,
+      "quality": 0.0
+    },
+    "nintendo-fy2016-guidance": {
+      "cost": -0.0011657,
+      "quality": 0.0
+    },
+    "nintendo-fy2019-guidance": {
+      "cost": -0.0313574,
+      "quality": 0.0
+    },
+    "pilot-investment-2017": {
+      "cost": 0.0100587,
+      "quality": null
+    },
+    "precision-castparts-merger-2015": {
+      "cost": 0.0056935,
+      "quality": null
+    },
+    "sainsbury-asda-final-report-2019": {
+      "cost": -0.03269425,
+      "cost_range": [
+        -0.0333,
+        -0.03269425
+      ],
+      "quality": null
+    },
+    "treasury-912796lc1-2017-10-02": {
+      "cost": 0.0109999,
+      "quality": 0.0
+    },
+    "treasury-912796qh5-2018-05-22": {
+      "cost": 0.0039477,
+      "quality": 0.0
+    },
+    "treasury-912810tb4-2021-11-10": {
+      "cost": -0.0213918,
+      "quality": 0.0
+    },
+    "treasury-91282cah4-2020-08-27": {
+      "cost": -0.0035389,
+      "quality": 0.0
+    },
+    "viagogo-stubhub-final-report-2021": {
+      "cost": 0.0166781,
+      "quality": null
+    }
+  },
+  "quality_90pct_interval": [
+    0.0,
+    0.09375
+  ],
+  "scores_sha256": "5b3529c45b552bce6e523e57271746e99e9acc6595affecee688cf76cc243092",
+  "single": "single_sol"
+}
