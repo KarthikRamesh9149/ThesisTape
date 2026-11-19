@@ -345,7 +345,7 @@ def main():
         if name == "register":
             cmd.add_argument("--cap-usd", type=Decimal, required=True)
             cmd.add_argument("--source-proof", type=Path, required=True)
-        if name in {"run", "export"}:
+        if name == "export":
             cmd.add_argument("--runs", type=Path, default=RESEARCH)
         if name == "run":
             cmd.add_argument("--workers", type=int, default=4)
@@ -366,7 +366,7 @@ def main():
     elif args.action == "register":
         result = register(args.questions, args.cap_usd, args.source_proof)
     elif args.action == "run":
-        return run(args.questions, args.runs, args.workers, args.limit)
+        return run(args.questions, RESEARCH, args.workers, args.limit)
     elif args.action == "validate":
         result = validate_file(args.questions, args.output)
     else:

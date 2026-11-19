@@ -1,3 +1,4 @@
+import gzip
 import json
 import tempfile
 import unittest
@@ -84,6 +85,15 @@ class FinanceGymAdapterTests(unittest.TestCase):
                 check_retrieval(root / "case", root / "http"),
                 {"searches": 1, "transport_requests": 3, "eligible_sources": 1},
             )
+            original_bytes = transport("https://web.archive.org/web/dated")
+            object_path = root / "http" / (fingerprint(original_bytes) + ".gz")
+            saved = object_path.read_bytes()
+            object_path.write_bytes(
+                gzip.compress(original_bytes.replace(b"quarterly", b"late-year"))
+            )
+            with self.assertRaises(ValueError):
+                check_retrieval(root / "case", root / "http")
+            object_path.write_bytes(saved)
             archive_receipt = next(
                 x
                 for x in (root / "http").glob("*.json")
