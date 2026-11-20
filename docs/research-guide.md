@@ -2,6 +2,8 @@
 
 Commands run from the repository root. Set up Python 3.12 and install the project dependencies using the [analyst desk quickstart](../README.md#run-the-analyst-desk).
 
+PDF image review and the full test suite use Poppler’s `pdftoppm`. Install Poppler and make `pdftoppm` available on `PATH` for those workflows.
+
 ## Ask a historical finance question
 
 Choose **New research → Public historical sources**. Enter a question, the last eligible UTC date and a USD spending limit. Live runs use `OPENAI_API_KEY` from the shell or the ignored project `.env.local`. A date without a time includes that entire UTC day. **Run activity** shows assignments, routing decisions, estimated charges from returned token usage and outstanding reservations. **Pause run** lets in-flight requests settle. **Resume run** continues under the original cutoff and cap.
