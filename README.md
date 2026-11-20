@@ -66,7 +66,7 @@ curl -fsSL 'https://raw.githubusercontent.com/google-research/google-research/c8
 .venv/bin/python -B -m evaluations.financegym.evidence verify runs/benchmark_400_public.jsonl
 ```
 
-The verifier checks the dataset fingerprint, replays the 400 submitted reports and reconciles sources, elapsed time and cost from the saved evidence. After the one-time download, the replay runs offline without an API key. [GitHub verification runs](https://github.com/KarthikRamesh9149/ThesisTape/actions/workflows/verify.yml) · [Artifact manifest](evaluations/financegym/results/manifest.json) · [Search all 400 reports offline](evaluations/financegym/README.md#browse-the-reports-offline)
+The verifier checks the dataset fingerprint, replays the 400 submitted reports and reconciles sources, elapsed time and cost from the saved evidence. After the one-time download, the replay runs offline without an API key. GitHub Actions runs the FinanceGym tests and the same report replay. [GitHub verification runs](https://github.com/KarthikRamesh9149/ThesisTape/actions/workflows/verify.yml) · [Artifact manifest](evaluations/financegym/results/manifest.json) · [Search all 400 reports offline](evaluations/financegym/README.md#browse-the-reports-offline)
 
 ## Run the research team
 

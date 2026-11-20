@@ -2,7 +2,7 @@
 
 Commands run from the repository root. Set up Python 3.12 and install the project dependencies using the [analyst desk quickstart](../README.md#run-the-analyst-desk).
 
-PDF image review and the full test suite use Poppler’s `pdftoppm`. Install Poppler and make `pdftoppm` available on `PATH` for those workflows.
+PDF image review uses Poppler’s `pdftoppm` on `PATH`. The full test suite includes historical development replays that check the Python, SQLite and Poppler versions recorded in the [paired development manifest](../evaluations/paired/run-manifest.json). GitHub Actions runs the FinanceGym tests and verifies the sealed submission on Ubuntu.
 
 ## Ask a historical finance question
 
