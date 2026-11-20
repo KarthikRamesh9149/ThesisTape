@@ -1,6 +1,6 @@
 # FinanceGym results and submission package
 
-ThesisTape produced a cited research report for each of the 400 original FinanceGym questions. Offline replay reproduced all 400 with their original wording, order and cutoff dates. The full project used an estimated USD 138.93 of its USD 140 API budget. The external score and ranking are pending maintainer grading. [400 reports](results/answers.jsonl) · [Methodology paper](methodology.pdf) · [Offline reader instructions](README.md) · [FinanceGym submission rules](https://financegym.github.io/#submit)
+ThesisTape submitted 400 cited reports to FinanceGym on 20 November 2026. Offline replay reproduced all 400 with their original wording, order and cutoff dates. The full project used an estimated USD 138.93 of its USD 140 API budget. FinanceGym’s maintainers determine the official score and rank. [Submitted JSONL](results/answers.jsonl) · [Read two reports](../../docs/financegym-examples/README.md) · [Methodology PDF](methodology.pdf) · [Offline reader](README.md#browse-the-reports-offline) · [FinanceGym leaderboard](https://financegym.github.io/#leaderboard)
 
 ## Where the reports came from
 

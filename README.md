@@ -1,205 +1,77 @@
 # ThesisTape
 
-ThesisTape researches a financial question using the sources in its archive that were public by a chosen cutoff. An analyst can set a spending limit, watch the work, and open the original passage behind a claim in the released memo.
+**Point-in-time financial research with citations you can open.**
 
-## Open the analyst desk
+Give ThesisTape a financial question, an information cutoff and a spending limit. It searches dated source editions and returns a memo with cited evidence, an outlook, and a record of what the research cost.
 
-From the repository root, use Python 3.12 to install the research dependencies and start the desk.
+[Review the FinanceGym submission](#financegym-submission) · [Read a submitted memo](docs/financegym-examples/intel-altera.md) · [Run the analyst desk](#run-the-analyst-desk) · [Replay all 400 reports](#verify-the-submission)
+
+## FinanceGym submission
+
+ThesisTape submitted reports for all **400 questions** on **20 November 2026**. FinanceGym’s maintainers assign the official score and rank. [FinanceGym leaderboard](https://financegym.github.io/#leaderboard)
+
+| Recorded result | Value |
+| --- | ---: |
+| Reports reproduced from the archived evidence | **400 / 400** |
+| Reports marked complete by ThesisTape | 127 |
+| Reports identifying gaps in the dated evidence | 273 |
+| Estimated model cost across benchmark attempts | USD 90.38 |
+| Average model cost per question | USD 0.2259 |
+
+The release counts come from ThesisTape’s own checks. The registered primary and recovery routes released 361 reports. Procedures documented during the run supplied 39 more. The audit includes all attempts and their costs. [Full results and limitations](evaluations/financegym/evaluation.md) · [Methodology PDF](evaluations/financegym/methodology.pdf) · [Download the submitted JSONL](https://raw.githubusercontent.com/KarthikRamesh9149/ThesisTape/6c04ea66823dbb2f94551c081cf69b936156d820/evaluations/financegym/results/answers.jsonl)
+
+### Read two submitted reports
+
+| Report | Cutoff | What to look for |
+| --- | --- | --- |
+| [Intel’s Altera divestiture](docs/financegym-examples/intel-altera.md) | 20 August 2025 | How the memo weighs the expected liquidity gain against the investment and customer commitments needed to compete in AI accelerators. |
+| [Canadian domestic demand](docs/financegym-examples/canadian-demand.md) | 17 June 2025 | How a qualified memo reasons from available evidence and identifies figures it could not substantiate by the cutoff. |
+
+Both Markdown files reproduce the submitted report text byte for byte. [Sample task IDs and hashes](docs/financegym-examples/README.md)
+
+## Run the analyst desk
+
+The desk opens with a saved memo on TSMC’s Arizona financing. Select a numbered citation to read the source passage alongside the memo. Use **Open original** to check the archived page and **Export .md** to download the report. The saved demo runs with zero model calls. [TSMC memo and evaluation](evaluations/open_research/tsmc/evaluation.md)
+
+<p align="center">
+  <img src="docs/media/analyst-desk.png" width="920" alt="ThesisTape’s analyst desk showing the saved TSMC Arizona memo, the cutoff and recorded cost, and a selected NIST source passage beside the report." />
+</p>
 
 ```sh
+git clone https://github.com/KarthikRamesh9149/ThesisTape.git
+cd ThesisTape
 python3.12 -m venv .venv
 .venv/bin/python -m pip install -r requirements-baseline.txt -r requirements-retrieval.txt
 .venv/bin/python -B -m scripts.analyst_desk --port 8765
 ```
 
-Open the saved TSMC financing report to see the government announcement, the cited passages, the participating models and their recorded costs. Select a numbered citation to read the passage, **Open original** to see the source, or **Export .md** to download the report. Opening the saved example uses no API credits and requires no key. [Local analyst desk](http://127.0.0.1:8765/)
+Open the desk at [127.0.0.1:8765](http://127.0.0.1:8765/). To start a live investigation, set `OPENAI_API_KEY` locally and choose **New research**. The [research guide](docs/research-guide.md#ask-a-historical-finance-question) explains the available research methods, spending limits and pause and resume controls.
 
-## Ask a historical finance question
+## How ThesisTape works
 
-Choose **New research → Public historical sources**. Enter a question, the last eligible UTC date and a USD spending limit. Live runs use `OPENAI_API_KEY` from the shell or the ignored project `.env.local`. A date without a time includes that entire UTC day. **Run activity** shows assignments, routing decisions, estimated charges from returned token usage and outstanding reservations. **Pause run** lets in-flight requests settle. **Resume run** continues under the original cutoff and cap.
+1. **Bind the cutoff to retrieval.** Each search sends the question’s cutoff as `max_date`. The gateway checks the availability of an archived capture, revision or filing before returning it to the researcher.
+2. **Research and review.** The run can use a single analyst or a team with separate evidence, calculation and review roles. The team checks material claims against source passages and can flag unresolved gaps in the memo.
+3. **Save the evidence.** Reports retain citations, dated source references and measured model usage. Portable records let a reviewer replay the result offline.
 
-The public archive accepts open research questions. Three curated collections cover the dated research archive, Twitter merger filings and NVIDIA earnings filings. The desk issues a qualified memo when the available sources support only part of an answer.
+[Architecture and model costs](ThesisTape-Architecture.pdf) · [Research workflow diagram](ThesisTape-Architecture.png) · [How the FinanceGym candidate was selected](evaluations/financegym/selection.md)
 
-The desk binds to loopback and saves each intake to its own folder under `runs/desk/`. Use `--runs-dir DIRECTORY` to open a different parent folder of CLI runs. The CLI accepts the same free-form intake with `run --question "…" --cutoff 2023-10-27 --collection archive --budget-usd 0.10 --output-dir runs/desk/my-run`. Replay a completed run offline with `python -m scripts.research_team replay --run-dir DIRECTORY`. [Browser verification and measured costs](evaluations/analyst_desk/evaluation.md)
+## Verify the submission
 
-## Research results
-
-[Build plan and validation milestones](BUILD_PLAN.md) · [Architecture and model costs (PDF)](ThesisTape-Architecture.pdf)
-
-ThesisTape produced and replayed reports for all 400 FinanceGym questions. The originally registered researchers released 361. Later procedures supplied 39. The benchmark cost an estimated USD 90.38 across all attempts. Including development and testing, project usage reached USD 138.93 against the USD 140 limit. FinanceGym’s maintainers determine the official score and rank. [Results, methods and submission files](evaluations/financegym/evaluation.md)
-
-GPT-6.2 Sol can research a filing alone or lead two GPT-6 Luna workers. The team and the single analyst each earned 3/3 on the Disney/Hulu and Tradeweb development cases. The single analyst was cheaper on both. Moving the Tradeweb cutoff to one second before its amendment led the team to request another search and qualify its answer. [Results and costs](evaluations/first-team/evaluation.md) · [Disney memo](evaluations/first-team/disney-team/memo.md) · [Tradeweb memo](evaluations/first-team/tradeweb-team/memo.md)
-
-On 24 held-out financial events, single Astra earned 79.7% local quality and released 24 reports. The research team earned 70.1% and released 22. Both forecast the correct direction in 7 of 16 prospective cases. The team cost an average USD 0.1378 per event and single Astra USD 0.1417. The preregistered rule selected single Astra for the primary FinanceGym investigation. [Held-out results and intervals](evaluations/paired/revisions/analyst_product/blind/evaluation.md) · [Evaluation protocol](evaluations/paired/protocol.md)
-
-The desk also offers additional checks on financial figures. On Nintendo, the team recovered the prior-year profit from the original PDF, calculated the decline and the comparison band, and correctly forecast the direction. It spent USD 0.351676 against a USD 0.45 limit. On Canon it calculated the remaining profit needed to meet guidance and missed the forecast direction. [Nintendo memo](evaluations/paired/revisions/quantitative_trials_v3/nintendo.md) · [Canon memo](evaluations/paired/revisions/quantitative_trials_v3/canon.md) · [Scoring and costs](evaluations/paired/revisions/quantitative_trials_v3/evaluation.md)
-
-On a public-source question about TSMC Arizona, the analyst desk retrieved the grant, proposed loans and payment conditions from the archived government announcement. The browser-exported report cost USD 0.349358. The evaluation includes an earlier draft that omitted the financing amounts. [TSMC financing memo and evidence](evaluations/open_research/tsmc/evaluation.md)
-
-The independent FinanceBench comparison sampled 24 companies. The quantitative team produced 15 correct, source-supported answers and single Astra with the same tools produced 13. The 90% paired interval for the difference was −8.3 to +25.0 percentage points. The general analyst therefore remains the primary researcher on accounting questions in FinanceGym. [Company-level results](evaluations/financebench/evaluation.md) · [Original Nintendo pilot and repair](evaluations/paired/revisions/grounding_v2/evaluation.md)
-
-The live ECB trial cost USD 0.2052854 and its download reproduced offline. [ECB report and browser checks](evaluations/open_research/ecb/evaluation.md) · [Boeing acquisition report](evaluations/open_research/boeing/reviewed.md)
-
-For a public-source question, choose the standard team, the team with additional checks on figures, or a single Astra analyst. All three search the same dated archive and can reopen the surrounding text of the original source. On the March 2023 Fed decision, the team found the new target range and the single analyst supported the size of the hike. The browser downloads preserve each report’s remaining evidence gaps. [Compare the two Fed memos](evaluations/open_research/fomc/evaluation.md)
-
-![ThesisTape research workflow showing the lead orchestrator, evidence workers, independent review and final report.](ThesisTape-Architecture.png)
-
-## Reproduce the Disney/Hulu case
-
-From the repository root, run these commands with Python 3.9 or later.
+From the repository root, install the dependencies as shown in the quickstart, then fetch the pinned public questions and run the verifier.
 
 ```sh
-python3 scripts/disney_hulu_case.py verify
-case_workspace="$(mktemp -d)"
-python3 scripts/disney_hulu_case.py import --output-dir "$case_workspace/disney-hulu"
-python3 scripts/disney_hulu_case.py verify --case-dir "$case_workspace/disney-hulu"
-python3 -B -m unittest discover -s tests -p 'test_disney_hulu_case.py' -v
+mkdir -p runs
+curl -fsSL 'https://raw.githubusercontent.com/google-research/google-research/c878a53ec1764bcb91a6178dc5c315202a3b5fa2/finance_harness/FinanceGym/data/benchmark_400_public.jsonl' \
+  -o runs/benchmark_400_public.jsonl
+.venv/bin/python -B -m evaluations.financegym.evidence verify runs/benchmark_400_public.jsonl
 ```
 
-The two files in `agent/` form the supplied-filing control. The gateway run takes its question and cutoff from the case and discovers its evidence through search. The evaluator uses the separate `evaluator/` directory to grade the answer and check the dated sources. Import and verification run offline.
-
-The importer reads the saved filings and indexes from the repository by default. Pass `--filings-dir DIR` to read the same four HTML files by their saved names from a single directory. The manifests and scoring sheet come from the versioned case. Reusing a destination with identical files succeeds without rewriting it.
-
-The stored Form 8-K documents are the original HTML payloads inside EDGAR’s complete submissions. The direct HTML responses included an archive script. The saved payloads match EDGAR’s listed sizes and the rest of each direct response byte for byte. The evaluator manifest links to both complete submissions and the index snapshots.
+The verifier checks the dataset fingerprint, replays the 400 submitted reports and reconciles sources, elapsed time and cost from the saved evidence. After the one-time download, the replay runs offline without an API key. [GitHub verification runs](https://github.com/KarthikRamesh9149/ThesisTape/actions/workflows/verify.yml) · [Artifact manifest](evaluations/financegym/results/manifest.json) · [Search all 400 reports offline](evaluations/financegym/README.md#browse-the-reports-offline)
 
 ## Run the research team
 
-Sol assigns a filings search and an independent search for contrary evidence. The Luna workers run in parallel. Each uses its own cutoff-bound archive session, opens passages and selects exact source spans. Sol compares their findings and can request one targeted follow-up before writing. The controller verifies citations, runs the Disney calculation and reserves each call against the same run budget, including any calls still in flight.
+The research guide covers [live team runs and offline replay](docs/research-guide.md#run-the-research-team), [the single-Sol baseline](docs/research-guide.md#run-the-single-sol-baseline), and [the dated retrieval archive](docs/research-guide.md#search-the-point-in-time-archive). The [build plan](BUILD_PLAN.md) records the development milestones and evaluations.
 
-After installing the dependencies for the analyst desk, reproduce the saved team report and run the test suite. The replay works offline without an API key.
+### Run the single-Sol baseline
 
-```sh
-.venv/bin/python -B -m scripts.research_team replay --run-dir evaluations/first-team/disney-team > /tmp/thesistape-team.md
-cmp /tmp/thesistape-team.md evaluations/first-team/disney-team/memo.md
-.venv/bin/python -B -m unittest discover -s tests -v
-```
-
-For a live run, set `OPENAI_API_KEY` in the ignored project `.env.local` or the shell. Use a fresh output directory for each run. The Tradeweb question is identical at the two cutoffs.
-
-```sh
-.venv/bin/python -B -m scripts.research_team run --case disney --route team --budget-usd 0.05 --output-dir runs/disney-team-new
-.venv/bin/python -B -m scripts.research_team run --case tradeweb --route team --budget-usd 0.05 --output-dir runs/tradeweb-team-new
-.venv/bin/python -B -m scripts.research_team run --case tradeweb --route single --budget-usd 0.05 --output-dir runs/tradeweb-single-new
-.venv/bin/python -B -m scripts.research_team run --case tradeweb-before --route team --budget-usd 0.05 --output-dir runs/tradeweb-earlier-new
-```
-
-Each directory contains the memo and a portable `run.json` with assignments, actual search queries, selected excerpts, lead decisions, token usage, timings and costs. The separate `provider-ids.json` is an operator receipt kept under the ignored `runs/` directory. The earlier Tradeweb report lists the passages inspected when the archive could not support a figure. [Earlier report](evaluations/first-team/tradeweb-before/memo.md) · [First team runs and spend](evaluations/first-team/development-usage.json)
-
-### Resume an interrupted research run
-
-Press Ctrl+C once to pause the CLI. It finishes saving any provider responses already in flight and exits with status 130. Continue in the same directory. The saved case, cutoff, route and spending limit carry over.
-
-```sh
-.venv/bin/python -B -m scripts.research_team resume --run-dir runs/disney-team-new
-```
-
-Keep the entire operator run directory when moving unfinished work. It contains the private receipts used to reconcile a generation that returned just before a crash. A completed run can reproduce its memo offline from the portable `run.json`. If a dispatched request has no recoverable receipt, the CLI records `needs_reconciliation`, displays the amount still reserved and stops before sending another generation.
-
-The Twitter price case survived both Ctrl+C and a hard process kill. The HTTP trace recorded one author generation and one reviewer generation. Offline recovery exported the cited memo, and repeating resume left the files byte-identical. [Live interruption proof and offline check](evaluations/cli_resume/evaluation.md)
-
-### Run independent citation review
-
-Use `--route reviewed` to send the team’s memo to a fresh Sol reviewer. It reopens the original passages at the case cutoff and assesses every material paragraph, any filing history and the Disney arithmetic. A material rejection goes to the lead for one correction. The controller exports the exact memo that passes review. If the revision still fails review, the verdict and drafts remain in the run record and the CLI exits with status 2. A search that yields no usable evidence returns a qualified notice listing the passages inspected.
-
-On Toyota’s real FY2024 forecast table, the reviewer accepted the original and caught a deliberately changed metric with identical numbers and citations. The complete correction branch added USD 0.011550 to the shared draft. [Paired evaluation and replay instructions](evaluations/citation_review/evaluation.md) · [Reviewed memo](evaluations/citation_review/challenge/memo.md) · [Spend through citation review](evaluations/citation_review/usage.json)
-
-```sh
-.venv/bin/python -B -m evaluations.citation_review.experiment check
-.venv/bin/python -B -m scripts.research_team run --case toyota --route reviewed --budget-usd 0.09 --output-dir runs/toyota-reviewed-new
-```
-
-### Run a forecast
-
-Use `--route forecast` for a Sol specialist that gives the lead a base case, causal driver, alternative and observable revision signal. Each point refers to a dated source. The independent reviewer checks the forecast’s factual premises and whether the conclusion follows from them. The same question also runs through `--route reviewed` for comparison.
-
-On NVIDIA’s Q2 FY2024 revenue, the specialist memo earned 6/6 and the reviewed control 5/6 for their cutoff-based analyses. Both predicted revenue within guidance, and NVIDIA reported revenue above the range. [Reports, missed forecast and costs](evaluations/forecast_specialist/evaluation.md) · [Cumulative spend](evaluations/forecast_specialist/usage.json)
-
-```sh
-.venv/bin/python -B -m evaluations.forecast_specialist.experiment check
-.venv/bin/python -B -m scripts.research_team run --case nvidia --route forecast --budget-usd 0.12 --output-dir runs/nvidia-forecast-new
-```
-
-### Read a financial table
-
-The conditional table route checks the requested row in a located, dated PDF. If extraction joins numeric cells, the row is ambiguous or Sol cannot resolve a field, Terra reads the registered page. A fresh Sol reviewer checks the report against that same page and the original notes. A clear row can complete with text alone.
-
-On Toyota’s full-year buybacks, both routes scored 6/6. Visual confirmation added USD 0.012342. A separate live check of the adjacent row returned the correct value and skipped the image. [Reports, scores and replay](evaluations/visual_reader/evaluation.md) · [Cumulative spend](evaluations/visual_reader/usage.json)
-
-```sh
-.venv/bin/python -B -m evaluations.visual_reader.verify
-.venv/bin/python -B -m scripts.research_team run --case toyota-buybacks --route visual --budget-usd 0.12 --output-dir runs/toyota-table-new
-```
-
-### Review a material dispute
-
-Use `--route dispute` when opposing primary sources could change the answer. The independent Sol reviewer identifies the disputed claim and cites both sides. The controller reopens the originals at the cutoff and calls Astra once if enough budget remains for revision and review. A material change must pass fresh Sol review. The workflow can release a supported, qualified answer or withhold a conclusion it cannot support.
-
-On the July 2022 Twitter merger dispute, both the reviewed Sol report and the conditional Astra report earned 6/6. Both explained why closing was still unresolved. Escalation added USD 0.025464. A separate question about the board’s USD 54.20-per-share price completed without Astra. [Comparison, source dates and receipts](evaluations/material_dispute/evaluation.md)
-
-The first command reproduces the saved comparison offline. The second starts a new paid run.
-
-```sh
-.venv/bin/python -B -m evaluations.material_dispute.experiment check
-.venv/bin/python -B -m scripts.research_team run --case twitter-deal --route dispute --budget-usd 0.20 --output-dir runs/twitter-dispute-new
-```
-
-## Run the single-Sol baseline
-
-Sol chooses its search terms, inspects dated result previews and selects passages to open. It has up to two searches. Only the selected full passages go into its writing request. The controller checks the quoted evidence, reconciles the amounts with decimal arithmetic and builds citations from the opened sources.
-
-Install both dependencies with Python 3.12. To reproduce the verified result offline, replay the saved provider responses through the archive.
-
-```sh
-python3.12 -m venv .venv
-.venv/bin/python -m pip install -r requirements-baseline.txt -r requirements-retrieval.txt
-.venv/bin/python -B -m scripts.sol_baseline replay --run-dir evaluations/disney-sol-gateway > /tmp/thesistape-disney-replay.md
-cmp evaluations/disney-sol-gateway/memo.md /tmp/thesistape-disney-replay.md
-.venv/bin/python -B -m unittest discover -s tests -v
-```
-
-For a new live run, set `OPENAI_API_KEY` in the ignored project `.env.local` or in the shell and choose a fresh output directory.
-
-```sh
-.venv/bin/python -B -m scripts.sol_baseline run --retrieval gateway --budget-usd 0.05 --output-dir runs/disney-sol
-.venv/bin/python -B -m scripts.sol_baseline replay --run-dir runs/disney-sol > runs/disney-sol/replayed.md
-cmp runs/disney-sol/memo.md runs/disney-sol/replayed.md
-```
-
-`memo.md` is the analyst deliverable. The portable `run.json` records the model’s search and passage choices, source hashes, quoted evidence, request fingerprints, token usage, arithmetic and estimated spend. The exact provider identifiers are saved locally in `provider-ids.json`. Before each generation, the controller counts the input tokens and checks that the remaining run budget covers the maximum charge. An unconfirmed request retains its reservation. The cost estimate uses Standard rates. [OpenAI GPT-6.2 Sol pricing](https://developers.openai.com/api/docs/models/gpt-6.2-sol)
-
-Use `--retrieval supplied` to run the original single-call control with the filing passages provided upfront. Both saved runs replay without a key. [Supplied-filing control](evaluations/disney-sol-gateway/supplied-control/memo.md)
-
-## Search the point-in-time archive
-
-The shared gateway searches eight historical editions. Each result carries its original URL, edition, publication date, availability in UTC, SHA-256, passage, locator and citation link. Install the PDF reader in the Python 3.12 environment above. Search, direct reads and evaluation run offline and require no API key.
-
-```sh
-.venv/bin/python -m pip install -r requirements-retrieval.txt
-.venv/bin/python -m scripts.retrieval_gateway verify
-.venv/bin/python -m scripts.retrieval_gateway search --as-of 2023-11-02 --limit 5 'What did Disney expect to pay NBCU for Hulu and what could an appraisal change?'
-.venv/bin/python -m scripts.retrieval_gateway read --as-of 2023-11-02 --locator 'Item 8.01 Other Events. ¶1' 'https://www.sec.gov/Archives/edgar/data/1744489/000174448923000206/dis-20231101.htm'
-.venv/bin/python -m scripts.retrieval_eval --check
-.venv/bin/python -B -m unittest discover -s tests -v
-```
-
-The controller creates one session per cutoff and supplies its original `max_date` on every search and read. Calendar cutoffs include the full UTC day. An offset timestamp permits intraday cases. A publisher that gives only a local date is admitted at the end of that local day. An unverified publication time or version stays outside the index. Each case gets its own SQLite FTS5 index so later documents cannot affect ranking. A search returns the latest covered vintage for each release series. An explicit citation can still open an older edition that was public by the cutoff.
-
-| Archive coverage | Passages available to the gateway |
-| --- | --- |
-| Disney and Tradeweb, US | Disney’s Hulu agreement in Item 8.01, plus Tradeweb’s original and amended earnings filings. EDGAR acceptance times distinguish the two Tradeweb versions issued on the same day. |
-| Toyota, Japan | Pages 2–3 of the English FY2023 financial summary. Consolidated results, forecasts and cash flow tables retain their rows, headings, units and notes. |
-| European Central Bank | The three-page September 2023 policy decision in the Banco de España archive. |
-| US Bureau of Economic Analysis | Pages 1–2 of the advance and 1–3 of the second Q3 2023 GDP releases. Current-vintage search ends when the third release became available on 21 December. |
-| Financial news | The published 16 September 2008 Wikinews revision about Lehman Brothers. Article text by Wikinews contributors under [CC BY 2.5](https://creativecommons.org/licenses/by/2.5/). |
-
-Publisher dates and version evidence are recorded in the [source catalog](retrieval/catalog.json). The gateway reads an explicit list of content-addressed archive objects. Direct URLs, citation fragments and dated redirects resolve within the same session. A missing or ineligible target returns an empty result. The model-visible trace includes the bound cutoff and admitted passage IDs. The evaluator supplies the 2025 Disney filing only in the mixed-archive isolation test.
-
-The retrieval evaluation uses 12 development questions and 14 manually marked passages. It reports top-five passage recall and whether the first result is marked. Each returned citation must reopen the exact passage through both its citation URL and its source locator. For PDFs the external link targets the original page and includes a search phrase, whose highlighting depends on the viewer. The development questions and ranks are available in the [scoring sheet](evaluations/retrieval/cases.json) and [measured results](evaluations/retrieval/results.json).
-
-To rebuild the archive directly from the publishers, run the optional import with network access and native `curl`. It checks the pinned hashes and edition dates before creating the destination. The bundled archive supports repeatable offline verification when a publisher changes its site.
-
-```sh
-archive_workspace="$(mktemp -d)"
-.venv/bin/python -m scripts.retrieval_archive --output-dir "$archive_workspace/publishers"
-diff -qr retrieval "$archive_workspace/publishers"
-```
+Use the [baseline replay commands](docs/research-guide.md#run-the-single-sol-baseline) to reproduce the saved Disney/Hulu memo without an API key.

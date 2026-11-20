@@ -1,10 +1,30 @@
 # FinanceGym evaluation
 
-The official runner uses the analyst desk's public-archive research engine. It matches every output to the original question and cutoff, meters each model generation, and records the raw HTTP evidence needed to rebuild dated retrieval independently. The 400 tasks come from the pinned public release. The maintainers hold the scoring rubric. [Public dataset](https://huggingface.co/datasets/Rujun/FinanceGym/tree/980a80810fdb41c90d8533baa228ddbe6557e9b1) · [Submission rules](https://financegym.github.io/#submit)
+ThesisTape submitted 400 cited reports to FinanceGym on 20 November 2026. Review the release counts and limitations, open an individual report, or replay the archived submission. FinanceGym’s maintainers grade the reports using their withheld rubric. [Results and limitations](evaluation.md) · [Submitted examples](../../docs/financegym-examples/README.md) · [Methodology PDF](methodology.pdf) · [Submission rules](https://financegym.github.io/#submit)
+
+## Verify the submitted reports
+
+Install the project dependencies and save the pinned public questions to `runs/benchmark_400_public.jsonl` using the [verification commands in the main README](../../README.md#verify-the-submission). Then run the verifier from the repository root. It checks the exact questions, cutoff dates, report text, receipts and artifact hashes. This runs offline without an API key after the question file has been downloaded.
+
+```sh
+.venv/bin/python -B -m evaluations.financegym.evidence verify runs/benchmark_400_public.jsonl
+```
+
+The portable archive stores original and published research, dated passages, model usage and fingerprints of the operator’s HTTP receipts. [Submitted JSONL](results/answers.jsonl) · [Artifact manifest](results/manifest.json) · [Per-question audit](results/audit.json) · [Public question dataset](https://huggingface.co/datasets/Rujun/FinanceGym/tree/980a80810fdb41c90d8533baa228ddbe6557e9b1)
+
+FinanceGym distributes its benchmark materials for noncommercial research and evaluation under CC BY-NC 4.0. [FinanceGym license](https://financegym.github.io/#license)
+
+## Browse the reports offline
+
+Build the self-contained reader from the same sealed files, then open `runs/financegym-submission/Report index.html` in your browser. Search questions, filter by release status, inspect citations and download the original memo for any of the 400 questions.
+
+```sh
+.venv/bin/python -B -m evaluations.financegym.report_index runs/benchmark_400_public.jsonl evaluations/financegym/results 'runs/financegym-submission/Report index.html'
+```
 
 ## Run or resume the complete workflow
 
-Place the pinned question file at `runs/benchmark_400_public.jsonl`. The status command reads the research records and project balance without calling a model. The paced runner completes outstanding primary investigations. The finish command reviews eligible drafts, conducts independent research on unanswered questions and applies the source checks before exporting the reports. Both research commands can use API credits and enforce the shared project ceiling.
+The runner uses the analyst desk's public-archive research engine. It matches every output to the original question and cutoff, meters each model generation, and saves the raw HTTP evidence needed to rebuild dated retrieval. The status command reads the research records and project balance without calling a model. The paced runner completes outstanding primary investigations. The finish command reviews eligible drafts, conducts independent research on unanswered questions and applies the source checks before export. Both research commands can use API credits and enforce the shared project ceiling.
 
 ```sh
 .venv/bin/python -B -m evaluations.financegym.workflow status runs/benchmark_400_public.jsonl
@@ -14,15 +34,9 @@ Place the pinned question file at `runs/benchmark_400_public.jsonl`. The status 
 
 After the original investigations and eligible draft reviews settle, the finish command records the balance and assigns the remaining cases. The quantitative team keeps its assignments when the budget covers the projected cost. When needed, the previously tested mixed team takes questions with several dated editions. Each assignment records the original evidence, model profile and spending limit before the new investigation begins. Offline replay checks that selection against the receipts. [Allocation policy](recovery-budget-policy.md)
 
-The final directory contains the submission JSONL, a per-question audit and a methodology paper. The workflow also seals and independently replays the private evidence in `evaluations/financegym/results/`. For a new run in a checkout that already contains a sealed benchmark, choose a fresh destination and pass `--evidence-directory` with a fresh directory. To reproduce the already sealed reports, use `evaluations.financegym.evidence verify` with the public question file. That operation runs offline without an API key.
+The final directory contains the submission JSONL, a per-question audit, a methodology paper and the offline report reader. The workflow also seals and independently replays the portable evidence in `evaluations/financegym/results/`. For a new run in a checkout that already contains a sealed benchmark, choose a fresh destination and pass `--evidence-directory` with a fresh directory.
 
 ## Verify the inputs and retrieval
-
-The finish command also writes `Report index.html` in the submission folder. Open it locally to search the 400 questions, filter for complete or qualified reports, inspect citations and download an individual memo. The reader runs offline and uses the exact text submitted for each question. To rebuild it from the sealed evidence, run the following command.
-
-```sh
-.venv/bin/python -B -m evaluations.financegym.report_index runs/benchmark_400_public.jsonl evaluations/financegym/results 'runs/financegym-submission/Report index.html'
-```
 
 Save the JSONL from the pinned dataset as `runs/benchmark_400_public.jsonl`. Run from the repository root.
 
@@ -106,7 +120,7 @@ Under the USD 140 total budget, the system can first give a fresh Sol reviewer a
 .venv/bin/python -B -m evaluations.financegym.budget_publication run runs/benchmark_400_public.jsonl --task-id "$UNANSWERED_TASK_ID"
 ```
 
-When a damaged PDF interrupted a dated search, the original attempt kept its failure, timestamp and charge. The separate verifier repeats the paid plan from recorded output and reconstructs every search from the original HTTP bytes with the network disabled. The private replay package includes the malformed PDF so another machine can reproduce the parser error. The final export uses this verifier throughout the existing publication procedure.
+When a damaged PDF interrupted a dated search, the original attempt kept its failure, timestamp and charge. The separate verifier repeats the paid plan from recorded output and reconstructs every search from the original HTTP bytes with the network disabled. The replay archive includes the malformed PDF so another machine can reproduce the parser error. The final export uses this verifier throughout the existing publication procedure.
 
 ```sh
 .venv/bin/python -B -m evaluations.financegym.archive_failure verify runs/benchmark_400_public.jsonl 6a04cfe2a3882eb36cfc9305
@@ -114,16 +128,16 @@ When a damaged PDF interrupted a dated search, the original attempt kept its fai
 
 ## Prepare the methodology paper and local email
 
-Generate the public-facing paper from the verified 400-row export. The note reports the actual configuration and the independently measured results. The code repository can stay private. Once the paper has a public URL, use the submitter's email address, organization and submission date to generate a local email draft with the exact JSONL attached.
+The 20 November submission used this public repository as its system link. For a future run, generate the methodology note from the verified 400-row export. Use the public repository or paper URL, submitter's email address, organization and submission date to generate a local email draft with the exact JSONL attached. The CLI accepts the system link through `--published-paper`.
 
 ```sh
 .venv/bin/python -B -m evaluations.financegym.submission paper runs/benchmark_400_public.jsonl runs/financegym-submission
 .venv/bin/python -B -m evaluations.financegym.submission draft runs/benchmark_400_public.jsonl runs/financegym-submission \
   --contact "$SUBMITTER_EMAIL" --org "$SUBMITTER_ORGANIZATION" \
-  --published-paper "$PUBLIC_PAPER_URL" --submission-date "$SUBMISSION_DATE"
+  --published-paper "$PUBLIC_SYSTEM_URL" --submission-date "$SUBMISSION_DATE"
 ```
 
-The private evidence archive stores the original and published research, dated passages, model usage, and hashes of the operator's HTTP receipts. The verifier rebuilds all 400 submitted reports with the network disabled. It reconciles each question's document count, elapsed time, model charges and outstanding reservations across its investigations. It also counts reports by the source types their published paragraphs cite, including reports supported solely by dated encyclopedia revisions.
+To seal a completed run, use the command below. The verifier reconciles document counts, elapsed time, model charges and outstanding reservations. It also counts reports by the source types their published paragraphs cite, including reports supported solely by dated encyclopedia revisions.
 
 ```sh
 .venv/bin/python -B -m evaluations.financegym.evidence seal runs/benchmark_400_public.jsonl runs/financegym-submission
